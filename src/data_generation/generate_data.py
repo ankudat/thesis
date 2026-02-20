@@ -18,8 +18,8 @@ if not API_KEY:
 
 # DATASET SETTINGS
 TOTAL_SAMPLES_NEEDED = 3000
-BATCH_SIZE = 10  # Increased for efficiency with large datasets
-MODEL_NAME = "gemini-2.5-pro" # Based on your current rate limits
+BATCH_SIZE = 10  
+MODEL_NAME = "gemini-2.5-pro" 
 
 # PATH SETUP (Windows Format)
 OUTPUT_DIR = r"C:\thesis\data\raw"
