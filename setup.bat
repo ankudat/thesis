@@ -2,8 +2,11 @@
 TITLE Thesis Environment Setup
 CLS
 
+:: 0. Force the script to run in its own directory (Fixes System32 issue)
+cd /d "%~dp0"
+
 ECHO =========================================================
-ECHO   THESIS SETUP
+ECHO   THESIS SETUP AND RESET
 ECHO =========================================================
 ECHO.
 
@@ -15,19 +18,33 @@ IF %ERRORLEVEL% NEQ 0 (
     EXIT /B
 )
 
-:: 2. Create Virtual Environment (if missing)
+:: 2. Reset Environment Check
+IF EXIST "venv" (
+    ECHO [INFO] Existing 'venv' found.
+    SET /P AREYOUSURE="Do you want to completely delete and reset it? (Y/[N])? "
+    IF /I "%AREYOUSURE%"=="Y" (
+        ECHO [INFO] Nusing old environment...
+        rmdir /s /q venv
+    )
+)
+
+:: 3. Create Virtual Environment
 IF NOT EXIST "venv" (
-    ECHO [INFO] Creating venv...
+    ECHO [INFO] Creating fresh venv...
     python -m venv venv
 )
 
-:: 3. Install Libraries from requirements.txt
-ECHO [INFO] Installing libraries from requirements.txt...
+:: 4. Install Libraries
+ECHO [INFO] Activating environment and installing libraries...
 call venv\Scripts\activate
 python -m pip install --upgrade pip
 pip install -r requirements.txt
 
+:: 5. Download the Pinned spaCy Model
+ECHO [INFO] Downloading exact German spaCy model...
+python -m spacy download de_core_news_lg-3.8.0 --direct
+
 ECHO.
-ECHO [SUCCESS] Environment is ready!
+ECHO [SUCCESS] Environment is perfectly configured and ready!
 ECHO.
 PAUSE
