@@ -1,0 +1,53 @@
+# --- Data Generation ---
+# Used to access Gemini for generating synthetic Swiss banking data
+google-genai==0.3.0
+# Handles environment variables to keep the API Key secure
+python-dotenv==1.2.1
+# Shows progress bars during long data generation or evaluation loops
+tqdm==4.67.1
+
+# --- Data Validation & Annotation (Manual Review) ---
+# The main tool for manually checking NER tag accuracy
+label-studio==1.15.0
+# Must be exactly 1.0.8 for Label Studio 1.15.0
+label-studio-sdk==1.0.8
+
+# --- Baseline Evaluation ---
+# The classical NLP library used as the "Control Group" (Baseline Model 1)
+spacy==3.8.2
+
+# --- Local LLM Inference & Deep Learning ---
+# REQUIRED FOR RTX 4090: Tells pip where to find the GPU-accelerated (CUDA 12.1) version of PyTorch
+--extra-index-url https://download.pytorch.org/whl/cu121
+
+# Deep Learning framework required to run Transformer models locally on RTX 4090
+torch==2.5.1
+torchvision==0.20.1
+torchaudio==2.5.1
+
+# Hugging Face library to load pre-trained LLaMA/Qwen/BERT models
+transformers==4.47.1
+# Manages VRAM memory and device mapping
+accelerate>=0.26.0
+# Required tokenizer library for XLM-RoBERTa and certain local LLMs
+sentencepiece==0.2.0
+
+# --- Semantic Evaluation ---
+# Updated to ensure compatibility with modern Numpy
+scikit-learn==1.6.0
+# Creates vector embeddings to compare meaning (Original vs. Anonymized)
+sentence-transformers==2.2.2
+# The "Gold Standard" metric for evaluating text generation quality
+bert-score==0.3.13
+# Calculates readability metrics (Flesch-Kincaid) to measure text complexity
+textstat==0.7.3
+
+# --- Data Analysis & Visualization ---
+# Used to calculate metrics (Precision/Recall) and organize results
+pandas==2.2.3
+# For Exporting to Excel
+openpyxl==3.1.5
+# REQUIRED: Label Studio 1.15.0 needs >= 1.26.4
+numpy==1.26.4
+# Formats the results into pretty tables for the terminal and LaTeX
+tabulate==0.9.0
