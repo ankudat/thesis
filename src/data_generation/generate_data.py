@@ -73,9 +73,24 @@ Task: Generate **Client Visit Reports** and **Internal CRM Notes** regarding you
     - RIGHT: <MONEY>CHF 50'000</MONEY>
 3. **Closing Tags & No Hallucinations:** Every opening tag MUST have a matching closing tag immediately after the entity. NEVER invent new tags (e.g., DO NOT use <GEO>). Use ONLY the supported tags listed below.
 4. **Currencies are Money, NOT Locations:** Standalone currency codes (like "USD", "EUR", "CHF") MUST be tagged as <MONEY>, NEVER as <LOC> or <NATION>.
+5. **No Titles or Salutations in PER tags:** NEVER include salutations (Herr, Frau) or academic/professional titles (Dr., Prof., CEO) inside the <PER> tag.
+    - WRONG: <PER>Herr Dr. Beat Weber</PER>
+    - RIGHT: Herr Dr. <PER>Beat Weber</PER>
+6. **Exclude Articles:** NEVER include definite or indefinite articles (der, die, das, ein, eine) inside the tags.
+    - WRONG: <ORG>der UBS AG</ORG>
+    - RIGHT: der <ORG>UBS AG</ORG>
+7. **Exclude Surrounding Punctuation:** NEVER include commas, colons, or end-of-sentence periods inside the tag, UNLESS the period is strictly part of an abbreviation (e.g., "Mio.", "GmbH.", "Inc.").
+    - WRONG: in <LOC>Zürich,</LOC> und <LOC>Bern.</LOC>
+    - RIGHT: in <LOC>Zürich</LOC>, und <LOC>Bern</LOC>.
+8. **No Sub-Word Tagging:** Do not split hyphenated words with tags. If an entity is part of a hyphenated compound, tag the entire compound based on its primary meaning.
+    - WRONG: <EDU>ETH</EDU>-Ingenieur
+    - RIGHT: <JOB>ETH-Ingenieur</JOB>
+9. **Full Company Names:** ALWAYS include legal entity suffixes (AG, GmbH, SA, Ltd.) inside the <ORG> tag.
+    - WRONG: <ORG>Alpen Tech</ORG> AG
+    - RIGHT: <ORG>Alpen Tech AG</ORG>
 
 **Supported Tags:**
-- <PER>: Person names (e.g., Hans Müller).
+- <PER>: Person names (e.g., Hans Müller). Strictly exclude titles/salutations.
 - <EMAIL>: Email addresses.
 - <PHONE>: Phone numbers.
 - <IBAN>: IBANs (Must start with CH).
@@ -96,10 +111,10 @@ Task: Generate **Client Visit Reports** and **Internal CRM Notes** regarding you
 **### GOLD STANDARD EXAMPLES (FOLLOW THIS FORMAT STRICTLY) ###**
 
 [Example 1 - Formal Style]
-Am <DATE>12.03.2024</DATE> traf ich <PER>Dr. Beat Weber</PER>, den <JOB>CFO</JOB> der <ORG>Alpen Tech AG</ORG>, in <LOC>Zürich</LOC>. Wir besprachen die Erhöhung der Kreditlimite auf <MONEY>CHF 2.5 Mio.</MONEY> (Gegenwert in <MONEY>USD</MONEY>). Er bestätigte, dass die <EDU>ETH</EDU>-Absolventin <PER>Sarah Müller</PER> neue <JOB>CEO</JOB> wird. Bitte <EMAIL>s.mueller@alpentech.ch</EMAIL> für KYC kontaktieren.
+Am <DATE>12.03.2024</DATE> traf ich Herrn Dr. <PER>Beat Weber</PER>, den <JOB>CFO</JOB> der <ORG>Alpen Tech AG</ORG>, in <LOC>Zürich</LOC>. Wir besprachen die Erhöhung der Kreditlimite auf <MONEY>CHF 2.5 Mio.</MONEY> (Gegenwert in <MONEY>USD</MONEY>). Er bestätigte, dass die <JOB>ETH-Absolventin</JOB> Frau <PER>Sarah Müller</PER> neue <JOB>CEO</JOB> wird. Bitte <EMAIL>s.mueller@alpentech.ch</EMAIL> für KYC kontaktieren.
 
 [Example 2 - Hasty Style]
-Tel mit <PER>Rolf</PER> (<PHONE>079 555 22 11</PHONE>). Hat Stress wegen <ORG>Baugruppe Nord</ORG>. Will <MONEY>50k</MONEY> oder <MONEY>EUR</MONEY> sofort auf <IBAN>CH93 0070 0111 2222 3333 4</IBAN> überweisen. <LOC>Bern</LOC> macht Druck. <AGE>60-jährig</AGE> und wirkt müde.
+Tel mit <PER>Rolf</PER> (<PHONE>079 555 22 11</PHONE>). Hat Stress wegen der <ORG>Baugruppe Nord</ORG>. Will <MONEY>50k</MONEY> oder <MONEY>EUR</MONEY> sofort auf <IBAN>CH93 0070 0111 2222 3333 4</IBAN> überweisen. <LOC>Bern</LOC> macht Druck. Ist <AGE>60-jährig</AGE> und wirkt müde.
 
 **### END EXAMPLES ###**
 
