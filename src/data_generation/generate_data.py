@@ -307,8 +307,9 @@ Task: Generate **Client Visit Reports** and **Internal CRM Notes** regarding you
     - RIGHT: Herr Dr. <PER>Beat Weber</PER>
 6. **Exclude Articles:** NEVER include definite or indefinite articles (der, die, das, ein, eine) inside the tags.
 7. **Exclude Surrounding Punctuation:** NEVER include commas, colons, or end-of-sentence periods inside the tag, UNLESS the period is strictly part of an abbreviation (e.g., "Mio.", "GmbH.", "Inc.").
-8. **No Sub-Word Tagging:** Do not split hyphenated words with tags. If an entity is part of a hyphenated compound, tag the entire compound.
+8. **No Sub-Word Tagging:** Do not split hyphenated words with tags. If an entity is part of a hyphenated compound, tag the entire compound based on its primary meaning.
     - WRONG: <EDU>ETH</EDU>-Ingenieur → RIGHT: <JOB>ETH-Ingenieur</JOB>
+    - WRONG: <EDU>HSG</EDU>-Absolventin → RIGHT: <JOB>HSG-Absolventin</JOB>
 9. **Full Company Names:** ALWAYS include legal entity suffixes (AG, GmbH, SA, Ltd.) inside the <ORG> tag.
     - WRONG: <ORG>Alpen Tech</ORG> AG → RIGHT: <ORG>Alpen Tech AG</ORG>
 10. **LOC vs. Countries:** Use <LOC> for geographic locations (cities, cantons, countries, regions, continents). Countries and regions are LOC.
@@ -321,12 +322,12 @@ Task: Generate **Client Visit Reports** and **Internal CRM Notes** regarding you
 - <PER>: Person names (e.g., Hans Müller). Strictly exclude titles/salutations.
 - <EMAIL>: Email addresses.
 - <PHONE>: Phone numbers.
-- <IBAN>: IBANs (Must start with CH, exactly 21 characters).
+- <IBAN>: IBANs (Must start with CH, 21 alphanumeric characters, spaces are formatting only, e.g. CH93 0070 0111 2222 3333 4).
 - <MONEY>: Monetary amounts with values (NOT standalone currency codes).
-- <JOB>: Job titles (including compound forms like ETH-Ingenieur).
+- <JOB>: Job titles, including hyphenated compounds where the primary meaning is a role (e.g., ETH-Ingenieur, HSG-Absolventin).
 - <AGE>: Full age expressions (e.g., "65-jährig", "65 Jahre").
-- <NATION>: Nationality adjectives (e.g., "deutscher", "französische").
-- <EDU>: Education institutions and qualifications (e.g., "HSG", "MBA", "ETH-Abschluss").
+- <NATION>: Nationality adjectives only (e.g., "deutscher Staatsbürger", "französische Inhaberin"). Do NOT use for country names — those are <LOC>.
+- <EDU>: Education institutions and degrees when referenced as education (e.g., "Abschluss an der <EDU>HSG</EDU>", "hat einen <EDU>MBA</EDU>"). When part of a job compound, use <JOB> instead.
 - <LOC>: Cities, cantons, countries, regions, continents.
 - <ORG>: Company names including legal suffix.
 - <DATE>: Dates.
@@ -336,11 +337,15 @@ Task: Generate **Client Visit Reports** and **Internal CRM Notes** regarding you
 2. START DIRECTLY with the text content.
 3. SEPARATOR: Use "###SEPARATOR###" strictly between notes.
 
-**### EXAMPLE (FOLLOW THIS FORMAT STRICTLY) ###**
+**### GOLD STANDARD EXAMPLES (FOLLOW THIS FORMAT STRICTLY) ###**
 
+[Example 1 - Formal Style]
 Am <DATE>12.03.2024</DATE> traf ich Herrn Dr. <PER>Beat Weber</PER>, den <JOB>CFO</JOB> der <ORG>Alpen Tech AG</ORG>, in <LOC>Zürich</LOC>. Wir besprachen die Erhöhung der Kreditlimite auf <MONEY>CHF 2.5 Mio.</MONEY>. Die <JOB>ETH-Absolventin</JOB> Frau <PER>Sarah Müller</PER> wird neue <JOB>CEO</JOB>. Bitte <EMAIL>s.mueller@alpentech.ch</EMAIL> für KYC kontaktieren.
 
-**### END EXAMPLE ###**
+[Example 2 - Hasty Style]
+Tel mit <PER>Rolf</PER> (<PHONE>079 555 22 11</PHONE>). Hat Stress wegen der <ORG>Baugruppe Nord GmbH</ORG>. Will <MONEY>50k</MONEY> sofort auf <IBAN>CH93 0070 0111 2222 3333 4</IBAN> überweisen. <LOC>Bern</LOC> macht Druck. Ist <AGE>60-jährig</AGE> und wirkt müde.
+
+**### END EXAMPLES ###**
 
 STYLE INSTRUCTION:
 {style_desc}
