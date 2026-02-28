@@ -295,28 +295,23 @@ Task: Generate **Client Visit Reports** and **Internal CRM Notes** regarding you
 2. **No Attributes:** NEVER add attributes. 
     - WRONG: <MONEY currency="CHF"> 
     - RIGHT: <MONEY>CHF 50'000</MONEY>
-3. **Closing Tags & No Hallucinations:** Every opening tag MUST have a matching closing tag immediately after the entity. NEVER invent new tags. Use ONLY the supported tags listed below.
-4. **Currency vs. Money Distinction:**
-    - Standalone currency codes (EUR, USD, CHF, GBP, JPY, etc.) used as REFERENCES to a currency (e.g., "ein Konto in USD") should NOT be tagged at all.
-    - ONLY tag <MONEY> when there is an ACTUAL monetary amount: <MONEY>CHF 50'000</MONEY>, <MONEY>USD 1.2 Mio.</MONEY>, <MONEY>50k</MONEY>.
-    - WRONG: ein Konto in <MONEY>USD</MONEY>   →   RIGHT: ein Konto in USD
-    - WRONG: den <MONEY>EUR</MONEY>/<MONEY>CHF</MONEY>-Kurs   →   RIGHT: den EUR/CHF-Kurs
-    - RIGHT: eine Überweisung von <MONEY>EUR 250'000</MONEY>
+3. **Closing Tags & No Hallucinations:** Every opening tag MUST have a matching closing tag immediately after the entity. NEVER invent new tags (e.g., DO NOT use <GEO>). Use ONLY the supported tags listed below.
+4. **Currencies are Money, NOT Locations:** Standalone currency codes (like "USD", "EUR", "CHF") MUST be tagged as <MONEY>, NEVER as <LOC> or <NATION>.
 5. **No Titles or Salutations in PER tags:** NEVER include salutations (Herr, Frau) or academic/professional titles (Dr., Prof., CEO) inside the <PER> tag.
     - WRONG: <PER>Herr Dr. Beat Weber</PER>
     - RIGHT: Herr Dr. <PER>Beat Weber</PER>
 6. **Exclude Articles:** NEVER include definite or indefinite articles (der, die, das, ein, eine) inside the tags.
+    - WRONG: <ORG>der UBS AG</ORG>
+    - RIGHT: der <ORG>UBS AG</ORG>
 7. **Exclude Surrounding Punctuation:** NEVER include commas, colons, or end-of-sentence periods inside the tag, UNLESS the period is strictly part of an abbreviation (e.g., "Mio.", "GmbH.", "Inc.").
+    - WRONG: in <LOC>Zürich,</LOC> und <LOC>Bern.</LOC>
+    - RIGHT: in <LOC>Zürich</LOC>, und <LOC>Bern</LOC>.
 8. **No Sub-Word Tagging:** Do not split hyphenated words with tags. If an entity is part of a hyphenated compound, tag the entire compound based on its primary meaning.
-    - WRONG: <EDU>ETH</EDU>-Ingenieur → RIGHT: <JOB>ETH-Ingenieur</JOB>
-    - WRONG: <EDU>HSG</EDU>-Absolventin → RIGHT: <JOB>HSG-Absolventin</JOB>
+    - WRONG: <EDU>ETH</EDU>-Ingenieur
+    - RIGHT: <JOB>ETH-Ingenieur</JOB>
 9. **Full Company Names:** ALWAYS include legal entity suffixes (AG, GmbH, SA, Ltd.) inside the <ORG> tag.
-    - WRONG: <ORG>Alpen Tech</ORG> AG → RIGHT: <ORG>Alpen Tech AG</ORG>
-10. **LOC vs. Countries:** Use <LOC> for geographic locations (cities, cantons, countries, regions, continents). Countries and regions are LOC.
-11. **AGE consistency:** Always tag the full age expression including unit words.
-    - WRONG: <AGE>65</AGE>-jährig → RIGHT: <AGE>65-jährig</AGE>
-    - RIGHT: <AGE>65 Jahre</AGE> alt
-12. **Consistent ORG naming:** Each company should have ONE canonical name within a single note. Do not alternate between "AG" and "GmbH" for the same company.
+    - WRONG: <ORG>Alpen Tech</ORG> AG
+    - RIGHT: <ORG>Alpen Tech AG</ORG>
 
 **Supported Tags:**
 - <PER>: Person names (e.g., Hans Müller). Strictly exclude titles/salutations.
