@@ -19,7 +19,7 @@ if not API_KEY:
 BASE_DIR = r"C:\thesis"
 INPUT_FILE = os.path.join(BASE_DIR, "data", "raw", "german_financial_data_raw.json")
 FINAL_CLEANED_FILE = os.path.join(BASE_DIR, "data", "processed", "german_financial_data_cleaned.json")
-REPORT_FILE = os.path.join(BASE_DIR, "results", "logs", "audit_report_detailed.txt")
+REPORT_FILE = os.path.join(BASE_DIR, "results", "logs", "audit_report_german_financial_data_raw.txt")
 
 # Ensure directories exist
 os.makedirs(os.path.dirname(FINAL_CLEANED_FILE), exist_ok=True)

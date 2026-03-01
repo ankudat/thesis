@@ -2,7 +2,6 @@ import os
 import json
 import re
 import time
-import random
 from tqdm import tqdm
 from dotenv import load_dotenv
 from google import genai
@@ -19,11 +18,12 @@ if not API_KEY:
 
 # DATASET SETTINGS
 TOTAL_SAMPLES_NEEDED = 3000
-BATCH_SIZE = 10
-MODEL_NAME = "gemini-2.5-pro"
+BATCH_SIZE = 10  
+MODEL_NAME = "gemini-2.5-pro" 
 
 # PATH SETUP (Windows Format)
 OUTPUT_DIR = r"C:\thesis\data\raw"
+# Changed back to standard .json as requested
 OUTPUT_FILE = os.path.join(OUTPUT_DIR, "german_financial_data_raw.json")
 
 os.makedirs(OUTPUT_DIR, exist_ok=True)
@@ -32,252 +32,28 @@ os.makedirs(OUTPUT_DIR, exist_ok=True)
 client = genai.Client(api_key=API_KEY)
 
 # ==========================================
-# 2. NAME & ENTITY POOLS (KEY IMPROVEMENT)
-# ==========================================
-# Large pools to inject into prompts per-batch, preventing repetition.
-
-FIRST_NAMES_MALE = [
-    "Daniel", "Thomas", "Michael", "Andreas", "Christian", "Martin", "Markus", "Peter",
-    "Stefan", "Patrick", "Marco", "David", "Pascal", "Marcel", "Urs", "Marc",
-    "Roger", "Bruno", "Roland", "Simon", "Beat", "Hans", "Christoph", "René",
-    "Manuel", "Adrian", "Reto", "José", "Nicolas", "André", "Matthias", "Stephan",
-    "Philipp", "Antonio", "Philippe", "Rolf", "Fabian", "Lukas", "Alexander", "Mario",
-    "Michel", "Roman", "Samuel", "Florian", "Robert", "Olivier", "Oliver", "Benjamin",
-    "Jürg", "Luca", "Tobias", "Dominik", "Sandro", "Kevin", "Walter", "Giuseppe",
-    "Alain", "Claudio", "Christophe", "Carlos", "Fabio", "Alexandre", "Jean", "Stéphane",
-    "Jan", "Heinz", "Paul", "Kurt", "Laurent", "Pierre", "Roberto", "Yves",
-    "Francesco", "Werner", "Raphael", "Eric", "Andrea", "Ivan", "Julien", "Rudolf",
-    "Frédéric", "Sébastien", "Josef", "Remo", "Alessandro", "Cédric", "Bernhard", "Thierry",
-    "Felix", "Vincent", "Sven", "Jonas", "Sebastian", "Richard", "Anton", "Ulrich",
-    "Ali", "Jonathan", "Giovanni", "Patrik", "Mathias", "Stefano", "Sascha", "Paulo",
-    "François", "Jörg", "Alfred", "Dominique", "Dario", "Frank", "Claude", "Nicola",
-    "Pedro", "Erich", "Franz", "Michele", "Jérôme", "Luis", "Guido", "Davide",
-]
-
-FIRST_NAMES_FEMALE = [
-    "Maria", "Sandra", "Claudia", "Andrea", "Nicole", "Monika", "Daniela", "Barbara",
-    "Karin", "Christine", "Manuela", "Silvia", "Anna", "Susanne", "Brigitte", "Ursula",
-    "Sarah", "Cornelia", "Gabriela", "Anita", "Franziska", "Nathalie", "Corinne", "Ana",
-    "Patricia", "Martina", "Laura", "Sabrina", "Sonja", "Isabelle", "Esther", "Marianne",
-    "Alexandra", "Beatrice", "Fabienne", "Yvonne", "Ruth", "Elisabeth", "Doris", "Melanie",
-    "Nadine", "Sabine", "Jacqueline", "Caroline", "Rita", "Petra", "Tanja", "Irene",
-    "Katharina", "Angela", "Sara", "Marie", "Regula", "Simone", "Stefanie", "Nadia",
-    "Verena", "Catherine", "Jessica", "Carmen", "Tamara", "Erika", "Anne", "Vanessa",
-    "Eva", "Marina", "Julia", "Denise", "Heidi", "Bettina", "Christina", "Céline",
-    "Jasmin", "Chantal", "Elena", "Rahel", "Diana", "Eveline", "Judith", "Sophie",
-    "Valérie", "Stephanie", "Mirjam", "Jennifer", "Anja", "Nadja", "Cristina", "Stéphanie",
-    "Janine", "Patrizia", "Priska", "Michèle", "Astrid", "Ramona", "Sonia", "Véronique",
-    "Monica", "Nina", "Edith", "Susanna", "Sibylle", "Rosa", "Katja", "Maja",
-    "Sylvie", "Renate", "Marion", "Miriam", "Dominique", "Isabel", "Carla", "Pia",
-    "Margrit", "Michelle", "Iris", "Rosmarie", "Myriam", "Michaela", "Linda", "Aline",
-]
-
-LAST_NAMES = [
-    "Müller", "Meier", "Schmid", "Keller", "Weber", "Schneider", "Huber", "Meyer",
-    "Steiner", "da Silva", "Fischer", "Gerber", "Baumann", "Brunner", "Frei", "Zimmermann",
-    "Moser", "Graf", "Widmer", "Wyss", "Ferreira", "Roth", "Pereira", "Bucher",
-    "Baumgartner", "Bachmann", "Suter", "Kaufmann", "Studer", "Berger", "Lüthi", "Bühler",
-    "Kunz", "Krasniqi", "Lehmann", "Hofer", "Marti", "dos Santos", "Berisha", "Rodrigues",
-    "Arnold", "Koch", "Christen", "Frey", "Wüthrich", "Egli", "Gashi", "Zürcher",
-    "Fuchs", "Pfister", "Gasser", "Fernandes", "Stalder", "Koller", "Schweizer", "Martin",
-    "Peter", "Bieri", "Gomes", "Maurer", "Kohler", "Wenger", "Furrer", "Burri",
-    "Vogel", "Michel", "Leuenberger", "Rüegg", "Martins", "Schär", "Egger", "Garcia",
-    "Hunziker", "Lopes", "Schuler", "Kälin", "Ammann", "Hofmann", "Hess", "Hug",
-    "Tanner", "Gisler", "Sutter", "Favre", "Wagner", "Blaser", "Hauser", "Oliveira",
-    "Alves", "Ribeiro", "Schmidt", "Silva", "Hartmann", "Gonçalves", "Shala", "Senn",
-    "Flückiger", "Lang", "Stucki", "Odermatt", "Pinto", "Bajrami", "Siegenthaler", "Fankhauser",
-    "Teixeira", "Scherrer", "Zbinden", "Morina", "Marques", "Ramadani", "Sommer", "Zaugg",
-    "Imhof", "Portmann", "Küng", "da Costa", "Santos", "Rodriguez", "Ackermann", "Nguyen",
-    "Schärer", "Scheidegger", "Vogt", "Schwarz", "Jost", "Schenk", "Rey", "Liechti",
-    "Kuhn", "Schumacher", "Hasler", "Hofstetter", "Costa", "Giger", "Weiss", "Staub",
-    "Seiler", "Stocker", "Röthlisberger", "Betschart", "Herzog", "Schnyder", "Lüscher", "Fässler",
-    "Wittwer", "Wolf", "Marty", "Haas", "Zehnder", "Stadelmann", "Dias", "Fernandez",
-    "Stöckli", "Schwab", "Käser", "Schaller", "Bühlmann", "Martinez", "Gonzalez", "Weibel",
-    "Näf", "Kaiser", "Häfliger", "Steiger", "Rohner", "Ulrich", "Bernasconi", "Rossi",
-    "Gloor", "Stutz", "Bosshard", "Stettler", "Lutz", "Rohrer", "Walker", "Beck",
-    "Lanz", "Grob", "Mäder", "Tobler", "Steffen", "Blum", "Brügger", "Aeschlimann",
-    "Sigrist", "Meister", "Osmani", "Jenni", "Ziegler", "Eichenberger", "de Oliveira", "Lopez",
-    "Kuster", "Sieber", "Ademi", "Kessler", "Siegrist", "Wicki", "Shabani", "Bolliger",
-]
-
-COMPANY_PREFIXES = [
-    "Alpen", "Alpine", "Aqua", "Astra", "Berg", "Bio", "Blau", "Brücken",
-    "Central", "Chrono", "Clar", "Delta", "Diamant", "Digi", "Eco", "Edel",
-    "Elektro", "Elite", "Euro", "First", "Flora", "Forst", "Gastro", "Global",
-    "Granit", "Grün", "Heli", "Helvetia", "Horizon", "Hydro", "Inno", "Inter",
-    "Jura", "Klima", "Kraft", "Kristall", "Lago", "Linth", "Matterhorn", "Medico",
-    "Metro", "Micro", "Monta", "Navi", "Neo", "Nexus", "Nova", "Omega", "Optima",
-    "Peak", "Pharma", "Pionier", "Planet", "Pola", "Präzis", "Prima", "Pro",
-    "Quarz", "Rapid", "Reno", "Rhein", "Riviera", "Robo", "Roto", "Saline",
-    "Saphir", "Saturn", "Schild", "Senn", "Signal", "Solar", "Spektrum", "Stahl",
-    "Stern", "Stratos", "Swiss", "Techno", "Terra", "Thermo", "Titan", "Topaz",
-    "Trans", "Trio", "Turbo", "Ultra", "Urban", "Vecto", "Ventus", "Vero",
-    "Viso", "Volta", "Weiss", "Wetter", "Xenon", "Zenit", "Zentral", "Züri",
-]
-
-COMPANY_SUFFIXES = [
-    "Bau", "Consult", "Design", "Dynamics", "Electronics", "Engineering",
-    "Export", "Finance", "Food", "Freight", "Handel", "Holding", "Import",
-    "Industries", "Innovation", "Invest", "IT", "Klinik", "Logistik",
-    "Maschinenbau", "Mechanik", "Media", "Metall", "Mobilität", "Partners",
-    "Pharma", "Precision", "Produktion", "Robotics", "Services", "Software",
-    "Solutions", "Sport", "Systems", "Tech", "Textil", "Trade", "Transport",
-    "Treuhand", "Ventures", "Werkzeuge",
-]
-
-LEGAL_FORMS = ["AG", "GmbH", "SA", "Sàrl", "& Co. KG", "& Cie."]
-
-SWISS_CITIES = [
-    "Zürich", "Genf", "Basel", "Bern", "Lausanne", "Winterthur", "Luzern",
-    "St. Gallen", "Lugano", "Biel/Bienne", "Thun", "Köniz", "La Chaux-de-Fonds",
-    "Schaffhausen", "Freiburg", "Chur", "Neuchâtel", "Vernier", "Uster", "Sion",
-    "Emmen", "Kriens", "Rapperswil-Jona", "Zug", "Dübendorf", "Dietikon",
-    "Frauenfeld", "Wil", "Aarau", "Baden", "Olten", "Solothurn", "Grenchen",
-    "Langenthal", "Burgdorf", "Bellinzona", "Locarno", "Martigny", "Montreux",
-    "Nyon", "Morges", "Vevey", "Yverdon-les-Bains", "Delémont", "Brig-Glis",
-    "Wädenswil", "Horgen", "Thalwil", "Kloten", "Opfikon", "Wallisellen",
-    "Arth", "Rotkreuz", "Cham", "Baar", "Stans", "Sarnen", "Altdorf",
-    "Schwyz", "Glarus", "Appenzell", "Herisau", "Gossau", "Buchs",
-    "Davos", "Interlaken", "Grindelwald", "Meiringen", "Spiez", "Brienz",
-]
-
-JOB_TITLES = [
-    "CEO", "CFO", "COO", "CTO", "CIO", "CHRO", "CLO", "CMO", "CSO",
-    "Geschäftsführer", "Geschäftsführerin",
-    "Verwaltungsratspräsident", "Verwaltungsratspräsidentin",
-    "Verwaltungsrat", "Verwaltungsrätin",
-    "Finanzchef", "Finanzchefin",
-    "Leiter Finanzen", "Leiterin Finanzen",
-    "Leiter Treasury", "Leiterin Treasury",
-    "Leiter Buchhaltung", "Leiterin Buchhaltung",
-    "Leiter Export", "Leiterin Export",
-    "Leiter Einkauf", "Leiterin Einkauf",
-    "Leiter IT", "Leiterin IT",
-    "Head of Treasury", "Head of Finance", "Head of Operations",
-    "Head of Compliance", "Head of Legal", "Head of Sales",
-    "Inhaber", "Inhaberin",
-    "Gründer", "Gründerin",
-    "Mitgründer", "Mitgründerin",
-    "Teilhaber", "Teilhaberin",
-    "Projektleiter", "Projektleiterin",
-    "Prokurist", "Prokuristin",
-    "Buchhalter", "Buchhalterin",
-    "Treasurer", "Controller", "Controllerin",
-    "Export Manager", "Export Managerin",
-    "Office Manager", "Office Managerin",
-    "Betriebsleiter", "Betriebsleiterin",
-    "Produktionsleiter", "Produktionsleiterin",
-    "Personalchef", "Personalchefin",
-    "Syndikus", "Syndika",
-    "General Counsel", "VP Finance", "VP Operations",
-    "Managing Director", "Director",
-]
-
-EDUCATION_LABELS = [
-    "HSG", "ETH", "EPFL", "Universität Zürich", "Universität Bern",
-    "Universität Basel", "Universität Genf", "Universität Lausanne",
-    "Universität St. Gallen", "Universität Freiburg", "Universität Luzern",
-    "Universität Neuenburg", "USI Lugano", "ZHAW", "FHNW", "HWZ",
-    "BFH", "HSLU", "OST", "SUPSI", "HES-SO",
-    "MBA", "EMBA", "CAS", "MAS", "DAS",
-    "INSEAD", "IMD", "London Business School",
-    "HSG-Absolvent", "HSG-Absolventin", "ETH-Ingenieur", "ETH-Ingenieurin",
-    "ETH-Abschluss", "ETH-Diplom", "EPFL-Abschluss",
-    "lic. oec.", "lic. iur.", "Dr. oec.", "Dr. iur.", "dipl. Ing. ETH",
-]
-
-NATIONALITIES = [
-    "schweizerischer", "schweizerische", "Schweizer",
-    "deutscher", "deutsche", "Deutscher", "Deutsche",
-    "österreichischer", "österreichische",
-    "französischer", "französische",
-    "italienischer", "italienische",
-    "britischer", "britische",
-    "amerikanischer", "amerikanische",
-    "brasilianischer", "brasilianische",
-    "indischer", "indische",
-    "chinesischer", "chinesische",
-    "japanischer", "japanische",
-    "koreanischer", "koreanische",
-    "türkischer", "türkische",
-    "portugiesischer", "portugiesische",
-    "spanischer", "spanische",
-    "polnischer", "polnische",
-    "kroatischer", "kroatische",
-    "serbischer", "serbische",
-    "niederländischer", "niederländische",
-    "schwedischer", "schwedische",
-    "dänischer", "dänische",
-]
-
-
-def generate_random_names(n=8):
-    """Pick n random full names from the pools, ensuring no duplicates per batch."""
-    names = []
-    used = set()
-    all_first = FIRST_NAMES_MALE + FIRST_NAMES_FEMALE
-    for _ in range(n):
-        while True:
-            first = random.choice(all_first)
-            last = random.choice(LAST_NAMES)
-            full = f"{first} {last}"
-            if full not in used:
-                used.add(full)
-                names.append(full)
-                break
-    return names
-
-
-def generate_random_companies(n=5):
-    """Generate n unique random company names."""
-    companies = []
-    used = set()
-    for _ in range(n):
-        while True:
-            prefix = random.choice(COMPANY_PREFIXES)
-            suffix = random.choice(COMPANY_SUFFIXES)
-            legal = random.choice(LEGAL_FORMS[:3])  # Bias toward AG/GmbH/SA
-            name = f"{prefix}{suffix} {legal}"
-            if name not in used:
-                used.add(name)
-                companies.append(name)
-                break
-    return companies
-
-
-def generate_random_cities(n=5):
-    """Pick n random cities."""
-    return random.sample(SWISS_CITIES, min(n, len(SWISS_CITIES)))
-
-
-def generate_random_jobs(n=5):
-    """Pick n random job titles."""
-    return random.sample(JOB_TITLES, min(n, len(JOB_TITLES)))
-
-
-# ==========================================
-# 3. TEMPERATURE LEVELS
+# 2. DEFINING TEMPERATURE LEVELS
 # ==========================================
 TEMP_SETTINGS = [
     {
-        "level": "Low",
-        "temp": 0.30,
+        "level": "Low", 
+        "temp": 0.30, 
         "desc": "Formal Visit Report. Full sentences, perfect Standard German. Objective tone. Official records."
     },
     {
-        "level": "Medium",
-        "temp": 0.70,
+        "level": "Medium", 
+        "temp": 0.70, 
         "desc": "Standard CRM Note in German. Concise, professional banking terminology. Uses industry abbreviations."
     },
     {
-        "level": "High",
-        "temp": 0.85,
+        "level": "High", 
+        "temp": 0.85, 
         "desc": "Hasty Quick-Log in German. Bullet points, fragments. INTENTIONALLY include realistic typos (e.g., 'habne', 'fianziell') to simulate hasty typing. Keep XML tags perfect."
     }
 ]
 
 # ==========================================
-# 4. PROMPTS (IMPROVED FOR DIVERSITY)
+# 3. PROMPTS (UPDATED FOR HIGHER QUALITY)
 # ==========================================
 SYSTEM_INSTRUCTION_BASE = """
 You are a Swiss Corporate & Institutional Clients (CIC) Relationship Manager.
@@ -296,7 +72,13 @@ Task: Generate **Client Visit Reports** and **Internal CRM Notes** regarding you
     - WRONG: <MONEY currency="CHF"> 
     - RIGHT: <MONEY>CHF 50'000</MONEY>
 3. **Closing Tags & No Hallucinations:** Every opening tag MUST have a matching closing tag immediately after the entity. NEVER invent new tags (e.g., DO NOT use <GEO>). Use ONLY the supported tags listed below.
-4. **Currencies are Money, NOT Locations:** Standalone currency codes (like "USD", "EUR", "CHF") MUST be tagged as <MONEY>, NEVER as <LOC> or <NATION>.
+4. **Standalone Currency Codes are NOT Entities:** Do NOT tag standalone currency codes (like "USD", "EUR", "CHF") without an amount. They are NOT money, NOT locations, and NOT nationalities — leave them completely untagged. Only tag monetary expressions that include a numeric value.
+    - WRONG: Importe in <MONEY>USD</MONEY>
+    - WRONG: Geschäfte in <LOC>CHF</LOC>
+    - WRONG: <NATION>EUR</NATION>-Raum
+    - RIGHT: Importe in USD (no tag)
+    - RIGHT: <MONEY>CHF 50'000</MONEY>
+    - RIGHT: <MONEY>USD 1.2 Mio.</MONEY>
 5. **No Titles or Salutations in PER tags:** NEVER include salutations (Herr, Frau) or academic/professional titles (Dr., Prof., CEO) inside the <PER> tag.
     - WRONG: <PER>Herr Dr. Beat Weber</PER>
     - RIGHT: Herr Dr. <PER>Beat Weber</PER>
@@ -317,14 +99,14 @@ Task: Generate **Client Visit Reports** and **Internal CRM Notes** regarding you
 - <PER>: Person names (e.g., Hans Müller). Strictly exclude titles/salutations.
 - <EMAIL>: Email addresses.
 - <PHONE>: Phone numbers.
-- <IBAN>: IBANs (Must start with CH, 21 alphanumeric characters, spaces are formatting only, e.g. CH93 0070 0111 2222 3333 4).
-- <MONEY>: Monetary amounts with values (NOT standalone currency codes).
-- <JOB>: Job titles, including hyphenated compounds where the primary meaning is a role (e.g., ETH-Ingenieur, HSG-Absolventin).
-- <AGE>: Full age expressions (e.g., "65-jährig", "65 Jahre").
-- <NATION>: Nationality adjectives only (e.g., "deutscher Staatsbürger", "französische Inhaberin"). Do NOT use for country names — those are <LOC>.
-- <EDU>: Education institutions and degrees when referenced as education (e.g., "Abschluss an der <EDU>HSG</EDU>", "hat einen <EDU>MBA</EDU>"). When part of a job compound, use <JOB> instead.
-- <LOC>: Cities, cantons, countries, regions, continents.
-- <ORG>: Company names including legal suffix.
+- <IBAN>: IBANs (Must start with CH).
+- <MONEY>: Monetary values AND standalone currency codes (e.g., CHF, USD, EUR, 50k).
+- <JOB>: Job titles.
+- <AGE>: Ages/Birth years.
+- <NATION>: Nationalities.
+- <EDU>: Education.
+- <LOC>: Addresses, cities, cantons, countries (Do NOT tag currencies here).
+- <ORG>: Company names.
 - <DATE>: Dates.
 
 **### FORMATTING RULES ###**
@@ -335,10 +117,10 @@ Task: Generate **Client Visit Reports** and **Internal CRM Notes** regarding you
 **### GOLD STANDARD EXAMPLES (FOLLOW THIS FORMAT STRICTLY) ###**
 
 [Example 1 - Formal Style]
-Am <DATE>12.03.2024</DATE> traf ich Herrn Dr. <PER>Beat Weber</PER>, den <JOB>CFO</JOB> der <ORG>Alpen Tech AG</ORG>, in <LOC>Zürich</LOC>. Wir besprachen die Erhöhung der Kreditlimite auf <MONEY>CHF 2.5 Mio.</MONEY>. Die <JOB>ETH-Absolventin</JOB> Frau <PER>Sarah Müller</PER> wird neue <JOB>CEO</JOB>. Bitte <EMAIL>s.mueller@alpentech.ch</EMAIL> für KYC kontaktieren.
+Am <DATE>12.03.2024</DATE> traf ich Herrn Dr. <PER>Beat Weber</PER>, den <JOB>CFO</JOB> der <ORG>Alpen Tech AG</ORG>, in <LOC>Zürich</LOC>. Wir besprachen die Erhöhung der Kreditlimite auf <MONEY>CHF 2.5 Mio.</MONEY> (Gegenwert in <MONEY>USD</MONEY>). Er bestätigte, dass die <JOB>ETH-Absolventin</JOB> Frau <PER>Sarah Müller</PER> neue <JOB>CEO</JOB> wird. Bitte <EMAIL>s.mueller@alpentech.ch</EMAIL> für KYC kontaktieren.
 
 [Example 2 - Hasty Style]
-Tel mit <PER>Rolf</PER> (<PHONE>079 555 22 11</PHONE>). Hat Stress wegen der <ORG>Baugruppe Nord GmbH</ORG>. Will <MONEY>50k</MONEY> sofort auf <IBAN>CH93 0070 0111 2222 3333 4</IBAN> überweisen. <LOC>Bern</LOC> macht Druck. Ist <AGE>60-jährig</AGE> und wirkt müde.
+Tel mit <PER>Rolf</PER> (<PHONE>079 555 22 11</PHONE>). Hat Stress wegen der <ORG>Baugruppe Nord</ORG>. Will <MONEY>50k</MONEY> oder <MONEY>EUR</MONEY> sofort auf <IBAN>CH93 0070 0111 2222 3333 4</IBAN> überweisen. <LOC>Bern</LOC> macht Druck. Ist <AGE>60-jährig</AGE> und wirkt müde.
 
 **### END EXAMPLES ###**
 
@@ -346,49 +128,38 @@ STYLE INSTRUCTION:
 {style_desc}
 """
 
-# The user prompt now injects random entities to force diversity
 USER_PROMPT_TEMPLATE = """
 Generate {n} distinct **CIC Client Notes** in GERMAN, separating them ONLY with "###SEPARATOR###".
 
-**MANDATORY: USE THESE SPECIFIC NAMES, COMPANIES, AND LOCATIONS in your notes (distribute them across the {n} notes):**
+**OUTPUT LANGUAGE: GERMAN**
 
-**Person Names to use:** {names}
-**Company Names to use:** {companies}
-**Cities to use:** {cities}
-**Job Titles to use:** {jobs}
+INSTRUCTIONS:
+1. Mix Direct Identifiers (<PER>, <EMAIL>, <PHONE>, <IBAN>) and Indirect Identifiers (<JOB>, <MONEY>, <ORG>) heavily in every note.
+2. Randomly select scenarios from this list:
 
-You may also invent ADDITIONAL names/companies beyond these, but you MUST use the ones listed above. 
-Do NOT reuse the same person name across multiple notes — each note should feature different people.
-
-SCENARIOS TO COVER (randomly mix):
-- Treasury/Cash: FX, Cash Management, Deposits, Festgeld, Akkreditiv
-- Financing: TEF, Lending, Leasing, Hypotheken, Kreditlimiten
-- Corporate: Nachfolge, Spin-offs, Governance, Wechsel Geschäftsführung
-- Interaction: Betriebsbesichtigung, Geschäftsmodell, Umsatz, EBITDA
-- Lifecycle/Ops: Kauf Liegenschaften, Kontosaldierung, Kontoeröffnung, Jahresabschlüsse
-- Admin: Kartenlimite, Fehlende Dokumente, Unterschriften, E-Banking, Zugriffsberechtigungen
+SCENARIOS TO COVER:
+- **Treasury/Cash:** FX, Cash Management, Deposits, Festgeld, Akkreditiv.
+- **Financing:** TEF (Trade & Export Finance), Lending, Leasing, Hypotheken, Kreditlimiten.
+- **Corporate:** Nachfolge, Spin-offs, Governance Meetings, Wechsel Geschäftsführung.
+- **Interaction:** Betriebsbesichtigung, Geschäftsmodell Firma, Umsatz, EBITDA, momentaner Zustand.
+- **Lifecycle/Ops:** Kauf Liegenschaften, Kontosaldierung, Kontoeröffnung, zusätzliche Konten, Einreichung Jahresabschlüsse.
+- **Admin:** Kartenlimite Erhöhung, Fehlende Dokumente, Unterschriften (rechtsverbindlich), E-Banking-Vertrag, Zugriffsberechtigungen.
 
 Begin generation now:
 """
 
 # ==========================================
-# 5. PARSING LOGIC (IMPROVED)
+# 4. PARSING LOGIC 
 # ==========================================
 def parse_tagged_text(raw_text, doc_id_start, temp_level):
-    if not raw_text:
-        return []
-
+    if not raw_text: return []
+    
     raw_messages = raw_text.split("###SEPARATOR###")
     full_records = []
     current_id = doc_id_start
-
-    tag_pattern = re.compile(
-        r"<\s*(PER|LOC|ORG|IBAN|DATE|EMAIL|PHONE|MONEY|JOB|AGE|NATION|EDU)\s*>"
-        r"(.*?)"
-        r"<\/\s*\1\s*>",
-        re.DOTALL
-    )
-
+    
+    tag_pattern = re.compile(r"<\s*(PER|LOC|ORG|IBAN|DATE|EMAIL|PHONE|MONEY|JOB|AGE|NATION|EDU)\s*>(.*?)<\/\s*\1\s*>", re.DOTALL)
+    
     for msg in raw_messages:
         msg = msg.strip()
         msg = re.sub(r"^(?:\**)?Note\s+\d+\**", "", msg, flags=re.IGNORECASE).strip()
@@ -397,22 +168,23 @@ def parse_tagged_text(raw_text, doc_id_start, temp_level):
 
         if not msg or not re.search(r"<\s*[A-Z]+\s*>", msg):
             continue
-
+        
         entities = []
         clean_text = ""
         last_pos = 0
-
+        
         for match in tag_pattern.finditer(msg):
             tag_name = match.group(1)
-            content = match.group(2).strip()
+            # Strip leading/trailing spaces from the entity text
+            content = match.group(2).strip() 
             start_tag_start, end_tag_end = match.span()
-
+            
             clean_text += msg[last_pos:start_tag_start]
             entity_start = len(clean_text)
-
+            
             clean_text += content
             entity_end = len(clean_text)
-
+            
             entities.append({
                 "start": entity_start,
                 "end": entity_end,
@@ -420,134 +192,69 @@ def parse_tagged_text(raw_text, doc_id_start, temp_level):
                 "text": content
             })
             last_pos = end_tag_end
-
+            
         clean_text += msg[last_pos:]
-
+        
         full_records.append({
-            "id": f"doc_{current_id:05d}",
-            "meta_temp": temp_level,
+            "id": f"doc_{current_id:05d}", # 5-digit padding for 3000+ samples
+            "meta_temp": temp_level, 
             "text": clean_text.strip(),
             "entities": entities,
             "raw_content": msg.strip()
         })
         current_id += 1
-
+        
     return full_records
 
-
 # ==========================================
-# 6. POST-PROCESSING VALIDATION
-# ==========================================
-def validate_record(record):
-    """Flag common issues for optional review."""
-    issues = []
-    text = record["text"]
-
-    for ent in record["entities"]:
-        # Check offset alignment
-        extracted = text[ent["start"]:ent["end"]]
-        if extracted != ent["text"]:
-            issues.append(f"OFFSET MISMATCH: '{ent['text']}' vs '{extracted}'")
-
-        # Flag standalone currency codes tagged as MONEY
-        if ent["label"] == "MONEY" and ent["text"] in ("EUR", "CHF", "USD", "GBP", "JPY", "CNY", "CAD", "AUD"):
-            issues.append(f"STANDALONE_CURRENCY_AS_MONEY: '{ent['text']}'")
-
-        # Flag Herr/Frau in PER
-        if ent["label"] == "PER" and (ent["text"].startswith("Herr ") or ent["text"].startswith("Frau ")):
-            issues.append(f"TITLE_IN_PER: '{ent['text']}'")
-
-    return issues
-
-
-# ==========================================
-# 7. MAIN EXECUTION
+# 5. MAIN EXECUTION
 # ==========================================
 def main():
     print(f"--- Starting Generation of {TOTAL_SAMPLES_NEEDED} Samples ---")
-
+    
+    # Store all parsed objects in memory
     all_parsed_objects = []
     doc_counter = 1
     samples_per_level = TOTAL_SAMPLES_NEEDED // len(TEMP_SETTINGS)
-    validation_log = []
 
     for setting in TEMP_SETTINGS:
         level, temp, desc = setting["level"], setting["temp"], setting["desc"]
         print(f"\nProcessing Style: {level} (T={temp})")
-
+        
         current_sys = SYSTEM_INSTRUCTION_BASE.format(style_desc=desc)
         num_batches = (samples_per_level + BATCH_SIZE - 1) // BATCH_SIZE
-
-        for batch_num in tqdm(range(num_batches), desc=f"Progress {level}"):
+        
+        for _ in tqdm(range(num_batches), desc=f"Progress {level}"):
             try:
-                # Generate FRESH random entities for EVERY batch
-                batch_names = generate_random_names(n=8)
-                batch_companies = generate_random_companies(n=5)
-                batch_cities = generate_random_cities(n=5)
-                batch_jobs = generate_random_jobs(n=5)
-
-                prompt = USER_PROMPT_TEMPLATE.format(
-                    n=BATCH_SIZE,
-                    names=", ".join(batch_names),
-                    companies=", ".join(batch_companies),
-                    cities=", ".join(batch_cities),
-                    jobs=", ".join(batch_jobs),
-                )
-
                 response = client.models.generate_content(
-                    model=MODEL_NAME,
+                    model=MODEL_NAME, 
                     config=types.GenerateContentConfig(
                         system_instruction=current_sys,
                         temperature=temp,
-                        max_output_tokens=5000
+                        max_output_tokens=5000 
                     ),
-                    contents=[prompt]
+                    contents=[USER_PROMPT_TEMPLATE.format(n=BATCH_SIZE)]
                 )
-
+                
                 if response.text:
                     recs = parse_tagged_text(response.text, doc_counter, level)
-
-                    # Validate each record
-                    for rec in recs:
-                        issues = validate_record(rec)
-                        if issues:
-                            validation_log.append({
-                                "id": rec["id"],
-                                "issues": issues
-                            })
-
+                    # Extend the main list with the newly parsed records
                     all_parsed_objects.extend(recs)
                     doc_counter += len(recs)
-
+                
+                # Sleep to respect the 150 RPM rate limit
                 time.sleep(1.5)
-
+                
             except Exception as e:
-                print(f"\nError in batch {batch_num}: {e}")
+                print(f"\nError encountered during batch: {e}")
                 time.sleep(10)
 
-    # Save main dataset
+    # Write the complete list to a standard JSON file at the very end
     print(f"\nSaving {len(all_parsed_objects)} samples to file...")
     with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
         json.dump(all_parsed_objects, f, indent=2, ensure_ascii=False)
 
-    # Save validation log
-    log_file = os.path.join(OUTPUT_DIR, "validation_issues.json")
-    with open(log_file, "w", encoding="utf-8") as f:
-        json.dump(validation_log, f, indent=2, ensure_ascii=False)
-
-    print(f"Success! Data saved to: {OUTPUT_FILE}")
-    print(f"Validation log ({len(validation_log)} records with issues) saved to: {log_file}")
-
-    # Print summary stats
-    from collections import Counter
-    label_counts = Counter()
-    for rec in all_parsed_objects:
-        for ent in rec["entities"]:
-            label_counts[ent["label"]] += 1
-    print("\nLabel distribution:")
-    for label, count in label_counts.most_common():
-        print(f"  {label}: {count}")
-
+    print(f"Success! All data saved to: {OUTPUT_FILE}")
 
 if __name__ == "__main__":
     main()
