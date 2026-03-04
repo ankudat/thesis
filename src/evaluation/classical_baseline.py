@@ -25,13 +25,11 @@ Requirements:
     pip install transformers torch spacy tqdm
     python -m spacy download de_core_news_lg
 
-Author: André Kuhn – Master Thesis (MScIDS, HSLU)
 """
 
 import json
 import re
 import os
-import argparse
 import time
 import gc
 from typing import List, Dict, Optional
@@ -568,67 +566,66 @@ def print_and_save_comparison(baseline_results: Dict, output_dir: str) -> None:
     print(f"  Comparison summary saved to: {comparison_path}")
 
 
+# ╔════════════════════════════════════════════════════════════════════╗
+# ║  USER SETTINGS — Change these before each run, then press ▶️     ║
+# ╠════════════════════════════════════════════════════════════════════╣
+# ║                                                                    ║
+# ║  SPLIT_IDS:                                                        ║
+# ║    None           → run on ALL documents (full dataset)            ║
+# ║    path to .json  → run only on the 256 test-split documents       ║
+# ║                     (for fair comparison with fine-tuned BERT)     ║
+# ║                                                                    ║
+# ╚════════════════════════════════════════════════════════════════════╝
+
+INPUT_PATH  = r"C:\thesis\data\label_studio\20260302_Export_Label_Studio_Client_Notes.json"
+OUTPUT_DIR  = r"C:\thesis\results\classical_baselines"
+SPLIT_IDS   = r"C:\thesis\results\bert_finetuned\split_ids.json"  # ← set to None for full dataset
+LIMIT       = None                                                  # ← set to 5 for quick test
+
+SKIP_SPACY  = False
+SKIP_BERT   = False
+
+
 # ─────────────────────────────────────────────
 #  9. MAIN EXECUTION
 # ─────────────────────────────────────────────
 
 def main():
-    parser = argparse.ArgumentParser(
-        description="Classical NER Baselines: spaCy + BERT (both with Regex)"
-    )
-    parser.add_argument(
-        "--input", type=str,
-        default=r"C:\thesis\data\label_studio\20260222_Export_Label_Studio_Client_Notes.json",
-    )
-    parser.add_argument(
-        "--output-dir", type=str,
-        default=r"C:\thesis\results\classical_baselines",
-    )
-    parser.add_argument(
-        "--spacy-model", type=str, default=DEFAULT_SPACY_MODEL,
-        help="spaCy model name (default: de_core_news_lg)",
-    )
-    parser.add_argument(
-        "--bert-model", type=str, default=DEFAULT_BERT_MODEL,
-        help="HuggingFace BERT NER model ID (default: fhswf/bert_de_ner)",
-    )
-    parser.add_argument(
-        "--skip-spacy", action="store_true",
-        help="Skip the spaCy baseline",
-    )
-    parser.add_argument(
-        "--skip-bert", action="store_true",
-        help="Skip the BERT baseline",
-    )
-    parser.add_argument(
-        "--limit", type=int, default=None,
-        help="Limit number of records (for quick testing)",
-    )
-    args = parser.parse_args()
-
-    os.makedirs(args.output_dir, exist_ok=True)
+    os.makedirs(OUTPUT_DIR, exist_ok=True)
 
     # ── Load annotated data ──
-    print(f"Loading data from: {args.input}")
-    gold_records = load_label_studio_export(args.input)
-    if args.limit:
-        gold_records = gold_records[: args.limit]
-    print(f"  Loaded {len(gold_records)} records\n")
+    print(f"Loading data from: {INPUT_PATH}")
+    gold_records = load_label_studio_export(INPUT_PATH)
+    print(f"  Total records: {len(gold_records)}")
 
+    # ── Filter to test split if provided ──
+    if SPLIT_IDS:
+        print(f"  Loading split IDs from: {SPLIT_IDS}")
+        with open(SPLIT_IDS, "r", encoding="utf-8") as f:
+            split_info = json.load(f)
+        test_ids = set(split_info["test_ids"])
+        gold_records = [r for r in gold_records if r["id"] in test_ids]
+        print(f"  Filtered to test split: {len(gold_records)} records")
+
+    if LIMIT:
+        gold_records = gold_records[:LIMIT]
+        print(f"  Limited to {len(gold_records)} records")
+
+    print()
     baseline_results = {}
 
     # ── BASELINE A: spaCy + Regex ──
-    if not args.skip_spacy:
+    if not SKIP_SPACY:
         print(f"{'=' * 60}")
-        print(f"  BASELINE A: spaCy ({args.spacy_model}) + Regex")
+        print(f"  BASELINE A: spaCy ({DEFAULT_SPACY_MODEL}) + Regex")
         print(f"{'=' * 60}")
 
-        nlp = load_spacy_model(args.spacy_model)
+        nlp = load_spacy_model(DEFAULT_SPACY_MODEL)
         result_a = run_baseline(
             name="spacy",
             predict_fn=lambda text: spacy_pipeline(nlp, text),
             gold_records=gold_records,
-            output_dir=args.output_dir,
+            output_dir=OUTPUT_DIR,
         )
         baseline_results["spacy"] = result_a
 
@@ -637,17 +634,17 @@ def main():
         gc.collect()
 
     # ── BASELINE B: BERT NER + Regex ──
-    if not args.skip_bert:
+    if not SKIP_BERT:
         print(f"\n{'=' * 60}")
-        print(f"  BASELINE B: BERT NER ({args.bert_model}) + Regex")
+        print(f"  BASELINE B: BERT NER ({DEFAULT_BERT_MODEL}) + Regex")
         print(f"{'=' * 60}")
 
-        ner_pipe = load_bert_ner_model(args.bert_model)
+        ner_pipe = load_bert_ner_model(DEFAULT_BERT_MODEL)
         result_b = run_baseline(
             name="bert",
             predict_fn=lambda text: bert_pipeline(ner_pipe, text),
             gold_records=gold_records,
-            output_dir=args.output_dir,
+            output_dir=OUTPUT_DIR,
         )
         baseline_results["bert"] = result_b
 
@@ -659,7 +656,7 @@ def main():
 
     # ── Side-by-side comparison (only if both baselines were run) ──
     if len(baseline_results) == 2:
-        print_and_save_comparison(baseline_results, args.output_dir)
+        print_and_save_comparison(baseline_results, OUTPUT_DIR)
 
 
 if __name__ == "__main__":
