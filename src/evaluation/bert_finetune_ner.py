@@ -639,12 +639,12 @@ def main():
         help="Random seed for reproducibility (default: 42)",
     )
     parser.add_argument(
-        "--train-ratio", type=float, default=0.80,
-        help="Fraction of data for training (default: 0.80)",
+        "--train-ratio", type=float, default=0.50,
+        help="Fraction of data for training (default: 0.50)",
     )
     parser.add_argument(
-        "--dev-ratio", type=float, default=0.10,
-        help="Fraction of data for validation (default: 0.10)",
+        "--dev-ratio", type=float, default=0.25,
+        help="Fraction of data for validation (default: 0.25)",
     )
     parser.add_argument(
         "--save-model", action="store_true",
