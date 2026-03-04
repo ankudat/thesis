@@ -567,7 +567,7 @@ def print_and_save_comparison(baseline_results: Dict, output_dir: str) -> None:
 
 
 # ╔════════════════════════════════════════════════════════════════════╗
-# ║  USER SETTINGS — Change these before each run, then press ▶️     ║
+# ║  USER SETTINGS — Change these before each run                      ║
 # ╠════════════════════════════════════════════════════════════════════╣
 # ║                                                                    ║
 # ║  SPLIT_IDS:                                                        ║
