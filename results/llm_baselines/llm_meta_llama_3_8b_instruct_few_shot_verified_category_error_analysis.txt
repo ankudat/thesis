@@ -1,0 +1,466 @@
+================================================================================
+  SYSTEMATIC ERROR ANALYSIS BY CATEGORY (FREQUENCY RANKED)
+================================================================================
+  This report shows the most frequent strict-match errors.
+  Compare the Top FNs vs Top FPs in a category to spot boundary issues.
+
+
+############################## CATEGORY: AGE ##############################
+
+  [✗] TOP 25 FALSE NEGATIVES (Gold standard wanted these, model missed them):
+         2x : '62-jährigen'
+         1x : '35-jähriger'
+         1x : '58-jährig'
+         1x : '65-jährig'
+         1x : '64 Jahre'
+         1x : '68-jährigen'
+         1x : '66 Jahre'
+         1x : '64-jährig'
+         1x : '38'
+         1x : '58'
+         1x : '45-jährige'
+         1x : '67-jährig'
+         1x : '32-jähriger'
+         1x : '58-jähriger'
+         1x : '28'
+         1x : '65'
+         1x : '55'
+
+  [!] TOP 25 FALSE POSITIVES (Model hallucinated these, or bounds are wrong):
+         1x : '38 Jahre'
+         1x : '58 Jahre'
+         1x : '28 Jahre'
+         1x : '12.04.1965'
+         1x : '55 Jahre'
+
+--------------------------------------------------------------------------------
+
+############################## CATEGORY: DATE ##############################
+
+  [✗] TOP 25 FALSE NEGATIVES (Gold standard wanted these, model missed them):
+        58x : '2023'
+         6x : 'nächste Woche'
+         5x : '2022'
+         4x : 'morgen'
+         4x : 'Ende Monat'
+         2x : '2024'
+         2x : 'Ende nächster Woche'
+         2x : 'Ende Woche'
+         2x : 'morgen Mittag'
+         2x : 'nächstes Jahr'
+         1x : 'Anfang Juni 2024'
+         1x : 'Ende Jahr'
+         1x : '12 Monaten'
+         1x : 'Juni'
+         1x : '1. Januar 2025'
+         1x : 'Ende Juni'
+         1x : '90 Tage'
+         1x : '2025'
+         1x : 'Ende dieser Woche'
+         1x : 'heute Abend'
+         1x : 'sofort'
+         1x : 'Ende Q3'
+         1x : '9 Uhr'
+         1x : 'Q4'
+         1x : 'gestern'
+
+  [!] TOP 25 FALSE POSITIVES (Model hallucinated these, or bounds are wrong):
+        35x : 'Monate'
+        23x : 'Jahresabschluss 2023'
+         9x : 'Monaten'
+         9x : 'Monat'
+         7x : 'Woche'
+         6x : '3 Monate'
+         5x : 'Ende Monat'
+         3x : 'Jahresabschluss 2022'
+         3x : '10 Jahren'
+         3x : '6 Monate'
+         3x : '2023'
+         2x : '12 Monaten'
+         2x : 'Jahresabschlusses 2023'
+         2x : 'morgen'
+         2x : 'Jahresabschluss'
+         1x : 'Ende der Woche'
+         1x : 'Juni 2024'
+         1x : 'Jahr'
+         1x : '10 Jahre'
+         1x : '12 Monate'
+         1x : '2024'
+         1x : 'Ende Jahr'
+         1x : 'Ende Juni'
+         1x : '6 Monaten'
+         1x : 'Juni'
+
+--------------------------------------------------------------------------------
+
+############################## CATEGORY: EDU ##############################
+
+  [✗] TOP 25 FALSE NEGATIVES (Gold standard wanted these, model missed them):
+         9x : 'HSG'
+         3x : 'ETH'
+         1x : 'Hotelfachschule Lausanne'
+         1x : 'MBA'
+
+  [!] TOP 25 FALSE POSITIVES (Model hallucinated these, or bounds are wrong):
+        17x : 'ETH-Ingenieur'
+         8x : 'HSG-Absolventin'
+         6x : 'HSG-Absolvent'
+         2x : 'ETH-Absolventin'
+         1x : 'ETH-Ingenieurin'
+         1x : 'dipl. Architektin ETH'
+         1x : 'Bauingenieur ETH'
+         1x : 'Betriebsökonomin FH'
+         1x : 'Betriebsökonom FH'
+         1x : 'ETH-Bauingenieurin'
+         1x : 'ETH-Physiker'
+         1x : 'dipl. Holzbauingenieur'
+         1x : 'ETH-Absolvent'
+         1x : 'ETH-Physikerin'
+         1x : 'CS'
+
+--------------------------------------------------------------------------------
+
+############################## CATEGORY: EMAIL ##############################
+
+  [✗] TOP 25 FALSE NEGATIVES (Gold standard wanted these, model missed them):
+      (None)
+
+  [!] TOP 25 FALSE POSITIVES (Model hallucinated these, or bounds are wrong):
+         2x : 'per E-Mail'
+         2x : 'Mail'
+         1x : 'E-Mail'
+
+--------------------------------------------------------------------------------
+
+############################## CATEGORY: IBAN ##############################
+
+  [✗] TOP 25 FALSE NEGATIVES (Gold standard wanted these, model missed them):
+         1x : 'CH45 0023 3788 1234 5678 A'
+         1x : 'CH44 0023 3233 4444 5555 6'
+         1x : 'CH56 0023 3233 4455 6677 A'
+
+  [!] TOP 25 FALSE POSITIVES (Model hallucinated these, or bounds are wrong):
+         1x : 'CH45 0023 3788 1234 5678'
+         1x : 'CH56 0023 3233 4455 6677'
+
+--------------------------------------------------------------------------------
+
+############################## CATEGORY: JOB ##############################
+
+  [✗] TOP 25 FALSE NEGATIVES (Gold standard wanted these, model missed them):
+        19x : 'Inhaber'
+        16x : 'ETH-Ingenieur'
+         7x : 'Gründer'
+         4x : 'Assistent'
+         4x : 'Mitarbeiter'
+         4x : 'Gründerin'
+         3x : 'Leiterin Treasury'
+         3x : 'HSG-Absolvent'
+         3x : 'Partner'
+         3x : 'Patron'
+         3x : 'Anwalt'
+         2x : 'Eigentümer'
+         2x : 'HSG-Absolventin'
+         2x : 'ETH-Absolventin'
+         2x : 'Sohn'
+         2x : 'Physiker'
+         2x : 'Inhaberin'
+         2x : 'Partnerin'
+         2x : 'CEO'
+         1x : 'Gründer und CEO'
+         1x : 'ETH-Ingenieurin'
+         1x : 'Geschäftsführer'
+         1x : 'Liquidatorin'
+         1x : 'dipl. Architektin ETH'
+         1x : 'Mitarbeiterin'
+
+  [!] TOP 25 FALSE POSITIVES (Model hallucinated these, or bounds are wrong):
+        20x : 'Geschäftsführung'
+         4x : 'Verwaltungsrat'
+         3x : 'Leiterin'
+         3x : 'FX-Spezialisten'
+         3x : 'CEO'
+         3x : 'Geschäftsleitung'
+         3x : 'TEF-Spezialisten'
+         2x : 'Geschäftsführer'
+         2x : 'Gründer'
+         2x : 'Inhaber'
+         2x : 'Treasury-Spezialisten'
+         2x : 'Liquidator'
+         2x : 'Buchhaltung'
+         2x : 'Treasury'
+         1x : 'Inhaber und Geschäftsführer'
+         1x : 'Mitarbeiter'
+         1x : 'Treuhänder'
+         1x : 'Leasing-Spezialisten'
+         1x : 'Patron'
+         1x : 'Treasury-Team'
+         1x : 'Stellvertreterin'
+         1x : 'M&A-Experten'
+         1x : 'Sachbearbeiter'
+         1x : 'M&A-Spezialisten'
+         1x : 'Cash Management Spezialisten'
+
+--------------------------------------------------------------------------------
+
+############################## CATEGORY: LOC ##############################
+
+  [✗] TOP 25 FALSE NEGATIVES (Gold standard wanted these, model missed them):
+         4x : 'Zürich'
+         1x : 'China'
+         1x : 'Italien'
+         1x : 'Europa'
+         1x : 'Polen'
+         1x : 'Steffisburg'
+         1x : 'Bern'
+         1x : 'Thurgau'
+         1x : 'Zug'
+         1x : 'Aargau'
+         1x : 'Genf'
+         1x : 'Rue du Rhône 15, 1204 Genf'
+         1x : 'Schweiz'
+         1x : 'Les Jardins du Lac'
+         1x : 'Asien'
+         1x : 'Kanton Zug'
+         1x : 'Kanton Obwalden'
+         1x : 'England'
+
+  [!] TOP 25 FALSE POSITIVES (Model hallucinated these, or bounds are wrong):
+         8x : 'Bahnhofstrasse'
+         4x : 'deutschen'
+         2x : 'Zürich'
+         2x : 'amerikanischen'
+         2x : 'Genf'
+         1x : 'Bahnhofstrasse 5'
+         1x : 'Firmenadresse'
+         1x : 'US-amerikanischen'
+         1x : 'Industriegebiet von Steffisburg'
+         1x : 'Werk'
+         1x : 'Industriestrasse 15'
+         1x : 'Büro'
+         1x : 'Freiburgstrasse'
+         1x : 'Bern'
+         1x : 'asiatischen'
+         1x : 'Kanton Thurgau'
+         1x : 'Kanton Zug'
+         1x : 'Seestrasse 15'
+         1x : 'Kanton Aargau'
+         1x : 'Industriestrasse 5'
+         1x : 'Filiale Zürich'
+         1x : 'Seestrasse'
+         1x : 'Universität Bern'
+         1x : 'Rue du Rhône 15'
+         1x : 'Liegenschaft'
+
+--------------------------------------------------------------------------------
+
+############################## CATEGORY: MONEY ##############################
+
+  [✗] TOP 25 FALSE NEGATIVES (Gold standard wanted these, model missed them):
+         6x : 'CHF 3.5 Mio.'
+         6x : 'CHF 10 Mio.'
+         5x : 'CHF 5 Mio.'
+         4x : 'CHF 3.2 Mio.'
+         4x : 'CHF 1.2 Mio.'
+         4x : 'CHF 1.8 Mio.'
+         3x : 'CHF 4 Mio.'
+         3x : 'CHF 2.8 Mio.'
+         3x : 'CHF 1.5 Mio.'
+         2x : 'CHF 2.1 Mio.'
+         2x : 'CHF 12 Mio.'
+         2x : 'CHF 3.0 Mio.'
+         2x : 'CHF 4.2 Mio.'
+         2x : 'CHF 15 Mio.'
+         2x : 'CHF 25 Mio.'
+         2x : 'CHF 3 Mio.'
+         2x : 'CHF 1 Mio.'
+         2x : 'CHF 4.5 Mio.'
+         1x : 'CHF 9.8 Mio.'
+         1x : 'CHF 5 pro Aktie'
+         1x : '15%'
+         1x : 'EUR 5 Mio.'
+         1x : 'CHF 2.5 Mio.'
+         1x : 'USD 1.8 Mio.'
+         1x : 'CHF'
+
+  [!] TOP 25 FALSE POSITIVES (Model hallucinated these, or bounds are wrong):
+        36x : 'USD'
+        28x : 'EUR'
+        23x : 'CHF'
+         6x : 'EUR/CHF'
+         6x : 'CHF 10 Mio'
+         5x : 'CHF 3.5 Mio'
+         4x : 'Kaufpreis'
+         4x : 'CHF 1.2 Mio'
+         4x : 'CHF 1.8 Mio'
+         4x : 'CHF 5 Mio'
+         3x : 'CHF 3.2 Mio'
+         3x : 'CHF 2.8 Mio'
+         3x : 'CHF 1.5 Mio'
+         2x : 'CHF 2.1 Mio'
+         2x : 'CHF 4 Mio'
+         2x : 'CHF 12 Mio'
+         2x : 'CHF 4.2 Mio'
+         2x : 'CHF 3.0 Mio'
+         2x : 'CHF 15 Mio'
+         2x : 'CHF 3 Mio'
+         2x : 'CHF 4.5 Mio'
+         2x : 'EBITDA'
+         1x : 'CHF 5'
+         1x : 'Firmenkreditkartenlimite'
+         1x : 'GBP'
+
+--------------------------------------------------------------------------------
+
+############################## CATEGORY: NATION ##############################
+
+  [✗] TOP 25 FALSE NEGATIVES (Gold standard wanted these, model missed them):
+         6x : 'deutsche'
+         6x : 'deutschen'
+         3x : 'französischer'
+         3x : 'amerikanischen'
+         3x : 'französische'
+         2x : 'asiatischen'
+         1x : 'US-amerikanischen'
+         1x : 'schweizerische'
+         1x : 'französischen'
+         1x : 'Schweizer'
+         1x : 'chinesischen'
+         1x : 'italienische'
+         1x : 'britisch'
+         1x : 'schweizerisch-kroatische'
+
+  [!] TOP 25 FALSE POSITIVES (Model hallucinated these, or bounds are wrong):
+         3x : 'deutsche Staatsbürgerin'
+         1x : 'China'
+         1x : 'EU'
+         1x : 'Italien'
+         1x : 'Europa'
+         1x : 'Polen'
+         1x : 'Asien'
+
+--------------------------------------------------------------------------------
+
+############################## CATEGORY: ORG ##############################
+
+  [✗] TOP 25 FALSE NEGATIVES (Gold standard wanted these, model missed them):
+         2x : 'ETH Zürich'
+         1x : 'INSEAD'
+         1x : 'Digital Solutions GmbH'
+         1x : 'Novartis'
+         1x : 'Baumann Transport GmbH'
+         1x : 'Immo Generalbau AG'
+         1x : 'Lisboa Trading Lda.'
+         1x : 'Global Trade Partners GmbH'
+         1x : 'Bau AG Zürich'
+         1x : 'Universität Bern'
+         1x : 'Riyadh Manufacturing Ltd'
+         1x : 'Diagnostica Spin-Off AG'
+         1x : 'Helvetia DE GmbH'
+         1x : 'Knecht Transport AG'
+         1x : 'KIBAG'
+         1x : 'DigitalPrint Solutions AG'
+         1x : 'Import AG'
+         1x : 'Saigon Textile Ltd'
+         1x : 'InnoTech Lab GmbH'
+         1x : 'Immo Invest AG'
+         1x : 'CS'
+         1x : 'Zürcher Bau & Partner AG'
+
+  [!] TOP 25 FALSE POSITIVES (Model hallucinated these, or bounds are wrong):
+        12x : 'Firma'
+         8x : 'Verwaltungsrat'
+         3x : 'Muttergesellschaft'
+         3x : 'Gesellschaft'
+         2x : 'TEF-Abteilung'
+         2x : 'Unternehmens'
+         2x : 'Holding'
+         1x : 'Holdinggesellschaft'
+         1x : 'Tochtergesellschaften'
+         1x : 'Trade & Export Finance (TEF)'
+         1x : 'Digital Solutions GmbH i.L.'
+         1x : 'Lisboa Trading Lda'
+         1x : 'Riyadh Manufacturing Ltd.'
+         1x : 'Compliance-Abteilung'
+         1x : 'französischen Tochtergesellschaft'
+         1x : 'Tochtergesellschaft'
+         1x : 'NeuroCore SA'
+         1x : 'Kreditkomitee'
+         1x : 'Leasing-Abteilung'
+         1x : 'Saigon Textile Ltd.'
+         1x : 'Spin-off InnoTech Lab GmbH'
+         1x : 'E-Banking Admin'
+         1x : 'Invest AG'
+
+--------------------------------------------------------------------------------
+
+############################## CATEGORY: PER ##############################
+
+  [✗] TOP 25 FALSE NEGATIVES (Gold standard wanted these, model missed them):
+        12x : 'Keller'
+        10x : 'Fischer'
+        10x : 'Steiner'
+         8x : 'Schmid'
+         8x : 'Dubois'
+         7x : 'Baumann'
+         7x : 'Frei'
+         6x : 'Bachmann'
+         6x : 'Graf'
+         5x : 'Bianchi'
+         4x : 'Vogel'
+         3x : 'Schmidt'
+         3x : 'Meier'
+         3x : 'Brunner'
+         3x : 'Martin Keller'
+         3x : 'Thomas'
+         2x : 'Elena Schmidt'
+         2x : 'Rochat'
+         2x : 'Li'
+         2x : 'Elena Fischer'
+         2x : 'Herzog'
+         2x : 'Berger'
+         2x : 'Wyss'
+         2x : 'Ziegler'
+         2x : 'Frischknecht'
+
+  [!] TOP 25 FALSE POSITIVES (Model hallucinated these, or bounds are wrong):
+        11x : 'Keller'
+         8x : 'Dubois'
+         7x : 'Schmid'
+         7x : 'Fischer'
+         4x : 'Vogel'
+         4x : 'Bachmann'
+         4x : 'Sohn'
+         3x : 'Moser'
+         3x : 'Bianchi'
+         3x : 'Frei'
+         2x : 'Dr. Elena Schmidt'
+         2x : 'Rochat'
+         2x : 'Dr. Elena Fischer'
+         2x : 'Berger'
+         2x : 'Dr. Elena Bianchi'
+         2x : 'Tanner'
+         2x : 'Dr. Martin Keller'
+         2x : 'Egger'
+         2x : 'Dr. Anna Schmid'
+         2x : 'Dr. Elena Rossi'
+         2x : 'Baumann'
+         2x : 'Baker'
+         2x : 'Dr. Anna Leuenberger'
+         2x : 'Zürcher'
+         2x : 'Gerber'
+
+--------------------------------------------------------------------------------
+
+############################## CATEGORY: PHONE ##############################
+
+  [✗] TOP 25 FALSE NEGATIVES (Gold standard wanted these, model missed them):
+         1x : '044 222 33 44'
+         1x : '031 333 44 55'
+
+  [!] TOP 25 FALSE POSITIVES (Model hallucinated these, or bounds are wrong):
+         1x : '(044 222 33 44'
+         1x : '(031 333 44 55'
+         1x : 'Telefonkonferenz'
+
+--------------------------------------------------------------------------------
