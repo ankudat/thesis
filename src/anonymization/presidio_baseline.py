@@ -1,7 +1,7 @@
 """
 presidio_baseline.py
 =====================
-Microsoft Presidio Analyzer baseline for PII detection in German financial texts.
+Microsoft Presidio Analyzer baseline for PII detection.
 
 Presidio combines NER models with regex-based pattern recognizers and context-aware
 confidence boosting. This makes it an interesting additional baseline because:
@@ -10,7 +10,7 @@ confidence boosting. This makes it an interesting additional baseline because:
   - It has built-in recognizers for EMAIL, PHONE, IBAN, etc.
 
 For German, Presidio uses spaCy's German model for NER (PER, LOC, ORG) and
-pattern-based recognizers for structured entities. We add custom recognizers
+pattern-based recognizers for structured entities. I add custom recognizers
 for Swiss-specific patterns (IBAN, MONEY, PHONE) and Tier 3 quasi-identifiers.
 
 Usage:
@@ -150,21 +150,21 @@ def create_custom_recognizers():
     # ── Monetary Amounts ──
     # CHF/EUR/USD followed by amounts, or amounts followed by currency
     # Handles: CHF 500'000, EUR 2.8 Mio., USD 850'000, CHF 12'450.50
+    #
+    # FIX: Changed \b to (?!\w) at end of main pattern so trailing period
+    #      in "Mio." is captured (gold standard includes the period).
+    # FIX: Removed standalone currency pattern (CHF/EUR/USD alone) which
+    #      produced ~93 false positives with no attached amount.
     money_patterns = [
         Pattern(
             name="money_currency_amount",
-            regex=r"\b(?:CHF|EUR|USD|GBP)\s*\d[\d''.,\s]*(?:Mio\.?|Mrd\.?|k)?\b",
+            regex=r"\b(?:CHF|EUR|USD|GBP)\s*\d[\d''.,\s]*(?:Mio\.?|Mrd\.?|k)?(?!\w)",
             score=0.85,
         ),
         Pattern(
             name="money_amount_currency",
             regex=r"\b\d[\d''.,\s]*\s*(?:CHF|EUR|USD|GBP|Franken|Euro)\b",
             score=0.8,
-        ),
-        Pattern(
-            name="money_standalone_currency",
-            regex=r"\b(?:CHF|EUR|USD|GBP)\b",
-            score=0.3,
         ),
     ]
     recognizers.append(PatternRecognizer(
@@ -178,6 +178,9 @@ def create_custom_recognizers():
 
     # ── Date Patterns ──
     # German dates: 01.05.2024, 1. Mai 2024, Mai 2024, Ende Monat, nächste Woche
+    #
+    # FIX: Added standalone year pattern to catch "2023", "2024" etc.
+    #      which were missed 72+ times in the original evaluation.
     date_patterns = [
         Pattern(
             name="date_numeric",
@@ -193,6 +196,11 @@ def create_custom_recognizers():
             name="date_month_year",
             regex=r"\b(?:Januar|Februar|März|April|Mai|Juni|Juli|August|September|Oktober|November|Dezember)\s+\d{4}\b",
             score=0.7,
+        ),
+        Pattern(
+            name="date_standalone_year",
+            regex=r"\b(?:19|20)\d{2}\b",
+            score=0.6,
         ),
         Pattern(
             name="date_relative",
