@@ -11,15 +11,9 @@ Implements TWO classical baselines, each combined with regex for structured enti
 Both baselines are limited to Tier 1 + Tier 2 entities.
 Neither can detect Tier 3 quasi-identifiers (JOB, AGE, NATION, EDU).
 
-Recommended BERT NER models for German (choose via --bert-model):
-  - "fhswf/bert_de_ner"                                German BERT, GermEval + CoNLL
-  - "mschiesser/ner-bert-german"                        German BERT NER
-  - "Davlan/bert-base-multilingual-cased-ner-hrl"       Multilingual BERT NER
-  - "dslim/bert-large-NER"                              Large multilingual NER
-
-Usage:
-    python classical_baseline.py --input <label_studio_export.json> --output-dir <results_dir>
-    python classical_baseline.py --input <export.json> --bert-model fhswf/bert_de_ner --limit 100
+How to use:
+  1. Adjust USER SETTINGS below
+  2. Press Run in VS Code
 
 Requirements:
     pip install transformers torch spacy tqdm
