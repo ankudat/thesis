@@ -11,19 +11,56 @@ This script:
   5. Evaluates on the test set using the shared evaluation_utils.py
   6. Exports predictions in the same format as classical_baseline.py
 
-Usage:
-    python bert_finetune_ner.py --input <label_studio_export.json> --output-dir <results_dir>
-    python bert_finetune_ner.py --input <export.json> --epochs 5 --batch-size 16 --lr 3e-5
+How to use:
+  1. Adjust USER SETTINGS below
+  2. Press Run in VS Code
 
 Requirements:
     pip install transformers torch datasets seqeval scikit-learn tqdm
     (evaluation_utils.py must be importable)
 
+Author: André Kuhn – Master Thesis (MScIDS, HSLU)
 """
+
+# =====================================================================
+#  USER SETTINGS
+# =====================================================================
+
+# Base model for fine-tuning
+# Recommended models for German NER:
+#   "bert-base-german-cased"    (dbmdz German BERT, good default)
+#   "deepset/gbert-base"        (German BERT by deepset)
+#   "deepset/gbert-large"       (larger, needs more VRAM)
+#   "xlm-roberta-base"          (multilingual, robust fallback)
+BASE_MODEL  = "bert-base-german-cased"
+
+# Paths
+INPUT_PATH  = r"C:\thesis\data\label_studio\20260302_Export_Label_Studio_Client_Notes.json"
+OUTPUT_DIR  = r"C:\thesis\results\bert_finetuned"
+
+# Training hyperparameters
+EPOCHS          = 5
+BATCH_SIZE      = 16
+LR              = 3e-5
+WEIGHT_DECAY    = 0.01
+WARMUP_RATIO    = 0.1
+SEED            = 42
+
+# Data split ratios (must sum to 1.0)
+TRAIN_RATIO     = 0.50
+DEV_RATIO       = 0.25
+# TEST_RATIO is computed automatically as 1 - TRAIN_RATIO - DEV_RATIO
+
+# Save the full model (not just checkpoint)?
+SAVE_MODEL      = False
+
+
+# =====================================================================
+#  IMPORTS
+# =====================================================================
 
 import json
 import os
-import argparse
 import time
 import random
 import numpy as np
@@ -70,7 +107,6 @@ IGNORE_LABEL_ID = -100
 #   - "deepset/gbert-base"              (German BERT by deepset)
 #   - "deepset/gbert-large"             (larger, needs more VRAM)
 #   - "xlm-roberta-base"                (multilingual, robust fallback)
-DEFAULT_BASE_MODEL = "bert-base-german-cased"
 
 
 # ─────────────────────────────────────────────
@@ -596,72 +632,17 @@ def compute_seqeval_metrics(
 # ─────────────────────────────────────────────
 
 def main():
-    parser = argparse.ArgumentParser(
-        description="Fine-tune German BERT for NER on thesis PII dataset"
-    )
-    parser.add_argument(
-        "--input", type=str,
-        default=r"C:\thesis\data\label_studio\20260302_Export_Label_Studio_Client_Notes.json",
-        help="Path to Label Studio JSON export",
-    )
-    parser.add_argument(
-        "--output-dir", type=str,
-        default=r"C:\thesis\results\bert_finetuned",
-        help="Directory for all outputs (model, predictions, reports)",
-    )
-    parser.add_argument(
-        "--base-model", type=str, default=DEFAULT_BASE_MODEL,
-        help=f"HuggingFace base model ID (default: {DEFAULT_BASE_MODEL})",
-    )
-    parser.add_argument(
-        "--epochs", type=int, default=5,
-        help="Number of training epochs (default: 5)",
-    )
-    parser.add_argument(
-        "--batch-size", type=int, default=16,
-        help="Training batch size (default: 16)",
-    )
-    parser.add_argument(
-        "--lr", type=float, default=3e-5,
-        help="Learning rate (default: 3e-5)",
-    )
-    parser.add_argument(
-        "--weight-decay", type=float, default=0.01,
-        help="Weight decay for AdamW (default: 0.01)",
-    )
-    parser.add_argument(
-        "--warmup-ratio", type=float, default=0.1,
-        help="Fraction of total steps used for LR warmup (default: 0.1)",
-    )
-    parser.add_argument(
-        "--seed", type=int, default=42,
-        help="Random seed for reproducibility (default: 42)",
-    )
-    parser.add_argument(
-        "--train-ratio", type=float, default=0.50,
-        help="Fraction of data for training (default: 0.50)",
-    )
-    parser.add_argument(
-        "--dev-ratio", type=float, default=0.25,
-        help="Fraction of data for validation (default: 0.25)",
-    )
-    parser.add_argument(
-        "--save-model", action="store_true",
-        help="Save the fine-tuned model to output-dir/model/",
-    )
-    args = parser.parse_args()
+    test_ratio = 1.0 - TRAIN_RATIO - DEV_RATIO
+    assert test_ratio > 0, "TRAIN_RATIO + DEV_RATIO must be < 1.0"
 
-    test_ratio = 1.0 - args.train_ratio - args.dev_ratio
-    assert test_ratio > 0, "train_ratio + dev_ratio must be < 1.0"
-
-    os.makedirs(args.output_dir, exist_ok=True)
+    os.makedirs(OUTPUT_DIR, exist_ok=True)
 
     # ── Reproducibility ──
-    random.seed(args.seed)
-    np.random.seed(args.seed)
-    torch.manual_seed(args.seed)
+    random.seed(SEED)
+    np.random.seed(SEED)
+    torch.manual_seed(SEED)
     if torch.cuda.is_available():
-        torch.cuda.manual_seed_all(args.seed)
+        torch.cuda.manual_seed_all(SEED)
 
     # ── Device ──
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -673,10 +654,10 @@ def main():
     # ── Load tokenizer and model ──
     from transformers import AutoTokenizer, AutoModelForTokenClassification
 
-    print(f"\nLoading base model: {args.base_model}")
-    tokenizer = AutoTokenizer.from_pretrained(args.base_model)
+    print(f"\nLoading base model: {BASE_MODEL}")
+    tokenizer = AutoTokenizer.from_pretrained(BASE_MODEL)
     model = AutoModelForTokenClassification.from_pretrained(
-        args.base_model,
+        BASE_MODEL,
         num_labels=len(IOB2_LABELS),
         id2label=ID_TO_LABEL,
         label2id=LABEL_TO_ID,
@@ -687,8 +668,8 @@ def main():
     print(f"  IOB2 label count: {len(IOB2_LABELS)}")
 
     # ── Load & convert data ──
-    print(f"\nLoading data from: {args.input}")
-    raw_records = load_label_studio_raw(args.input)
+    print(f"\nLoading data from: {INPUT_PATH}")
+    raw_records = load_label_studio_raw(INPUT_PATH)
     print(f"  Raw records: {len(raw_records)}")
 
     print(f"  Converting to IOB2 token format...")
@@ -698,10 +679,10 @@ def main():
     # ── Split ──
     train_data, dev_data, test_data = stratified_split(
         all_records,
-        train_ratio=args.train_ratio,
-        dev_ratio=args.dev_ratio,
+        train_ratio=TRAIN_RATIO,
+        dev_ratio=DEV_RATIO,
         test_ratio=test_ratio,
-        seed=args.seed,
+        seed=SEED,
     )
 
     # Print split statistics
@@ -718,25 +699,25 @@ def main():
         "train_ids": [r["id"] for r in train_data],
         "dev_ids":   [r["id"] for r in dev_data],
         "test_ids":  [r["id"] for r in test_data],
-        "seed":      args.seed,
-        "split":     f"{args.train_ratio}/{args.dev_ratio}/{test_ratio}",
+        "seed":      SEED,
+        "split":     f"{TRAIN_RATIO}/{DEV_RATIO}/{test_ratio}",
     }
-    split_path = os.path.join(args.output_dir, "split_ids.json")
+    split_path = os.path.join(OUTPUT_DIR, "split_ids.json")
     with open(split_path, "w", encoding="utf-8") as f:
         json.dump(split_info, f, indent=2)
     print(f"  Split IDs saved to: {split_path}")
 
     # ── DataLoaders ──
     train_loader = DataLoader(
-        NERDataset(train_data), batch_size=args.batch_size,
+        NERDataset(train_data), batch_size=BATCH_SIZE,
         shuffle=True, collate_fn=collate_fn,
     )
     dev_loader = DataLoader(
-        NERDataset(dev_data), batch_size=args.batch_size * 2,
+        NERDataset(dev_data), batch_size=BATCH_SIZE * 2,
         shuffle=False, collate_fn=collate_fn,
     )
     test_loader = DataLoader(
-        NERDataset(test_data), batch_size=args.batch_size * 2,
+        NERDataset(test_data), batch_size=BATCH_SIZE * 2,
         shuffle=False, collate_fn=collate_fn,
     )
 
@@ -745,11 +726,11 @@ def main():
 
     optimizer = torch.optim.AdamW(
         model.parameters(),
-        lr=args.lr,
-        weight_decay=args.weight_decay,
+        lr=LR,
+        weight_decay=WEIGHT_DECAY,
     )
-    total_steps = len(train_loader) * args.epochs
-    warmup_steps = int(total_steps * args.warmup_ratio)
+    total_steps = len(train_loader) * EPOCHS
+    warmup_steps = int(total_steps * WARMUP_RATIO)
 
     scheduler = get_linear_schedule_with_warmup(
         optimizer,
@@ -758,7 +739,7 @@ def main():
     )
 
     print(f"\n{'=' * 60}")
-    print(f"  TRAINING: {args.epochs} epochs, batch_size={args.batch_size}, lr={args.lr}")
+    print(f"  TRAINING: {EPOCHS} epochs, batch_size={BATCH_SIZE}, lr={LR}")
     print(f"  Total steps: {total_steps}, warmup: {warmup_steps}")
     print(f"{'=' * 60}\n")
 
@@ -771,7 +752,7 @@ def main():
 
     start_time = time.time()
 
-    for epoch in range(args.epochs):
+    for epoch in range(EPOCHS):
         # Train
         train_loss = train_one_epoch(model, train_loader, optimizer, scheduler, device, epoch)
 
@@ -788,7 +769,7 @@ def main():
         }
         training_log.append(epoch_log)
 
-        print(f"\n  Epoch {epoch + 1}/{args.epochs}: "
+        print(f"\n  Epoch {epoch + 1}/{EPOCHS}: "
               f"train_loss={train_loss:.4f}, dev_loss={dev_loss:.4f}, dev_f1={dev_f1:.4f}")
 
         # Check for improvement
@@ -798,7 +779,7 @@ def main():
             patience_counter = 0
 
             # Save best model checkpoint
-            checkpoint_dir = os.path.join(args.output_dir, "best_checkpoint")
+            checkpoint_dir = os.path.join(OUTPUT_DIR, "best_checkpoint")
             os.makedirs(checkpoint_dir, exist_ok=True)
             model.save_pretrained(checkpoint_dir)
             tokenizer.save_pretrained(checkpoint_dir)
@@ -817,7 +798,7 @@ def main():
 
     # ── Load best checkpoint for final evaluation ──
     print(f"\n  Loading best checkpoint for final evaluation...")
-    checkpoint_dir = os.path.join(args.output_dir, "best_checkpoint")
+    checkpoint_dir = os.path.join(OUTPUT_DIR, "best_checkpoint")
     model = AutoModelForTokenClassification.from_pretrained(checkpoint_dir)
     model.to(device)
 
@@ -848,8 +829,8 @@ def main():
     report_content = []
     report_content.append(f"BERT Fine-Tuned NER Evaluation Report")
     report_content.append(f"Generated: {time.strftime('%Y-%m-%d %H:%M:%S')}")
-    report_content.append(f"Base model: {args.base_model}")
-    report_content.append(f"Best epoch: {best_epoch}/{args.epochs}")
+    report_content.append(f"Base model: {BASE_MODEL}")
+    report_content.append(f"Best epoch: {best_epoch}/{EPOCHS}")
     report_content.append(f"Training time: {training_time:.1f}s")
     report_content.append(f"Test records: {len(test_data)}")
     report_content.append(f"Training log: {training_log}\n")
@@ -898,18 +879,18 @@ def main():
 
     # ── Save everything ──
     # Evaluation results JSON
-    results_path = os.path.join(args.output_dir, "bert_finetuned_evaluation_results.json")
+    results_path = os.path.join(OUTPUT_DIR, "bert_finetuned_evaluation_results.json")
     save_results_json(all_results, results_path)
     print(f"\n  Results JSON: {results_path}")
 
     # Predictions JSON
-    pred_path = os.path.join(args.output_dir, "bert_finetuned_predictions.json")
+    pred_path = os.path.join(OUTPUT_DIR, "bert_finetuned_predictions.json")
     with open(pred_path, "w", encoding="utf-8") as f:
         json.dump(pred_records, f, indent=2, ensure_ascii=False)
     print(f"  Predictions: {pred_path}")
 
     # Evaluation report
-    report_path = os.path.join(args.output_dir, "bert_finetuned_evaluation_report.txt")
+    report_path = os.path.join(OUTPUT_DIR, "bert_finetuned_evaluation_report.txt")
     with open(report_path, "w", encoding="utf-8") as f:
         f.write("\n".join(report_content))
     print(f"  Report: {report_path}")
@@ -925,7 +906,7 @@ def main():
     # Full document-by-document comparison log
     print(f"  Generating full document-by-document log...")
     full_log_text = generate_full_document_log(gold_records, pred_records)
-    full_log_path = os.path.join(args.output_dir, "bert_finetuned_full_document_log.txt")
+    full_log_path = os.path.join(OUTPUT_DIR, "bert_finetuned_full_document_log.txt")
     with open(full_log_path, "w", encoding="utf-8") as f:
         f.write(full_log_text)
     print(f"  Full document log: {full_log_path}")
@@ -933,32 +914,35 @@ def main():
     # Category-level frequency error report
     print(f"  Generating category frequency error report...")
     category_error_text = generate_category_error_report(gold_records, pred_records)
-    category_error_path = os.path.join(args.output_dir, "bert_finetuned_category_error_analysis.txt")
+    category_error_path = os.path.join(OUTPUT_DIR, "bert_finetuned_category_error_analysis.txt")
     with open(category_error_path, "w", encoding="utf-8") as f:
         f.write(category_error_text)
     print(f"  Category error analysis: {category_error_path}")
 
     # Training log
-    log_path = os.path.join(args.output_dir, "training_log.json")
+    log_path = os.path.join(OUTPUT_DIR, "training_log.json")
     with open(log_path, "w", encoding="utf-8") as f:
         json.dump({
-            "args": vars(args),
+            "base_model": BASE_MODEL,
+            "epochs": EPOCHS, "batch_size": BATCH_SIZE, "lr": LR,
+            "weight_decay": WEIGHT_DECAY, "warmup_ratio": WARMUP_RATIO,
+            "seed": SEED, "train_ratio": TRAIN_RATIO, "dev_ratio": DEV_RATIO,
             "best_epoch": best_epoch,
             "best_dev_f1": best_dev_f1,
             "training_time_seconds": training_time,
-            "epochs": training_log,
+            "epochs_log": training_log,
         }, f, indent=2)
     print(f"  Training log: {log_path}")
 
     # Optionally save the full model
-    if args.save_model:
-        model_dir = os.path.join(args.output_dir, "model")
+    if SAVE_MODEL:
+        model_dir = os.path.join(OUTPUT_DIR, "model")
         model.save_pretrained(model_dir)
         tokenizer.save_pretrained(model_dir)
         print(f"  Model saved to: {model_dir}")
 
     print(f"\n{'=' * 60}")
-    print(f"  Done! All outputs in: {args.output_dir}")
+    print(f"  Done! All outputs in: {OUTPUT_DIR}")
     print(f"{'=' * 60}")
 
 

@@ -27,6 +27,28 @@ Requirements:
 
 """
 
+# =====================================================================
+#  USER SETTINGS
+# =====================================================================
+
+# Paths
+INPUT_PATH  = r"C:\thesis\data\label_studio\20260302_Export_Label_Studio_Client_Notes.json"
+OUTPUT_DIR  = r"C:\thesis\results\classical_baselines"
+
+# Split IDs: set to None to run on ALL documents (full dataset),
+# or provide a path to run only on the test-split documents
+# (for fair comparison with fine-tuned BERT and LLM baselines)
+SPLIT_IDS   = r"C:\thesis\results\bert_finetuned\split_ids.json"
+
+LIMIT       = None      # None for full run, small int for quick test
+SKIP_SPACY  = False     # set True to skip spaCy baseline
+SKIP_BERT   = False     # set True to skip BERT baseline
+
+
+# =====================================================================
+#  IMPORTS
+# =====================================================================
+
 import json
 import re
 import os
@@ -565,25 +587,6 @@ def print_and_save_comparison(baseline_results: Dict, output_dir: str) -> None:
         f.write(comparison_text)
     print(f"  Comparison summary saved to: {comparison_path}")
 
-
-# ╔════════════════════════════════════════════════════════════════════╗
-# ║  USER SETTINGS — Change these before each run                      ║
-# ╠════════════════════════════════════════════════════════════════════╣
-# ║                                                                    ║
-# ║  SPLIT_IDS:                                                        ║
-# ║    None           → run on ALL documents (full dataset)            ║
-# ║    path to .json  → run only on the 256 test-split documents       ║
-# ║                     (for fair comparison with fine-tuned BERT)     ║
-# ║                                                                    ║
-# ╚════════════════════════════════════════════════════════════════════╝
-
-INPUT_PATH  = r"C:\thesis\data\label_studio\20260302_Export_Label_Studio_Client_Notes.json"
-OUTPUT_DIR  = r"C:\thesis\results\classical_baselines"
-SPLIT_IDS   = r"C:\thesis\results\bert_finetuned\split_ids.json"  # ← set to None for full dataset
-LIMIT       = None                                                  # ← set to 5 for quick test
-
-SKIP_SPACY  = False
-SKIP_BERT   = False
 
 
 # ─────────────────────────────────────────────

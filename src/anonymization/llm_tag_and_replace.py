@@ -9,14 +9,21 @@ tokens. A deterministic parser then extracts character-offset spans.
 Optionally, a self-verification step asks the LLM to confirm each
 extracted entity, reducing false positives.
 
+Supported models:
+  - meta-llama/Meta-Llama-3-8B-Instruct   (general-purpose baseline)
+  - Qwen/Qwen2.5-7B-Instruct             (strongest 7B-class model)
+  - VAGOsolutions/Llama-3.1-SauerkrautLM-8b-Instruct  (German-specialized)
+
 How to use:
-  1. Change the settings in USER SETTINGS below
+  1. Uncomment ONE model block in USER SETTINGS below
   2. Press Run in VS Code
+  3. Repeat for each model (results auto-named, no overwrites)
 
 Requirements:
     pip install transformers torch accelerate tqdm bitsandbytes
     (evaluation_utils.py must be importable)
 
+Author: André Kuhn – Master Thesis (MScIDS, HSLU)
 """
 
 # =====================================================================
@@ -24,36 +31,37 @@ Requirements:
 # =====================================================================
 #
 #  Available models:
-#    "meta-llama/Meta-Llama-3-8B-Instruct"   (16 GB, float16)
-#    "mistralai/Mistral-7B-Instruct-v0.3"    (14 GB, float16)
-#    "LeoLM/leo-hessianai-13b-chat"          (26 GB, needs 4-bit)
+#    "meta-llama/Meta-Llama-3-8B-Instruct"   (16 GB, float16)  — general-purpose baseline
+#    "Qwen/Qwen2.5-7B-Instruct"             (15 GB, float16)  — strongest 7B-class model
+#    "VAGOsolutions/Llama-3.1-SauerkrautLM-8b-Instruct"  (16 GB, float16)  — German-specialized
 #
 #  Available strategies:
 #    "zero-shot"    (no examples in prompt)
 #    "few-shot"     (3 annotated examples in prompt)
 #
+#  Run configurations — uncomment ONE block at a time:
 # =====================================================================
 
-MODEL       = "meta-llama/Meta-Llama-3-8B-Instruct"   # <- change model
-# STRATEGY    = "zero-shot"                               # <- change strategy
-# VERIFY      = False                                     # <- set to True to enable self-verification
-# MAX_DOCS    = 5                                         # <- set to 5 for quick test, None for full run
-QUANTIZE    = False                                     # <- set to True for LeoLM-13B
-
-# Run 1: Llama-3, zero-shot, no verify
-# STRATEGY    = "zero-shot"
-# VERIFY      = False
-# MAX_DOCS    = None
-
-# # Run 2: Llama-3, few-shot, no verify
-# STRATEGY    = "few-shot"
-# VERIFY      = False
-# MAX_DOCS    = None
-
-# # Run 3: Llama-3, few-shot, with verify
+# --- Llama-3 8B (your existing baseline) ---
+MODEL       = "meta-llama/Meta-Llama-3-8B-Instruct"
+QUANTIZE    = False
 STRATEGY    = "few-shot"
 VERIFY      = True
 MAX_DOCS    = None
+
+# --- Qwen2.5 7B (strongest small model) ---
+# MODEL       = "Qwen/Qwen2.5-7B-Instruct"
+# QUANTIZE    = False
+# STRATEGY    = "few-shot"
+# VERIFY      = True
+# MAX_DOCS    = None
+
+# --- SauerkrautLM 8B (German-specialized) ---
+# MODEL       = "VAGOsolutions/Llama-3.1-SauerkrautLM-8b-Instruct"
+# QUANTIZE    = False
+# STRATEGY    = "few-shot"
+# VERIFY      = True
+# MAX_DOCS    = None
 
 
 # Paths (should not need changing)
@@ -751,8 +759,7 @@ def main():
         print(f"  Limited to {len(records)} documents")
 
     # -- Load model --
-    needs_4bit = QUANTIZE or "13b" in MODEL.lower()
-    model, tokenizer = load_model(MODEL, quantize_4bit=needs_4bit)
+    model, tokenizer = load_model(MODEL, quantize_4bit=QUANTIZE)
 
     # -- Run inference --
     gold_records = records
