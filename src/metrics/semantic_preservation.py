@@ -63,19 +63,30 @@ SPLIT_IDS = r"C:\thesis\results\bert_finetuned\split_ids.json"
 # Prediction files from each pipeline (JSON: list of {id, entities})
 # Set to None to skip a pipeline.
 PREDICTION_FILES = {
+    # Classical baselines
     "spaCy + Regex":                   r"C:\thesis\results\classical_baselines\spacy\spacy_predictions.json",
     "BERT (pretrained) + Regex":       r"C:\thesis\results\classical_baselines\bert\bert_predictions.json",
     "BERT Fine-Tuned":                 r"C:\thesis\results\bert_finetuned\bert_finetuned_predictions.json",
+    # LLM tag-and-replace: Llama-3
     "LLM Llama-3 [zero-shot]":         r"C:\thesis\results\llm_baselines\llm_meta_llama_3_8b_instruct_zero_shot_predictions.json",
     "LLM Llama-3 [few-shot]":          r"C:\thesis\results\llm_baselines\llm_meta_llama_3_8b_instruct_few_shot_predictions.json",
     "LLM Llama-3 [few-shot +verify]":  r"C:\thesis\results\llm_baselines\llm_meta_llama_3_8b_instruct_few_shot_verified_predictions.json",
+    # LLM tag-and-replace: Qwen2.5
+    "LLM Qwen2.5 [few-shot +verify]":  r"C:\thesis\results\llm_baselines\llm_qwen2.5_7b_instruct_few_shot_verified_predictions.json",
+    # LLM tag-and-replace: SauerkrautLM
+    "LLM SauerkrautLM [few-shot +verify]": r"C:\thesis\results\llm_baselines\llm_llama_3.1_sauerkrautlm_8b_instruct_few_shot_verified_predictions.json",
+    # LLM fine-tuned (QLoRA)
+    "LLM Llama-3 [fine-tuned]":        r"C:\thesis\results\llm_finetuned\llm_finetuned_meta_llama_3_8b_instruct\llm_finetuned_meta_llama_3_8b_instruct_predictions.json",
+    "LLM Qwen2.5 [fine-tuned]":        r"C:\thesis\results\llm_finetuned\llm_finetuned_qwen2.5_7b_instruct\llm_finetuned_qwen2.5_7b_instruct_predictions.json",
+    "LLM SauerkrautLM [fine-tuned]":   r"C:\thesis\results\llm_finetuned\llm_finetuned_llama_3.1_sauerkrautlm_8b_instruct\llm_finetuned_llama_3.1_sauerkrautlm_8b_instruct_predictions.json",
 }
 
 # Prompt-based anonymization files (rewritten text, not entity predictions)
 # These use a different format: {"id", "rewritten_text"} instead of {"id", "entities"}
 PROMPT_ANON_FILES = {
-    "LLM Llama-3 [prompt few-shot]":   r"C:\thesis\results\llm_prompt_anonymize\prompt_anon_meta_llama_3_8b_instruct_few_shot_predictions.json",
-    # "LLM Llama-3 [prompt zero-shot]": r"C:\thesis\results\llm_prompt_anonymize\prompt_anon_meta_llama_3_8b_instruct_zero_shot_predictions.json",
+    "LLM Llama-3 [prompt few-shot]":       r"C:\thesis\results\llm_prompt_anonymize\prompt_anon_meta_llama_3_8b_instruct_few_shot_predictions.json",
+    "LLM Qwen2.5 [prompt few-shot]":       r"C:\thesis\results\llm_prompt_anonymize\prompt_anon_qwen2.5_7b_instruct_few_shot_predictions.json",
+    "LLM SauerkrautLM [prompt few-shot]":   r"C:\thesis\results\llm_prompt_anonymize\prompt_anon_llama_3.1_sauerkrautlm_8b_instruct_few_shot_predictions.json",
 }
 
 # Output directory for semantic preservation results

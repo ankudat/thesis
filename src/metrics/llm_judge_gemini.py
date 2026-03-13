@@ -39,16 +39,26 @@ OUTPUT_DIR  = r"C:\thesis\results\llm_judge_gemini"
 
 # Tag-and-replace predictions: {id, entities}
 TAG_REPLACE_PREDICTIONS = {
+    # Classical baselines
     "spaCy + Regex":                  r"C:\thesis\results\classical_baselines\spacy\spacy_predictions.json",
     "BERT (pretrained) + Regex":      r"C:\thesis\results\classical_baselines\bert\bert_predictions.json",
     "BERT Fine-Tuned":                r"C:\thesis\results\bert_finetuned\bert_finetuned_predictions.json",
     "Presidio":                       r"C:\thesis\results\presidio_baseline\presidio_predictions.json",
+    # LLM tag-and-replace
     "LLM Llama-3 [few-shot +verify]": r"C:\thesis\results\llm_baselines\llm_meta_llama_3_8b_instruct_few_shot_verified_predictions.json",
+    "LLM Qwen2.5 [few-shot +verify]": r"C:\thesis\results\llm_baselines\llm_qwen2.5_7b_instruct_few_shot_verified_predictions.json",
+    "LLM SauerkrautLM [few-shot +verify]": r"C:\thesis\results\llm_baselines\llm_llama_3.1_sauerkrautlm_8b_instruct_few_shot_verified_predictions.json",
+    # LLM fine-tuned (QLoRA)
+    "LLM Llama-3 [fine-tuned]":        r"C:\thesis\results\llm_finetuned\llm_finetuned_meta_llama_3_8b_instruct\llm_finetuned_meta_llama_3_8b_instruct_predictions.json",
+    "LLM Qwen2.5 [fine-tuned]":        r"C:\thesis\results\llm_finetuned\llm_finetuned_qwen2.5_7b_instruct\llm_finetuned_qwen2.5_7b_instruct_predictions.json",
+    "LLM SauerkrautLM [fine-tuned]":   r"C:\thesis\results\llm_finetuned\llm_finetuned_llama_3.1_sauerkrautlm_8b_instruct\llm_finetuned_llama_3.1_sauerkrautlm_8b_instruct_predictions.json",
 }
 
 # Prompt-based rewrite predictions: {id, rewritten_text}
 PROMPT_REWRITE_PREDICTIONS = {
-    "LLM Llama-3 [prompt few-shot]":  r"C:\thesis\results\llm_prompt_anonymize\prompt_anon_meta_llama_3_8b_instruct_few_shot_predictions.json",
+    "LLM Llama-3 [prompt few-shot]":     r"C:\thesis\results\llm_prompt_anonymize\prompt_anon_meta_llama_3_8b_instruct_few_shot_predictions.json",
+    "LLM Qwen2.5 [prompt few-shot]":     r"C:\thesis\results\llm_prompt_anonymize\prompt_anon_qwen2.5_7b_instruct_few_shot_predictions.json",
+    "LLM SauerkrautLM [prompt few-shot]": r"C:\thesis\results\llm_prompt_anonymize\prompt_anon_llama_3.1_sauerkrautlm_8b_instruct_few_shot_predictions.json",
 }
 
 MAX_DOCS = None    # None for full run, small int for testing
