@@ -16,24 +16,45 @@ os.makedirs(PLOT_DIR, exist_ok=True)
 
 # Path mapping to your specific JSON result files
 FILE_MAP = {
+    # Classical baselines
     'BERT (FT)':      os.path.join(RESULTS_DIR, "bert_finetuned", "bert_finetuned_evaluation_results.json"),
-    'Llama3 (FS+V)':  os.path.join(RESULTS_DIR, "llm_baselines", "llm_meta_llama_3_8b_instruct_few_shot_verified_evaluation_results.json"),
-    'Llama3 (FS)':    os.path.join(RESULTS_DIR, "llm_baselines", "llm_meta_llama_3_8b_instruct_few_shot_evaluation_results.json"),
     'BERT (Base)':    os.path.join(RESULTS_DIR, "classical_baselines", "bert", "bert_evaluation_results.json"),
     'SPACY':          os.path.join(RESULTS_DIR, "classical_baselines", "spacy", "spacy_evaluation_results.json"),
+    'MS Presidio':    os.path.join(RESULTS_DIR, "presidio_baseline", "presidio_evaluation_results.json"),
+    # LLM baselines: Llama-3
+    'Llama3 (FS+V)':  os.path.join(RESULTS_DIR, "llm_baselines", "llm_meta_llama_3_8b_instruct_few_shot_verified_evaluation_results.json"),
+    'Llama3 (FS)':    os.path.join(RESULTS_DIR, "llm_baselines", "llm_meta_llama_3_8b_instruct_few_shot_evaluation_results.json"),
     'Llama3 (ZS)':    os.path.join(RESULTS_DIR, "llm_baselines", "llm_meta_llama_3_8b_instruct_zero_shot_evaluation_results.json"),
-    'MS Presidio':    os.path.join(RESULTS_DIR, "presidio_baseline", "presidio_evaluation_results.json")
+    # LLM baselines: Qwen2.5
+    'Qwen2.5 (FS+V)': os.path.join(RESULTS_DIR, "llm_baselines", "llm_qwen2.5_7b_instruct_few_shot_verified_evaluation_results.json"),
+    # LLM baselines: SauerkrautLM
+    'SauerkrautLM (FS+V)': os.path.join(RESULTS_DIR, "llm_baselines", "llm_llama_3.1_sauerkrautlm_8b_instruct_few_shot_verified_evaluation_results.json"),
+    # LLM fine-tuned (QLoRA)
+    'Llama3 (FT)':    os.path.join(RESULTS_DIR, "llm_finetuned", "llm_finetuned_meta_llama_3_8b_instruct", "llm_finetuned_meta_llama_3_8b_instruct_evaluation_results.json"),
+    'Qwen2.5 (FT)':   os.path.join(RESULTS_DIR, "llm_finetuned", "llm_finetuned_qwen2.5_7b_instruct", "llm_finetuned_qwen2.5_7b_instruct_evaluation_results.json"),
+    'SauerkrautLM (FT)': os.path.join(RESULTS_DIR, "llm_finetuned", "llm_finetuned_llama_3.1_sauerkrautlm_8b_instruct", "llm_finetuned_llama_3.1_sauerkrautlm_8b_instruct_evaluation_results.json"),
 }
 
-# 2. ACADEMIC COLOR PALETTE (Blue for Llama, Gray for others)
+# 2. ACADEMIC COLOR PALETTE
+# Blues for LLMs (one shade per model family), Grays for classical baselines
+# Fine-tuned variants use darker/saturated versions of their family color
 BLUE_GRAY_PALETTE = {
-    'BERT (FT)':      '#4d4d4d', # Dark Gray (Requested starting point)
-    'Llama3 (FS+V)':  '#084594', # Dark Blue
-    'Llama3 (FS)':    '#2171b5', # Medium Blue
-    'BERT (Base)':    '#7f7f7f', # Gray
-    'SPACY':          '#afafaf', # Silver/Gray
-    'Llama3 (ZS)':    '#6baed6', # Light Blue
-    'MS Presidio':    '#d9d9d9'  # Very Light Gray
+    # Classical baselines (grays)
+    'BERT (FT)':      '#4d4d4d',   # Dark Gray
+    'BERT (Base)':    '#7f7f7f',   # Gray
+    'SPACY':          '#afafaf',   # Silver
+    'MS Presidio':    '#d9d9d9',   # Light Gray
+    # Llama-3 (blues)
+    'Llama3 (FS+V)':  '#2171b5',   # Medium Blue
+    'Llama3 (FS)':    '#6baed6',   # Light Blue
+    'Llama3 (ZS)':    '#9ecae1',   # Very Light Blue
+    'Llama3 (FT)':    '#08306b',   # Deep Navy (fine-tuned = darkest)
+    # Qwen2.5 (greens)
+    'Qwen2.5 (FS+V)': '#41ab5d',  # Medium Green
+    'Qwen2.5 (FT)':   '#00441b',  # Deep Green (fine-tuned = darkest)
+    # SauerkrautLM (oranges)
+    'SauerkrautLM (FS+V)': '#f16913',  # Medium Orange
+    'SauerkrautLM (FT)':   '#8c2d04',  # Deep Burnt Orange (fine-tuned = darkest)
 }
 
 # 3. DATA PROCESSING
@@ -79,7 +100,7 @@ def finalize_and_save(fig, filename):
     plt.close(fig)
 
 # --- CHART 1: OVERALL PERFORMANCE ---
-fig1, ax1 = plt.subplots(figsize=(10, 5))
+fig1, ax1 = plt.subplots(figsize=(10, 7))
 df_sorted = df.sort_values('Overall', ascending=False)
 sns.barplot(x='Overall', y='Model', data=df_sorted, palette=BLUE_GRAY_PALETTE, edgecolor='black', ax=ax1)
 ax1.set_xlim(0.4, 1.05)
@@ -93,7 +114,7 @@ finalize_and_save(fig1, 'overall_performance.png')
 
 # --- CHART 2: TIER COMPARISON ---
 tier_df = df.melt(id_vars='Model', value_vars=['Tier 1', 'Tier 2', 'Tier 3'], var_name='Tier', value_name='F1')
-fig2, ax2 = plt.subplots(figsize=(11, 6))
+fig2, ax2 = plt.subplots(figsize=(12, 6))
 sns.barplot(data=tier_df, x='Tier', y='F1', hue='Model', hue_order=ranked_models, palette=BLUE_GRAY_PALETTE, edgecolor='black', ax=ax2)
 ax2.set_ylim(0, 1.15)
 ax2.legend(title='Methods', bbox_to_anchor=(1.02, 1), loc='upper left')
@@ -105,7 +126,7 @@ finalize_and_save(fig2, 'tier_comparison.png')
 
 # --- CHART 3: COMPLEXITY ROBUSTNESS ---
 comp_df = df.melt(id_vars='Model', value_vars=['Low', 'Medium', 'High'], var_name='Complexity', value_name='F1')
-fig3, ax3 = plt.subplots(figsize=(11, 6))
+fig3, ax3 = plt.subplots(figsize=(12, 6))
 sns.barplot(data=comp_df, x='Complexity', y='F1', hue='Model', hue_order=ranked_models, palette=BLUE_GRAY_PALETTE, edgecolor='black', ax=ax3)
 ax3.set_ylim(0.4, 1.15)
 ax3.legend(title='Methods', bbox_to_anchor=(1.02, 1), loc='upper left')
