@@ -33,32 +33,35 @@ Requirements:
 GEMINI_MODEL = "gemini-2.5-flash"   # or "gemini-3-flash-preview" for latest
 
 # Paths
-INPUT_PATH  = r"C:\thesis\data\label_studio\20260302_Export_Label_Studio_Client_Notes.json"
-SPLIT_IDS   = r"C:\thesis\results\bert_finetuned\split_ids.json"
-OUTPUT_DIR  = r"C:\thesis\results\llm_judge_gemini"
+import os
+BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
+
+INPUT_PATH  = os.path.join(BASE_DIR, "data", "label_studio", "20260302_Export_Label_Studio_Client_Notes.json")
+SPLIT_IDS   = os.path.join(BASE_DIR, "results", "bert_finetuned", "split_ids.json")
+OUTPUT_DIR  = os.path.join(BASE_DIR, "results", "llm_judge_gemini")
 
 # Tag-and-replace predictions: {id, entities}
 TAG_REPLACE_PREDICTIONS = {
     # Classical baselines
-    "spaCy + Regex":                  r"C:\thesis\results\classical_baselines\spacy\spacy_predictions.json",
-    "BERT (pretrained) + Regex":      r"C:\thesis\results\classical_baselines\bert\bert_predictions.json",
-    "BERT Fine-Tuned":                r"C:\thesis\results\bert_finetuned\bert_finetuned_predictions.json",
-    "Presidio":                       r"C:\thesis\results\presidio_baseline\presidio_predictions.json",
+    "spaCy + Regex":                  os.path.join(BASE_DIR, "results", "classical_baselines", "spacy", "spacy_predictions.json"),
+    "BERT (pretrained) + Regex":      os.path.join(BASE_DIR, "results", "classical_baselines", "bert", "bert_predictions.json"),
+    "BERT Fine-Tuned":                os.path.join(BASE_DIR, "results", "bert_finetuned", "bert_finetuned_predictions.json"),
+    "Presidio":                       os.path.join(BASE_DIR, "results", "presidio_baseline", "presidio_predictions.json"),
     # LLM tag-and-replace
-    "LLM Llama-3 [few-shot +verify]": r"C:\thesis\results\llm_baselines\llm_meta_llama_3_8b_instruct_few_shot_verified_predictions.json",
-    "LLM Qwen2.5 [few-shot +verify]": r"C:\thesis\results\llm_baselines\llm_qwen2.5_7b_instruct_few_shot_verified_predictions.json",
-    "LLM SauerkrautLM [few-shot +verify]": r"C:\thesis\results\llm_baselines\llm_llama_3.1_sauerkrautlm_8b_instruct_few_shot_verified_predictions.json",
+    "LLM Llama-3 [few-shot +verify]": os.path.join(BASE_DIR, "results", "llm_baselines", "llm_meta_llama_3_8b_instruct_few_shot_verified_predictions.json"),
+    "LLM Qwen2.5 [few-shot +verify]": os.path.join(BASE_DIR, "results", "llm_baselines", "llm_qwen2.5_7b_instruct_few_shot_verified_predictions.json"),
+    "LLM SauerkrautLM [few-shot +verify]": os.path.join(BASE_DIR, "results", "llm_baselines", "llm_llama_3.1_sauerkrautlm_8b_instruct_few_shot_verified_predictions.json"),
     # LLM fine-tuned (QLoRA)
-    "LLM Llama-3 [fine-tuned]":        r"C:\thesis\results\llm_finetuned\llm_finetuned_meta_llama_3_8b_instruct\llm_finetuned_meta_llama_3_8b_instruct_predictions.json",
-    "LLM Qwen2.5 [fine-tuned]":        r"C:\thesis\results\llm_finetuned\llm_finetuned_qwen2.5_7b_instruct\llm_finetuned_qwen2.5_7b_instruct_predictions.json",
-    "LLM SauerkrautLM [fine-tuned]":   r"C:\thesis\results\llm_finetuned\llm_finetuned_llama_3.1_sauerkrautlm_8b_instruct\llm_finetuned_llama_3.1_sauerkrautlm_8b_instruct_predictions.json",
+    "LLM Llama-3 [fine-tuned]":        os.path.join(BASE_DIR, "results", "llm_finetuned", "llm_finetuned_meta_llama_3_8b_instruct", "llm_finetuned_meta_llama_3_8b_instruct_predictions.json"),
+    "LLM Qwen2.5 [fine-tuned]":        os.path.join(BASE_DIR, "results", "llm_finetuned", "llm_finetuned_qwen2.5_7b_instruct", "llm_finetuned_qwen2.5_7b_instruct_predictions.json"),
+    "LLM SauerkrautLM [fine-tuned]":   os.path.join(BASE_DIR, "results", "llm_finetuned", "llm_finetuned_llama_3.1_sauerkrautlm_8b_instruct", "llm_finetuned_llama_3.1_sauerkrautlm_8b_instruct_predictions.json"),
 }
 
 # Prompt-based rewrite predictions: {id, rewritten_text}
 PROMPT_REWRITE_PREDICTIONS = {
-    "LLM Llama-3 [prompt few-shot]":     r"C:\thesis\results\llm_prompt_anonymize\prompt_anon_meta_llama_3_8b_instruct_few_shot_predictions.json",
-    "LLM Qwen2.5 [prompt few-shot]":     r"C:\thesis\results\llm_prompt_anonymize\prompt_anon_qwen2.5_7b_instruct_few_shot_predictions.json",
-    "LLM SauerkrautLM [prompt few-shot]": r"C:\thesis\results\llm_prompt_anonymize\prompt_anon_llama_3.1_sauerkrautlm_8b_instruct_few_shot_predictions.json",
+    "LLM Llama-3 [prompt few-shot]":     os.path.join(BASE_DIR, "results", "llm_prompt_anonymize", "prompt_anon_meta_llama_3_8b_instruct_few_shot_predictions.json"),
+    "LLM Qwen2.5 [prompt few-shot]":     os.path.join(BASE_DIR, "results", "llm_prompt_anonymize", "prompt_anon_qwen2.5_7b_instruct_few_shot_predictions.json"),
+    "LLM SauerkrautLM [prompt few-shot]": os.path.join(BASE_DIR, "results", "llm_prompt_anonymize", "prompt_anon_llama_3.1_sauerkrautlm_8b_instruct_few_shot_predictions.json"),
 }
 
 MAX_DOCS = None    # None for full run, small int for testing
@@ -100,7 +103,7 @@ def create_gemini_client():
     try:
         from dotenv import load_dotenv
         # Look for .env in common locations
-        for env_path in [r"C:\thesis\.env", ".env", "../.env", "../../.env"]:
+        for env_path in [os.path.join(BASE_DIR, ".env"), ".env", "../.env", "../../.env"]:
             if os.path.exists(env_path):
                 load_dotenv(env_path)
                 print(f"  Loaded environment from: {env_path}")
@@ -116,7 +119,7 @@ def create_gemini_client():
             "No API key found. Set GEMINI_API_KEY or GOOGLE_API_KEY environment variable.\n"
             "  Windows:  set GEMINI_API_KEY=your_key_here\n"
             "  Linux:    export GEMINI_API_KEY=your_key_here\n"
-            "  Or add it to C:\\thesis\\.env file as: GEMINI_API_KEY=your_key_here"
+            "  Or add it to .env file (in project root) as: GEMINI_API_KEY=your_key_here"
         )
 
     client = genai.Client(api_key=api_key)
