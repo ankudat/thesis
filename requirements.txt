@@ -47,6 +47,16 @@ bert-score==0.3.13
 
 # --- Memory Optimization & Quantization ---
 # Manages device mapping to efficiently load large models into GPU memory
-accelerate==1.3.0
+accelerate==1.13.0
 # Enables 4-bit and 8-bit quantization to fit 13B+ and 70B models on 24GB VRAM
-bitsandbytes==0.45.2
+bitsandbytes==0.49.2
+
+# --- QLoRA Fine-Tuning & NER Evaluation ---
+# Parameter-Efficient Fine-Tuning (provides LoRA adapters)
+peft==0.18.1
+# Transformer Reinforcement Learning (provides SFTTrainer for easy fine-tuning)
+trl==0.29.0
+# Standard Hugging Face library for managing and loading training datasets
+datasets==4.7.0
+# Standard framework for calculating exact-match F1 scores on NER tagging tasks
+seqeval==1.2.2
