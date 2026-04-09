@@ -26,9 +26,11 @@ Requirements:
 #  USER SETTINGS
 # =====================================================================
 
-INPUT_PATH  = r"C:\thesis\data\label_studio\20260302_Export_Label_Studio_Client_Notes.json"
-OUTPUT_DIR  = r"C:\thesis\results\presidio_baseline"
-SPLIT_IDS   = r"C:\thesis\results\bert_finetuned\split_ids.json"
+import os
+BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
+INPUT_PATH  = os.path.join(BASE_DIR, "data", "label_studio", "20260302_Export_Label_Studio_Client_Notes.json")
+OUTPUT_DIR  = os.path.join(BASE_DIR, "results", "presidio_baseline")
+SPLIT_IDS   = os.path.join(BASE_DIR, "results", "bert_finetuned", "split_ids.json")
 LIMIT       = None   # Set to 5 for quick test, None for full run
 SEED        = 42
 
@@ -38,13 +40,13 @@ SPACY_MODEL = "de_core_news_lg"
 # Minimum confidence score for Presidio detections
 SCORE_THRESHOLD = 0.3
 
-
 # =====================================================================
 #  IMPORTS
 # =====================================================================
 
 import json
 import os
+
 import re
 import time
 import random
@@ -63,7 +65,6 @@ from evaluation_utils import (
     generate_full_document_log,
     generate_category_error_report,
 )
-
 
 # =====================================================================
 #  1. PRESIDIO LABEL MAPPING
@@ -95,7 +96,6 @@ PRESIDIO_TO_THESIS = {
 
 # Presidio entities we want to request (built-in + custom)
 ENTITIES_TO_DETECT = list(set(PRESIDIO_TO_THESIS.keys()))
-
 
 # =====================================================================
 #  2. CUSTOM RECOGNIZERS FOR SWISS GERMAN FINANCIAL TEXT
@@ -353,7 +353,6 @@ def create_custom_recognizers():
 
     return recognizers
 
-
 # =====================================================================
 #  3. ANALYZER SETUP
 # =====================================================================
@@ -464,7 +463,6 @@ def create_analyzer():
 
     return analyzer
 
-
 # =====================================================================
 #  4. PREDICTION PIPELINE
 # =====================================================================
@@ -525,7 +523,6 @@ def presidio_predict(
 
     return entities
 
-
 def _resolve_overlaps(entities: List[Dict]) -> List[Dict]:
     """
     Resolve overlapping entity spans by keeping the higher-confidence one.
@@ -560,7 +557,6 @@ def _resolve_overlaps(entities: List[Dict]) -> List[Dict]:
 
     resolved.sort(key=lambda e: e["start"])
     return resolved
-
 
 # =====================================================================
 #  5. EVALUATION & REPORTING
@@ -686,7 +682,6 @@ def run_presidio_baseline(
         "pred_records": pred_records,
     }
 
-
 # =====================================================================
 #  6. MAIN
 # =====================================================================
@@ -732,7 +727,6 @@ def main():
     print(f"\n{'=' * 60}")
     print(f"  Done! All outputs in: {OUTPUT_DIR}")
     print(f"{'=' * 60}")
-
 
 if __name__ == "__main__":
     main()

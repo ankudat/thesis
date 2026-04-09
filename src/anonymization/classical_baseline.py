@@ -25,19 +25,21 @@ Requirements:
 #  USER SETTINGS
 # =====================================================================
 
+import os
+
 # Paths
-INPUT_PATH  = r"C:\thesis\data\label_studio\20260302_Export_Label_Studio_Client_Notes.json"
-OUTPUT_DIR  = r"C:\thesis\results\classical_baselines"
+BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
+INPUT_PATH  = os.path.join(BASE_DIR, "data", "label_studio", "20260302_Export_Label_Studio_Client_Notes.json")
+OUTPUT_DIR  = os.path.join(BASE_DIR, "results", "classical_baselines")
 
 # Split IDs: set to None to run on ALL documents (full dataset),
 # or provide a path to run only on the test-split documents
 # (for fair comparison with fine-tuned BERT and LLM baselines)
-SPLIT_IDS   = r"C:\thesis\results\bert_finetuned\split_ids.json"
+SPLIT_IDS   = os.path.join(BASE_DIR, "results", "bert_finetuned", "split_ids.json")
 
 LIMIT       = None      # None for full run, small int for quick test
 SKIP_SPACY  = False     # set True to skip spaCy baseline
 SKIP_BERT   = False     # set True to skip BERT baseline
-
 
 # =====================================================================
 #  IMPORTS
@@ -46,6 +48,7 @@ SKIP_BERT   = False     # set True to skip BERT baseline
 import json
 import re
 import os
+
 import time
 import gc
 from typing import List, Dict, Optional
@@ -64,7 +67,6 @@ from evaluation_utils import (
     generate_category_error_report,
     SPACY_LABEL_MAP,
 )
-
 
 # ─────────────────────────────────────────────
 #  1. CONFIGURATION
@@ -89,7 +91,6 @@ BERT_LABEL_MAP: Dict[str, Optional[str]] = {
     "OTH": None,        # some models use OTH for miscellaneous
     "O": None,          # the "outside" tag — not an entity
 }
-
 
 # ─────────────────────────────────────────────
 #  2. REGEX PATTERNS FOR STRUCTURED ENTITIES
@@ -144,7 +145,6 @@ REGEX_PATTERNS = {
     ],
 }
 
-
 # ─────────────────────────────────────────────
 #  3. REGEX PIPELINE (shared by both baselines)
 # ─────────────────────────────────────────────
@@ -167,7 +167,6 @@ def run_regex_ner(text: str) -> List[Dict]:
                 })
 
     return entities
-
 
 # ─────────────────────────────────────────────
 #  4. OVERLAP RESOLUTION
@@ -209,7 +208,6 @@ def resolve_overlaps(entities: List[Dict]) -> List[Dict]:
 
     return sorted(accepted, key=lambda e: e["start"])
 
-
 # ─────────────────────────────────────────────
 #  5. BASELINE A:  spaCy + Regex
 # ─────────────────────────────────────────────
@@ -222,7 +220,6 @@ def load_spacy_model(model_name: str):
     nlp = spacy.load(model_name)
     print(f"  Pipeline components: {nlp.pipe_names}")
     return nlp
-
 
 def run_spacy_ner(nlp, text: str) -> List[Dict]:
     """
@@ -244,7 +241,6 @@ def run_spacy_ner(nlp, text: str) -> List[Dict]:
 
     return entities
 
-
 def spacy_pipeline(nlp, text: str) -> List[Dict]:
     """
     Full Baseline A pipeline: spaCy NER + regex, with overlap resolution.
@@ -253,7 +249,6 @@ def spacy_pipeline(nlp, text: str) -> List[Dict]:
     spacy_entities = run_spacy_ner(nlp, text)
     regex_entities = run_regex_ner(text)
     return resolve_overlaps(regex_entities + spacy_entities)
-
 
 # ─────────────────────────────────────────────
 #  6. BASELINE B:  BERT NER + Regex
@@ -300,7 +295,6 @@ def load_bert_ner_model(model_name: str, device: int = -1):
 
     return ner_pipe
 
-
 def map_bert_label(raw_label: str) -> Optional[str]:
     """
     Translate a raw BERT NER label to our unified schema.
@@ -325,7 +319,6 @@ def map_bert_label(raw_label: str) -> Optional[str]:
 
     # 3. Look up — try as-is first, then uppercase
     return BERT_LABEL_MAP.get(base_label, BERT_LABEL_MAP.get(base_label.upper()))
-
 
 def run_bert_ner(ner_pipe, text: str) -> List[Dict]:
     """
@@ -359,7 +352,6 @@ def run_bert_ner(ner_pipe, text: str) -> List[Dict]:
 
     return entities
 
-
 def bert_pipeline(ner_pipe, text: str) -> List[Dict]:
     """
     Full Baseline B pipeline: BERT NER + regex, with overlap resolution.
@@ -368,7 +360,6 @@ def bert_pipeline(ner_pipe, text: str) -> List[Dict]:
     bert_entities  = run_bert_ner(ner_pipe, text)
     regex_entities = run_regex_ner(text)
     return resolve_overlaps(regex_entities + bert_entities)
-
 
 # ─────────────────────────────────────────────
 #  7. RUN A SINGLE BASELINE
@@ -504,7 +495,6 @@ def run_baseline(
         "pred_records": pred_records,
     }
 
-
 # ─────────────────────────────────────────────
 #  8. SIDE-BY-SIDE COMPARISON
 # ─────────────────────────────────────────────
@@ -581,8 +571,6 @@ def print_and_save_comparison(baseline_results: Dict, output_dir: str) -> None:
         f.write(comparison_text)
     print(f"  Comparison summary saved to: {comparison_path}")
 
-
-
 # ─────────────────────────────────────────────
 #  9. MAIN EXECUTION
 # ─────────────────────────────────────────────
@@ -654,7 +642,6 @@ def main():
     # ── Side-by-side comparison (only if both baselines were run) ──
     if len(baseline_results) == 2:
         print_and_save_comparison(baseline_results, OUTPUT_DIR)
-
 
 if __name__ == "__main__":
     main()

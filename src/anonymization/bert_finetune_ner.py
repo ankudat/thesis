@@ -19,7 +19,6 @@ Requirements:
     pip install transformers torch datasets seqeval scikit-learn tqdm
     (evaluation_utils.py must be importable)
 
-Author: André Kuhn – Master Thesis (MScIDS, HSLU)
 """
 
 # =====================================================================
@@ -34,9 +33,12 @@ Author: André Kuhn – Master Thesis (MScIDS, HSLU)
 #   "xlm-roberta-base"          (multilingual, robust fallback)
 BASE_MODEL  = "bert-base-german-cased"
 
+import os
+
 # Paths
-INPUT_PATH  = r"C:\thesis\data\label_studio\20260302_Export_Label_Studio_Client_Notes.json"
-OUTPUT_DIR  = r"C:\thesis\results\bert_finetuned"
+BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
+INPUT_PATH  = os.path.join(BASE_DIR, "data", "label_studio", "20260302_Export_Label_Studio_Client_Notes.json")
+OUTPUT_DIR  = os.path.join(BASE_DIR, "results", "bert_finetuned")
 
 # Training hyperparameters
 EPOCHS          = 5
@@ -54,13 +56,13 @@ DEV_RATIO       = 0.25
 # Save the full model (not just checkpoint)?
 SAVE_MODEL      = False
 
-
 # =====================================================================
 #  IMPORTS
 # =====================================================================
 
 import json
 import os
+
 import time
 import random
 import numpy as np
@@ -80,7 +82,6 @@ from evaluation_utils import (
     generate_full_document_log,
     generate_category_error_report,
 )
-
 
 # ─────────────────────────────────────────────
 #  1. CONFIGURATION & CONSTANTS
@@ -107,7 +108,6 @@ IGNORE_LABEL_ID = -100
 #   - "deepset/gbert-base"              (German BERT by deepset)
 #   - "deepset/gbert-large"             (larger, needs more VRAM)
 #   - "xlm-roberta-base"                (multilingual, robust fallback)
-
 
 # ─────────────────────────────────────────────
 #  2. DATA LOADING & IOB2 CONVERSION
@@ -140,7 +140,6 @@ def load_label_studio_raw(filepath: str) -> List[Dict]:
             "entities":  sorted(entities, key=lambda e: e["start"]),
         })
     return records
-
 
 def align_labels_with_tokens(
     text: str,
@@ -215,7 +214,6 @@ def align_labels_with_tokens(
 
     return input_ids, attention_mask, label_ids
 
-
 def convert_dataset(
     records: List[Dict],
     tokenizer,
@@ -249,7 +247,6 @@ def convert_dataset(
         print(f"  Total alignment errors: {alignment_errors}/{len(records)}")
 
     return converted
-
 
 # ─────────────────────────────────────────────
 #  3. STRATIFIED TRAIN / DEV / TEST SPLIT
@@ -297,7 +294,6 @@ def stratified_split(
 
     return train_all, dev_all, test_all
 
-
 # ─────────────────────────────────────────────
 #  4. COLLATION & DATA LOADING
 # ─────────────────────────────────────────────
@@ -318,7 +314,6 @@ class NERDataset(torch.utils.data.Dataset):
             "attention_mask": torch.tensor(rec["attention_mask"], dtype=torch.long),
             "labels":         torch.tensor(rec["labels"], dtype=torch.long),
         }
-
 
 def collate_fn(batch: List[Dict]) -> Dict[str, torch.Tensor]:
     """
@@ -351,7 +346,6 @@ def collate_fn(batch: List[Dict]) -> Dict[str, torch.Tensor]:
         "attention_mask": torch.stack(padded_attention),
         "labels":         torch.stack(padded_labels),
     }
-
 
 # ─────────────────────────────────────────────
 #  5. TRAINING
@@ -397,7 +391,6 @@ def train_one_epoch(
         progress.set_postfix(loss=f"{loss.item():.4f}")
 
     return total_loss / max(num_batches, 1)
-
 
 def evaluate_on_split(
     model,
@@ -448,7 +441,6 @@ def evaluate_on_split(
 
     avg_loss = total_loss / max(num_batches, 1)
     return avg_loss, all_true, all_pred
-
 
 # ─────────────────────────────────────────────
 #  6. TOKEN PREDICTIONS → CHARACTER SPANS
@@ -534,7 +526,6 @@ def token_predictions_to_char_spans(
 
     return entities
 
-
 def generate_char_span_predictions(
     model,
     records: List[Dict],
@@ -595,7 +586,6 @@ def generate_char_span_predictions(
 
     return pred_records
 
-
 # ─────────────────────────────────────────────
 #  7. seqeval METRICS (token-level, for monitoring)
 # ─────────────────────────────────────────────
@@ -625,7 +615,6 @@ def compute_seqeval_metrics(
                     correct += 1
         accuracy = correct / max(total, 1)
         return {"f1": accuracy, "report": f"Token accuracy: {accuracy:.4f}"}
-
 
 # ─────────────────────────────────────────────
 #  8. MAIN TRAINING LOOP
@@ -944,7 +933,6 @@ def main():
     print(f"\n{'=' * 60}")
     print(f"  Done! All outputs in: {OUTPUT_DIR}")
     print(f"{'=' * 60}")
-
 
 if __name__ == "__main__":
     main()

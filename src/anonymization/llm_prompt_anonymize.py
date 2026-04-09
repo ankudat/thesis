@@ -17,11 +17,14 @@ Supported models:
   - Qwen/Qwen2.5-7B-Instruct             (strongest 7B-class model)
   - VAGOsolutions/Llama-3.1-SauerkrautLM-8b-Instruct  (German-specialized)
 
+The script loops through all configured model/strategy combinations
+automatically. Each model is loaded once and reused, then freed from
+GPU memory before loading the next model.
+
 How to use:
-  1. Uncomment ONE model block in USER SETTINGS below
-  2. Press Run in VS Code
+  1. Edit RUN_MATRIX in USER SETTINGS to enable/disable runs
+  2. Press Run in VS Code — everything executes sequentially
   3. Then run semantic_preservation.py and llm_judge_gemini.py on the output
-  4. Repeat for each model (results auto-named, no overwrites)
 
 Requirements:
     pip install transformers torch accelerate tqdm bitsandbytes
@@ -30,41 +33,38 @@ Author: André Kuhn – Master Thesis (MScIDS, HSLU)
 """
 
 # =====================================================================
-#  USER SETTINGS - Uncomment ONE model block, then press Run
+#  USER SETTINGS
 # =====================================================================
 #
-#  Available models:
-#    "meta-llama/Meta-Llama-3-8B-Instruct"   (16 GB, float16)  — general-purpose baseline
-#    "Qwen/Qwen2.5-7B-Instruct"             (15 GB, float16)  — strongest 7B-class model
-#    "VAGOsolutions/Llama-3.1-SauerkrautLM-8b-Instruct"  (16 GB, float16)  — German-specialized
+#  RUN_MATRIX defines all experiments to run sequentially.
+#  Each entry is: (model_id, quantize, strategy)
 #
+#  The script groups runs by model — loads a model once, runs all its
+#  configurations, frees GPU memory, then loads the next model.
+#
+#  Comment out any rows you want to skip.
 # =====================================================================
 
-# --- Llama-3 8B (your existing baseline) ---
-MODEL       = "meta-llama/Meta-Llama-3-8B-Instruct"
-STRATEGY    = "few-shot"      # "zero-shot" or "few-shot"
-QUANTIZE    = False
-MAX_DOCS    = None            # None for full run, small int for testing
-SEED        = 42
+RUN_MATRIX = [
+    # ── Llama-3 8B (general-purpose baseline) ──
+    ("meta-llama/Meta-Llama-3-8B-Instruct",                  False, "zero-shot"),
+    ("meta-llama/Meta-Llama-3-8B-Instruct",                  False, "few-shot"),
 
-# --- Qwen2.5 7B (strongest small model) ---
-# MODEL       = "Qwen/Qwen2.5-7B-Instruct"
-# STRATEGY    = "few-shot"
-# QUANTIZE    = False
-# MAX_DOCS    = None
-# SEED        = 42
+    # ── Qwen2.5 7B (strongest small model) ──
+    ("Qwen/Qwen2.5-7B-Instruct",                             False, "zero-shot"),
+    ("Qwen/Qwen2.5-7B-Instruct",                             False, "few-shot"),
 
-# --- SauerkrautLM 8B (German-specialized) ---
-# MODEL       = "VAGOsolutions/Llama-3.1-SauerkrautLM-8b-Instruct"
-# STRATEGY    = "few-shot"
-# QUANTIZE    = False
-# MAX_DOCS    = None
-# SEED        = 42
+    # ── SauerkrautLM 8B (German-specialized) ──
+    ("VAGOsolutions/Llama-3.1-SauerkrautLM-8b-Instruct",     False, "zero-shot"),
+    ("VAGOsolutions/Llama-3.1-SauerkrautLM-8b-Instruct",     False, "few-shot"),
+]
 
 # Paths
 INPUT_PATH  = r"C:\thesis\data\label_studio\20260302_Export_Label_Studio_Client_Notes.json"
 OUTPUT_DIR  = r"C:\thesis\results\llm_prompt_anonymize"
 SPLIT_IDS   = r"C:\thesis\results\bert_finetuned\split_ids.json"
+MAX_DOCS    = None      # None for full run, small int for quick test
+SEED        = 42
 
 
 # =====================================================================
@@ -105,7 +105,7 @@ def build_system_prompt() -> str:
         "- Email addresses → remove or replace with '[E-Mail]'\n"
         "- Phone numbers → remove or replace with '[Telefon]'\n"
         "- IBAN/Account numbers → replace with '[Konto]'\n"
-        "- Monetary amounts → keep amounts but remove account-linking context\n"
+        "- Monetary amounts → replace with generic references (e.g., 'einen Betrag', 'eine Summe')\n"
         "- Job titles → generalize (e.g., 'eine Führungskraft', 'ein Mitarbeiter')\n"
         "- Age references → remove or generalize\n"
         "- Nationality → remove or generalize\n"
@@ -134,11 +134,11 @@ FEW_SHOT_EXAMPLES = [
         ),
         "output": (
             "Betriebsbesichtigung bei einem Lebensmittelunternehmen an einem Schweizer Standort "
-            "an einem Datum im Frühjahr. Der Geschäftsführer führte durch die neuen Anlagen. "
-            "Das Unternehmen verzeichnet ein starkes Wachstum im europäischen Markt. "
+            "an einem Datum im Frühjahr. Ein Mitarbeiter der Geschäftsleitung führte durch die neuen Anlagen. "
+            "Das Unternehmen verzeichnet ein starkes Wachstum im Markt. "
             "Zur Finanzierung des weiteren Ausbaus wird eine Trade & Export Finance (TEF) "
             "Lösung für Lieferungen ins Ausland geprüft. Das aktuelle "
-            "Volumen beträgt ca. CHF 750'000 pro Monat. Der Geschäftsführer hat "
+            "Volumen beträgt einen erheblichen Betrag pro Monat. Der Verantwortliche hat "
             "einen Hochschulabschluss."
         ),
     },
@@ -155,9 +155,9 @@ FEW_SHOT_EXAMPLES = [
             "Telefonat mit einer Mitarbeiterin eines Bauunternehmens. "
             "Sie informierte uns über die Saldierung "
             "eines Kontos, da die entsprechende "
-            "Projektgesellschaft liquidiert wurde. Der Restbetrag von CHF 12'450.50 soll "
-            "auf das Hauptkonto überwiesen werden. Die rechtsverbindliche Unterschrift des "
-            "Geschäftsführers liegt uns vor."
+            "Projektgesellschaft liquidiert wurde. Ein Restbetrag soll "
+            "auf das Hauptkonto überwiesen werden. Die rechtsverbindliche Unterschrift "
+            "einer Führungskraft liegt uns vor."
         ),
     },
     {
@@ -172,7 +172,7 @@ FEW_SHOT_EXAMPLES = [
         "output": (
             "An einem Datum fand das Eröffnungsgespräch mit einem neu gegründeten "
             "Pharmaunternehmen statt. Der designierte Geschäftsführer, ein "
-            "Hochschulabsolvent, benötigt diverse Firmenkonten in CHF und EUR. Die notwendigen "
+            "Hochschulabsolvent, benötigt diverse Firmenkonten. Die notwendigen "
             "KYC-Dokumente, inklusive Handelsregisterauszug aus einem Schweizer Kanton, "
             "wurden übergeben. Die Kontaktdaten für die technische Anbindung des Cash Managements "
             "wurden hinterlegt."
@@ -252,6 +252,10 @@ def generate_response(model, tokenizer, messages, max_new_tokens=1024, temperatu
 # =====================================================================
 
 def check_pii_leakage(rewritten_text, gold_entities, case_sensitive=False):
+    """
+    Check which ground-truth PII strings survive in the rewritten text.
+    All PII categories are counted, including MONEY.
+    """
     leaked = []
     per_category = defaultdict(lambda: {"total": 0, "leaked": 0})
     check_text = rewritten_text if case_sensitive else rewritten_text.lower()
@@ -261,7 +265,10 @@ def check_pii_leakage(rewritten_text, gold_entities, case_sensitive=False):
         per_category[label]["total"] += 1
         search_text = pii_text if case_sensitive else pii_text.lower()
 
-        if len(pii_text) <= 2:
+        if len(pii_text) <= 5:
+            # Short PII strings (e.g., "Zug", "CEO", "CHF") need word boundary
+            # matching to avoid false positives from substring matches
+            # (e.g., "Zug" inside "Lesezugriff")
             found = bool(re.search(r'\b' + re.escape(search_text) + r'\b', check_text))
         else:
             found = search_text in check_text
@@ -382,45 +389,25 @@ def format_report(results, run_stats, model_name, strategy):
 #  7. MAIN
 # =====================================================================
 
-def main():
-    os.makedirs(OUTPUT_DIR, exist_ok=True)
-    random.seed(SEED); torch.manual_seed(SEED)
+def save_run_outputs(results, run_stats, model_name, strategy, output_dir):
+    """Save all outputs for a single run."""
+    model_short = model_name.split("/")[-1].lower().replace("-", "_")
+    prefix = f"prompt_anon_{model_short}_{strategy.replace('-', '_')}"
 
-    print(f"Loading data from: {INPUT_PATH}")
-    gold_records = load_label_studio_export(INPUT_PATH)
-    print(f"  Total records: {len(gold_records)}")
-
-    if SPLIT_IDS:
-        with open(SPLIT_IDS, "r", encoding="utf-8") as f: split_info = json.load(f)
-        gold_records = [r for r in gold_records if r["id"] in set(split_info["test_ids"])]
-        print(f"  Filtered to test split: {len(gold_records)} records")
-
-    if MAX_DOCS is not None:
-        gold_records = gold_records[:MAX_DOCS]
-        print(f"  Limited to {len(gold_records)} documents")
-
-    model, tokenizer = load_model(MODEL, quantize_4bit=QUANTIZE)
-
-    results, run_stats = run_prompt_anonymization(
-        model, tokenizer, gold_records, strategy=STRATEGY, max_new_tokens=1024, temperature=0.0)
-
-    report = format_report(results, run_stats, MODEL, STRATEGY)
+    report = format_report(results, run_stats, model_name, strategy)
     print(report)
 
-    model_short = MODEL.split("/")[-1].lower().replace("-", "_")
-    prefix = f"prompt_anon_{model_short}_{STRATEGY.replace('-', '_')}"
-
-    with open(os.path.join(OUTPUT_DIR, f"{prefix}_report.txt"), "w", encoding="utf-8") as f:
+    with open(os.path.join(output_dir, f"{prefix}_report.txt"), "w", encoding="utf-8") as f:
         f.write(report)
-    with open(os.path.join(OUTPUT_DIR, f"{prefix}_full_results.json"), "w", encoding="utf-8") as f:
+    with open(os.path.join(output_dir, f"{prefix}_full_results.json"), "w", encoding="utf-8") as f:
         json.dump(results, f, indent=2, ensure_ascii=False)
 
-    # Full side-by-side comparison (all documents) for human review
+    # Full side-by-side comparison
     side_by_side = []
     side_by_side.append("=" * 90)
     side_by_side.append("  FULL SIDE-BY-SIDE COMPARISON: Original → Rewritten (ALL documents)")
     side_by_side.append(f"  Generated: {time.strftime('%Y-%m-%d %H:%M:%S')}")
-    side_by_side.append(f"  Model: {MODEL} | Strategy: {STRATEGY}")
+    side_by_side.append(f"  Model: {model_name} | Strategy: {strategy}")
     side_by_side.append(f"  Documents: {len(results)}")
     side_by_side.append("=" * 90)
 
@@ -439,7 +426,7 @@ def main():
             for lk in r['leakage']['leaked_entities']:
                 side_by_side.append(f"    [{lk['label']:<8}] \"{lk['text']}\"")
 
-    sbs_path = os.path.join(OUTPUT_DIR, f"{prefix}_side_by_side.txt")
+    sbs_path = os.path.join(output_dir, f"{prefix}_side_by_side.txt")
     with open(sbs_path, "w", encoding="utf-8") as f:
         f.write("\n".join(side_by_side))
     print(f"  Side-by-side (all docs): {sbs_path}")
@@ -447,13 +434,83 @@ def main():
     preds = [{"id": r["id"], "rewritten_text": r["rewritten_text"],
               "leakage": {"total_pii": r["leakage"]["total_pii"], "leaked_pii": r["leakage"]["leaked_pii"],
                           "leakage_rate": r["leakage"]["leakage_rate"]}} for r in results]
-    with open(os.path.join(OUTPUT_DIR, f"{prefix}_predictions.json"), "w", encoding="utf-8") as f:
+    with open(os.path.join(output_dir, f"{prefix}_predictions.json"), "w", encoding="utf-8") as f:
         json.dump(preds, f, indent=2, ensure_ascii=False)
 
-    with open(os.path.join(OUTPUT_DIR, f"{prefix}_run_stats.json"), "w", encoding="utf-8") as f:
+    with open(os.path.join(output_dir, f"{prefix}_run_stats.json"), "w", encoding="utf-8") as f:
         json.dump(run_stats, f, indent=2, ensure_ascii=False)
 
-    print(f"\n{'='*60}\n  Done! All outputs in: {OUTPUT_DIR}\n{'='*60}")
+
+def main():
+    import gc
+    from itertools import groupby
+
+    os.makedirs(OUTPUT_DIR, exist_ok=True)
+    random.seed(SEED); torch.manual_seed(SEED)
+
+    # -- Load data (once, shared across all runs) --
+    print(f"Loading data from: {INPUT_PATH}")
+    gold_records = load_label_studio_export(INPUT_PATH)
+    print(f"  Total records: {len(gold_records)}")
+
+    if SPLIT_IDS:
+        with open(SPLIT_IDS, "r", encoding="utf-8") as f: split_info = json.load(f)
+        gold_records = [r for r in gold_records if r["id"] in set(split_info["test_ids"])]
+        print(f"  Filtered to test split: {len(gold_records)} records")
+
+    if MAX_DOCS is not None:
+        gold_records = gold_records[:MAX_DOCS]
+        print(f"  Limited to {len(gold_records)} documents")
+
+    # -- Group runs by model (load each model once) --
+    total_runs = len(RUN_MATRIX)
+    completed = 0
+
+    grouped = []
+    for model_id, runs in groupby(RUN_MATRIX, key=lambda x: x[0]):
+        grouped.append((model_id, list(runs)))
+
+    for model_id, runs in grouped:
+        quantize = runs[0][1]
+
+        print(f"\n{'#' * 70}")
+        print(f"  LOADING MODEL: {model_id}")
+        print(f"  Runs to execute: {len(runs)}")
+        print(f"{'#' * 70}")
+
+        model, tokenizer = load_model(model_id, quantize_4bit=quantize)
+
+        for _, _, strategy in runs:
+            completed += 1
+            print(f"\n{'=' * 60}")
+            print(f"  RUN {completed}/{total_runs}: {model_id.split('/')[-1]} [{strategy}]")
+            print(f"{'=' * 60}")
+
+            # Check if output already exists (skip if so)
+            model_short = model_id.split("/")[-1].lower().replace("-", "_")
+            prefix = f"prompt_anon_{model_short}_{strategy.replace('-', '_')}"
+            pred_path = os.path.join(OUTPUT_DIR, f"{prefix}_predictions.json")
+
+            if os.path.exists(pred_path):
+                print(f"  → SKIPPING (already exists: {pred_path})")
+                continue
+
+            results, run_stats = run_prompt_anonymization(
+                model, tokenizer, gold_records, strategy=strategy,
+                max_new_tokens=1024, temperature=0.0)
+
+            save_run_outputs(results, run_stats, model_id, strategy, OUTPUT_DIR)
+
+        # Free GPU memory before loading next model
+        print(f"\n  Freeing GPU memory for {model_id.split('/')[-1]}...")
+        del model, tokenizer
+        gc.collect()
+        if torch.cuda.is_available():
+            torch.cuda.empty_cache()
+
+    print(f"\n{'#' * 70}")
+    print(f"  ALL DONE! {completed} runs completed. Outputs in: {OUTPUT_DIR}")
+    print(f"{'#' * 70}")
 
 
 if __name__ == "__main__":

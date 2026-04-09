@@ -14,64 +14,63 @@ Supported models:
   - Qwen/Qwen2.5-7B-Instruct             (strongest 7B-class model)
   - VAGOsolutions/Llama-3.1-SauerkrautLM-8b-Instruct  (German-specialized)
 
+The script loops through all configured model/strategy/verify combinations
+automatically. Each model is loaded once and reused for all its runs,
+then freed from GPU memory before loading the next model.
+
 How to use:
-  1. Uncomment ONE model block in USER SETTINGS below
-  2. Press Run in VS Code
-  3. Repeat for each model (results auto-named, no overwrites)
+  1. Edit RUN_MATRIX in USER SETTINGS to enable/disable runs
+  2. Press Run in VS Code — everything executes sequentially
 
 Requirements:
     pip install transformers torch accelerate tqdm bitsandbytes
     (evaluation_utils.py must be importable)
 
-Author: André Kuhn – Master Thesis (MScIDS, HSLU)
 """
 
 # =====================================================================
-#  USER SETTINGS - Change these before each run, then press Run
+#  USER SETTINGS
 # =====================================================================
 #
-#  Available models:
-#    "meta-llama/Meta-Llama-3-8B-Instruct"   (16 GB, float16)  — general-purpose baseline
-#    "Qwen/Qwen2.5-7B-Instruct"             (15 GB, float16)  — strongest 7B-class model
-#    "VAGOsolutions/Llama-3.1-SauerkrautLM-8b-Instruct"  (16 GB, float16)  — German-specialized
+#  RUN_MATRIX defines all experiments to run sequentially.
+#  Each entry is: (model_id, quantize, strategy, verify)
 #
-#  Available strategies:
-#    "zero-shot"    (no examples in prompt)
-#    "few-shot"     (3 annotated examples in prompt)
+#  The script groups runs by model — loads a model once, runs all its
+#  configurations, frees GPU memory, then loads the next model.
 #
-#  Run configurations — uncomment ONE block at a time:
+#  Comment out any rows you want to skip.
 # =====================================================================
 
-# --- Llama-3 8B (your existing baseline) ---
-MODEL       = "meta-llama/Meta-Llama-3-8B-Instruct"
-QUANTIZE    = False
-STRATEGY    = "few-shot"
-VERIFY      = True
-MAX_DOCS    = None
+RUN_MATRIX = [
+    # ── Llama-3 8B (general-purpose baseline) ──
+    ("meta-llama/Meta-Llama-3-8B-Instruct",                  False, "zero-shot", False),
+    ("meta-llama/Meta-Llama-3-8B-Instruct",                  False, "few-shot",  False),
+    ("meta-llama/Meta-Llama-3-8B-Instruct",                  False, "few-shot",  True),
 
-# --- Qwen2.5 7B (strongest small model) ---
-# MODEL       = "Qwen/Qwen2.5-7B-Instruct"
-# QUANTIZE    = False
-# STRATEGY    = "few-shot"
-# VERIFY      = True
-# MAX_DOCS    = None
+    # ── Qwen2.5 7B (strongest small model) ──
+    ("Qwen/Qwen2.5-7B-Instruct",                             False, "zero-shot", False),
+    ("Qwen/Qwen2.5-7B-Instruct",                             False, "few-shot",  False),
+    ("Qwen/Qwen2.5-7B-Instruct",                             False, "few-shot",  True),
 
-# --- SauerkrautLM 8B (German-specialized) ---
-# MODEL       = "VAGOsolutions/Llama-3.1-SauerkrautLM-8b-Instruct"
-# QUANTIZE    = False
-# STRATEGY    = "few-shot"
-# VERIFY      = True
-# MAX_DOCS    = None
+    # ── SauerkrautLM 8B (German-specialized) ──
+    ("VAGOsolutions/Llama-3.1-SauerkrautLM-8b-Instruct",     False, "zero-shot", False),
+    ("VAGOsolutions/Llama-3.1-SauerkrautLM-8b-Instruct",     False, "few-shot",  False),
+    ("VAGOsolutions/Llama-3.1-SauerkrautLM-8b-Instruct",     False, "few-shot",  True),
+]
 
+import os
 
-# Paths (should not need changing)
-INPUT_PATH  = r"C:\thesis\data\label_studio\20260302_Export_Label_Studio_Client_Notes.json"
-OUTPUT_DIR  = r"C:\thesis\results\llm_baselines"
-SPLIT_IDS   = r"C:\thesis\results\bert_finetuned\split_ids.json"
+# Paths
+BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
+INPUT_PATH  = os.path.join(BASE_DIR, "data", "label_studio", "20260302_Export_Label_Studio_Client_Notes.json")
+OUTPUT_DIR  = os.path.join(BASE_DIR, "results", "llm_baselines")
+SPLIT_IDS   = os.path.join(BASE_DIR, "results", "bert_finetuned", "split_ids.json")
+MAX_DOCS    = None      # None for full run, small int for quick test
 SEED        = 42
 
 import json
 import os
+
 import re
 import time
 import random
@@ -90,7 +89,6 @@ from evaluation_utils import (
     generate_full_document_log,
     generate_category_error_report,
 )
-
 
 # -----------------------------------------
 #  1. CONFIGURATION
@@ -112,14 +110,12 @@ LABEL_DESCRIPTIONS = {
     "EDU":    "Educational institutions and qualifications (ETH, HSG, MBA, EPFL, ETH-Absolvent, HSG-Absolventin, etc.)",
 }
 
-
 def build_label_description_block() -> str:
     """Format label descriptions for inclusion in prompts."""
     lines = []
     for label in sorted(LABEL_DESCRIPTIONS.keys()):
         lines.append(f"- {label}: {LABEL_DESCRIPTIONS[label]}")
     return "\n".join(lines)
-
 
 # -----------------------------------------
 #  2. PROMPT CONSTRUCTION (@@LABEL...## format)
@@ -150,7 +146,6 @@ def build_system_prompt() -> str:
         "8. If no entities are found, just copy the text unchanged.\n"
         "9. Output ONLY the marked text. No explanations, no preamble, no markdown.\n"
     )
-
 
 # -- Few-Shot Examples --
 FEW_SHOT_EXAMPLES = [
@@ -212,11 +207,9 @@ FEW_SHOT_EXAMPLES = [
     },
 ]
 
-
 def build_user_prompt_zero_shot(text: str) -> str:
     """Zero-shot: just the text to mark."""
     return f"Mark all PII entities in the following text:\n\nInput: {text}\nOutput:"
-
 
 def build_user_prompt_few_shot(text: str) -> str:
     """Few-shot: include examples before the target text."""
@@ -226,7 +219,6 @@ def build_user_prompt_few_shot(text: str) -> str:
 
     parts.append(f"Now mark all PII entities in this text:\n\nInput: {text}\nOutput:")
     return "\n\n".join(parts)
-
 
 # -----------------------------------------
 #  3. MODEL LOADING
@@ -263,7 +255,6 @@ def load_model(model_name: str, quantize_4bit: bool = False):
 
     return model, tokenizer
 
-
 # -----------------------------------------
 #  4. INFERENCE
 # -----------------------------------------
@@ -274,7 +265,6 @@ def format_chat_messages(system_prompt: str, user_prompt: str) -> List[Dict]:
         {"role": "system", "content": system_prompt},
         {"role": "user", "content": user_prompt},
     ]
-
 
 def generate_response(
     model, tokenizer, messages: List[Dict],
@@ -308,7 +298,6 @@ def generate_response(
     input_length = inputs["input_ids"].shape[1]
     response_tokens = outputs[0][input_length:]
     return tokenizer.decode(response_tokens, skip_special_tokens=True).strip()
-
 
 # -----------------------------------------
 #  5. OUTPUT PARSING (@@LABEL...## format)
@@ -348,7 +337,6 @@ def parse_marked_text(response: str, original_text: str) -> Tuple[List[Dict], st
 
     return [], "failed"
 
-
 def _parse_json_fallback(response: str) -> Optional[List[Dict]]:
     """Try to parse as JSON array (fallback if LLM ignores @@## format)."""
     cleaned = re.sub(r"```json\s*", "", response)
@@ -375,7 +363,6 @@ def _parse_json_fallback(response: str) -> Optional[List[Dict]]:
         pass
     return None
 
-
 def _parse_xml_fallback(response: str) -> Optional[List[Dict]]:
     """Try to parse XML-style tags as fallback."""
     entities = []
@@ -386,7 +373,6 @@ def _parse_xml_fallback(response: str) -> Optional[List[Dict]]:
         if text and label in ALL_LABELS:
             entities.append({"text": text, "label": label})
     return entities if entities else None
-
 
 # -----------------------------------------
 #  6. TEXT-TO-SPAN ALIGNMENT
@@ -433,7 +419,6 @@ def align_entities_to_text(text: str, raw_entities: List[Dict]) -> List[Dict]:
     aligned.sort(key=lambda e: e["start"])
     return aligned
 
-
 # -----------------------------------------
 #  7. SELF-VERIFICATION (optional)
 # -----------------------------------------
@@ -451,7 +436,6 @@ def build_verification_prompt(sentence: str, entity_text: str, label: str) -> st
         f'Is "{entity_text}" a {label} entity in the sentence above?\n'
         f"Answer ONLY with yes or no."
     )
-
 
 def verify_entities(
     model, tokenizer,
@@ -489,7 +473,6 @@ def verify_entities(
             verified.append(ent)
 
     return verified
-
 
 # -----------------------------------------
 #  8. MAIN INFERENCE LOOP
@@ -587,7 +570,6 @@ def run_inference(
         )
 
     return pred_records, run_stats, raw_responses
-
 
 # -----------------------------------------
 #  9. EVALUATION & REPORTING
@@ -711,18 +693,19 @@ def evaluate_and_report(
 
     return all_results
 
-
 # -----------------------------------------
 #  10. MAIN
 # -----------------------------------------
 
 def main():
-    os.makedirs(OUTPUT_DIR, exist_ok=True)
+    import gc
+    from itertools import groupby
 
+    os.makedirs(OUTPUT_DIR, exist_ok=True)
     random.seed(SEED)
     torch.manual_seed(SEED)
 
-    # -- Load data --
+    # -- Load data (once, shared across all runs) --
     print(f"Loading data from: {INPUT_PATH}")
     with open(INPUT_PATH, "r", encoding="utf-8") as f:
         raw_data = json.load(f)
@@ -758,31 +741,71 @@ def main():
         records = records[:MAX_DOCS]
         print(f"  Limited to {len(records)} documents")
 
-    # -- Load model --
-    model, tokenizer = load_model(MODEL, quantize_4bit=QUANTIZE)
-
-    # -- Run inference --
     gold_records = records
-    pred_records, run_stats, raw_responses = run_inference(
-        model, tokenizer, records,
-        strategy=STRATEGY,
-        verify=VERIFY,
-        max_new_tokens=1024,
-        temperature=0.0,
-    )
 
-    # -- Evaluate --
-    evaluate_and_report(
-        gold_records, pred_records, run_stats,
-        model_name=MODEL, strategy=STRATEGY,
-        output_dir=OUTPUT_DIR,
-        raw_responses=raw_responses,
-    )
+    # -- Group runs by model (load each model once) --
+    total_runs = len(RUN_MATRIX)
+    completed = 0
 
-    print(f"\n{'=' * 60}")
-    print(f"  Done! All outputs in: {OUTPUT_DIR}")
-    print(f"{'=' * 60}")
+    # Group by model_id to avoid reloading the same model
+    grouped = []
+    for model_id, runs in groupby(RUN_MATRIX, key=lambda x: x[0]):
+        grouped.append((model_id, list(runs)))
 
+    for model_id, runs in grouped:
+        quantize = runs[0][1]  # quantize flag is the same for all runs of a model
+
+        print(f"\n{'#' * 70}")
+        print(f"  LOADING MODEL: {model_id}")
+        print(f"  Runs to execute: {len(runs)}")
+        print(f"{'#' * 70}")
+
+        model, tokenizer = load_model(model_id, quantize_4bit=quantize)
+
+        for _, _, strategy, verify in runs:
+            completed += 1
+            verify_tag = " +verify" if verify else ""
+            print(f"\n{'=' * 60}")
+            print(f"  RUN {completed}/{total_runs}: {model_id.split('/')[-1]} [{strategy}{verify_tag}]")
+            print(f"{'=' * 60}")
+
+            # Check if output already exists (skip if so)
+            model_short = model_id.split("/")[-1].lower().replace("-", "_")
+            v_tag = "_verified" if verify else ""
+            prefix = f"llm_{model_short}_{strategy.replace('-', '_')}{v_tag}"
+            results_path = os.path.join(OUTPUT_DIR, f"{prefix}_evaluation_results.json")
+
+            if os.path.exists(results_path):
+                print(f"  → SKIPPING (already exists: {results_path})")
+                continue
+
+            # Run inference
+            pred_records, run_stats, raw_responses = run_inference(
+                model, tokenizer, gold_records,
+                strategy=strategy,
+                verify=verify,
+                max_new_tokens=1024,
+                temperature=0.0,
+            )
+
+            # Evaluate and save
+            evaluate_and_report(
+                gold_records, pred_records, run_stats,
+                model_name=model_id, strategy=strategy,
+                output_dir=OUTPUT_DIR,
+                raw_responses=raw_responses,
+            )
+
+        # Free GPU memory before loading next model
+        print(f"\n  Freeing GPU memory for {model_id.split('/')[-1]}...")
+        del model, tokenizer
+        gc.collect()
+        if torch.cuda.is_available():
+            torch.cuda.empty_cache()
+
+    print(f"\n{'#' * 70}")
+    print(f"  ALL DONE! {completed} runs completed. Outputs in: {OUTPUT_DIR}")
+    print(f"{'#' * 70}")
 
 if __name__ == "__main__":
     main()
