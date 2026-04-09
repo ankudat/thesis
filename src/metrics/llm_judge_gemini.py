@@ -3,14 +3,17 @@ llm_judge_gemini.py
 ====================
 LLM-as-Judge evaluation of anonymized text quality using Google Gemini Flash.
 
-Implements the utility evaluation from Staab et al. (ICLR 2025) using a
-capable API model instead of a local 8B model, which gives much better
-discrimination between anonymization methods.
+Implements two evaluation dimensions:
 
-For each anonymized document, Gemini Flash scores:
-  - Readability (1-10): How readable is the anonymized text on its own?
-  - Meaning (1-10): How well does the anonymized text preserve original meaning?
-  - Hallucination (0/1): Does the anonymized text contain invented information?
+  A) UTILITY (following Staab et al., ICLR 2025):
+     - Readability (1-10): How readable is the anonymized text on its own?
+     - Meaning (1-10): How well does the anonymized text preserve original meaning?
+     - Hallucination (0/1): Does the anonymized text contain invented information?
+
+  B) PRIVACY (following Schiezaro et al., Frontiers in Public Health 2026):
+     - Anonymization Quality (1-10): How effectively were PII entities detected and masked?
+     - Re-identification Risk (1-10): How difficult is it to re-identify individuals
+       from the anonymized text? (10 = very difficult, well protected)
 
 Results are reported per pipeline, per complexity level, and overall.
 
@@ -53,8 +56,8 @@ TAG_REPLACE_PREDICTIONS = {
     "LLM SauerkrautLM [few-shot +verify]": os.path.join(BASE_DIR, "results", "llm_baselines", "llm_llama_3.1_sauerkrautlm_8b_instruct_few_shot_verified_predictions.json"),
     # LLM fine-tuned (QLoRA)
     "LLM Llama-3 [fine-tuned]":        os.path.join(BASE_DIR, "results", "llm_finetuned", "llm_finetuned_meta_llama_3_8b_instruct", "llm_finetuned_meta_llama_3_8b_instruct_predictions.json"),
-    "LLM Qwen2.5 [fine-tuned]":        os.path.join(BASE_DIR, "results", "llm_finetuned", "llm_finetuned_qwen2.5_7b_instruct", "llm_finetuned_qwen2.5_7b_instruct_predictions.json"),
-    "LLM SauerkrautLM [fine-tuned]":   os.path.join(BASE_DIR, "results", "llm_finetuned", "llm_finetuned_llama_3.1_sauerkrautlm_8b_instruct", "llm_finetuned_llama_3.1_sauerkrautlm_8b_instruct_predictions.json"),
+    # "LLM Qwen2.5 [fine-tuned]":        os.path.join(BASE_DIR, "results", "llm_finetuned", "llm_finetuned_qwen2.5_7b_instruct", "llm_finetuned_qwen2.5_7b_instruct_predictions.json"),
+    # "LLM SauerkrautLM [fine-tuned]":   os.path.join(BASE_DIR, "results", "llm_finetuned", "llm_finetuned_llama_3.1_sauerkrautlm_8b_instruct", "llm_finetuned_llama_3.1_sauerkrautlm_8b_instruct_predictions.json"),
 }
 
 # Prompt-based rewrite predictions: {id, rewritten_text}
@@ -65,7 +68,7 @@ PROMPT_REWRITE_PREDICTIONS = {
 }
 
 MAX_DOCS = None    # None for full run, small int for testing
-SAMPLE_SIZE = 50  # Set to None for all docs, or e.g. 100 for stratified sample
+SAMPLE_SIZE = None  # None = evaluate ALL 638 test documents (recommended for thesis)
 SEED     = 42
 
 # Rate limiting: pause between API calls (seconds)
@@ -141,7 +144,7 @@ def call_gemini(client, prompt: str, model: str = GEMINI_MODEL, temperature: flo
                 contents=prompt,
                 config=types.GenerateContentConfig(
                     temperature=temperature,
-                    max_output_tokens=500,
+                    max_output_tokens=4096,
                 ),
             )
             return response.text.strip() if response.text else ""
@@ -181,14 +184,16 @@ def build_anonymized_text(text: str, pred_entities: List[Dict]) -> str:
 
 def build_judge_prompt(original_text: str, anonymized_text: str) -> str:
     """
-    Build the utility judge prompt following Staab et al. (2025).
-    Uses a single prompt (no system/user separation needed for Gemini).
+    Build the utility + privacy judge prompt.
+    Utility dimensions follow Staab et al. (ICLR 2025).
+    Privacy dimensions follow Schiezaro et al. (Frontiers in Public Health 2026).
     """
     return (
-        "You are an expert text quality evaluator for German-language financial "
+        "You are an expert text quality and privacy evaluator for German-language financial "
         "communications from a Swiss banking context. You evaluate anonymized texts "
         "by comparing them to their originals.\n\n"
-        "Score the anonymized text on three dimensions:\n\n"
+        "Score the anonymized text on FIVE dimensions:\n\n"
+        "── UTILITY DIMENSIONS ──\n\n"
         "READABILITY (1-10): How readable and understandable is the anonymized text on its own, "
         "WITHOUT seeing the original? Could a bank employee read and understand it?\n"
         "  1 = Unreadable, key information missing or replaced with incomprehensible tokens\n"
@@ -206,6 +211,25 @@ def build_judge_prompt(original_text: str, anonymized_text: str) -> str:
         "  10 = All non-personal meaning perfectly preserved\n\n"
         "HALLUCINATION (0 or 1): Does the anonymized text contain any NEW information "
         "that was NOT in the original? (0 = contains new/invented info, 1 = no hallucination)\n\n"
+        "── PRIVACY DIMENSIONS ──\n\n"
+        "ANONYMIZATION_QUALITY (1-10): How effectively did the anonymization identify and "
+        "mask ALL personally identifiable information (PII)? Check for names, phone numbers, "
+        "email addresses, IBANs, dates of birth, ages, locations, company names, job titles, "
+        "nationalities, and education details.\n"
+        "  1 = Almost no PII was masked, most identifiers remain visible\n"
+        "  3 = Some PII was masked but major identifiers were missed\n"
+        "  5 = Most common PII was masked but some identifiers were overlooked\n"
+        "  7 = Nearly all PII was masked with only minor omissions\n"
+        "  10 = All PII was correctly identified and masked, no identifiers remain\n\n"
+        "REIDENTIFICATION_RISK (1-10): How difficult would it be for someone to identify "
+        "the specific individuals, companies, or locations from the anonymized text alone? "
+        "Consider both direct identifiers AND indirect clues (e.g., unique combinations of "
+        "job title + company type + location that could narrow down a person).\n"
+        "  1 = Trivially easy to re-identify (most PII still present or obvious from context)\n"
+        "  3 = Possible to narrow down with some effort using remaining contextual clues\n"
+        "  5 = Difficult but some indirect clues remain that could aid re-identification\n"
+        "  7 = Very difficult, only vague statistical guesses possible\n"
+        "  10 = Impossible to re-identify, all identifying and quasi-identifying information removed\n\n"
         "═══════════════════════════════════════════════\n"
         f"ORIGINAL TEXT:\n{original_text}\n\n"
         "═══════════════════════════════════════════════\n"
@@ -213,7 +237,10 @@ def build_judge_prompt(original_text: str, anonymized_text: str) -> str:
         "═══════════════════════════════════════════════\n\n"
         "Respond ONLY with a JSON object, no other text:\n"
         '{"readability": <1-10>, "meaning": <1-10>, "hallucination": <0 or 1>, '
-        '"readability_reason": "<1 sentence>", "meaning_reason": "<1 sentence>"}'
+        '"anonymization_quality": <1-10>, "reidentification_risk": <1-10>, '
+        '"readability_reason": "<1 sentence>", "meaning_reason": "<1 sentence>", '
+        '"hallucination_reason": "<1 sentence>", '
+        '"anonymization_quality_reason": "<1 sentence>", "reidentification_risk_reason": "<1 sentence>"}'
     )
 
 
@@ -227,8 +254,13 @@ def parse_judge_response(response: str) -> Dict:
         "readability": None,
         "meaning": None,
         "hallucination": None,
+        "anonymization_quality": None,
+        "reidentification_risk": None,
         "readability_reason": "",
         "meaning_reason": "",
+        "hallucination_reason": "",
+        "anonymization_quality_reason": "",
+        "reidentification_risk_reason": "",
         "raw_response": response,
     }
 
@@ -242,8 +274,8 @@ def parse_judge_response(response: str) -> Dict:
         cleaned = re.sub(r'```\s*', '', cleaned)
         cleaned = cleaned.strip()
 
-        # Find JSON object
-        json_match = re.search(r'\{[^{}]*\}', cleaned, re.DOTALL)
+        # Find JSON object (greedy match from first { to last })
+        json_match = re.search(r'\{.*\}', cleaned, re.DOTALL)
         if json_match:
             parsed = json.loads(json_match.group())
 
@@ -253,8 +285,15 @@ def parse_judge_response(response: str) -> Dict:
                 result["meaning"] = max(1, min(10, int(parsed["meaning"])))
             if "hallucination" in parsed:
                 result["hallucination"] = int(parsed["hallucination"])
+            if "anonymization_quality" in parsed:
+                result["anonymization_quality"] = max(1, min(10, int(parsed["anonymization_quality"])))
+            if "reidentification_risk" in parsed:
+                result["reidentification_risk"] = max(1, min(10, int(parsed["reidentification_risk"])))
             result["readability_reason"] = str(parsed.get("readability_reason", ""))
             result["meaning_reason"] = str(parsed.get("meaning_reason", ""))
+            result["hallucination_reason"] = str(parsed.get("hallucination_reason", ""))
+            result["anonymization_quality_reason"] = str(parsed.get("anonymization_quality_reason", ""))
+            result["reidentification_risk_reason"] = str(parsed.get("reidentification_risk_reason", ""))
             return result
 
     except (json.JSONDecodeError, ValueError, TypeError):
@@ -264,6 +303,8 @@ def parse_judge_response(response: str) -> Dict:
     r_match = re.search(r'"?readability"?\s*[:=]\s*(\d+)', response, re.IGNORECASE)
     m_match = re.search(r'"?meaning"?\s*[:=]\s*(\d+)', response, re.IGNORECASE)
     h_match = re.search(r'"?hallucination"?\s*[:=]\s*(\d)', response, re.IGNORECASE)
+    aq_match = re.search(r'"?anonymization_quality"?\s*[:=]\s*(\d+)', response, re.IGNORECASE)
+    rr_match = re.search(r'"?reidentification_risk"?\s*[:=]\s*(\d+)', response, re.IGNORECASE)
 
     if r_match:
         result["readability"] = max(1, min(10, int(r_match.group(1))))
@@ -271,6 +312,10 @@ def parse_judge_response(response: str) -> Dict:
         result["meaning"] = max(1, min(10, int(m_match.group(1))))
     if h_match:
         result["hallucination"] = int(h_match.group(1))
+    if aq_match:
+        result["anonymization_quality"] = max(1, min(10, int(aq_match.group(1))))
+    if rr_match:
+        result["reidentification_risk"] = max(1, min(10, int(rr_match.group(1))))
 
     return result
 
@@ -352,6 +397,8 @@ def _aggregate_scores(results: List[Dict], pipeline_name: str) -> Dict:
     valid_read = [r["readability"] for r in results if r["readability"] is not None]
     valid_mean = [r["meaning"] for r in results if r["meaning"] is not None]
     valid_hall = [r["hallucination"] for r in results if r["hallucination"] is not None]
+    valid_aq = [r["anonymization_quality"] for r in results if r["anonymization_quality"] is not None]
+    valid_rr = [r["reidentification_risk"] for r in results if r["reidentification_risk"] is not None]
 
     overall = {
         "count": len(results),
@@ -362,6 +409,12 @@ def _aggregate_scores(results: List[Dict], pipeline_name: str) -> Dict:
         "meaning_median": _median(valid_mean),
         "meaning_std": _std(valid_mean),
         "hallucination_rate": round(1 - _mean(valid_hall), 3) if valid_hall else None,
+        "anonymization_quality_mean": _mean(valid_aq),
+        "anonymization_quality_median": _median(valid_aq),
+        "anonymization_quality_std": _std(valid_aq),
+        "reidentification_risk_mean": _mean(valid_rr),
+        "reidentification_risk_median": _median(valid_rr),
+        "reidentification_risk_std": _std(valid_rr),
     }
 
     # Per complexity
@@ -376,6 +429,8 @@ def _aggregate_scores(results: List[Dict], pipeline_name: str) -> Dict:
             gr = [r["readability"] for r in group if r["readability"] is not None]
             gm = [r["meaning"] for r in group if r["meaning"] is not None]
             gh = [r["hallucination"] for r in group if r["hallucination"] is not None]
+            gaq = [r["anonymization_quality"] for r in group if r["anonymization_quality"] is not None]
+            grr = [r["reidentification_risk"] for r in group if r["reidentification_risk"] is not None]
             per_complexity[level] = {
                 "count": len(group),
                 "readability_mean": _mean(gr),
@@ -385,6 +440,12 @@ def _aggregate_scores(results: List[Dict], pipeline_name: str) -> Dict:
                 "meaning_median": _median(gm),
                 "meaning_std": _std(gm),
                 "hallucination_rate": round(1 - _mean(gh), 3) if gh else None,
+                "anonymization_quality_mean": _mean(gaq),
+                "anonymization_quality_median": _median(gaq),
+                "anonymization_quality_std": _std(gaq),
+                "reidentification_risk_mean": _mean(grr),
+                "reidentification_risk_median": _median(grr),
+                "reidentification_risk_std": _std(grr),
             }
 
     return {
@@ -405,17 +466,18 @@ def format_report(all_results: List[Dict]) -> str:
     lines.append("  LLM-AS-JUDGE EVALUATION REPORT (Gemini Flash)")
     lines.append(f"  Generated: {time.strftime('%Y-%m-%d %H:%M:%S')}")
     lines.append(f"  Judge Model: {GEMINI_MODEL}")
-    lines.append(f"  Method: Staab et al. (ICLR 2025)")
+    lines.append(f"  Utility: Staab et al. (ICLR 2025)")
+    lines.append(f"  Privacy: Schiezaro et al. (Frontiers in Public Health 2026)")
     lines.append("=" * 78)
 
     # ── Summary Table ──
     lines.append(f"\n{'#' * 78}")
-    lines.append("  SUMMARY: Readability & Meaning Preservation Scores")
+    lines.append("  SUMMARY: Utility & Privacy Scores")
     lines.append(f"{'#' * 78}")
     lines.append("")
-    lines.append(f"  {'Pipeline':<38} {'Read':>6} {'Read':>6} {'Mean':>6} {'Mean':>6} {'Halluc':>7} {'n':>5}")
-    lines.append(f"  {'':38} {'(mean)':>6} {'(med)':>6} {'(mean)':>6} {'(med)':>6} {'rate':>7}")
-    lines.append(f"  {'-' * 76}")
+    lines.append(f"  {'Pipeline':<38} {'Read':>6} {'Mean':>6} {'Halluc':>7} {'AnonQ':>6} {'ReID':>6} {'n':>5}")
+    lines.append(f"  {'':38} {'(avg)':>6} {'(avg)':>6} {'rate':>7} {'(avg)':>6} {'(avg)':>6}")
+    lines.append(f"  {'-' * 79}")
 
     for result in all_results:
         name = result["pipeline"]
@@ -424,15 +486,15 @@ def format_report(all_results: List[Dict]) -> str:
         lines.append(
             f"  {name:<38} "
             f"{o['readability_mean']:>6.2f} "
-            f"{o['readability_median']:>6.1f} "
             f"{o['meaning_mean']:>6.2f} "
-            f"{o['meaning_median']:>6.1f} "
             f"{hall_str:>7} "
+            f"{o['anonymization_quality_mean']:>6.2f} "
+            f"{o['reidentification_risk_mean']:>6.2f} "
             f"{o['count']:>5}"
         )
 
-    lines.append(f"  {'-' * 76}")
-    lines.append("  Readability/Meaning: 1-10 (higher = better)")
+    lines.append(f"  {'-' * 79}")
+    lines.append("  Read/Mean/AnonQ/ReID: 1-10 (higher = better)")
     lines.append("  Hallucination rate: % of texts with invented information (lower = better)")
 
     # ── Per-Complexity Breakdown ──
@@ -444,8 +506,7 @@ def format_report(all_results: List[Dict]) -> str:
             continue
 
         lines.append(f"\n  >>> {level} Complexity <<<")
-        lines.append(f"  {'Pipeline':<38} {'Read':>6} {'Read':>6} {'Mean':>6} {'Mean':>6} {'n':>5}")
-        lines.append(f"  {'':38} {'(mean)':>6} {'(med)':>6} {'(mean)':>6} {'(med)':>6}")
+        lines.append(f"  {'Pipeline':<38} {'Read':>6} {'Mean':>6} {'AnonQ':>6} {'ReID':>6} {'n':>5}")
         lines.append(f"  {'-' * 69}")
 
         for result in all_results:
@@ -455,9 +516,9 @@ def format_report(all_results: List[Dict]) -> str:
                 lines.append(
                     f"  {name:<38} "
                     f"{comp['readability_mean']:>6.2f} "
-                    f"{comp['readability_median']:>6.1f} "
                     f"{comp['meaning_mean']:>6.2f} "
-                    f"{comp['meaning_median']:>6.1f} "
+                    f"{comp['anonymization_quality_mean']:>6.2f} "
+                    f"{comp['reidentification_risk_mean']:>6.2f} "
                     f"{comp['count']:>5}"
                 )
 
@@ -478,6 +539,9 @@ def format_report(all_results: List[Dict]) -> str:
         lines.append(f"  Meaning:     {o['meaning_mean']:.2f} ± {o['meaning_std']:.2f} (median: {o['meaning_median']:.1f})")
         if o["hallucination_rate"] is not None:
             lines.append(f"  Hallucination rate: {o['hallucination_rate']:.1%}")
+        lines.append(f"")
+        lines.append(f"  Anonymization Quality: {o['anonymization_quality_mean']:.2f} ± {o['anonymization_quality_std']:.2f} (median: {o['anonymization_quality_median']:.1f})")
+        lines.append(f"  Re-identification Risk: {o['reidentification_risk_mean']:.2f} ± {o['reidentification_risk_std']:.2f} (median: {o['reidentification_risk_median']:.1f})")
 
         for level in ["Low", "Medium", "High"]:
             comp = result["aggregated"]["by_complexity"].get(level, {})
@@ -486,6 +550,8 @@ def format_report(all_results: List[Dict]) -> str:
                 lines.append(f"  {level} (n={comp['count']}):")
                 lines.append(f"    Readability: {comp['readability_mean']:.2f} ± {comp['readability_std']:.2f} (median: {comp['readability_median']:.1f})")
                 lines.append(f"    Meaning:     {comp['meaning_mean']:.2f} ± {comp['meaning_std']:.2f} (median: {comp['meaning_median']:.1f})")
+                lines.append(f"    Anon Quality: {comp['anonymization_quality_mean']:.2f} ± {comp['anonymization_quality_std']:.2f}")
+                lines.append(f"    Re-ID Risk:   {comp['reidentification_risk_mean']:.2f} ± {comp['reidentification_risk_std']:.2f}")
 
     return "\n".join(lines)
 
@@ -609,6 +675,23 @@ def main():
     all_results = []
 
     for pipeline_name, anon_texts in pipelines.items():
+        # Skip if results already exist (resume after interruption)
+        safe_name = pipeline_name.lower().replace(" ", "_").replace("+", "").replace("[", "").replace("]", "")
+        per_doc_path = os.path.join(OUTPUT_DIR, f"{safe_name}_judge_scores.json")
+
+        if os.path.exists(per_doc_path):
+            print(f"\n  → SKIPPING {pipeline_name} (already exists: {per_doc_path})")
+            with open(per_doc_path, "r", encoding="utf-8") as f:
+                existing_docs = json.load(f)
+            existing_agg = _aggregate_scores(existing_docs, pipeline_name)
+            all_results.append({
+                "pipeline": pipeline_name,
+                "per_document": existing_docs,
+                "aggregated": existing_agg,
+                "parse_failures": sum(1 for d in existing_docs if d.get("readability") is None),
+            })
+            continue
+
         print(f"\n{'=' * 60}")
         print(f"  Evaluating: {pipeline_name}")
         print(f"{'=' * 60}")
@@ -617,9 +700,6 @@ def main():
         all_results.append(result)
 
         # Save per-pipeline results immediately (in case of interruption)
-        safe_name = pipeline_name.lower().replace(" ", "_").replace("+", "").replace("[", "").replace("]", "")
-        per_doc_path = os.path.join(OUTPUT_DIR, f"{safe_name}_judge_scores.json")
-
         # Save without raw_response to keep file size manageable
         slim_docs = [{k: v for k, v in d.items() if k != "raw_response"} for d in result["per_document"]]
         with open(per_doc_path, "w", encoding="utf-8") as f:

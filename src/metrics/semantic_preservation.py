@@ -25,7 +25,28 @@ Implements the methodology from Section 4.3.2 of the thesis:
      Character-level edit distance on masked texts, normalized by length.
      Catches small insertions/deletions that embedding similarity might miss.
 
-  5. PER-PIPELINE AND PER-COMPLEXITY BREAKDOWN
+  5. ROUGE-1 AND BLEU-4 ON FULL TEXTS (supplementary)
+     Following Staab et al. (ICLR 2025) and Dorémus et al. (JMIR AI 2025):
+       - ROUGE-1: Unigram overlap F1 between anonymized and original text.
+         Measures how many individual words survived anonymization.
+       - BLEU-4: 4-gram precision with brevity penalty between anonymized
+         and original text. Measures how many short word sequences remain
+         intact after anonymization.
+     These surface-level metrics complement BERTScore (semantic similarity)
+     by quantifying lexical fidelity. Tag-and-replace methods will naturally
+     score higher (most n-grams survive) than prompt-based rewrites (which
+     rephrase the text), even when semantic preservation is comparable.
+
+  6. PII LEAKAGE RATE (privacy metric)
+     For each document, checks how many ground-truth PII strings still
+     appear (case-insensitive) in the anonymized/rewritten text.
+     Computed as: leaked_count / total_pii_count.
+     This is the privacy metric for prompt-based rewrites (where span-based
+     recall cannot be computed), and is analogous to (1 - recall) for
+     tag-and-replace pipelines. Enables direct privacy comparison across
+     all anonymization paradigms.
+
+  7. PER-PIPELINE AND PER-COMPLEXITY BREAKDOWN
      Results are reported overall AND per complexity level (Low/Medium/High).
 
 Inputs required:
@@ -48,6 +69,7 @@ Requirements:
     (this script defaults to "bert-base-multilingual-cased" which
     handles German well).
 
+Author: André Kuhn – Master Thesis (MScIDS, HSLU)
 """
 
 # =====================================================================
@@ -55,42 +77,47 @@ Requirements:
 # =====================================================================
 
 # Path to the Label Studio export (ground truth)
-INPUT_PATH = r"C:\thesis\data\label_studio\20260302_Export_Label_Studio_Client_Notes.json"
+import os
+BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
+
+INPUT_PATH = os.path.join(BASE_DIR, "data", "label_studio", "20260302_Export_Label_Studio_Client_Notes.json")
 
 # Path to split IDs (to evaluate only test set, matching other evaluations)
-SPLIT_IDS = r"C:\thesis\results\bert_finetuned\split_ids.json"
+SPLIT_IDS = os.path.join(BASE_DIR, "results", "bert_finetuned", "split_ids.json")
 
 # Prediction files from each pipeline (JSON: list of {id, entities})
 # Set to None to skip a pipeline.
 PREDICTION_FILES = {
     # Classical baselines
-    "spaCy + Regex":                   r"C:\thesis\results\classical_baselines\spacy\spacy_predictions.json",
-    "BERT (pretrained) + Regex":       r"C:\thesis\results\classical_baselines\bert\bert_predictions.json",
-    "BERT Fine-Tuned":                 r"C:\thesis\results\bert_finetuned\bert_finetuned_predictions.json",
+    "spaCy + Regex":                   os.path.join(BASE_DIR, "results", "classical_baselines", "spacy", "spacy_predictions.json"),
+    "BERT (pretrained) + Regex":       os.path.join(BASE_DIR, "results", "classical_baselines", "bert", "bert_predictions.json"),
+    "BERT Fine-Tuned":                 os.path.join(BASE_DIR, "results", "bert_finetuned", "bert_finetuned_predictions.json"),
+    # Presidio
+    "Presidio":                        os.path.join(BASE_DIR, "results", "presidio_baseline", "presidio_predictions.json"),
     # LLM tag-and-replace: Llama-3
-    "LLM Llama-3 [zero-shot]":         r"C:\thesis\results\llm_baselines\llm_meta_llama_3_8b_instruct_zero_shot_predictions.json",
-    "LLM Llama-3 [few-shot]":          r"C:\thesis\results\llm_baselines\llm_meta_llama_3_8b_instruct_few_shot_predictions.json",
-    "LLM Llama-3 [few-shot +verify]":  r"C:\thesis\results\llm_baselines\llm_meta_llama_3_8b_instruct_few_shot_verified_predictions.json",
+    "LLM Llama-3 [zero-shot]":         os.path.join(BASE_DIR, "results", "llm_baselines", "llm_meta_llama_3_8b_instruct_zero_shot_predictions.json"),
+    "LLM Llama-3 [few-shot]":          os.path.join(BASE_DIR, "results", "llm_baselines", "llm_meta_llama_3_8b_instruct_few_shot_predictions.json"),
+    "LLM Llama-3 [few-shot +verify]":  os.path.join(BASE_DIR, "results", "llm_baselines", "llm_meta_llama_3_8b_instruct_few_shot_verified_predictions.json"),
     # LLM tag-and-replace: Qwen2.5
-    "LLM Qwen2.5 [few-shot +verify]":  r"C:\thesis\results\llm_baselines\llm_qwen2.5_7b_instruct_few_shot_verified_predictions.json",
+    "LLM Qwen2.5 [few-shot +verify]":  os.path.join(BASE_DIR, "results", "llm_baselines", "llm_qwen2.5_7b_instruct_few_shot_verified_predictions.json"),
     # LLM tag-and-replace: SauerkrautLM
-    "LLM SauerkrautLM [few-shot +verify]": r"C:\thesis\results\llm_baselines\llm_llama_3.1_sauerkrautlm_8b_instruct_few_shot_verified_predictions.json",
+    "LLM SauerkrautLM [few-shot +verify]": os.path.join(BASE_DIR, "results", "llm_baselines", "llm_llama_3.1_sauerkrautlm_8b_instruct_few_shot_verified_predictions.json"),
     # LLM fine-tuned (QLoRA)
-    "LLM Llama-3 [fine-tuned]":        r"C:\thesis\results\llm_finetuned\llm_finetuned_meta_llama_3_8b_instruct\llm_finetuned_meta_llama_3_8b_instruct_predictions.json",
-    "LLM Qwen2.5 [fine-tuned]":        r"C:\thesis\results\llm_finetuned\llm_finetuned_qwen2.5_7b_instruct\llm_finetuned_qwen2.5_7b_instruct_predictions.json",
-    "LLM SauerkrautLM [fine-tuned]":   r"C:\thesis\results\llm_finetuned\llm_finetuned_llama_3.1_sauerkrautlm_8b_instruct\llm_finetuned_llama_3.1_sauerkrautlm_8b_instruct_predictions.json",
+    "LLM Llama-3 [fine-tuned]":        os.path.join(BASE_DIR, "results", "llm_finetuned", "llm_finetuned_meta_llama_3_8b_instruct", "llm_finetuned_meta_llama_3_8b_instruct_predictions.json"),
+    "LLM Qwen2.5 [fine-tuned]":        os.path.join(BASE_DIR, "results", "llm_finetuned", "llm_finetuned_qwen2.5_7b_instruct", "llm_finetuned_qwen2.5_7b_instruct_predictions.json"),
+    "LLM SauerkrautLM [fine-tuned]":   os.path.join(BASE_DIR, "results", "llm_finetuned", "llm_finetuned_llama_3.1_sauerkrautlm_8b_instruct", "llm_finetuned_llama_3.1_sauerkrautlm_8b_instruct_predictions.json"),
 }
 
 # Prompt-based anonymization files (rewritten text, not entity predictions)
 # These use a different format: {"id", "rewritten_text"} instead of {"id", "entities"}
 PROMPT_ANON_FILES = {
-    "LLM Llama-3 [prompt few-shot]":       r"C:\thesis\results\llm_prompt_anonymize\prompt_anon_meta_llama_3_8b_instruct_few_shot_predictions.json",
-    "LLM Qwen2.5 [prompt few-shot]":       r"C:\thesis\results\llm_prompt_anonymize\prompt_anon_qwen2.5_7b_instruct_few_shot_predictions.json",
-    "LLM SauerkrautLM [prompt few-shot]":   r"C:\thesis\results\llm_prompt_anonymize\prompt_anon_llama_3.1_sauerkrautlm_8b_instruct_few_shot_predictions.json",
+    "LLM Llama-3 [prompt few-shot]":       os.path.join(BASE_DIR, "results", "llm_prompt_anonymize", "prompt_anon_meta_llama_3_8b_instruct_few_shot_predictions.json"),
+    "LLM Qwen2.5 [prompt few-shot]":       os.path.join(BASE_DIR, "results", "llm_prompt_anonymize", "prompt_anon_qwen2.5_7b_instruct_few_shot_predictions.json"),
+    "LLM SauerkrautLM [prompt few-shot]":   os.path.join(BASE_DIR, "results", "llm_prompt_anonymize", "prompt_anon_llama_3.1_sauerkrautlm_8b_instruct_few_shot_predictions.json"),
 }
 
 # Output directory for semantic preservation results
-OUTPUT_DIR = r"C:\thesis\results\semantic_preservation"
+OUTPUT_DIR = os.path.join(BASE_DIR, "results", "semantic_preservation")
 
 # BERTScore model (multilingual handles German well)
 BERTSCORE_MODEL = "bert-base-multilingual-cased"
@@ -186,6 +213,41 @@ def anonymize_text_with_gold(
     return anon
 
 
+def resolve_overlapping_entities(entities: List[Dict]) -> List[Dict]:
+    """
+    Remove overlapping entities by keeping the longer span.
+
+    LLM-based taggers sometimes produce overlapping entity spans
+    (e.g., tagging both "Dr. Müller" and "Müller" separately).
+    This causes garbled output in anonymize_text_with_predictions
+    because both spans try to replace overlapping character ranges.
+
+    Strategy: sort by start offset, then greedily keep spans that
+    don't overlap with the last accepted span. When two spans overlap,
+    keep the longer one (more informative for anonymization).
+    """
+    if not entities:
+        return []
+
+    # Sort by start, then by length descending (prefer longer spans first)
+    sorted_ents = sorted(entities, key=lambda e: (e["start"], -(e["end"] - e["start"])))
+
+    resolved = [sorted_ents[0]]
+    for ent in sorted_ents[1:]:
+        prev = resolved[-1]
+        if ent["start"] >= prev["end"]:
+            # No overlap — keep it
+            resolved.append(ent)
+        else:
+            # Overlap — keep the longer span
+            prev_len = prev["end"] - prev["start"]
+            curr_len = ent["end"] - ent["start"]
+            if curr_len > prev_len:
+                resolved[-1] = ent  # replace with longer
+
+    return resolved
+
+
 # =====================================================================
 #  2. MASKED-TEXT GENERATION
 # =====================================================================
@@ -260,7 +322,7 @@ def compute_bertscore_batch(
     candidates: List[str],
     references: List[str],
     model_type: str = "bert-base-multilingual-cased",
-    batch_size: int = 32,
+    batch_size: int = 16,
     device: str = "cuda",
 ) -> Dict[str, List[float]]:
     """
@@ -270,16 +332,16 @@ def compute_bertscore_batch(
         candidates:  list of candidate texts (anonymized/masked)
         references:  list of reference texts (original/masked)
         model_type:  HuggingFace model for BERTScore embeddings
-        batch_size:  batch size for inference
+        batch_size:  batch size for inference (reduced to 16 for stability)
         device:      "cuda" or "cpu"
 
     Returns:
         Dict with "precision", "recall", "f1" — each a list of floats
     """
-    from bert_score import score
+    import bert_score as bs
 
     # bert_score.score returns (P, R, F1) as tensors
-    P, R, F1 = score(
+    P, R, F1 = bs.score(
         candidates,
         references,
         model_type=model_type,
@@ -289,11 +351,33 @@ def compute_bertscore_batch(
         lang="de",
     )
 
-    return {
+    result = {
         "precision": P.tolist(),
         "recall":    R.tolist(),
         "f1":        F1.tolist(),
     }
+
+    # Force-unload the cached BERTScore model to prevent GPU memory buildup.
+    # bert_score caches the model in a module-level dict; without clearing it,
+    # repeated calls accumulate GPU memory until CUDA hangs.
+    import gc, torch
+    if hasattr(bs, 'scorer') and bs.scorer is not None:
+        del bs.scorer
+        bs.scorer = None
+    # Also clear the internal model cache used by some bert_score versions
+    if hasattr(bs.score, '__wrapped__'):
+        pass  # some versions don't cache this way
+    for attr in ['_model', '_tokenizer', 'model', 'tokenizer']:
+        if hasattr(bs, attr):
+            try:
+                delattr(bs, attr)
+            except Exception:
+                pass
+    gc.collect()
+    if torch.cuda.is_available():
+        torch.cuda.empty_cache()
+
+    return result
 
 
 # =====================================================================
@@ -336,6 +420,115 @@ def normalized_levenshtein(s1: str, s2: str) -> float:
 
     distance = prev_row[len1]
     return distance / max(len1, len2)
+
+
+# =====================================================================
+#  4b. ROUGE-1 AND BLEU-4 (following Staab et al., ICLR 2025)
+# =====================================================================
+
+def compute_rouge1_f1(candidate: str, reference: str) -> float:
+    """
+    Compute ROUGE-1 F1 score between candidate and reference texts.
+
+    ROUGE-1 measures unigram overlap — how many individual words in the
+    anonymized text also appear in the original. Following Staab et al.
+    (ICLR 2025), this is computed on the full (original, anonymized) pair.
+
+    Returns F1 score in [0, 1].
+    """
+    cand_tokens = candidate.lower().split()
+    ref_tokens = reference.lower().split()
+
+    if not cand_tokens or not ref_tokens:
+        return 0.0
+
+    # Count unigram overlaps
+    cand_counts = {}
+    for t in cand_tokens:
+        cand_counts[t] = cand_counts.get(t, 0) + 1
+
+    ref_counts = {}
+    for t in ref_tokens:
+        ref_counts[t] = ref_counts.get(t, 0) + 1
+
+    # Intersection count (min of each token's count)
+    overlap = 0
+    for token, count in cand_counts.items():
+        if token in ref_counts:
+            overlap += min(count, ref_counts[token])
+
+    precision = overlap / len(cand_tokens) if cand_tokens else 0.0
+    recall = overlap / len(ref_tokens) if ref_tokens else 0.0
+
+    if precision + recall == 0:
+        return 0.0
+
+    return 2 * precision * recall / (precision + recall)
+
+
+def compute_bleu4(candidate: str, reference: str) -> float:
+    """
+    Compute BLEU-4 score between candidate and reference texts.
+
+    BLEU-4 measures 4-gram overlap with a brevity penalty — how many
+    short word sequences from the anonymized text appear in the original.
+    Following Staab et al. (ICLR 2025) and Dorémus et al. (JMIR AI 2025),
+    this is computed on the full (original, anonymized) pair.
+
+    A high BLEU score indicates the anonymization only changed PII spans
+    and left everything else untouched. A low score signals the model
+    rewrote more than necessary.
+
+    Returns score in [0, 1].
+    """
+    import math
+
+    cand_tokens = candidate.lower().split()
+    ref_tokens = reference.lower().split()
+
+    if not cand_tokens or not ref_tokens:
+        return 0.0
+
+    # Compute n-gram precision for n=1..4
+    precisions = []
+    for n in range(1, 5):
+        if len(cand_tokens) < n:
+            precisions.append(0.0)
+            continue
+
+        # Extract n-grams
+        cand_ngrams = {}
+        for i in range(len(cand_tokens) - n + 1):
+            ng = tuple(cand_tokens[i:i + n])
+            cand_ngrams[ng] = cand_ngrams.get(ng, 0) + 1
+
+        ref_ngrams = {}
+        for i in range(len(ref_tokens) - n + 1):
+            ng = tuple(ref_tokens[i:i + n])
+            ref_ngrams[ng] = ref_ngrams.get(ng, 0) + 1
+
+        # Clipped count
+        clipped = 0
+        total = 0
+        for ng, count in cand_ngrams.items():
+            clipped += min(count, ref_ngrams.get(ng, 0))
+            total += count
+
+        precisions.append(clipped / total if total > 0 else 0.0)
+
+    # If any precision is 0, BLEU is 0 (avoid log(0))
+    if any(p == 0.0 for p in precisions):
+        return 0.0
+
+    # Geometric mean of precisions
+    log_avg = sum(math.log(p) for p in precisions) / 4
+
+    # Brevity penalty
+    bp = 1.0
+    if len(cand_tokens) < len(ref_tokens):
+        bp = math.exp(1 - len(ref_tokens) / len(cand_tokens))
+
+    return bp * math.exp(log_avg)
 
 
 # =====================================================================
@@ -403,13 +596,33 @@ def evaluate_semantic_preservation_rewrite(
 
         lev_masked = normalized_levenshtein(masked_orig, masked_rew)
 
+        # Per-document ROUGE-1 and BLEU-4 (following Staab et al., ICLR 2025)
+        rouge1 = compute_rouge1_f1(rewritten, text)
+        bleu4 = compute_bleu4(rewritten, text)
+
+        # PII leakage rate: proportion of ground-truth PII strings that
+        # still appear in the rewritten text (case-insensitive).
+        # This is the privacy metric for prompt-based rewrites, analogous
+        # to (1 - recall) for tag-and-replace pipelines.
+        leaked = 0
+        for ent in gold_ents:
+            if ent["text"].lower() in rewritten.lower():
+                leaked += 1
+        total_pii = len(gold_ents)
+        pii_leakage_rate = leaked / total_pii if total_pii > 0 else 0.0
+
         doc_results.append({
             "id": doc_id,
             "complexity": complexity,
             "original_length": len(text),
             "anonymized_length": len(rewritten),
             "num_gold_entities": len(gold_ents),
+            "pii_leaked": leaked,
+            "pii_total": total_pii,
+            "pii_leakage_rate": round(pii_leakage_rate, 6),
             "levenshtein_masked": round(lev_masked, 6),
+            "rouge1_full": round(rouge1, 6),
+            "bleu4_full": round(bleu4, 6),
             "anonymized_text": rewritten,
             "masked_original": masked_orig,
             "masked_anonymized": masked_rew,
@@ -492,6 +705,9 @@ def evaluate_semantic_preservation(
         pred_ents = pred_by_id.get(doc_id, [])
         complexity = gold.get("meta_temp", "Unknown")
 
+        # Resolve overlapping entity spans (LLMs sometimes produce these)
+        pred_ents = resolve_overlapping_entities(pred_ents)
+
         # Step 1: Anonymize with predicted entities
         anonymized_text, replacements = anonymize_text_with_predictions(text, pred_ents)
 
@@ -510,6 +726,21 @@ def evaluate_semantic_preservation(
         # Per-document Levenshtein
         lev_masked = normalized_levenshtein(masked_orig, masked_anon)
 
+        # Per-document ROUGE-1 and BLEU-4 (following Staab et al., ICLR 2025)
+        rouge1 = compute_rouge1_f1(anonymized_text, text)
+        bleu4 = compute_bleu4(anonymized_text, text)
+
+        # PII leakage rate: proportion of ground-truth PII strings that
+        # still appear in the anonymized text (case-insensitive).
+        # For tag-and-replace, this is analogous to (1 - recall): any PII
+        # the model missed will remain as plain text in the output.
+        leaked = 0
+        for ent in gold_ents:
+            if ent["text"].lower() in anonymized_text.lower():
+                leaked += 1
+        total_pii = len(gold_ents)
+        pii_leakage_rate = leaked / total_pii if total_pii > 0 else 0.0
+
         doc_results.append({
             "id": doc_id,
             "complexity": complexity,
@@ -518,7 +749,12 @@ def evaluate_semantic_preservation(
             "gold_anonymized_length": len(gold_anonymized),
             "num_pred_entities": len(pred_ents),
             "num_gold_entities": len(gold_ents),
+            "pii_leaked": leaked,
+            "pii_total": total_pii,
+            "pii_leakage_rate": round(pii_leakage_rate, 6),
             "levenshtein_masked": round(lev_masked, 6),
+            "rouge1_full": round(rouge1, 6),
+            "bleu4_full": round(bleu4, 6),
             "anonymized_text": anonymized_text,
             "masked_original": masked_orig,
             "masked_anonymized": masked_anon,
@@ -589,6 +825,14 @@ def aggregate_results(doc_results: List[Dict], pipeline_name: str) -> Dict:
             "bertscore_full_r_mean":    round(_mean([d["bertscore_full_r"] for d in docs]), 4),
             "levenshtein_masked_mean":  round(_mean([d["levenshtein_masked"] for d in docs]), 4),
             "levenshtein_masked_std":   round(_std([d["levenshtein_masked"] for d in docs]), 4),
+            "rouge1_full_mean":         round(_mean([d["rouge1_full"] for d in docs]), 4),
+            "rouge1_full_std":          round(_std([d["rouge1_full"] for d in docs]), 4),
+            "bleu4_full_mean":          round(_mean([d["bleu4_full"] for d in docs]), 4),
+            "bleu4_full_std":           round(_std([d["bleu4_full"] for d in docs]), 4),
+            "pii_leakage_rate_mean":    round(_mean([d["pii_leakage_rate"] for d in docs if "pii_leakage_rate" in d]), 4),
+            "pii_leakage_rate_std":     round(_std([d["pii_leakage_rate"] for d in docs if "pii_leakage_rate" in d]), 4),
+            "pii_leaked_total":         sum(d.get("pii_leaked", 0) for d in docs),
+            "pii_total":                sum(d.get("pii_total", 0) for d in docs),
         }
 
     # Overall
@@ -632,30 +876,35 @@ def format_semantic_report(all_results: List[Dict]) -> str:
     lines.append("  SUMMARY: Overall Semantic Preservation Scores")
     lines.append("#" * 78)
     lines.append("")
-    lines.append(f"  {'Pipeline':<38} {'BERTScore':>10} {'BERTScore':>10} {'Levenshtein':>12}")
-    lines.append(f"  {'':38} {'(masked)':>10} {'(full)':>10} {'(masked)':>12}")
-    lines.append(f"  {'-' * 72}")
+    lines.append(f"  {'Pipeline':<38} {'BERTScore':>10} {'BERTScore':>10} {'Levenshtein':>12} {'ROUGE-1':>8} {'BLEU-4':>8} {'PII Leak':>9}")
+    lines.append(f"  {'':38} {'(masked)':>10} {'(full)':>10} {'(masked)':>12} {'(full)':>8} {'(full)':>8} {'rate':>9}")
+    lines.append(f"  {'-' * 99}")
 
     for result in all_results:
         agg = result["aggregated"]["overall"]
         name = result["pipeline"]
+        leak_str = f"{agg['pii_leakage_rate_mean']:>9.4f}" if "pii_leakage_rate_mean" in agg else f"{'n/a':>9}"
         lines.append(
             f"  {name:<38} "
             f"{agg['bertscore_masked_f1_mean']:>10.4f} "
             f"{agg['bertscore_full_f1_mean']:>10.4f} "
-            f"{agg['levenshtein_masked_mean']:>12.4f}"
+            f"{agg['levenshtein_masked_mean']:>12.4f} "
+            f"{agg['rouge1_full_mean']:>8.4f} "
+            f"{agg['bleu4_full_mean']:>8.4f} "
+            f"{leak_str}"
         )
 
-    lines.append(f"  {'-' * 72}")
+    lines.append(f"  {'-' * 99}")
     lines.append("  BERTScore: higher = better semantic preservation (max 1.0)")
     lines.append("  Levenshtein: lower = better (0.0 = identical masked texts)")
+    lines.append("  PII Leak rate: lower = better privacy (0.0 = no PII survived anonymization)")
 
     # ── Per-Complexity Breakdown ──
     for level in ["Low", "Medium", "High"]:
         lines.append(f"\n  >>> Complexity: {level.upper()} <<<")
-        lines.append(f"  {'Pipeline':<38} {'BERTScore':>10} {'BERTScore':>10} {'Levenshtein':>12} {'n':>5}")
-        lines.append(f"  {'':38} {'(masked)':>10} {'(full)':>10} {'(masked)':>12}")
-        lines.append(f"  {'-' * 77}")
+        lines.append(f"  {'Pipeline':<38} {'BERTScore':>10} {'BERTScore':>10} {'Levenshtein':>12} {'ROUGE-1':>8} {'BLEU-4':>8} {'n':>5}")
+        lines.append(f"  {'':38} {'(masked)':>10} {'(full)':>10} {'(masked)':>12} {'(full)':>8} {'(full)':>8}")
+        lines.append(f"  {'-' * 95}")
 
         for result in all_results:
             comp = result["aggregated"]["by_complexity"].get(level, {})
@@ -667,6 +916,8 @@ def format_semantic_report(all_results: List[Dict]) -> str:
                 f"{comp['bertscore_masked_f1_mean']:>10.4f} "
                 f"{comp['bertscore_full_f1_mean']:>10.4f} "
                 f"{comp['levenshtein_masked_mean']:>12.4f} "
+                f"{comp['rouge1_full_mean']:>8.4f} "
+                f"{comp['bleu4_full_mean']:>8.4f} "
                 f"{comp['count']:>5}"
             )
 
@@ -697,6 +948,17 @@ def format_semantic_report(all_results: List[Dict]) -> str:
         lines.append(f"")
         lines.append(f"  Levenshtein (masked texts):")
         lines.append(f"    Mean:      {overall['levenshtein_masked_mean']:.4f} ± {overall['levenshtein_masked_std']:.4f}")
+        lines.append(f"")
+        lines.append(f"  ROUGE-1 (full texts — following Staab et al., ICLR 2025):")
+        lines.append(f"    Mean:      {overall['rouge1_full_mean']:.4f} ± {overall['rouge1_full_std']:.4f}")
+        lines.append(f"")
+        lines.append(f"  BLEU-4 (full texts — following Staab et al., ICLR 2025 / Dorémus et al., JMIR AI 2025):")
+        lines.append(f"    Mean:      {overall['bleu4_full_mean']:.4f} ± {overall['bleu4_full_std']:.4f}")
+        lines.append(f"")
+        if "pii_leakage_rate_mean" in overall:
+            lines.append(f"  PII Leakage Rate (privacy metric — lower = better):")
+            lines.append(f"    Mean:      {overall['pii_leakage_rate_mean']:.4f} ± {overall['pii_leakage_rate_std']:.4f}")
+            lines.append(f"    Leaked:    {overall['pii_leaked_total']} / {overall['pii_total']} PII instances")
 
         for level in ["Low", "Medium", "High"]:
             comp = agg["by_complexity"].get(level, {})
@@ -706,6 +968,10 @@ def format_semantic_report(all_results: List[Dict]) -> str:
                 lines.append(f"    BERTScore masked F1: {comp['bertscore_masked_f1_mean']:.4f} ± {comp['bertscore_masked_f1_std']:.4f}")
                 lines.append(f"    BERTScore full F1:   {comp['bertscore_full_f1_mean']:.4f} ± {comp['bertscore_full_f1_std']:.4f}")
                 lines.append(f"    Levenshtein masked:  {comp['levenshtein_masked_mean']:.4f} ± {comp['levenshtein_masked_std']:.4f}")
+                lines.append(f"    ROUGE-1 full:        {comp['rouge1_full_mean']:.4f} ± {comp['rouge1_full_std']:.4f}")
+                lines.append(f"    BLEU-4 full:         {comp['bleu4_full_mean']:.4f} ± {comp['bleu4_full_std']:.4f}")
+                if "pii_leakage_rate_mean" in comp:
+                    lines.append(f"    PII leakage rate:    {comp['pii_leakage_rate_mean']:.4f} ± {comp['pii_leakage_rate_std']:.4f}")
 
     return "\n".join(lines)
 
@@ -793,10 +1059,13 @@ def format_qualitative_samples(
                 continue
 
             lines.append(f"  {name}:")
-            lines.append(f"    Anonymized: {doc_data['anonymized_text'][:500]}{'...' if len(doc_data['anonymized_text']) > 500 else ''}")
+            anon_text = doc_data.get('anonymized_text', '(text not available — loaded from cached results)')
+            lines.append(f"    Anonymized: {anon_text[:500]}{'...' if len(anon_text) > 500 else ''}")
             lines.append(f"    BERTScore (masked): F1={doc_data['bertscore_masked_f1']:.4f} | "
                          f"BERTScore (full): F1={doc_data['bertscore_full_f1']:.4f} | "
-                         f"Levenshtein: {doc_data['levenshtein_masked']:.4f}")
+                         f"Levenshtein: {doc_data['levenshtein_masked']:.4f} | "
+                         f"ROUGE-1: {doc_data['rouge1_full']:.4f} | "
+                         f"BLEU-4: {doc_data['bleu4_full']:.4f}")
             lines.append("")
 
     return "\n".join(lines)
@@ -841,6 +1110,22 @@ def main():
             print(f"\n  Skipping {pipeline_name} (file not found: {pred_path})")
             continue
 
+        # Skip if results already exist (resume after interruption)
+        safe_name = pipeline_name.lower().replace(" ", "_").replace("+", "").replace("[", "").replace("]", "")
+        per_doc_path = os.path.join(OUTPUT_DIR, f"{safe_name}_semantic_per_document.json")
+        if os.path.exists(per_doc_path):
+            print(f"\n  → SKIPPING {pipeline_name} (already exists: {per_doc_path})")
+            # Load existing results so they appear in the final report
+            with open(per_doc_path, "r", encoding="utf-8") as f:
+                existing_docs = json.load(f)
+            existing_agg = aggregate_results(existing_docs, pipeline_name)
+            all_results.append({
+                "pipeline": pipeline_name,
+                "per_document": existing_docs,
+                "aggregated": existing_agg,
+            })
+            continue
+
         print(f"\n{'=' * 60}")
         print(f"  Evaluating: {pipeline_name}")
         print(f"{'=' * 60}")
@@ -861,9 +1146,6 @@ def main():
         all_results.append(result)
 
         # Save per-pipeline detailed results
-        safe_name = pipeline_name.lower().replace(" ", "_").replace("+", "").replace("[", "").replace("]", "")
-        per_doc_path = os.path.join(OUTPUT_DIR, f"{safe_name}_semantic_per_document.json")
-
         # Save without the full text fields to keep file sizes manageable
         slim_docs = []
         for d in result["per_document"]:
@@ -875,6 +1157,13 @@ def main():
             json.dump(slim_docs, f, indent=2, ensure_ascii=False)
         print(f"  Per-document results: {per_doc_path}")
 
+        # Free GPU memory before next pipeline (prevents CUDA hang)
+        import gc
+        gc.collect()
+        if torch.cuda.is_available():
+            torch.cuda.empty_cache()
+            print(f"  GPU memory cleared.")
+
     if not all_results and not PROMPT_ANON_FILES:
         print("\nNo pipelines could be evaluated. Check your prediction file paths.")
         return
@@ -883,6 +1172,21 @@ def main():
     for pipeline_name, pred_path in PROMPT_ANON_FILES.items():
         if pred_path is None or not os.path.exists(pred_path):
             print(f"\n  Skipping {pipeline_name} (file not found: {pred_path})")
+            continue
+
+        # Skip if results already exist (resume after interruption)
+        safe_name = pipeline_name.lower().replace(" ", "_").replace("+", "").replace("[", "").replace("]", "")
+        per_doc_path = os.path.join(OUTPUT_DIR, f"{safe_name}_semantic_per_document.json")
+        if os.path.exists(per_doc_path):
+            print(f"\n  → SKIPPING {pipeline_name} (already exists: {per_doc_path})")
+            with open(per_doc_path, "r", encoding="utf-8") as f:
+                existing_docs = json.load(f)
+            existing_agg = aggregate_results(existing_docs, pipeline_name)
+            all_results.append({
+                "pipeline": pipeline_name,
+                "per_document": existing_docs,
+                "aggregated": existing_agg,
+            })
             continue
 
         print(f"\n{'=' * 60}")
@@ -904,9 +1208,6 @@ def main():
         all_results.append(result)
 
         # Save per-pipeline detailed results
-        safe_name = pipeline_name.lower().replace(" ", "_").replace("+", "").replace("[", "").replace("]", "")
-        per_doc_path = os.path.join(OUTPUT_DIR, f"{safe_name}_semantic_per_document.json")
-
         slim_docs = []
         for d in result["per_document"]:
             slim = {k: v for k, v in d.items()
@@ -916,6 +1217,13 @@ def main():
         with open(per_doc_path, "w", encoding="utf-8") as f:
             json.dump(slim_docs, f, indent=2, ensure_ascii=False)
         print(f"  Per-document results: {per_doc_path}")
+
+        # Free GPU memory before next pipeline (prevents CUDA hang)
+        import gc
+        gc.collect()
+        if torch.cuda.is_available():
+            torch.cuda.empty_cache()
+            print(f"  GPU memory cleared.")
 
     if not all_results:
         print("\nNo pipelines could be evaluated. Check your prediction file paths.")
