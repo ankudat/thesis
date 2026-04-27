@@ -1,0 +1,794 @@
+% =============================================================================
+%  Chapter 3: Methodology
+%  Master Thesis – André Kuhn (MScIDS, HSLU)
+%  "How well do LLMs anonymize text data?"
+% =============================================================================
+
+\chapter{Methodology}
+\label{ch:methodology}
+
+This chapter describes the experimental framework designed to answer the four
+research questions. The methodology consists of three main stages:
+(1)~synthetic dataset creation with ground-truth PII annotations,
+(2)~anonymization using twenty in-house pipeline configurations spanning
+classical and LLM-based approaches plus one external API
+baseline, and (3)~multi-dimensional evaluation covering PII detection
+accuracy, semantic preservation, and quality assessment.
+Figure~\ref{fig:methodology_overview} illustrates the overall workflow.
+
+\begin{figure}[htbp]
+  \centering
+  \begin{tikzpicture}[
+    node distance=10mm and 0mm,
+    every node/.style={font=\small},
+    stage/.style={
+      rectangle, rounded corners=10pt,
+      fill=red!8, draw=red!55!black, line width=0.7pt,
+      minimum width=0.55\textwidth,
+      align=center, inner sep=10pt,
+    },
+    flow/.style={-{Stealth[length=3.5mm,width=3mm]}, line width=0.9pt,
+                 draw=black!70},
+  ]
+    \node[stage] (gen) {\textbf{Synthetic Data Generation}};
+
+    \node[stage, below=of gen] (anon) {%
+      \textbf{Anonymization}\\[4pt]
+      \begin{tabular}{@{}l@{}}
+        $\bullet$ Classical tag-and-replace\\
+        $\bullet$ Fine-tuned tag-and-replace\\
+        $\bullet$ LLM tag-and-replace\\
+        $\bullet$ Prompt-based rewriting\\
+        $\bullet$ External API\\
+      \end{tabular}
+    };
+
+    \node[stage, below=of anon] (eval) {%
+      \textbf{Multi-Dimensional Evaluation}\\[4pt]
+      \begin{tabular}{@{}l@{}}
+        $\bullet$ PII Detection (P/R/F1 per tier)\\
+        $\bullet$ BERTScore\\
+        $\bullet$ Utility (LLM-as-Judge)\\
+      \end{tabular}
+    };
+
+    \draw[flow] (gen)  -- (anon);
+    \draw[flow] (anon) -- (eval);
+  \end{tikzpicture}
+  \caption{Overview of the methodological workflow. Synthetic customer notes
+           are generated and validated, then processed by twenty in-house
+           anonymization pipeline configurations (four categories) and one
+           external API baseline. Results are evaluated along
+           three dimensions: PII detection accuracy, semantic preservation,
+           and quality assessment.}
+  \label{fig:methodology_overview}
+\end{figure}
+
+
+% =====================================================================
+\section{Synthetic Dataset Creation}
+\label{sec:data_creation}
+% =====================================================================
+
+\subsection{Motivation for Synthetic Data}
+\label{sec:data_motivation}
+
+Real customer notes from financial institutions are classified as sensitive
+personal data under both the FADP and the GDPR. The author's employer, a
+Swiss bank, further restricts such data through an internal information
+security policy that prohibits any transfer of customer records outside
+its internal infrastructure, irrespective of duration or the application
+of pseudonymisation. The use of authentic customer notes within a personal
+computing environment was therefore not authorised. Since the experimental
+design adopted in this thesis requires all anonymisation pipelines to be
+executed locally on a single consumer-grade GPU, necessarily situated
+outside the bank's network perimeter, access to authentic data was
+precluded by the deployment constraints of the study itself. Synthetic
+data generation consequently provides the only viable path for
+constructing a labelled dataset with complete ground-truth PII
+annotations \citep{tan2024llm_annotation}.
+
+The use of synthetic data offers a key methodological advantage: because the
+generation process controls all PII content, ground-truth annotations are
+produced by design rather than through error-prone manual labeling. This enables
+exact computation of precision and recall against known entity boundaries.
+
+
+\subsection{Generation Process}
+\label{sec:data_generation}
+
+Figure~\ref{fig:data_pipeline} illustrates the five-stage data pipeline from
+generation to the final annotated dataset.
+
+\begin{figure}[htbp]
+  \centering
+  \begin{tikzpicture}[
+    every node/.style={font=\footnotesize},
+    box/.style={
+      rectangle, rounded corners=8pt,
+      draw=red!55!black, line width=0.6pt,
+      minimum width=24mm, minimum height=18mm,
+      align=center, inner sep=4pt, font=\footnotesize\bfseries,
+    },
+    sub/.style={font=\scriptsize\itshape, align=center, text width=26mm},
+    flow/.style={-{Stealth[length=2.5mm,width=2mm]}, draw=black!70,
+                 line width=0.7pt},
+    node distance=4mm and 5mm,
+  ]
+    \node[box, fill=red!10]  (gen)  {Gemini 2.5 Pro\\Generation};
+    \node[box, fill=red!25, right=of gen]  (det)  {Deterministic\\Validation};
+    \node[box, fill=red!40, right=of det]  (sem)  {Semantic\\Validation};
+    \node[box, fill=red!55, right=of sem]  (lab)  {Label Studio\\Review};
+    \node[box, fill=red!50!black, right=of lab,
+          text=white, draw=red!70!black]   (fin)  {Final Dataset\\2{,}542 docs};
+
+    \draw[flow] (gen) -- (det);
+    \draw[flow] (det) -- (sem);
+    \draw[flow] (sem) -- (lab);
+    \draw[flow] (lab) -- (fin);
+
+    \node[sub, below=of gen] {3{,}000 docs\\3 complexity levels};
+    \node[sub, below=of det] {Tag balance\\Format checks};
+    \node[sub, below=of sem] {Gemini Flash\\LLM audit};
+    \node[sub, below=of lab] {Manual review\\\& export};
+    \node[sub, below=of fin] {50/25/25 split\\12 PII categories};
+  \end{tikzpicture}
+  \caption{Data generation and validation pipeline. Raw documents are generated
+           by Gemini~2.5~Pro, validated in two stages, manually reviewed in
+           Label~Studio, and split into train/dev/test subsets.}
+  \label{fig:data_pipeline}
+\end{figure}
+
+The dataset is generated using the Gemini~2.5~Pro API \citep{google2025gemini},
+which serves as the text generator. This choice ensures that the generating model
+is substantially larger and more capable than the locally deployed models used
+for anonymization (7--8 billion parameters), minimizing the risk that the
+evaluation models have seen their own training patterns in the test data.
+
+Each API call generates a batch of ten customer notes in German, simulating
+realistic interactions between a client advisor and a corporate banking customer.
+The generation prompt defines the task as producing Internal CRM Notes for a Swiss Corporate \& Institutional Clients (CIC)
+relationship manager. The prompt specifies:
+
+\begin{itemize}
+    \item \textbf{Language:} Standard German (Hochdeutsch), with Swiss banking
+    terminology permitted (e.g., ``Traktanden'', ``Pendenzen'').
+    \item \textbf{PII annotation:} Inline XML tags for twelve entity categories
+    (see Section~\ref{sec:pii_taxonomy}).
+    \item \textbf{Strict annotation rules:} Nine rules governing tag syntax,
+    including flat structure (no nesting), no attributes, mandatory closing tags,
+    exclusion of salutations and articles from entity spans, and full inclusion
+    of legal entity suffixes in organization names.
+    \item \textbf{Scenario diversity:} Notes cover treasury operations, financing,
+    corporate governance, client interactions, lifecycle operations, and
+    administrative tasks.
+    \item \textbf{Gold-standard examples:} Two fully annotated examples
+    (formal and hasty style) are included in every prompt.
+\end{itemize}
+
+
+\subsection{Complexity Levels}
+\label{sec:complexity_levels}
+
+To evaluate robustness across varying text quality, the dataset is generated
+at three complexity levels. Each level is controlled jointly by a dedicated
+generation prompt, specifying register, sentence structure, abbreviations,
+and (for High) intentional typos, and by the sampling temperature, with
+lower temperatures producing more deterministic, formal output and higher
+temperatures yielding noisier, fragmented text:
+
+\begin{enumerate}
+    \item \textbf{Low complexity} ($T = 0.30$): Formal visit reports written in
+    complete sentences with perfect Standard German and an objective tone.
+    These represent official records and are the easiest texts for NER systems
+    to process.
+
+    \item \textbf{Medium complexity} ($T = 0.70$): Standard CRM notes using
+    concise, professional banking terminology and industry abbreviations.
+    These represent the typical quality of daily advisor notes.
+
+    \item \textbf{High complexity} ($T = 0.85$): Hasty quick-logs written in
+    bullet points and sentence fragments, intentionally containing realistic
+    typos (e.g., ``habne'' for ``haben'', ``fianziell'' for ``finanziell'').
+    These simulate the most challenging real-world scenario where advisors
+    type quickly between client calls.
+\end{enumerate}
+
+Each complexity level contributes approximately one-third of the total dataset,
+enabling a per-level analysis of pipeline robustness.
+
+
+\subsection{PII Taxonomy}
+\label{sec:pii_taxonomy}
+
+The annotation schema defines twelve PII categories, organized into three
+tiers based on detection difficulty. The conceptual distinction between
+direct identifiers (names, locations, organisations) and quasi-identifiers
+(occupations, ages, nationalities, education) follows the privacy
+literature originating with \citet{sweeney2002kanonymity} and adopted in
+text-anonymisation benchmarks such as the Text Anonymization Benchmark
+\citep{pilan2022tab} and the indirect-identifier schema of
+\citet{baroud2025indirect}. This thesis extends that two-way split with
+an intermediate tier for structured identifiers (IBANs, emails, phone
+numbers, dates, monetary amounts), motivated by the practical observation
+that such entities are reliably captured by deterministic pattern
+matching, while the other two tiers require learned models. The resulting
+three-tier structure is central to the evaluation framework, as it
+reveals where classical methods fail and where LLMs provide clear
+advantages.
+
+\begin{table}[htbp]
+\centering
+\caption{PII taxonomy: twelve entity categories organized into three tiers of
+detection difficulty.}
+\label{tab:pii_taxonomy}
+\begin{tabular}{lll}
+\toprule
+\textbf{Tier} & \textbf{Category} & \textbf{Description} \\
+\midrule
+\multirow{3}{*}{\textbf{Tier 1: Direct NER}}
+  & \texttt{PER}   & Person names (excluding salutations and titles) \\
+  & \texttt{LOC}   & Locations: addresses, cities, cantons, countries \\
+  & \texttt{ORG}   & Organizations (including legal suffixes: AG, GmbH) \\
+\midrule
+\multirow{5}{*}{\textbf{Tier 2: Structured}}
+  & \texttt{IBAN}  & Swiss IBANs (starting with CH) \\
+  & \texttt{EMAIL} & Email addresses \\
+  & \texttt{PHONE} & Phone numbers (Swiss formats) \\
+  & \texttt{DATE}  & Dates (various German formats) \\
+  & \texttt{MONEY} & Monetary amounts with currency \\
+\midrule
+\multirow{4}{*}{\textbf{Tier 3: Quasi-Identifiers}}
+  & \texttt{JOB}     & Job titles and occupations \\
+  & \texttt{AGE}     & Ages, birth years, age references \\
+  & \texttt{NATION}  & Nationalities \\
+  & \texttt{EDU}     & Educational qualifications \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Figure~\ref{fig:pii_tiers} visualizes the three tiers with their respective
+F1-score ranges for classical and fine-tuned approaches.
+
+\begin{figure}[htbp]
+  \centering
+  \begin{tikzpicture}[
+    every node/.style={font=\small},
+    tier/.style={
+      rectangle, rounded corners=10pt,
+      draw=red!55!black, line width=0.7pt,
+      minimum width=42mm, minimum height=34mm,
+      align=center, inner sep=6pt,
+    },
+    title/.style={font=\small\bfseries\itshape, text=red!55!black},
+    cats/.style={font=\footnotesize, align=center},
+    diffarrow/.style={-{Stealth[length=3mm,width=2.5mm]},
+                       line width=0.9pt, draw=red!55!black},
+    node distance=0mm and 6mm,
+  ]
+    % Three tier boxes with progressive shading
+    \node[tier, fill=red!8]                        (t1) {};
+    \node[tier, fill=red!22, right=of t1]          (t2) {};
+    \node[tier, fill=red!50, right=of t2,
+          text=white, draw=red!75!black]           (t3) {};
+
+    % Box contents (placed manually so spacing matches across tiers)
+    \node[title, anchor=north]
+        at ($(t1.north)+(0,-3mm)$) {Tier 1 \textemdash{} Direct NER};
+    \node[cats] at (t1) {PER (Person names)\\
+                         LOC (Locations)\\
+                         ORG (Organizations)};
+
+    \node[title, anchor=north]
+        at ($(t2.north)+(0,-3mm)$) {Tier 2 \textemdash{} Structured};
+    \node[cats] at (t2) {IBAN (Bank accounts)\\
+                         EMAIL (Emails)\\
+                         PHONE (Phone numbers)\\
+                         DATE (Dates)\\
+                         MONEY (Amounts)};
+
+    \node[title, anchor=north, text=white]
+        at ($(t3.north)+(0,-3mm)$) {Tier 3 \textemdash{} Quasi-Identifiers};
+    \node[cats, text=white] at (t3) {JOB (Occupations)\\
+                                     AGE (Age references)\\
+                                     NATION (Nationalities)\\
+                                     EDU (Education)};
+
+    % Top arrow with caption
+    \draw[diffarrow] ($(t1.north west)+(2mm,7mm)$)
+                  -- ($(t3.north east)+(-2mm,7mm)$)
+                  node[midway, above, font=\footnotesize\itshape, text=red!55!black]
+                  {Increasing detection difficulty};
+  \end{tikzpicture}
+  \caption{PII taxonomy organized into three tiers of increasing detection
+           difficulty. Tier~1 categories are standard named entities,
+           Tier~2 categories follow structured patterns, and Tier~3
+           categories are contextually embedded quasi-identifiers.}
+  \label{fig:pii_tiers}
+\end{figure}
+
+\textbf{Tier~1} categories correspond to standard NER labels that pre-trained
+models such as spaCy and BERT are explicitly designed to detect.
+\textbf{Tier~2} categories follow regular patterns (e.g., IBAN checksums, email
+syntax) and can be captured by regex-based recognizers.
+\textbf{Tier~3} categories are quasi-identifiers that require contextual
+understanding, for example, determining that ``ETH-Ingenieur'' refers to a
+job title rather than an organization. These are the categories where classical
+methods are expected to fail and LLMs should demonstrate their advantage.
+
+
+\subsection{Data Validation}
+\label{sec:data_validation}
+
+Generated data undergoes a two-stage validation process to ensure annotation
+quality:
+
+\textbf{Stage~1: Deterministic validation:} Rule-based checks verify the
+structural integrity of annotations:
+\begin{itemize}
+    \item Tag balance: every opening tag has a matching closing tag.
+    \item No hallucinated tags: only the twelve defined categories are accepted.
+    \item No bracket leaks: entity text spans do not contain XML markers.
+    \item Character offset consistency: \texttt{text[start:end]} matches the
+    recorded entity value for every annotation.
+\end{itemize}
+
+\textbf{Stage~2: Semantic validation:} Gemini~Flash is used as an auditor to
+identify critical tagging errors and logical inconsistencies that deterministic
+rules cannot catch, such as missing entities that appear in the text but are not
+annotated, or entity boundaries that include surrounding context inappropriately.
+
+Records that fail either stage are discarded. After parse failures (9
+notes) and validation rejections (449 notes, 15.0\%), 2{,}542 of the
+original 3{,}000 generated notes are retained and imported into
+Label~Studio for manual review, producing the definitive ground-truth
+annotations used for all evaluations.
+
+
+\subsection{Dataset Statistics}
+\label{sec:dataset_stats}
+
+The final annotated dataset comprises 2{,}542 customer notes. For evaluation,
+the data is split into three subsets stratified by complexity level:
+
+\begin{itemize}
+    \item \textbf{Training set:} 1{,}270 documents (50\%), used for BERT and
+    LLM fine-tuning.
+    \item \textbf{Development set:} 634 documents (25\%), used for
+    hyperparameter tuning and early stopping.
+    \item \textbf{Test set:} 638 documents (25\%), used for all reported
+    evaluations. Every pipeline is evaluated on this identical test set.
+\end{itemize}
+
+The stratified split ensures that each subset contains a proportional
+representation of Low, Medium, and High complexity documents (test set:
+218~Low, 215~Medium, 205~High), preventing distributional bias in the
+evaluation. The slight imbalance across complexity levels reflects
+differential rejection rates during validation: high-complexity texts with
+intentional typos more frequently exhibit tag balance errors and are
+therefore rejected at a higher rate during the deterministic validation
+stage.
+
+
+The canonical tag-and-replace ground truth for every document is produced
+by replacing each annotated span with its category placeholder (e.g.,
+``[PER]'', ``[MONEY]''). Representative examples of the annotated format
+and the masked form, one per complexity level, are provided in
+Appendix~\ref{sec:appendix_example_notes}.
+
+
+% =====================================================================
+\section{Anonymization Pipelines}
+\label{sec:anonymization_pipelines}
+% =====================================================================
+
+A total of twenty in-house anonymization pipeline configurations are
+evaluated, spanning four categories: classical baselines, a fine-tuned
+BERT model, LLM-based tag-and-replace (with three prompting strategies
+per model), and LLM-based prompt rewriting (with two prompting strategies
+per model). In addition, the Anonymizer API, provided by the supervisor,
+is included as an external baseline.
+Table~\ref{tab:pipeline_overview} provides an overview. For Qwen~2.5 and SauerkrautLM, all three tag-and-replace strategies
+(zero-shot, few-shot, few-shot with verification) are evaluated, but the
+detailed discussion in the results chapter focuses on the best-performing
+configuration per model (few-shot with verification) to maintain readability.
+Full results for all configurations are provided in the appendix.
+
+\begin{table}[htbp]
+\centering
+\caption{Overview of all anonymization pipeline configurations: twenty
+in-house pipelines plus one external API baseline. For the LLM
+tag-and-replace category, each of the three models is evaluated across
+three prompting strategies (zero-shot, few-shot, few-shot+verify),
+yielding nine configurations; for the LLM rewrite category, each model
+is evaluated across two prompting strategies (zero-shot, few-shot),
+yielding six configurations. The detailed discussion focuses on the
+best configuration per model in the tag-and-replace category (marked
+with $\star$).}
+\label{tab:pipeline_overview}
+\small
+\begin{tabular}{lll}
+\toprule
+\textbf{Pipeline} & \textbf{Category} & \textbf{Approach} \\
+\midrule
+\multicolumn{3}{l}{\textit{Classical baselines}} \\
+spaCy + Regex                          & Classical      & NER + pattern matching \\
+BERT (pretrained) + Regex              & Classical      & NER + pattern matching \\
+Presidio                               & Classical      & NER + custom recognizers \\
+\midrule
+\multicolumn{3}{l}{\textit{Fine-tuned encoder}} \\
+BERT Fine-Tuned                        & Fine-tuned     & Token classification \\
+\midrule
+\multicolumn{3}{l}{\textit{LLM tag-and-replace: Llama-3}} \\
+Llama-3 [zero-shot]                    & LLM tag-repl.  & Zero-shot prompting \\
+Llama-3 [few-shot]                     & LLM tag-repl.  & 3-shot prompting \\
+Llama-3 [few-shot+verify]$^\star$      & LLM tag-repl.  & 3-shot + self-verify \\
+\midrule
+\multicolumn{3}{l}{\textit{LLM tag-and-replace: Qwen2.5}} \\
+Qwen2.5 [zero-shot]                    & LLM tag-repl.  & Zero-shot prompting \\
+Qwen2.5 [few-shot]                     & LLM tag-repl.  & 3-shot prompting \\
+Qwen2.5 [few-shot+verify]$^\star$      & LLM tag-repl.  & 3-shot + self-verify \\
+\midrule
+\multicolumn{3}{l}{\textit{LLM tag-and-replace: SauerkrautLM}} \\
+SauerkrautLM [zero-shot]               & LLM tag-repl.  & Zero-shot prompting \\
+SauerkrautLM [few-shot]                & LLM tag-repl.  & 3-shot prompting \\
+SauerkrautLM [few-shot+verify]$^\star$ & LLM tag-repl.  & 3-shot + self-verify \\
+\midrule
+\multicolumn{3}{l}{\textit{LLM fine-tuned (QLoRA)}} \\
+Llama-3 [fine-tuned]                   & LLM fine-tuned & QLoRA tag-and-replace \\
+\midrule
+\multicolumn{3}{l}{\textit{LLM prompt-based rewriting}} \\
+Llama-3 [prompt zero-shot]             & LLM rewrite    & Zero-shot rewriting \\
+Llama-3 [prompt few-shot]              & LLM rewrite    & 3-shot rewriting \\
+Qwen2.5 [prompt zero-shot]             & LLM rewrite    & Zero-shot rewriting \\
+Qwen2.5 [prompt few-shot]              & LLM rewrite    & 3-shot rewriting \\
+SauerkrautLM [prompt zero-shot]        & LLM rewrite    & Zero-shot rewriting \\
+SauerkrautLM [prompt few-shot]         & LLM rewrite    & 3-shot rewriting \\
+\midrule
+\multicolumn{3}{l}{\textit{External API}} \\
+Anonymizer API                         & External API   & Classical NLP techniques (no LLM) \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+% ----- Classical Baselines -----
+\subsection{Classical Baselines}
+\label{sec:classical_baselines}
+
+\subsubsection{spaCy + Regex}
+
+The first baseline combines the spaCy \texttt{de\_core\_news\_lg} model
+\citep{honnibal2020spacy} for Tier~1 named entity recognition (PER, LOC, ORG)
+with a set of regular expressions for Tier~2 structured entities (IBAN, EMAIL,
+PHONE, DATE, MONEY). The regex patterns are designed for Swiss-specific formats,
+including Swiss IBAN checksums, Swiss phone number formats (+41, 0xx), and
+German date notation (DD.MM.YYYY). This pipeline cannot detect Tier~3
+quasi-identifiers.
+
+\subsubsection{BERT (Pretrained) + Regex}
+
+The second baseline replaces spaCy's NER component with a pre-trained German
+BERT model (\texttt{fhswf/bert\_de\_ner}) for token-level classification of
+Tier~1 entities. The same regex patterns as the spaCy baseline handle Tier~2
+entities. This pipeline likewise cannot detect Tier~3 quasi-identifiers.
+
+\subsubsection{Microsoft Presidio}
+
+The third baseline uses Microsoft Presidio \citep{microsoft2024presidio}, a
+production-grade PII detection framework that unifies NER models with
+pattern-based recognizers and context-aware confidence boosting. Presidio uses
+spaCy's \texttt{de\_core\_news\_lg} model as its NLP engine for German NER.
+Custom recognizers are added for Swiss-specific patterns (IBAN, phone numbers,
+monetary amounts) and partial Tier~3 support through keyword-based recognizers.
+A minimum confidence threshold of $0.3$ is applied to all detections.
+
+
+% ----- Fine-Tuned BERT -----
+\subsection{Fine-Tuned BERT}
+\label{sec:bert_finetuned}
+
+A \texttt{bert-base-german-cased} model is fine-tuned for token-level NER on
+the training set using all twelve PII categories with IOB2 labeling. This is the
+only classical-family model capable of detecting Tier~3 quasi-identifiers,
+as it learns these categories from the annotated training data.
+
+Training uses the following hyperparameters: 5~epochs, batch size~16,
+learning rate $3 \times 10^{-5}$ with linear warmup (10\% of steps) and weight
+decay of $0.01$. The best checkpoint is selected based on development set
+performance. The training set comprises 1{,}270 documents (50\% of the data).
+
+
+% ----- LLM Tag-and-Replace -----
+\subsection{LLM-Based Tag-and-Replace}
+\label{sec:llm_tag_replace}
+
+The tag-and-replace approach, inspired by GPT-NER \citep{wang2023gptner},
+instructs the LLM to copy the input text while marking entity spans with
+delimiter tokens (\texttt{@@LABEL~...~\#\#}). A deterministic parser extracts
+character-offset spans from the model's output. This two-step process separates
+the LLM's role (entity detection) from the anonymization action (replacement
+with \texttt{[LABEL]} placeholders), enabling precise evaluation against
+ground-truth annotations.
+
+Three locally deployed LLMs are evaluated:
+
+\begin{enumerate}
+    \item \textbf{Meta-Llama-3-8B-Instruct} \citep{dubey2024llama3}: A
+    general-purpose instruction-tuned model (8B parameters, 16\,GB in float16).
+    This serves as the primary baseline due to its strong multilingual
+    capabilities.
+
+    \item \textbf{Qwen2.5-7B-Instruct}: A 7B-parameter model from the Qwen
+    family, considered one of the strongest models in its size class at the time
+    of evaluation.
+
+    \item \textbf{Llama-3.1-SauerkrautLM-8b-Instruct}: A German-specialized
+    variant of Llama-3.1, fine-tuned on German instruction data by VAGOsolutions.
+    This model tests whether German-specific training provides an advantage for
+    German-language PII detection.
+\end{enumerate}
+
+All models run locally in float16 precision on a single NVIDIA RTX~4090 GPU
+(24\,GB VRAM) without quantization.
+
+Three prompting strategies are evaluated for each model:
+
+\begin{itemize}
+    \item \textbf{Zero-shot:} The prompt defines all twelve entity categories
+    with descriptions and annotation rules, but provides no examples.
+
+    \item \textbf{Few-shot (3 examples):} Three fully annotated German banking
+    notes of varying complexity are prepended to the prompt, demonstrating the
+    expected annotation format.
+
+    \item \textbf{Few-shot + self-verification:} After the initial annotation,
+    the LLM is prompted a second time to verify each extracted entity, confirming
+    or rejecting it. This additional step aims to reduce false positives at the
+    cost of doubled inference time.
+\end{itemize}
+
+All three strategies are evaluated for all three models, yielding nine
+tag-and-replace configurations. Since few-shot with self-verification
+consistently outperforms the other strategies across all models, the detailed
+discussion in the results chapter focuses on this configuration. Results for
+all configurations are reported in the appendix.
+
+
+% ----- LLM Prompt-Based Rewriting -----
+\subsection{LLM-Based Prompt Rewriting}
+\label{sec:llm_prompt_rewrite}
+
+Unlike tag-and-replace, the prompt-based rewriting approach instructs the LLM to
+directly produce an anonymized version of the input text. The model is prompted
+to rewrite the text such that all PII is removed or replaced with
+natural-sounding alternatives, while preserving the original meaning and
+structure as closely as possible.
+
+This approach is evaluated for all three LLMs (Llama-3, Qwen~2.5, SauerkrautLM)
+in a few-shot configuration. It is particularly relevant for RQ2a and RQ2b,
+as it enables an assessment of semantic preservation that goes beyond simple
+placeholder substitution. Because the model rewrites rather than masks, the
+resulting text can be more natural and readable, but also carries a higher risk
+of hallucination and semantic drift.
+
+Since prompt-based rewrites do not produce entity-level predictions,
+precision, recall, and F1 cannot be computed directly. The privacy of
+these pipelines is therefore assessed through the PII leakage rate
+defined in Section~\ref{sec:eval_detection}.
+
+
+\subsection{External API}
+\label{sec:external_api}
+
+To contextualize the in-house pipelines against an external reference,
+the Anonymizer API, provided by the supervisor, is also evaluated. The
+service performs anonymization using various classical NLP techniques
+rather than an LLM. Because it transmits customer data to an external
+endpoint, it does not satisfy the same on-premises constraint as the
+in-house pipelines and is reported as a separate category in the
+results. No PII detection metrics (precision, recall, F1) are computed
+for this pipeline because it returns anonymized text only; privacy is
+assessed through the PII leakage rate and the LLM-judge scores.
+
+
+% =====================================================================
+\section{Evaluation Framework}
+\label{sec:evaluation}
+% =====================================================================
+
+The evaluation framework is organized along two dimensions corresponding to
+the research questions:
+
+\begin{itemize}
+    \item \textbf{RQ1, Detection and Privacy:} Did the pipeline successfully
+    detect and remove PII? Assessed through entity-level precision, recall, and
+    F1-score, PII leakage rates, and LLM-judge scores for anonymization quality
+    and re-identification risk.
+
+    \item \textbf{RQ2, Semantic Preservation and Utility:} Did the pipeline
+    preserve everything else? Assessed through BERTScore (masked and
+    full text) and LLM-judge scores for readability, meaning
+    preservation, and hallucination, complemented by normalized
+    Levenshtein distance, ROUGE-1, and BLEU-4 as surface-level
+    indicators.
+\end{itemize}
+
+
+% ----- PII Detection and Privacy (RQ1) -----
+\subsection{PII Detection and Privacy (RQ1a, RQ1b)}
+\label{sec:eval_detection}
+
+PII detection is evaluated at the entity level using standard NER metrics
+\citep{pilan2022tab, altalla2025evaluating}. Let $\mathit{TP}$ denote the
+number of true positives (predicted entities that match a ground-truth
+entity in both span and category), $\mathit{FP}$ the number of false
+positives (predicted entities with no corresponding ground-truth
+entity), and $\mathit{FN}$ the number of false negatives (ground-truth
+entities that are not predicted):
+
+\begin{itemize}
+    \item \textbf{Precision:} The proportion of predicted entities that match
+    a ground-truth entity (correct span and correct category).
+    \begin{equation}
+        \mathrm{Precision} = \frac{\mathit{TP}}{\mathit{TP} + \mathit{FP}}
+        \label{eq:precision}
+    \end{equation}
+    \item \textbf{Recall:} The proportion of ground-truth entities that are
+    successfully detected.
+    \begin{equation}
+        \mathrm{Recall} = \frac{\mathit{TP}}{\mathit{TP} + \mathit{FN}}
+        \label{eq:recall}
+    \end{equation}
+    \item \textbf{F1-score:} The harmonic mean of precision and recall.
+    \begin{equation}
+        F_1 = 2 \cdot \frac{\mathrm{Precision} \cdot \mathrm{Recall}}
+                           {\mathrm{Precision} + \mathrm{Recall}}
+        \label{eq:f1}
+    \end{equation}
+\end{itemize}
+
+Entity matching follows a \emph{strict} criterion: a predicted entity is
+counted as correct only if both the text span and the category label match the
+ground truth exactly. Additionally, a \emph{relaxed} matching mode requires
+at least 50\% character overlap of the shorter span, following the evaluation
+protocol established by the i2b2/UTHealth de-identification shared task
+\citep{stubbs2015i2b2}. 
+
+Metrics are computed at four levels of granularity:
+\begin{enumerate}
+    \item Per individual category (all twelve labels).
+    \item Per tier (Tier~1, Tier~2, Tier~3).
+    \item Overall (all categories combined).
+    \item Per complexity level (Low, Medium, High).
+\end{enumerate}
+
+Recall receives particular emphasis in the analysis, as anonymization systems
+should minimize the omission of sensitive information, a missed PII entity
+constitutes a privacy breach, whereas a false positive merely results in
+unnecessary redaction \citep{pilan2022tab}.
+
+For prompt-based rewriting pipelines, where entity-level predictions
+are not produced, a \emph{PII leakage rate} serves as the privacy
+metric. Inspired by \citet{siyan2025papillon}, the leakage rate
+measures how many ground-truth PII strings survive in the anonymized
+text:
+
+\begin{equation}
+\text{LEAK} = \frac{\text{number of PII strings found in anonymized text}}{\text{total number of PII strings}}
+\label{eq:leakage}
+\end{equation}
+
+\noindent For each ground-truth entity, the metric checks whether its
+text appears in the anonymized output using case-insensitive word
+boundary matching. Word boundary matching is necessary for German to
+avoid false positives from compound words and inflected forms; for
+example, the city name ``Bern'' (LOC) must not produce a spurious
+match inside ``Berner'' (the corresponding adjective, common in Swiss
+banking text such as ``Berner Kantonalbank''). A leakage rate of 0 means all PII was removed; higher values indicate
+more PII exposure. Nested annotations, such as a surname appearing
+inside an organisation name, can produce cascading matches when the
+parent entity is left unmasked.
+
+All detection and privacy metrics are reported overall and per complexity level
+(Low, Medium, High).
+
+
+% ----- Semantic Preservation and Utility (RQ2) -----
+\subsection{Semantic Preservation and Utility (RQ2a, RQ2b)}
+\label{sec:eval_semantic}
+
+Evaluating semantic preservation is less straightforward than detection
+accuracy and requires several complementary signals. The thesis combines
+two embedding-based metrics, two surface-level metrics, and the
+LLM-as-judge framework described in
+Section~\ref{sec:eval_judge}.
+
+\paragraph{Masked-text BERTScore.} The primary indicator of structural
+fidelity to non-PII content. PII spans in the original text are first
+replaced with category placeholders (e.g.\ \texttt{[PER]}); all
+placeholder tokens in both the original and the resulting anonymized
+text are then masked, producing \texttt{masked\_original} and
+\texttt{masked\_anonymized}. BERTScore \citep{zhang2020bertscore} is
+computed between these two masked texts using a multilingual BERT model
+(\texttt{bert-base-multilingual-cased}). Perfect non-PII preservation
+yields a BERTScore of~1.0; any deviation indicates that the
+anonymization process has altered content beyond the PII spans.
+
+\paragraph{Full-text BERTScore.} BERTScore is additionally computed on
+the unmasked original and anonymized texts. This second variant captures
+overall coherence shifts that the masked variant deliberately factors
+out, including the impact of placeholder tokens themselves on the
+surrounding text.
+
+\paragraph{Surface-level metrics.} Normalized Levenshtein distance on
+masked texts captures small insertions or deletions that embedding-based
+similarity might miss. ROUGE-1 and BLEU-4 on full texts measure unigram
+overlap and 4-gram precision, respectively \citep{staab2025iclr}. These
+quantify lexical fidelity but, unlike BERTScore and the judge model, do
+not capture meaning equivalence under paraphrase.
+
+All metrics in this section are reported overall and per complexity
+level (Low, Medium, High). The LLM-as-judge framework, which provides
+holistic readability, meaning-preservation, and hallucination scores
+that complement the automated metrics above, is described next.
+
+
+% ----- LLM-as-Judge -----
+\subsection{LLM-as-Judge Quality Assessment}
+\label{sec:eval_judge}
+
+A capable judge model provides a holistic assessment of anonymized texts
+that embedding-based similarity cannot capture in isolation. Following
+the methodology of \citet{staab2025iclr}, Gemini~2.5~Flash is used as
+the judge model, chosen for its ability to discriminate between
+anonymization quality levels more effectively than smaller local
+models.
+
+For each anonymized document (paired with its original), the judge scores five
+dimensions. These dimensions are assigned to the research questions as follows:
+
+\paragraph{Privacy dimensions (RQ1).} These complement the automated detection
+metrics by providing a holistic assessment of PII removal effectiveness:
+\begin{enumerate}
+    \item \textbf{Anonymization quality} (1--10): How effectively has PII been
+    removed or masked?
+
+    \item \textbf{Re-identification risk} (1--10): How difficult would it be
+    to re-identify the individuals mentioned, given only the anonymized text?
+\end{enumerate}
+
+\paragraph{Utility and faithfulness dimensions (RQ2).} These assess whether
+the anonymization process preserved the text's informational value:
+\begin{enumerate}
+    \setcounter{enumi}{2}
+    \item \textbf{Readability} (1--10): How readable is the anonymized text on
+    its own, without reference to the original?
+
+    \item \textbf{Meaning preservation} (1--10): How well does the anonymized
+    text preserve the original's factual and contextual meaning?
+
+    \item \textbf{Hallucination} (0/1): Does the anonymized text contain
+    information that was not present in the original? This dimension captures a
+    failure mode unique to generative models that cannot be detected by
+    entity-level metrics.
+\end{enumerate}
+
+Scores are aggregated per pipeline, per complexity level, and overall across all
+638 test documents.
+
+
+% ----- Experimental Protocol -----
+\subsection{Experimental Protocol}
+\label{sec:experimental_protocol}
+
+To ensure a fair comparison, all twenty-one pipeline configurations are
+evaluated on the identical held-out test set of 638~documents using fixed
+random seeds. The in-house experimental pipeline, data generation,
+anonymization, and evaluation, runs entirely on local hardware, in line
+with the on-premises constraint motivated in
+Section~\ref{sec:research_gap}. The Anonymizer API baseline is the only
+component that transmits data to an external provider and is reported
+separately. Concrete hardware, software versions, numerical precision,
+and seed values are documented in
+Section~\ref{sec:impl_experimental_setup}.

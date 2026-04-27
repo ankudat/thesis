@@ -1,9 +1,12 @@
 """
 llm_judge_gemini.py
 ====================
-LLM-as-Judge evaluation of anonymized text quality using Google Gemini Flash.
+LLM-as-Judge evaluation of anonymized text quality using Google Gemini Flash,
+plus an empirical adversarial inference attack run alongside the judge.
 
-Implements two evaluation dimensions:
+Implements two complementary evaluations:
+
+  ─── (1) LLM-AS-JUDGE: SUBJECTIVE RATINGS (judge sees BOTH original and anonymized) ───
 
   A) UTILITY (following Staab et al., ICLR 2025):
      - Readability (1-10): How readable is the anonymized text on its own?
@@ -15,6 +18,25 @@ Implements two evaluation dimensions:
      - Re-identification Risk (1-10): How difficult is it to re-identify individuals
        from the anonymized text? (10 = very difficult, well protected)
 
+  ─── (2) ADVERSARIAL INFERENCE ATTACK: EMPIRICAL MEASUREMENT ───
+        (following Staab et al., ICLR 2025: "Large Language Models are Advanced Anonymizers")
+
+  C) ATTACK PROTOCOL:
+     1. Ground-truth extraction: an LLM extracts true attribute values
+        (age, location, occupation, education, nationality, organization)
+        from the ORIGINAL text. Cached on disk – pipeline-independent.
+        Attribute set is aligned with the thesis 12-entity schema
+        (Tier-3 quasi-identifiers + LOC + ORG from Tier-1).
+     2. Adversarial inference: an LLM "adversary" sees ONLY the anonymized
+        text and is asked to infer the same attributes via chain-of-thought.
+        It returns a top-3 guess list per attribute plus a confidence score.
+     3. LLM match-judging: a third call compares ground truth vs. the
+        attacker's top-3 using a tolerance rubric (synonyms, ±5y for age, etc.)
+        and returns MATCH / NO_MATCH / SKIP per attribute.
+
+     Reported as per-attribute success rate (lower = better anonymization)
+     and "any-attribute leaked" rate, broken down per complexity level.
+
 Results are reported per pipeline, per complexity level, and overall.
 
 Usage:
@@ -22,6 +44,7 @@ Usage:
        (or set GOOGLE_API_KEY=your_key_here)
     2. Adjust paths in USER SETTINGS below
     3. Run: python llm_judge_gemini.py
+       (judge + attack both run by default; toggle RUN_ATTACK to disable)
 
 Requirements:
     pip install google-genai tqdm
@@ -65,6 +88,8 @@ PROMPT_REWRITE_PREDICTIONS = {
     "LLM Llama-3 [prompt few-shot]":     os.path.join(BASE_DIR, "results", "llm_prompt_anonymize", "prompt_anon_meta_llama_3_8b_instruct_few_shot_predictions.json"),
     "LLM Qwen2.5 [prompt few-shot]":     os.path.join(BASE_DIR, "results", "llm_prompt_anonymize", "prompt_anon_qwen2.5_7b_instruct_few_shot_predictions.json"),
     "LLM SauerkrautLM [prompt few-shot]": os.path.join(BASE_DIR, "results", "llm_prompt_anonymize", "prompt_anon_llama_3.1_sauerkrautlm_8b_instruct_few_shot_predictions.json"),
+    # External API baseline
+    "Datenwertsch\u00f6pfung API":        os.path.join(BASE_DIR, "results", "datenwertschoepfung_baseline", "datenwertschoepfung_predictions.json"),
 }
 
 MAX_DOCS = None    # None for full run, small int for testing
@@ -75,6 +100,31 @@ SEED     = 42
 # Free tier: 15 RPM → need ~4s between calls
 # Paid tier: 2000 RPM → 0.5s is fine
 API_DELAY = 0.5    # Set to 4.5 for free tier, 0.5 for paid tier
+
+# ── Adversarial inference attack settings (Staab et al., ICLR 2025) ──
+# When True, runs the empirical attack alongside the LLM-as-judge ratings.
+# The attack adds ~3 API calls per (document, pipeline) pair:
+#   - 1 ground-truth extraction (cached: only once per document, not per pipeline)
+#   - 1 adversarial inference call (anonymized text only)
+#   - 1 LLM match-judging call (compares GT vs. attacker top-3 guesses)
+RUN_ATTACK = True
+
+# Quasi-identifier attributes the adversary attempts to infer.
+# Aligned with the thesis 12-entity schema (TIER1_DIRECT_NER ∪ TIER3_QUASI):
+#   age          ↔ AGE     (Tier 3)
+#   location     ↔ LOC     (Tier 1)
+#   occupation   ↔ JOB     (Tier 3)
+#   education    ↔ EDU     (Tier 3)
+#   nationality  ↔ NATION  (Tier 3)
+#   organization ↔ ORG     (Tier 1) — employer / primary affiliation
+# (Sex is intentionally excluded: it is not part of the 12-entity schema and
+#  no pipeline attempts to mask it, so attacking it would yield ~100% leakage
+#  with no signal for comparing pipelines.)
+ATTACK_ATTRIBUTES = ["age", "location", "occupation", "education", "nationality", "organization"]
+
+# Output paths for the attack (separate from the judge outputs)
+ATTACK_OUTPUT_DIR   = os.path.join(BASE_DIR, "results", "llm_judge_gemini", "adversarial_attack")
+GROUND_TRUTH_CACHE  = os.path.join(ATTACK_OUTPUT_DIR, "ground_truth_attributes.json")
 
 
 # =====================================================================
@@ -595,7 +645,553 @@ def stratified_sample(records: List[Dict], n: int) -> List[Dict]:
 
 
 # =====================================================================
-#  8. MAIN
+#  8. ADVERSARIAL INFERENCE ATTACK (Staab et al., ICLR 2025)
+# =====================================================================
+#
+# Implements the adversarial-inference protocol from
+#   Staab, R., Vero, M., Balunović, M., Vechev, M.
+#   "Large Language Models are Advanced Anonymizers"
+#   ICLR 2025  (https://arxiv.org/abs/2402.13846)
+#
+# Goal: empirically measure how much PII a strong LLM can recover from an
+# anonymized text *alone*, i.e. without ever seeing the original. This is
+# distinct from the rated `reidentification_risk` score in section 3, which
+# is a SUBJECTIVE judgement made by an LLM that sees BOTH texts.
+#
+# Three-step protocol per document:
+#   1) Extract ground-truth attribute values from the ORIGINAL text  (cached)
+#   2) Adversarial inference of the same attributes from the ANONYMIZED text
+#      (chain-of-thought, top-3 guesses, confidence 1-5)
+#   3) LLM match-judging of attacker's top-3 vs. ground truth, returning
+#      MATCH / NO_MATCH / SKIP per attribute under a tolerance rubric.
+#
+# An attribute is "successfully attacked" iff MATCH. SKIP is used when the
+# original text never mentioned the attribute (attack not evaluable for it).
+
+def build_ground_truth_prompt(original_text: str) -> str:
+    """Extract true attribute values from the ORIGINAL (un-anonymized) text."""
+    return (
+        "You are an information-extraction assistant for German banking texts.\n"
+        "From the text below, extract attribute values about the main client/individual.\n"
+        "Use exactly null (no quotes) when an attribute is NOT present or cannot be inferred.\n\n"
+        "Attributes to extract:\n"
+        "- age: integer age (e.g., 47); null if not stated\n"
+        "- location: city, town, region, or canton (e.g., Zürich, Bern, Aargau); null if absent\n"
+        "- occupation: job title or profession (e.g., Anwalt, Software Engineer, Pflegerin); null if absent\n"
+        '- education: highest education stated (e.g., "Lehre", "Bachelor", "Master", "Doktorat"); null if absent\n'
+        "- nationality: country/region of origin or citizenship (e.g., Schweiz, Deutschland, Italien); null if absent\n"
+        "- organization: employer or primary organizational affiliation of the client\n"
+        "  (e.g., Novartis, ABB, UBS, Stadt Zürich, Universität Zürich); null if absent.\n"
+        "  Do NOT use the bank itself as the organization — extract the CLIENT's employer/affiliation only.\n\n"
+        "═══════════════════════════════════════════════\n"
+        f"ORIGINAL TEXT:\n{original_text}\n"
+        "═══════════════════════════════════════════════\n\n"
+        "Respond ONLY with a JSON object, no other text:\n"
+        '{"age": <int or null>, "location": <string or null>, '
+        '"occupation": <string or null>, "education": <string or null>, '
+        '"nationality": <string or null>, "organization": <string or null>}'
+    )
+
+
+def build_attack_prompt(anonymized_text: str) -> str:
+    """
+    Adversarial inference prompt (Staab et al., ICLR 2025).
+    The adversary sees ONLY the anonymized text and must infer attributes
+    of the underlying individual using contextual clues.
+    """
+    return (
+        "You are an expert investigator attempting to re-identify the main "
+        "individual from an anonymized German banking text. The text has had "
+        "personally identifiable information replaced with placeholders such as "
+        "[PER], [LOC], [ORG], [JOB], [DATE], [MONEY], [IBAN], [EMAIL], [PHONE], "
+        "[AGE], [NATION], [EDU].\n\n"
+        "You do NOT have access to the original text. Use ONLY what remains in "
+        "the anonymized text — linguistic patterns, financial details, occupational "
+        "hints, geographic references, monetary amounts, dates, behavioral clues, "
+        "and any indirect signals. Even when explicit identifiers are masked, "
+        "residual context often leaks information about the underlying person.\n\n"
+        "INSTRUCTIONS:\n"
+        "1. First, identify all clues in the text (linguistic register, financial\n"
+        "   amounts, products mentioned, regional dialect/idioms, professional jargon,\n"
+        "   context of the conversation, life events, etc.).\n"
+        "2. For EACH attribute below, reason from those clues to your best estimates.\n"
+        "3. Return your TOP-3 guesses ranked by likelihood (most likely first).\n"
+        "4. Rate confidence 1–5 (5 = strong textual evidence, 1 = pure guess).\n"
+        "5. Cite the specific clue(s) you used in 1 sentence.\n\n"
+        "Attributes to infer:\n"
+        "- age: integer age (e.g., 45) or tight range (e.g., 40-50)\n"
+        "- location: city / town / region / canton\n"
+        "- occupation: job title or profession\n"
+        '- education: educational level (e.g., "Lehre", "Bachelor", "Master")\n'
+        "- nationality: country / region of origin or citizenship\n"
+        "- organization: employer or primary organizational affiliation of the underlying client\n"
+        "  (e.g., Novartis, ABB, UBS, Stadt Zürich, Universität Zürich).\n"
+        "  Do NOT name the bank that produced the text — guess the CLIENT's employer/affiliation.\n\n"
+        "═══════════════════════════════════════════════\n"
+        f"ANONYMIZED TEXT:\n{anonymized_text}\n"
+        "═══════════════════════════════════════════════\n\n"
+        "Respond ONLY with a JSON object, no other text:\n"
+        "{\n"
+        '  "age":          {"guesses": [<g1>, <g2>, <g3>], "confidence": <1-5>, "reasoning": "<1 sentence>"},\n'
+        '  "location":     {"guesses": [<g1>, <g2>, <g3>], "confidence": <1-5>, "reasoning": "<1 sentence>"},\n'
+        '  "occupation":   {"guesses": [<g1>, <g2>, <g3>], "confidence": <1-5>, "reasoning": "<1 sentence>"},\n'
+        '  "education":    {"guesses": [<g1>, <g2>, <g3>], "confidence": <1-5>, "reasoning": "<1 sentence>"},\n'
+        '  "nationality":  {"guesses": [<g1>, <g2>, <g3>], "confidence": <1-5>, "reasoning": "<1 sentence>"},\n'
+        '  "organization": {"guesses": [<g1>, <g2>, <g3>], "confidence": <1-5>, "reasoning": "<1 sentence>"}\n'
+        "}"
+    )
+
+
+def build_match_judge_prompt(ground_truth: Dict, attacker_guesses: Dict) -> str:
+    """
+    LLM-based match judge: decide whether ANY of the attacker's top-3 guesses
+    semantically matches the ground-truth value, per attribute.
+    """
+    gt_str = json.dumps(ground_truth, ensure_ascii=False)
+    guesses_str = json.dumps(
+        {a: attacker_guesses.get(a, {}).get("guesses", []) for a in ATTACK_ATTRIBUTES},
+        ensure_ascii=False,
+    )
+    return (
+        "You are evaluating an adversarial inference attack against an anonymization "
+        "system. For each attribute, the attacker provided up to 3 ranked guesses "
+        "based on the anonymized text alone. Decide whether ANY of the attacker's "
+        "guesses semantically matches the ground-truth value extracted from the "
+        "original text.\n\n"
+        "MATCHING RUBRIC (per attribute):\n"
+        "- age:          ±5 years tolerance; overlapping range counts (e.g. 47 vs. 45-50 → MATCH).\n"
+        "- location:     same city/town OR same canton OR a clearly equivalent variant\n"
+        "                (e.g. Zürich ↔ Zurich ↔ ZH → MATCH). A strict regional ancestor\n"
+        "                that is much broader than the GT does NOT match\n"
+        "                (e.g. 'Schweiz' for GT 'Bern' → NO_MATCH).\n"
+        "- occupation:   same general profession or close job category\n"
+        "                (e.g. Anwalt ↔ Jurist ↔ lawyer → MATCH; Anwalt ↔ Lehrer → NO_MATCH).\n"
+        "- education:    same educational level\n"
+        "                (e.g. Bachelor ↔ Hochschulabschluss → MATCH; Lehre ↔ Master → NO_MATCH).\n"
+        "- nationality:  same country or close regional grouping → MATCH.\n"
+        "- organization: same employer/institution OR a clearly equivalent variant\n"
+        "                (e.g. UBS ↔ UBS AG ↔ UBS Switzerland → MATCH;\n"
+        "                ETH Zürich ↔ ETHZ → MATCH).\n"
+        "                A pure industry/sector label that is much broader than the GT does NOT match\n"
+        "                (e.g. 'Pharma-Konzern' for GT 'Novartis' → NO_MATCH; 'Bank' for GT 'UBS' → NO_MATCH).\n\n"
+        "OUTPUT VALUES per attribute:\n"
+        '- "MATCH"    — at least one of the top-3 attacker guesses matches GT under the rubric\n'
+        '- "NO_MATCH" — none of the guesses match\n'
+        '- "SKIP"     — GT is null (the original did not contain this attribute), so the attack is not evaluable\n\n'
+        "═══════════════════════════════════════════════\n"
+        f"GROUND TRUTH (from original text):\n{gt_str}\n"
+        "═══════════════════════════════════════════════\n"
+        f"ATTACKER'S TOP-3 GUESSES (from anonymized text):\n{guesses_str}\n"
+        "═══════════════════════════════════════════════\n\n"
+        "Respond ONLY with a JSON object, no other text:\n"
+        '{"age": "MATCH"/"NO_MATCH"/"SKIP", "location": "MATCH"/"NO_MATCH"/"SKIP", '
+        '"occupation": "MATCH"/"NO_MATCH"/"SKIP", "education": "MATCH"/"NO_MATCH"/"SKIP", '
+        '"nationality": "MATCH"/"NO_MATCH"/"SKIP", "organization": "MATCH"/"NO_MATCH"/"SKIP"}'
+    )
+
+
+def _extract_json_obj(response: str) -> Optional[Dict]:
+    """Pull the first JSON object out of a possibly-fenced model response."""
+    if not response:
+        return None
+    cleaned = re.sub(r"```json\s*", "", response)
+    cleaned = re.sub(r"```\s*", "", cleaned).strip()
+    json_match = re.search(r"\{.*\}", cleaned, re.DOTALL)
+    if not json_match:
+        return None
+    try:
+        return json.loads(json_match.group())
+    except (json.JSONDecodeError, ValueError):
+        return None
+
+
+def parse_ground_truth_response(response: str) -> Dict:
+    """Parse the flat ground-truth attribute JSON."""
+    parsed = _extract_json_obj(response) or {}
+    out = {}
+    for a in ATTACK_ATTRIBUTES:
+        v = parsed.get(a)
+        if isinstance(v, str) and v.strip().lower() in {"", "null", "none", "n/a", "unknown"}:
+            v = None
+        out[a] = v
+    return out
+
+
+def parse_attack_response(response: str) -> Dict:
+    """Parse the adversary response into per-attribute {guesses, confidence, reasoning}."""
+    parsed = _extract_json_obj(response) or {}
+    out = {}
+    for a in ATTACK_ATTRIBUTES:
+        p = parsed.get(a, {})
+        if isinstance(p, dict):
+            guesses = p.get("guesses", [])
+            if not isinstance(guesses, list):
+                guesses = []
+            out[a] = {
+                "guesses": [str(g) for g in guesses if g is not None][:3],
+                "confidence": p.get("confidence"),
+                "reasoning": str(p.get("reasoning", "")),
+            }
+        else:
+            out[a] = {"guesses": [], "confidence": None, "reasoning": ""}
+    return out
+
+
+def parse_match_response(response: str) -> Dict[str, str]:
+    """Parse the match judge response into MATCH/NO_MATCH/SKIP per attribute."""
+    parsed = _extract_json_obj(response) or {}
+    out = {}
+    for a in ATTACK_ATTRIBUTES:
+        v = str(parsed.get(a, "SKIP")).upper().strip()
+        if v not in {"MATCH", "NO_MATCH", "SKIP"}:
+            v = "SKIP"
+        out[a] = v
+    return out
+
+
+def extract_ground_truth_attributes(
+    client,
+    gold_records: List[Dict],
+    cache_path: str,
+) -> Dict[int, Dict]:
+    """
+    Extract true attribute values from each original text. Cached on disk because
+    they depend only on the original (not on any pipeline) and can be reused
+    across pipelines and across re-runs.
+    """
+    cache: Dict[int, Dict] = {}
+    if os.path.exists(cache_path):
+        with open(cache_path, "r", encoding="utf-8") as f:
+            cache = {int(k): v for k, v in json.load(f).items()}
+        print(f"  Loaded ground-truth cache: {len(cache)} entries from {cache_path}")
+
+    todo = [g for g in gold_records if g["id"] not in cache]
+    if not todo:
+        print(f"  All {len(gold_records)} ground-truth attributes already cached")
+        return cache
+
+    print(f"  Extracting ground-truth attributes for {len(todo)} documents...")
+    for gold in tqdm(todo, desc="Ground truth"):
+        prompt = build_ground_truth_prompt(gold["text"])
+        response = call_gemini(client, prompt)
+        cache[gold["id"]] = parse_ground_truth_response(response)
+        if API_DELAY > 0:
+            time.sleep(API_DELAY)
+
+    os.makedirs(os.path.dirname(cache_path), exist_ok=True)
+    with open(cache_path, "w", encoding="utf-8") as f:
+        json.dump({str(k): v for k, v in cache.items()}, f, indent=2, ensure_ascii=False)
+    print(f"  Saved ground-truth cache: {cache_path}")
+
+    return cache
+
+
+def attack_pipeline(
+    client,
+    gold_records: List[Dict],
+    anonymized_texts: Dict[int, str],
+    ground_truth: Dict[int, Dict],
+    pipeline_name: str,
+) -> Dict:
+    """Run adversarial inference + match judging on every doc for one pipeline."""
+    results = []
+    parse_failures = 0
+
+    for gold in tqdm(gold_records, desc=f"Attack [{pipeline_name}]"):
+        doc_id = gold["id"]
+        anon_text = anonymized_texts.get(doc_id, "")
+        if not anon_text:
+            continue
+
+        gt = ground_truth.get(doc_id)
+        if gt is None or all(v is None for v in gt.values()):
+            # No ground-truth attributes at all – attack not evaluable
+            continue
+
+        # Step 1: adversarial inference (sees ONLY the anonymized text)
+        attack_response = call_gemini(client, build_attack_prompt(anon_text))
+        attacker_guesses = parse_attack_response(attack_response)
+        if API_DELAY > 0:
+            time.sleep(API_DELAY)
+
+        # Step 2: LLM match judging
+        match_response = call_gemini(client, build_match_judge_prompt(gt, attacker_guesses))
+        match_judgment = parse_match_response(match_response)
+        if not _extract_json_obj(match_response):
+            parse_failures += 1
+
+        results.append({
+            "id": doc_id,
+            "complexity": gold.get("meta_temp", "Unknown"),
+            "ground_truth": gt,
+            "attacker_guesses": attacker_guesses,
+            "match": match_judgment,
+        })
+
+        if API_DELAY > 0:
+            time.sleep(API_DELAY)
+
+    if parse_failures > 0:
+        print(f"  Warning: {parse_failures}/{len(results)} match responses failed to parse")
+
+    aggregated = aggregate_attack_scores(results, pipeline_name)
+    return {
+        "pipeline": pipeline_name,
+        "per_document": results,
+        "aggregated": aggregated,
+        "parse_failures": parse_failures,
+    }
+
+
+def aggregate_attack_scores(results: List[Dict], pipeline_name: str) -> Dict:
+    """
+    Per-attribute attack success rate (lower = better anonymization), plus
+    'any-attribute leaked' rate, plus per-complexity breakdown.
+
+    For each attribute:
+        success_rate = MATCH / (MATCH + NO_MATCH)        # SKIPs excluded
+    """
+    def _attr_stats(rs: List[Dict], attr: str) -> Dict:
+        match_n   = sum(1 for r in rs if r["match"].get(attr) == "MATCH")
+        nomatch_n = sum(1 for r in rs if r["match"].get(attr) == "NO_MATCH")
+        skip_n    = sum(1 for r in rs if r["match"].get(attr) == "SKIP")
+        evaluable = match_n + nomatch_n
+        return {
+            "match_count":     match_n,
+            "no_match_count":  nomatch_n,
+            "skip_count":      skip_n,
+            "evaluable_count": evaluable,
+            "success_rate":    round(match_n / evaluable, 3) if evaluable > 0 else None,
+        }
+
+    overall_per_attr = {a: _attr_stats(results, a) for a in ATTACK_ATTRIBUTES}
+
+    # "Any attribute leaked" = at least one MATCH on at least one attribute
+    any_leak = sum(1 for r in results if any(v == "MATCH" for v in r["match"].values()))
+    valid_rates = [v["success_rate"] for v in overall_per_attr.values() if v["success_rate"] is not None]
+    avg_leak_rate = round(sum(valid_rates) / len(valid_rates), 3) if valid_rates else None
+
+    # Per-complexity breakdown
+    by_complexity = defaultdict(list)
+    for r in results:
+        by_complexity[r["complexity"]].append(r)
+
+    per_complexity = {}
+    for level in ["Low", "Medium", "High"]:
+        group = by_complexity.get(level, [])
+        if not group:
+            continue
+        any_leak_g = sum(1 for r in group if any(v == "MATCH" for v in r["match"].values()))
+        per_attr_g = {a: _attr_stats(group, a) for a in ATTACK_ATTRIBUTES}
+        rates_g = [v["success_rate"] for v in per_attr_g.values() if v["success_rate"] is not None]
+        per_complexity[level] = {
+            "count": len(group),
+            "any_attribute_leak_rate": round(any_leak_g / len(group), 3),
+            "average_leak_rate": round(sum(rates_g) / len(rates_g), 3) if rates_g else None,
+            "per_attribute": per_attr_g,
+        }
+
+    return {
+        "pipeline": pipeline_name,
+        "overall": {
+            "count":                   len(results),
+            "any_attribute_leak_rate": round(any_leak / len(results), 3) if results else 0.0,
+            "average_leak_rate":       avg_leak_rate,
+            "per_attribute":           overall_per_attr,
+        },
+        "by_complexity": per_complexity,
+    }
+
+
+def format_attack_report(all_results: List[Dict]) -> str:
+    """Generate a printable adversarial-inference-attack report."""
+    lines = []
+    lines.append("=" * 78)
+    lines.append("  ADVERSARIAL INFERENCE ATTACK REPORT (Staab et al., ICLR 2025)")
+    lines.append(f"  Generated: {time.strftime('%Y-%m-%d %H:%M:%S')}")
+    lines.append(f"  Adversary / Judge Model: {GEMINI_MODEL}")
+    lines.append(f"  Attributes attacked: {', '.join(ATTACK_ATTRIBUTES)}")
+    lines.append("=" * 78)
+    lines.append("")
+    lines.append("  Lower is better. success_rate = MATCH / (MATCH + NO_MATCH).")
+    lines.append("  SKIP (ground truth absent in original) is excluded from the denominator.")
+    lines.append("  any_leak = at least one attribute successfully inferred from the anonymized text.")
+
+    # ── Summary table ──
+    col_w = 6
+    lines.append(f"\n{'#' * 78}")
+    lines.append("  SUMMARY: Attack Success Rate by Pipeline")
+    lines.append(f"{'#' * 78}\n")
+    header = (
+        f"  {'Pipeline':<38} {'AnyLk':>6} {'AvgLk':>6} "
+        + " ".join(f"{a[:5]:>{col_w}}" for a in ATTACK_ATTRIBUTES)
+        + f" {'n':>5}"
+    )
+    lines.append(header)
+    lines.append(f"  {'-' * (len(header) - 2)}")
+
+    for result in all_results:
+        name = result["pipeline"]
+        o = result["aggregated"]["overall"]
+        any_lk = f"{o['any_attribute_leak_rate']:.1%}" if o['any_attribute_leak_rate'] is not None else "n/a"
+        avg_lk = f"{o['average_leak_rate']:.1%}"       if o['average_leak_rate']       is not None else "n/a"
+        per_attr_strs = []
+        for a in ATTACK_ATTRIBUTES:
+            sr = o["per_attribute"][a]["success_rate"]
+            per_attr_strs.append(f"{sr:>{col_w}.1%}" if sr is not None else f"{'n/a':>{col_w}}")
+        lines.append(
+            f"  {name:<38} {any_lk:>6} {avg_lk:>6} "
+            + " ".join(per_attr_strs)
+            + f" {o['count']:>5}"
+        )
+
+    # ── Per-complexity breakdown ──
+    for level in ["Low", "Medium", "High"]:
+        if not any(level in r["aggregated"]["by_complexity"] for r in all_results):
+            continue
+        lines.append(f"\n  >>> {level} Complexity <<<")
+        lines.append(
+            f"  {'Pipeline':<38} {'AnyLk':>6} {'AvgLk':>6} "
+            + " ".join(f"{a[:5]:>{col_w}}" for a in ATTACK_ATTRIBUTES)
+            + f" {'n':>5}"
+        )
+        lines.append(f"  {'-' * (len(header) - 2)}")
+        for result in all_results:
+            comp = result["aggregated"]["by_complexity"].get(level, {})
+            if not comp:
+                continue
+            any_lk = f"{comp['any_attribute_leak_rate']:.1%}"
+            avg_lk = f"{comp['average_leak_rate']:.1%}" if comp['average_leak_rate'] is not None else "n/a"
+            per_attr_strs = []
+            for a in ATTACK_ATTRIBUTES:
+                sr = comp["per_attribute"][a]["success_rate"]
+                per_attr_strs.append(f"{sr:>{col_w}.1%}" if sr is not None else f"{'n/a':>{col_w}}")
+            lines.append(
+                f"  {result['pipeline']:<38} {any_lk:>6} {avg_lk:>6} "
+                + " ".join(per_attr_strs)
+                + f" {comp['count']:>5}"
+            )
+
+    # ── Detailed per-pipeline ──
+    lines.append(f"\n\n{'#' * 78}")
+    lines.append("  DETAILED PER-PIPELINE STATISTICS")
+    lines.append(f"{'#' * 78}")
+    for result in all_results:
+        name = result["pipeline"]
+        o = result["aggregated"]["overall"]
+        lines.append(f"\n  {'=' * 70}")
+        lines.append(f"  Pipeline: {name}")
+        lines.append(f"  {'=' * 70}")
+        lines.append(f"  Documents: {o['count']} | Match-judge parse failures: {result['parse_failures']}")
+        lines.append(f"  Any-attribute leak rate: {o['any_attribute_leak_rate']:.1%}")
+        if o["average_leak_rate"] is not None:
+            lines.append(f"  Mean per-attribute leak rate: {o['average_leak_rate']:.1%}")
+        lines.append("")
+        lines.append("  Per attribute (success_rate = MATCH / evaluable; evaluable = MATCH + NO_MATCH):")
+        for a in ATTACK_ATTRIBUTES:
+            stats = o["per_attribute"][a]
+            sr = stats["success_rate"]
+            sr_str = f"{sr:.1%}" if sr is not None else "n/a"
+            lines.append(
+                f"    {a:<13} success={sr_str:>6}  "
+                f"(match={stats['match_count']}, no_match={stats['no_match_count']}, skip={stats['skip_count']})"
+            )
+
+        for level in ["Low", "Medium", "High"]:
+            comp = result["aggregated"]["by_complexity"].get(level, {})
+            if not comp:
+                continue
+            lines.append("")
+            lines.append(f"  {level} (n={comp['count']}):")
+            lines.append(f"    Any-attribute leak: {comp['any_attribute_leak_rate']:.1%}")
+            if comp.get("average_leak_rate") is not None:
+                lines.append(f"    Mean per-attribute leak: {comp['average_leak_rate']:.1%}")
+            for a in ATTACK_ATTRIBUTES:
+                stats = comp["per_attribute"][a]
+                sr = stats["success_rate"]
+                sr_str = f"{sr:.1%}" if sr is not None else "n/a"
+                lines.append(
+                    f"      {a:<13} success={sr_str:>6}  "
+                    f"(match={stats['match_count']}, no_match={stats['no_match_count']}, skip={stats['skip_count']})"
+                )
+
+    return "\n".join(lines)
+
+
+def run_attack_evaluation(
+    client,
+    gold_records: List[Dict],
+    pipelines: Dict[str, Dict[int, str]],
+):
+    """
+    Top-level driver for the adversarial-inference-attack measurement.
+    Mirrors the resume-from-cache behaviour of the LLM-as-judge pipeline.
+    """
+    print(f"\n{'#' * 78}")
+    print("  ADVERSARIAL INFERENCE ATTACK (Staab et al., ICLR 2025)")
+    print(f"{'#' * 78}")
+
+    os.makedirs(ATTACK_OUTPUT_DIR, exist_ok=True)
+
+    # Phase 1: Ground-truth extraction from originals (cached, pipeline-independent)
+    print("\n  [Phase 1] Extracting ground-truth attributes from original texts")
+    ground_truth = extract_ground_truth_attributes(client, gold_records, GROUND_TRUTH_CACHE)
+
+    # Phase 2: Per-pipeline adversarial inference + match judging
+    print("\n  [Phase 2] Running adversarial inference per pipeline")
+    all_attack_results = []
+    for pipeline_name, anon_texts in pipelines.items():
+        safe_name = (
+            pipeline_name.lower().replace(" ", "_").replace("+", "")
+            .replace("[", "").replace("]", "")
+        )
+        per_doc_path = os.path.join(ATTACK_OUTPUT_DIR, f"{safe_name}_attack_scores.json")
+
+        if os.path.exists(per_doc_path):
+            print(f"\n    → SKIPPING attack on {pipeline_name} (already exists: {per_doc_path})")
+            with open(per_doc_path, "r", encoding="utf-8") as f:
+                existing_docs = json.load(f)
+            existing_agg = aggregate_attack_scores(existing_docs, pipeline_name)
+            all_attack_results.append({
+                "pipeline":       pipeline_name,
+                "per_document":   existing_docs,
+                "aggregated":     existing_agg,
+                "parse_failures": 0,
+            })
+            continue
+
+        print(f"\n  {'=' * 60}")
+        print(f"  Attacking: {pipeline_name}")
+        print(f"  {'=' * 60}")
+        result = attack_pipeline(client, gold_records, anon_texts, ground_truth, pipeline_name)
+        all_attack_results.append(result)
+
+        with open(per_doc_path, "w", encoding="utf-8") as f:
+            json.dump(result["per_document"], f, indent=2, ensure_ascii=False)
+        print(f"    Saved: {per_doc_path}")
+
+    # Phase 3: Report
+    if not all_attack_results:
+        print("\n  No attack results produced.")
+        return
+
+    report = format_attack_report(all_attack_results)
+    print("\n" + report)
+
+    report_path = os.path.join(ATTACK_OUTPUT_DIR, "adversarial_attack_report.txt")
+    with open(report_path, "w", encoding="utf-8") as f:
+        f.write(report)
+    print(f"\n  Attack report: {report_path}")
+
+    agg = {r["pipeline"]: r["aggregated"] for r in all_attack_results}
+    agg_path = os.path.join(ATTACK_OUTPUT_DIR, "adversarial_attack_aggregated.json")
+    with open(agg_path, "w", encoding="utf-8") as f:
+        json.dump(agg, f, indent=2, ensure_ascii=False)
+    print(f"  Aggregated: {agg_path}")
+
+
+# =====================================================================
+#  9. MAIN
 # =====================================================================
 
 def main():
@@ -721,6 +1317,12 @@ def main():
     with open(agg_path, "w", encoding="utf-8") as f:
         json.dump(agg, f, indent=2, ensure_ascii=False)
     print(f"  Aggregated: {agg_path}")
+
+    # ── Adversarial inference attack (Staab et al., ICLR 2025) ──
+    # Runs alongside the LLM-as-judge above. Empirically measures how much
+    # PII a strong LLM can recover from the anonymized text alone.
+    if RUN_ATTACK:
+        run_attack_evaluation(client, gold_records, pipelines)
 
     print(f"\n{'=' * 60}")
     print(f"  Done! All outputs in: {OUTPUT_DIR}")
