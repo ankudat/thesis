@@ -18,9 +18,9 @@ The script loops through all configured model/strategy/verify combinations
 automatically. Each model is loaded once and reused for all its runs,
 then freed from GPU memory before loading the next model.
 
-How to use:
-  1. Edit RUN_MATRIX in USER SETTINGS to enable/disable runs
-  2. Press Run in VS Code — everything executes sequentially
+Usage:
+  1. Edit RUN_MATRIX in USER SETTINGS to enable/disable runs.
+  2. Run the script; all enabled runs execute sequentially.
 
 Requirements:
     pip install transformers torch accelerate tqdm bitsandbytes
@@ -38,7 +38,7 @@ Requirements:
 #  The script groups runs by model — loads a model once, runs all its
 #  configurations, frees GPU memory, then loads the next model.
 #
-#  Comment out any rows you want to skip.
+#  Comment out rows to skip them.
 # =====================================================================
 
 RUN_MATRIX = [

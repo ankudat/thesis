@@ -11,9 +11,9 @@ Implements TWO classical baselines, each combined with regex for structured enti
 Both baselines are limited to Tier 1 + Tier 2 entities.
 Neither can detect Tier 3 quasi-identifiers (JOB, AGE, NATION, EDU).
 
-How to use:
-  1. Adjust USER SETTINGS below
-  2. Press Run in VS Code
+Usage:
+  1. Configure USER SETTINGS below.
+  2. Run the script.
 
 Requirements:
     pip install transformers torch spacy tqdm

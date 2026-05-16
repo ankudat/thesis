@@ -6,7 +6,7 @@ Microsoft Presidio Analyzer baseline for PII detection.
 Presidio combines NER models with regex-based pattern recognizers and context-aware
 confidence boosting. This makes it an interesting additional baseline because:
   - It's a widely-used, production-grade PII detection framework
-  - It combines NER + regex in a single unified pipeline (vs. your separate approaches)
+  - It combines NER + regex in a single unified pipeline
   - It has built-in recognizers for EMAIL, PHONE, IBAN, etc.
 
 For German, Presidio uses spaCy's German model for NER (PER, LOC, ORG) and

@@ -11,9 +11,9 @@ This script:
   5. Evaluates on the test set using the shared evaluation_utils.py
   6. Exports predictions in the same format as classical_baseline.py
 
-How to use:
-  1. Adjust USER SETTINGS below
-  2. Press Run in VS Code
+Usage:
+  1. Configure USER SETTINGS below.
+  2. Run the script.
 
 Requirements:
     pip install transformers torch datasets seqeval scikit-learn tqdm

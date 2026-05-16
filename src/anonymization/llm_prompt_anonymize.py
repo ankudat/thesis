@@ -21,15 +21,14 @@ The script loops through all configured model/strategy combinations
 automatically. Each model is loaded once and reused, then freed from
 GPU memory before loading the next model.
 
-How to use:
-  1. Edit RUN_MATRIX in USER SETTINGS to enable/disable runs
-  2. Press Run in VS Code — everything executes sequentially
-  3. Then run semantic_preservation.py and llm_judge_gemini.py on the output
+Usage:
+  1. Edit RUN_MATRIX in USER SETTINGS to enable/disable runs.
+  2. Run the script; all enabled runs execute sequentially.
+  3. Then run semantic_preservation.py and llm_judge_gemini.py on the output.
 
 Requirements:
     pip install transformers torch accelerate tqdm bitsandbytes
 
-Author: André Kuhn – Master Thesis (MScIDS, HSLU)
 """
 
 # =====================================================================
@@ -42,7 +41,7 @@ Author: André Kuhn – Master Thesis (MScIDS, HSLU)
 #  The script groups runs by model — loads a model once, runs all its
 #  configurations, frees GPU memory, then loads the next model.
 #
-#  Comment out any rows you want to skip.
+#  Comment out rows to skip them.
 # =====================================================================
 
 RUN_MATRIX = [
@@ -265,13 +264,13 @@ def check_pii_leakage(rewritten_text, gold_entities, case_sensitive=False):
         per_category[label]["total"] += 1
         search_text = pii_text if case_sensitive else pii_text.lower()
 
-        if len(pii_text) <= 5:
-            # Short PII strings (e.g., "Zug", "CEO", "CHF") need word boundary
-            # matching to avoid false positives from substring matches
-            # (e.g., "Zug" inside "Lesezugriff")
-            found = bool(re.search(r'\b' + re.escape(search_text) + r'\b', check_text))
-        else:
-            found = search_text in check_text
+        # Always use word boundary matching to avoid false positives
+        # from German compound words (e.g., "Fischer" in "Fischerei",
+        # "Inhaber" in "Alleininhaber", "Zug" in "Lesezugriff").
+        # Python 3's \b handles Unicode (ä, ö, ü, ß) correctly.
+        # For multi-word entities (e.g., "Elena Petrova"), \b matches
+        # at the start and end of the full phrase.
+        found = bool(re.search(r'\b' + re.escape(search_text) + r'\b', check_text))
 
         if found:
             idx = check_text.find(search_text)
