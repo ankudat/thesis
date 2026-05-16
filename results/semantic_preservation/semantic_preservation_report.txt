@@ -1,0 +1,1213 @@
+==============================================================================
+  SEMANTIC PRESERVATION EVALUATION REPORT
+  Generated: 2026-04-18 20:26:25
+  BERTScore model: bert-base-multilingual-cased
+==============================================================================
+
+##############################################################################
+  SUMMARY: Overall Semantic Preservation Scores
+##############################################################################
+
+  Pipeline                                BERTScore  BERTScore  Levenshtein  ROUGE-1   BLEU-4  PII Leak
+                                           (masked)     (full)     (masked)   (full)   (full)      rate
+  ---------------------------------------------------------------------------------------------------
+  spaCy + Regex                              0.9570     0.8482       0.0947   0.7830   0.5435    0.2097
+  BERT (pretrained) + Regex                  0.9670     0.8475       0.0666   0.7790   0.5368    0.1688
+  BERT Fine-Tuned                            0.9949     0.8261       0.0110   0.7533   0.5109    0.0134
+  Presidio                                   0.9701     0.8235       0.0675   0.7495   0.4975    0.0712
+  LLM Llama-3 [zero-shot]                    0.9439     0.8157       0.1305   0.7442   0.4752    0.1265
+  LLM Llama-3 [few-shot]                     0.9781     0.8220       0.0502   0.7488   0.4968    0.0628
+  LLM Llama-3 [few-shot +verify]             0.9822     0.8275       0.0397   0.7549   0.5096    0.0657
+  LLM Qwen2.5 [zero-shot]                    0.9300     0.8933       0.1445   0.8483   0.6908    0.3932
+  LLM Qwen2.5 [few-shot]                     0.9683     0.8592       0.0679   0.7992   0.5904    0.2065
+  LLM Qwen2.5 [few-shot +verify]             0.9686     0.8618       0.0679   0.8023   0.5965    0.2127
+  LLM SauerkrautLM [zero-shot]               0.9605     0.8320       0.0823   0.7642   0.5195    0.1301
+  LLM SauerkrautLM [few-shot]                0.9806     0.8292       0.0441   0.7567   0.5123    0.0736
+  LLM SauerkrautLM [few-shot +verify]        0.9830     0.8344       0.0385   0.7636   0.5248    0.0825
+  LLM Llama-3 [fine-tuned]                   0.9954     0.8282       0.0102   0.7552   0.5139    0.0159
+  LLM Llama-3 [prompt zero-shot]             0.8686     0.8383       0.3483   0.6112   0.3738    0.0763
+  LLM Llama-3 [prompt few-shot]              0.8639     0.8347       0.3490   0.5996   0.3379    0.0516
+  LLM Qwen2.5 [prompt zero-shot]             0.8860     0.8538       0.2957   0.6508   0.4126    0.1435
+  LLM Qwen2.5 [prompt few-shot]              0.8820     0.8541       0.3150   0.6434   0.3920    0.1920
+  LLM SauerkrautLM [prompt zero-shot]        0.8760     0.8570       0.3300   0.6479   0.4333    0.1531
+  LLM SauerkrautLM [prompt few-shot]         0.8661     0.8424       0.3498   0.6144   0.3682    0.0717
+  Datenwertschöpfung API                     0.8366     0.8251       0.3256   0.8545   0.6950    0.3759
+  ---------------------------------------------------------------------------------------------------
+  BERTScore: higher = better semantic preservation (max 1.0)
+  Levenshtein: lower = better (0.0 = identical masked texts)
+  PII Leak rate: lower = better privacy (0.0 = no PII survived anonymization)
+
+  >>> Complexity: LOW <<<
+  Pipeline                                BERTScore  BERTScore  Levenshtein  ROUGE-1   BLEU-4     n
+                                           (masked)     (full)     (masked)   (full)   (full)
+  -----------------------------------------------------------------------------------------------
+  spaCy + Regex                              0.9634     0.8477       0.0787   0.7891   0.5563   218
+  BERT (pretrained) + Regex                  0.9726     0.8458       0.0548   0.7848   0.5461   218
+  BERT Fine-Tuned                            0.9971     0.8261       0.0067   0.7633   0.5256   218
+  Presidio                                   0.9761     0.8244       0.0532   0.7617   0.5169   218
+  LLM Llama-3 [zero-shot]                    0.9335     0.8091       0.1478   0.7456   0.4732   218
+  LLM Llama-3 [few-shot]                     0.9774     0.8207       0.0502   0.7576   0.5122   218
+  LLM Llama-3 [few-shot +verify]             0.9818     0.8262       0.0385   0.7632   0.5245   218
+  LLM Qwen2.5 [zero-shot]                    0.9308     0.8906       0.1354   0.8483   0.6917   218
+  LLM Qwen2.5 [few-shot]                     0.9773     0.8495       0.0464   0.7934   0.5820   218
+  LLM Qwen2.5 [few-shot +verify]             0.9786     0.8518       0.0447   0.7960   0.5874   218
+  LLM SauerkrautLM [zero-shot]               0.9550     0.8323       0.0900   0.7752   0.5373   218
+  LLM SauerkrautLM [few-shot]                0.9823     0.8285       0.0385   0.7654   0.5277   218
+  LLM SauerkrautLM [few-shot +verify]        0.9845     0.8332       0.0327   0.7707   0.5375   218
+  LLM Llama-3 [fine-tuned]                   0.9972     0.8282       0.0065   0.7652   0.5289   218
+  LLM Llama-3 [prompt zero-shot]             0.8792     0.8422       0.3171   0.6384   0.4267   218
+  LLM Llama-3 [prompt few-shot]              0.8777     0.8423       0.3137   0.6255   0.3853   218
+  LLM Qwen2.5 [prompt zero-shot]             0.8891     0.8526       0.2846   0.6623   0.4356   218
+  LLM Qwen2.5 [prompt few-shot]              0.8879     0.8550       0.2981   0.6536   0.4162   218
+  LLM SauerkrautLM [prompt zero-shot]        0.8867     0.8596       0.2979   0.6679   0.4819   218
+  LLM SauerkrautLM [prompt few-shot]         0.8769     0.8460       0.3176   0.6312   0.4082   218
+  Datenwertschöpfung API                     0.8278     0.8128       0.3287   0.8536   0.6863   218
+
+  >>> Complexity: MEDIUM <<<
+  Pipeline                                BERTScore  BERTScore  Levenshtein  ROUGE-1   BLEU-4     n
+                                           (masked)     (full)     (masked)   (full)   (full)
+  -----------------------------------------------------------------------------------------------
+  spaCy + Regex                              0.9594     0.8501       0.0920   0.7832   0.5447   215
+  BERT (pretrained) + Regex                  0.9676     0.8484       0.0665   0.7770   0.5329   215
+  BERT Fine-Tuned                            0.9941     0.8271       0.0130   0.7521   0.5084   215
+  Presidio                                   0.9712     0.8231       0.0699   0.7449   0.4902   215
+  LLM Llama-3 [zero-shot]                    0.9483     0.8168       0.1238   0.7427   0.4737   215
+  LLM Llama-3 [few-shot]                     0.9803     0.8227       0.0474   0.7453   0.4900   215
+  LLM Llama-3 [few-shot +verify]             0.9841     0.8278       0.0376   0.7518   0.5021   215
+  LLM Qwen2.5 [zero-shot]                    0.9304     0.8966       0.1441   0.8504   0.6963   215
+  LLM Qwen2.5 [few-shot]                     0.9728     0.8562       0.0595   0.7901   0.5731   215
+  LLM Qwen2.5 [few-shot +verify]             0.9727     0.8583       0.0597   0.7930   0.5787   215
+  LLM SauerkrautLM [zero-shot]               0.9649     0.8327       0.0755   0.7605   0.5135   215
+  LLM SauerkrautLM [few-shot]                0.9818     0.8290       0.0435   0.7529   0.5049   215
+  LLM SauerkrautLM [few-shot +verify]        0.9837     0.8343       0.0398   0.7607   0.5186   215
+  LLM Llama-3 [fine-tuned]                   0.9952     0.8289       0.0106   0.7534   0.5100   215
+  LLM Llama-3 [prompt zero-shot]             0.8802     0.8468       0.3300   0.6303   0.4046   215
+  LLM Llama-3 [prompt few-shot]              0.8750     0.8439       0.3273   0.6201   0.3668   215
+  LLM Qwen2.5 [prompt zero-shot]             0.8941     0.8599       0.2791   0.6618   0.4390   215
+  LLM Qwen2.5 [prompt few-shot]              0.8920     0.8609       0.2976   0.6571   0.4146   215
+  LLM SauerkrautLM [prompt zero-shot]        0.8846     0.8636       0.3141   0.6647   0.4644   215
+  LLM SauerkrautLM [prompt few-shot]         0.8764     0.8512       0.3332   0.6372   0.3987   215
+  Datenwertschöpfung API                     0.8336     0.8248       0.3354   0.8515   0.6918   215
+
+  >>> Complexity: HIGH <<<
+  Pipeline                                BERTScore  BERTScore  Levenshtein  ROUGE-1   BLEU-4     n
+                                           (masked)     (full)     (masked)   (full)   (full)
+  -----------------------------------------------------------------------------------------------
+  spaCy + Regex                              0.9475     0.8466       0.1145   0.7764   0.5287   205
+  BERT (pretrained) + Regex                  0.9604     0.8483       0.0792   0.7750   0.5310   205
+  BERT Fine-Tuned                            0.9936     0.8252       0.0134   0.7440   0.4979   205
+  Presidio                                   0.9624     0.8231       0.0801   0.7414   0.4846   205
+  LLM Llama-3 [zero-shot]                    0.9505     0.8215       0.1192   0.7443   0.4788   205
+  LLM Llama-3 [few-shot]                     0.9767     0.8227       0.0531   0.7430   0.4877   205
+  LLM Llama-3 [few-shot +verify]             0.9807     0.8286       0.0430   0.7493   0.5016   205
+  LLM Qwen2.5 [zero-shot]                    0.9288     0.8927       0.1545   0.8461   0.6839   205
+  LLM Qwen2.5 [few-shot]                     0.9540     0.8727       0.0997   0.8149   0.6175   205
+  LLM Qwen2.5 [few-shot +verify]             0.9535     0.8760       0.1010   0.8188   0.6248   205
+  LLM SauerkrautLM [zero-shot]               0.9615     0.8308       0.0812   0.7564   0.5069   205
+  LLM SauerkrautLM [few-shot]                0.9774     0.8303       0.0507   0.7515   0.5038   205
+  LLM SauerkrautLM [few-shot +verify]        0.9806     0.8359       0.0433   0.7591   0.5176   205
+  LLM Llama-3 [fine-tuned]                   0.9938     0.8274       0.0136   0.7465   0.5019   205
+  LLM Llama-3 [prompt zero-shot]             0.8451     0.8252       0.4006   0.5622   0.2853   205
+  LLM Llama-3 [prompt few-shot]              0.8376     0.8170       0.4092   0.5504   0.2572   205
+  LLM Qwen2.5 [prompt zero-shot]             0.8740     0.8487       0.3249   0.6270   0.3604   205
+  LLM Qwen2.5 [prompt few-shot]              0.8653     0.8460       0.3511   0.6181   0.3425   205
+  LLM SauerkrautLM [prompt zero-shot]        0.8555     0.8472       0.3806   0.6090   0.3491   205
+  LLM SauerkrautLM [prompt few-shot]         0.8439     0.8293       0.4015   0.5726   0.2935   205
+  Datenwertschöpfung API                     0.8491     0.8384       0.3121   0.8586   0.7076   205
+
+
+##############################################################################
+  DETAILED PER-PIPELINE STATISTICS
+##############################################################################
+
+  ======================================================================
+  Pipeline: spaCy + Regex
+  ======================================================================
+  Documents evaluated: 638
+
+  BERTScore (masked texts — primary metric):
+    F1:        0.9570 ± 0.0236
+    Precision: 0.9535
+    Recall:    0.9606
+
+  BERTScore (full texts — supplementary):
+    F1:        0.8482 ± 0.0329
+    Precision: 0.8446
+    Recall:    0.8520
+
+  Levenshtein (masked texts):
+    Mean:      0.0947 ± 0.0600
+
+  ROUGE-1 (full texts — following Staab et al., ICLR 2025):
+    Mean:      0.7830 ± 0.0463
+
+  BLEU-4 (full texts — following Staab et al., ICLR 2025 / Dorémus et al., JMIR AI 2025):
+    Mean:      0.5435 ± 0.0874
+
+  PII Leakage Rate (privacy metric — lower = better):
+    Mean:      0.2097 ± 0.1087
+    Leaked:    1097 / 5137 PII instances
+
+  Complexity: Low (n=218)
+    BERTScore masked F1: 0.9634 ± 0.0172
+    BERTScore full F1:   0.8477 ± 0.0293
+    Levenshtein masked:  0.0787 ± 0.0446
+    ROUGE-1 full:        0.7891 ± 0.0379
+    BLEU-4 full:         0.5563 ± 0.0714
+    PII leakage rate:    0.1860 ± 0.0959
+
+  Complexity: Medium (n=215)
+    BERTScore masked F1: 0.9594 ± 0.0221
+    BERTScore full F1:   0.8501 ± 0.0321
+    Levenshtein masked:  0.0920 ± 0.0588
+    ROUGE-1 full:        0.7832 ± 0.0440
+    BLEU-4 full:         0.5447 ± 0.0820
+    PII leakage rate:    0.2038 ± 0.1075
+
+  Complexity: High (n=205)
+    BERTScore masked F1: 0.9475 ± 0.0278
+    BERTScore full F1:   0.8466 ± 0.0371
+    Levenshtein masked:  0.1145 ± 0.0693
+    ROUGE-1 full:        0.7764 ± 0.0551
+    BLEU-4 full:         0.5287 ± 0.1047
+    PII leakage rate:    0.2410 ± 0.1157
+
+  ======================================================================
+  Pipeline: BERT (pretrained) + Regex
+  ======================================================================
+  Documents evaluated: 638
+
+  BERTScore (masked texts — primary metric):
+    F1:        0.9670 ± 0.0201
+    Precision: 0.9621
+    Recall:    0.9721
+
+  BERTScore (full texts — supplementary):
+    F1:        0.8475 ± 0.0325
+    Precision: 0.8427
+    Recall:    0.8525
+
+  Levenshtein (masked texts):
+    Mean:      0.0666 ± 0.0454
+
+  ROUGE-1 (full texts — following Staab et al., ICLR 2025):
+    Mean:      0.7790 ± 0.0446
+
+  BLEU-4 (full texts — following Staab et al., ICLR 2025 / Dorémus et al., JMIR AI 2025):
+    Mean:      0.5368 ± 0.0849
+
+  PII Leakage Rate (privacy metric — lower = better):
+    Mean:      0.1688 ± 0.1025
+    Leaked:    874 / 5137 PII instances
+
+  Complexity: Low (n=218)
+    BERTScore masked F1: 0.9726 ± 0.0168
+    BERTScore full F1:   0.8458 ± 0.0294
+    Levenshtein masked:  0.0548 ± 0.0381
+    ROUGE-1 full:        0.7848 ± 0.0346
+    BLEU-4 full:         0.5461 ± 0.0682
+    PII leakage rate:    0.1444 ± 0.0819
+
+  Complexity: Medium (n=215)
+    BERTScore masked F1: 0.9676 ± 0.0179
+    BERTScore full F1:   0.8484 ± 0.0340
+    Levenshtein masked:  0.0665 ± 0.0444
+    ROUGE-1 full:        0.7770 ± 0.0458
+    BLEU-4 full:         0.5329 ± 0.0851
+    PII leakage rate:    0.1680 ± 0.1042
+
+  Complexity: High (n=205)
+    BERTScore masked F1: 0.9604 ± 0.0234
+    BERTScore full F1:   0.8483 ± 0.0342
+    Levenshtein masked:  0.0792 ± 0.0501
+    ROUGE-1 full:        0.7750 ± 0.0518
+    BLEU-4 full:         0.5310 ± 0.0990
+    PII leakage rate:    0.1956 ± 0.1136
+
+  ======================================================================
+  Pipeline: BERT Fine-Tuned
+  ======================================================================
+  Documents evaluated: 638
+
+  BERTScore (masked texts — primary metric):
+    F1:        0.9949 ± 0.0092
+    Precision: 0.9951
+    Recall:    0.9947
+
+  BERTScore (full texts — supplementary):
+    F1:        0.8261 ± 0.0312
+    Precision: 0.8189
+    Recall:    0.8337
+
+  Levenshtein (masked texts):
+    Mean:      0.0110 ± 0.0214
+
+  ROUGE-1 (full texts — following Staab et al., ICLR 2025):
+    Mean:      0.7533 ± 0.0443
+
+  BLEU-4 (full texts — following Staab et al., ICLR 2025 / Dorémus et al., JMIR AI 2025):
+    Mean:      0.5109 ± 0.0813
+
+  PII Leakage Rate (privacy metric — lower = better):
+    Mean:      0.0134 ± 0.0437
+    Leaked:    71 / 5137 PII instances
+
+  Complexity: Low (n=218)
+    BERTScore masked F1: 0.9971 ± 0.0064
+    BERTScore full F1:   0.8261 ± 0.0301
+    Levenshtein masked:  0.0067 ± 0.0156
+    ROUGE-1 full:        0.7633 ± 0.0353
+    BLEU-4 full:         0.5256 ± 0.0668
+    PII leakage rate:    0.0066 ± 0.0265
+
+  Complexity: Medium (n=215)
+    BERTScore masked F1: 0.9941 ± 0.0100
+    BERTScore full F1:   0.8271 ± 0.0306
+    Levenshtein masked:  0.0130 ± 0.0226
+    ROUGE-1 full:        0.7521 ± 0.0419
+    BLEU-4 full:         0.5084 ± 0.0778
+    PII leakage rate:    0.0149 ± 0.0460
+
+  Complexity: High (n=205)
+    BERTScore masked F1: 0.9936 ± 0.0104
+    BERTScore full F1:   0.8252 ± 0.0330
+    Levenshtein masked:  0.0134 ± 0.0246
+    ROUGE-1 full:        0.7440 ± 0.0525
+    BLEU-4 full:         0.4979 ± 0.0957
+    PII leakage rate:    0.0192 ± 0.0539
+
+  ======================================================================
+  Pipeline: Presidio
+  ======================================================================
+  Documents evaluated: 638
+
+  BERTScore (masked texts — primary metric):
+    F1:        0.9701 ± 0.0221
+    Precision: 0.9712
+    Recall:    0.9690
+
+  BERTScore (full texts — supplementary):
+    F1:        0.8235 ± 0.0355
+    Precision: 0.8160
+    Recall:    0.8315
+
+  Levenshtein (masked texts):
+    Mean:      0.0675 ± 0.0539
+
+  ROUGE-1 (full texts — following Staab et al., ICLR 2025):
+    Mean:      0.7495 ± 0.0503
+
+  BLEU-4 (full texts — following Staab et al., ICLR 2025 / Dorémus et al., JMIR AI 2025):
+    Mean:      0.4975 ± 0.0917
+
+  PII Leakage Rate (privacy metric — lower = better):
+    Mean:      0.0712 ± 0.0916
+    Leaked:    365 / 5137 PII instances
+
+  Complexity: Low (n=218)
+    BERTScore masked F1: 0.9761 ± 0.0176
+    BERTScore full F1:   0.8244 ± 0.0339
+    Levenshtein masked:  0.0532 ± 0.0398
+    ROUGE-1 full:        0.7617 ± 0.0395
+    BLEU-4 full:         0.5169 ± 0.0741
+    PII leakage rate:    0.0543 ± 0.0736
+
+  Complexity: Medium (n=215)
+    BERTScore masked F1: 0.9712 ± 0.0216
+    BERTScore full F1:   0.8231 ± 0.0328
+    Levenshtein masked:  0.0699 ± 0.0581
+    ROUGE-1 full:        0.7449 ± 0.0470
+    BLEU-4 full:         0.4902 ± 0.0825
+    PII leakage rate:    0.0584 ± 0.0883
+
+  Complexity: High (n=205)
+    BERTScore masked F1: 0.9624 ± 0.0248
+    BERTScore full F1:   0.8231 ± 0.0397
+    Levenshtein masked:  0.0801 ± 0.0588
+    ROUGE-1 full:        0.7414 ± 0.0607
+    BLEU-4 full:         0.4846 ± 0.1124
+    PII leakage rate:    0.1026 ± 0.1039
+
+  ======================================================================
+  Pipeline: LLM Llama-3 [zero-shot]
+  ======================================================================
+  Documents evaluated: 638
+
+  BERTScore (masked texts — primary metric):
+    F1:        0.9439 ± 0.0364
+    Precision: 0.9461
+    Recall:    0.9424
+
+  BERTScore (full texts — supplementary):
+    F1:        0.8157 ± 0.0531
+    Precision: 0.8059
+    Recall:    0.8260
+
+  Levenshtein (masked texts):
+    Mean:      0.1305 ± 0.0883
+
+  ROUGE-1 (full texts — following Staab et al., ICLR 2025):
+    Mean:      0.7442 ± 0.0705
+
+  BLEU-4 (full texts — following Staab et al., ICLR 2025 / Dorémus et al., JMIR AI 2025):
+    Mean:      0.4752 ± 0.1386
+
+  PII Leakage Rate (privacy metric — lower = better):
+    Mean:      0.1265 ± 0.1738
+    Leaked:    646 / 5137 PII instances
+
+  Complexity: Low (n=218)
+    BERTScore masked F1: 0.9335 ± 0.0369
+    BERTScore full F1:   0.8091 ± 0.0522
+    Levenshtein masked:  0.1478 ± 0.0869
+    ROUGE-1 full:        0.7456 ± 0.0630
+    BLEU-4 full:         0.4732 ± 0.1301
+    PII leakage rate:    0.1390 ± 0.1665
+
+  Complexity: Medium (n=215)
+    BERTScore masked F1: 0.9483 ± 0.0367
+    BERTScore full F1:   0.8168 ± 0.0550
+    Levenshtein masked:  0.1238 ± 0.0893
+    ROUGE-1 full:        0.7427 ± 0.0717
+    BLEU-4 full:         0.4737 ± 0.1396
+    PII leakage rate:    0.1083 ± 0.1730
+
+  Complexity: High (n=205)
+    BERTScore masked F1: 0.9505 ± 0.0332
+    BERTScore full F1:   0.8215 ± 0.0516
+    Levenshtein masked:  0.1192 ± 0.0864
+    ROUGE-1 full:        0.7443 ± 0.0769
+    BLEU-4 full:         0.4788 ± 0.1467
+    PII leakage rate:    0.1324 ± 0.1813
+
+  ======================================================================
+  Pipeline: LLM Llama-3 [few-shot]
+  ======================================================================
+  Documents evaluated: 638
+
+  BERTScore (masked texts — primary metric):
+    F1:        0.9781 ± 0.0196
+    Precision: 0.9802
+    Recall:    0.9762
+
+  BERTScore (full texts — supplementary):
+    F1:        0.8220 ± 0.0320
+    Precision: 0.8146
+    Recall:    0.8298
+
+  Levenshtein (masked texts):
+    Mean:      0.0502 ± 0.0484
+
+  ROUGE-1 (full texts — following Staab et al., ICLR 2025):
+    Mean:      0.7488 ± 0.0450
+
+  BLEU-4 (full texts — following Staab et al., ICLR 2025 / Dorémus et al., JMIR AI 2025):
+    Mean:      0.4968 ± 0.0818
+
+  PII Leakage Rate (privacy metric — lower = better):
+    Mean:      0.0628 ± 0.0810
+    Leaked:    341 / 5137 PII instances
+
+  Complexity: Low (n=218)
+    BERTScore masked F1: 0.9774 ± 0.0205
+    BERTScore full F1:   0.8207 ± 0.0296
+    Levenshtein masked:  0.0502 ± 0.0482
+    ROUGE-1 full:        0.7576 ± 0.0381
+    BLEU-4 full:         0.5122 ± 0.0733
+    PII leakage rate:    0.0751 ± 0.0740
+
+  Complexity: Medium (n=215)
+    BERTScore masked F1: 0.9803 ± 0.0173
+    BERTScore full F1:   0.8227 ± 0.0322
+    Levenshtein masked:  0.0474 ± 0.0442
+    ROUGE-1 full:        0.7453 ± 0.0445
+    BLEU-4 full:         0.4900 ± 0.0798
+    PII leakage rate:    0.0473 ± 0.0737
+
+  Complexity: High (n=205)
+    BERTScore masked F1: 0.9767 ± 0.0207
+    BERTScore full F1:   0.8227 ± 0.0344
+    Levenshtein masked:  0.0531 ± 0.0529
+    ROUGE-1 full:        0.7430 ± 0.0506
+    BLEU-4 full:         0.4877 ± 0.0899
+    PII leakage rate:    0.0661 ± 0.0924
+
+  ======================================================================
+  Pipeline: LLM Llama-3 [few-shot +verify]
+  ======================================================================
+  Documents evaluated: 638
+
+  BERTScore (masked texts — primary metric):
+    F1:        0.9822 ± 0.0159
+    Precision: 0.9827
+    Recall:    0.9818
+
+  BERTScore (full texts — supplementary):
+    F1:        0.8275 ± 0.0321
+    Precision: 0.8205
+    Recall:    0.8349
+
+  Levenshtein (masked texts):
+    Mean:      0.0397 ± 0.0395
+
+  ROUGE-1 (full texts — following Staab et al., ICLR 2025):
+    Mean:      0.7549 ± 0.0445
+
+  BLEU-4 (full texts — following Staab et al., ICLR 2025 / Dorémus et al., JMIR AI 2025):
+    Mean:      0.5096 ± 0.0810
+
+  PII Leakage Rate (privacy metric — lower = better):
+    Mean:      0.0657 ± 0.0827
+    Leaked:    356 / 5137 PII instances
+
+  Complexity: Low (n=218)
+    BERTScore masked F1: 0.9818 ± 0.0154
+    BERTScore full F1:   0.8262 ± 0.0287
+    Levenshtein masked:  0.0385 ± 0.0342
+    ROUGE-1 full:        0.7632 ± 0.0364
+    BLEU-4 full:         0.5245 ± 0.0691
+    PII leakage rate:    0.0760 ± 0.0742
+
+  Complexity: Medium (n=215)
+    BERTScore masked F1: 0.9841 ± 0.0148
+    BERTScore full F1:   0.8278 ± 0.0320
+    Levenshtein masked:  0.0376 ± 0.0394
+    ROUGE-1 full:        0.7518 ± 0.0435
+    BLEU-4 full:         0.5021 ± 0.0785
+    PII leakage rate:    0.0504 ± 0.0776
+
+  Complexity: High (n=205)
+    BERTScore masked F1: 0.9807 ± 0.0173
+    BERTScore full F1:   0.8286 ± 0.0355
+    Levenshtein masked:  0.0430 ± 0.0445
+    ROUGE-1 full:        0.7493 ± 0.0519
+    BLEU-4 full:         0.5016 ± 0.0926
+    PII leakage rate:    0.0707 ± 0.0939
+
+  ======================================================================
+  Pipeline: LLM Qwen2.5 [zero-shot]
+  ======================================================================
+  Documents evaluated: 638
+
+  BERTScore (masked texts — primary metric):
+    F1:        0.9300 ± 0.0443
+    Precision: 0.9128
+    Recall:    0.9486
+
+  BERTScore (full texts — supplementary):
+    F1:        0.8933 ± 0.0581
+    Precision: 0.8881
+    Recall:    0.8987
+
+  Levenshtein (masked texts):
+    Mean:      0.1445 ± 0.0895
+
+  ROUGE-1 (full texts — following Staab et al., ICLR 2025):
+    Mean:      0.8483 ± 0.0833
+
+  BLEU-4 (full texts — following Staab et al., ICLR 2025 / Dorémus et al., JMIR AI 2025):
+    Mean:      0.6908 ± 0.1608
+
+  PII Leakage Rate (privacy metric — lower = better):
+    Mean:      0.3932 ± 0.2691
+    Leaked:    2036 / 5137 PII instances
+
+  Complexity: Low (n=218)
+    BERTScore masked F1: 0.9308 ± 0.0424
+    BERTScore full F1:   0.8906 ± 0.0529
+    Levenshtein masked:  0.1354 ± 0.0793
+    ROUGE-1 full:        0.8483 ± 0.0782
+    BLEU-4 full:         0.6917 ± 0.1504
+    PII leakage rate:    0.3734 ± 0.2542
+
+  Complexity: Medium (n=215)
+    BERTScore masked F1: 0.9304 ± 0.0445
+    BERTScore full F1:   0.8966 ± 0.0613
+    Levenshtein masked:  0.1441 ± 0.0916
+    ROUGE-1 full:        0.8504 ± 0.0862
+    BLEU-4 full:         0.6963 ± 0.1665
+    PII leakage rate:    0.3956 ± 0.2752
+
+  Complexity: High (n=205)
+    BERTScore masked F1: 0.9288 ± 0.0461
+    BERTScore full F1:   0.8927 ± 0.0600
+    Levenshtein masked:  0.1545 ± 0.0965
+    ROUGE-1 full:        0.8461 ± 0.0857
+    BLEU-4 full:         0.6839 ± 0.1659
+    PII leakage rate:    0.4118 ± 0.2777
+
+  ======================================================================
+  Pipeline: LLM Qwen2.5 [few-shot]
+  ======================================================================
+  Documents evaluated: 638
+
+  BERTScore (masked texts — primary metric):
+    F1:        0.9683 ± 0.0276
+    Precision: 0.9602
+    Recall:    0.9767
+
+  BERTScore (full texts — supplementary):
+    F1:        0.8592 ± 0.0398
+    Precision: 0.8538
+    Recall:    0.8649
+
+  Levenshtein (masked texts):
+    Mean:      0.0679 ± 0.0592
+
+  ROUGE-1 (full texts — following Staab et al., ICLR 2025):
+    Mean:      0.7992 ± 0.0523
+
+  BLEU-4 (full texts — following Staab et al., ICLR 2025 / Dorémus et al., JMIR AI 2025):
+    Mean:      0.5904 ± 0.0992
+
+  PII Leakage Rate (privacy metric — lower = better):
+    Mean:      0.2065 ± 0.1612
+    Leaked:    1063 / 5137 PII instances
+
+  Complexity: Low (n=218)
+    BERTScore masked F1: 0.9773 ± 0.0209
+    BERTScore full F1:   0.8495 ± 0.0326
+    Levenshtein masked:  0.0464 ± 0.0408
+    ROUGE-1 full:        0.7934 ± 0.0399
+    BLEU-4 full:         0.5820 ± 0.0765
+    PII leakage rate:    0.1585 ± 0.1159
+
+  Complexity: Medium (n=215)
+    BERTScore masked F1: 0.9728 ± 0.0235
+    BERTScore full F1:   0.8562 ± 0.0389
+    Levenshtein masked:  0.0595 ± 0.0544
+    ROUGE-1 full:        0.7901 ± 0.0496
+    BLEU-4 full:         0.5731 ± 0.0940
+    PII leakage rate:    0.1763 ± 0.1449
+
+  Complexity: High (n=205)
+    BERTScore masked F1: 0.9540 ± 0.0319
+    BERTScore full F1:   0.8727 ± 0.0439
+    Levenshtein masked:  0.0997 ± 0.0670
+    ROUGE-1 full:        0.8149 ± 0.0625
+    BLEU-4 full:         0.6175 ± 0.1188
+    PII leakage rate:    0.2893 ± 0.1857
+
+  ======================================================================
+  Pipeline: LLM Qwen2.5 [few-shot +verify]
+  ======================================================================
+  Documents evaluated: 638
+
+  BERTScore (masked texts — primary metric):
+    F1:        0.9686 ± 0.0273
+    Precision: 0.9599
+    Recall:    0.9776
+
+  BERTScore (full texts — supplementary):
+    F1:        0.8618 ± 0.0389
+    Precision: 0.8566
+    Recall:    0.8672
+
+  Levenshtein (masked texts):
+    Mean:      0.0679 ± 0.0591
+
+  ROUGE-1 (full texts — following Staab et al., ICLR 2025):
+    Mean:      0.8023 ± 0.0517
+
+  BLEU-4 (full texts — following Staab et al., ICLR 2025 / Dorémus et al., JMIR AI 2025):
+    Mean:      0.5965 ± 0.0977
+
+  PII Leakage Rate (privacy metric — lower = better):
+    Mean:      0.2127 ± 0.1628
+    Leaked:    1098 / 5137 PII instances
+
+  Complexity: Low (n=218)
+    BERTScore masked F1: 0.9786 ± 0.0204
+    BERTScore full F1:   0.8518 ± 0.0326
+    Levenshtein masked:  0.0447 ± 0.0408
+    ROUGE-1 full:        0.7960 ± 0.0391
+    BLEU-4 full:         0.5874 ± 0.0745
+    PII leakage rate:    0.1614 ± 0.1177
+
+  Complexity: Medium (n=215)
+    BERTScore masked F1: 0.9727 ± 0.0236
+    BERTScore full F1:   0.8583 ± 0.0387
+    Levenshtein masked:  0.0597 ± 0.0536
+    ROUGE-1 full:        0.7930 ± 0.0495
+    BLEU-4 full:         0.5787 ± 0.0935
+    PII leakage rate:    0.1816 ± 0.1457
+
+  Complexity: High (n=205)
+    BERTScore masked F1: 0.9535 ± 0.0308
+    BERTScore full F1:   0.8760 ± 0.0411
+    Levenshtein masked:  0.1010 ± 0.0661
+    ROUGE-1 full:        0.8188 ± 0.0611
+    BLEU-4 full:         0.6248 ± 0.1161
+    PII leakage rate:    0.2999 ± 0.1850
+
+  ======================================================================
+  Pipeline: LLM SauerkrautLM [zero-shot]
+  ======================================================================
+  Documents evaluated: 638
+
+  BERTScore (masked texts — primary metric):
+    F1:        0.9605 ± 0.0287
+    Precision: 0.9590
+    Recall:    0.9622
+
+  BERTScore (full texts — supplementary):
+    F1:        0.8320 ± 0.0435
+    Precision: 0.8246
+    Recall:    0.8397
+
+  Levenshtein (masked texts):
+    Mean:      0.0823 ± 0.0653
+
+  ROUGE-1 (full texts — following Staab et al., ICLR 2025):
+    Mean:      0.7642 ± 0.0585
+
+  BLEU-4 (full texts — following Staab et al., ICLR 2025 / Dorémus et al., JMIR AI 2025):
+    Mean:      0.5195 ± 0.1105
+
+  PII Leakage Rate (privacy metric — lower = better):
+    Mean:      0.1301 ± 0.1482
+    Leaked:    687 / 5137 PII instances
+
+  Complexity: Low (n=218)
+    BERTScore masked F1: 0.9550 ± 0.0300
+    BERTScore full F1:   0.8323 ± 0.0439
+    Levenshtein masked:  0.0900 ± 0.0637
+    ROUGE-1 full:        0.7752 ± 0.0515
+    BLEU-4 full:         0.5373 ± 0.1008
+    PII leakage rate:    0.1527 ± 0.1396
+
+  Complexity: Medium (n=215)
+    BERTScore masked F1: 0.9649 ± 0.0267
+    BERTScore full F1:   0.8327 ± 0.0433
+    Levenshtein masked:  0.0755 ± 0.0636
+    ROUGE-1 full:        0.7605 ± 0.0608
+    BLEU-4 full:         0.5135 ± 0.1145
+    PII leakage rate:    0.1175 ± 0.1600
+
+  Complexity: High (n=205)
+    BERTScore masked F1: 0.9615 ± 0.0286
+    BERTScore full F1:   0.8308 ± 0.0436
+    Levenshtein masked:  0.0812 ± 0.0682
+    ROUGE-1 full:        0.7564 ± 0.0616
+    BLEU-4 full:         0.5069 ± 0.1142
+    PII leakage rate:    0.1194 ± 0.1418
+
+  ======================================================================
+  Pipeline: LLM SauerkrautLM [few-shot]
+  ======================================================================
+  Documents evaluated: 638
+
+  BERTScore (masked texts — primary metric):
+    F1:        0.9806 ± 0.0178
+    Precision: 0.9812
+    Recall:    0.9800
+
+  BERTScore (full texts — supplementary):
+    F1:        0.8292 ± 0.0339
+    Precision: 0.8228
+    Recall:    0.8360
+
+  Levenshtein (masked texts):
+    Mean:      0.0441 ± 0.0418
+
+  ROUGE-1 (full texts — following Staab et al., ICLR 2025):
+    Mean:      0.7567 ± 0.0479
+
+  BLEU-4 (full texts — following Staab et al., ICLR 2025 / Dorémus et al., JMIR AI 2025):
+    Mean:      0.5123 ± 0.0864
+
+  PII Leakage Rate (privacy metric — lower = better):
+    Mean:      0.0736 ± 0.0843
+    Leaked:    395 / 5137 PII instances
+
+  Complexity: Low (n=218)
+    BERTScore masked F1: 0.9823 ± 0.0159
+    BERTScore full F1:   0.8285 ± 0.0328
+    Levenshtein masked:  0.0385 ± 0.0355
+    ROUGE-1 full:        0.7654 ± 0.0397
+    BLEU-4 full:         0.5277 ± 0.0740
+    PII leakage rate:    0.0805 ± 0.0783
+
+  Complexity: Medium (n=215)
+    BERTScore masked F1: 0.9818 ± 0.0169
+    BERTScore full F1:   0.8290 ± 0.0332
+    Levenshtein masked:  0.0435 ± 0.0426
+    ROUGE-1 full:        0.7529 ± 0.0468
+    BLEU-4 full:         0.5049 ± 0.0845
+    PII leakage rate:    0.0579 ± 0.0817
+
+  Complexity: High (n=205)
+    BERTScore masked F1: 0.9774 ± 0.0202
+    BERTScore full F1:   0.8303 ± 0.0360
+    Levenshtein masked:  0.0507 ± 0.0461
+    ROUGE-1 full:        0.7515 ± 0.0553
+    BLEU-4 full:         0.5038 ± 0.0980
+    PII leakage rate:    0.0828 ± 0.0910
+
+  ======================================================================
+  Pipeline: LLM SauerkrautLM [few-shot +verify]
+  ======================================================================
+  Documents evaluated: 638
+
+  BERTScore (masked texts — primary metric):
+    F1:        0.9830 ± 0.0168
+    Precision: 0.9822
+    Recall:    0.9839
+
+  BERTScore (full texts — supplementary):
+    F1:        0.8344 ± 0.0337
+    Precision: 0.8284
+    Recall:    0.8408
+
+  Levenshtein (masked texts):
+    Mean:      0.0385 ± 0.0394
+
+  ROUGE-1 (full texts — following Staab et al., ICLR 2025):
+    Mean:      0.7636 ± 0.0469
+
+  BLEU-4 (full texts — following Staab et al., ICLR 2025 / Dorémus et al., JMIR AI 2025):
+    Mean:      0.5248 ± 0.0852
+
+  PII Leakage Rate (privacy metric — lower = better):
+    Mean:      0.0825 ± 0.0911
+    Leaked:    443 / 5137 PII instances
+
+  Complexity: Low (n=218)
+    BERTScore masked F1: 0.9845 ± 0.0146
+    BERTScore full F1:   0.8332 ± 0.0319
+    Levenshtein masked:  0.0327 ± 0.0305
+    ROUGE-1 full:        0.7707 ± 0.0388
+    BLEU-4 full:         0.5375 ± 0.0725
+    PII leakage rate:    0.0870 ± 0.0813
+
+  Complexity: Medium (n=215)
+    BERTScore masked F1: 0.9837 ± 0.0166
+    BERTScore full F1:   0.8343 ± 0.0337
+    Levenshtein masked:  0.0398 ± 0.0434
+    ROUGE-1 full:        0.7607 ± 0.0471
+    BLEU-4 full:         0.5186 ± 0.0852
+    PII leakage rate:    0.0707 ± 0.0905
+
+  Complexity: High (n=205)
+    BERTScore masked F1: 0.9806 ± 0.0189
+    BERTScore full F1:   0.8359 ± 0.0354
+    Levenshtein masked:  0.0433 ± 0.0427
+    ROUGE-1 full:        0.7591 ± 0.0535
+    BLEU-4 full:         0.5176 ± 0.0959
+    PII leakage rate:    0.0900 ± 0.1004
+
+  ======================================================================
+  Pipeline: LLM Llama-3 [fine-tuned]
+  ======================================================================
+  Documents evaluated: 638
+
+  BERTScore (masked texts — primary metric):
+    F1:        0.9954 ± 0.0089
+    Precision: 0.9954
+    Recall:    0.9955
+
+  BERTScore (full texts — supplementary):
+    F1:        0.8282 ± 0.0310
+    Precision: 0.8213
+    Recall:    0.8354
+
+  Levenshtein (masked texts):
+    Mean:      0.0102 ± 0.0211
+
+  ROUGE-1 (full texts — following Staab et al., ICLR 2025):
+    Mean:      0.7552 ± 0.0436
+
+  BLEU-4 (full texts — following Staab et al., ICLR 2025 / Dorémus et al., JMIR AI 2025):
+    Mean:      0.5139 ± 0.0811
+
+  PII Leakage Rate (privacy metric — lower = better):
+    Mean:      0.0159 ± 0.0473
+    Leaked:    88 / 5137 PII instances
+
+  Complexity: Low (n=218)
+    BERTScore masked F1: 0.9972 ± 0.0062
+    BERTScore full F1:   0.8282 ± 0.0303
+    Levenshtein masked:  0.0065 ± 0.0159
+    ROUGE-1 full:        0.7652 ± 0.0344
+    BLEU-4 full:         0.5289 ± 0.0668
+    PII leakage rate:    0.0107 ± 0.0366
+
+  Complexity: Medium (n=215)
+    BERTScore masked F1: 0.9952 ± 0.0100
+    BERTScore full F1:   0.8289 ± 0.0305
+    Levenshtein masked:  0.0106 ± 0.0225
+    ROUGE-1 full:        0.7534 ± 0.0424
+    BLEU-4 full:         0.5100 ± 0.0787
+    PII leakage rate:    0.0143 ± 0.0467
+
+  Complexity: High (n=205)
+    BERTScore masked F1: 0.9938 ± 0.0099
+    BERTScore full F1:   0.8274 ± 0.0321
+    Levenshtein masked:  0.0136 ± 0.0236
+    ROUGE-1 full:        0.7465 ± 0.0512
+    BLEU-4 full:         0.5019 ± 0.0942
+    PII leakage rate:    0.0231 ± 0.0564
+
+  ======================================================================
+  Pipeline: LLM Llama-3 [prompt zero-shot]
+  ======================================================================
+  Documents evaluated: 638
+
+  BERTScore (masked texts — primary metric):
+    F1:        0.8686 ± 0.0402
+    Precision: 0.8589
+    Recall:    0.8788
+
+  BERTScore (full texts — supplementary):
+    F1:        0.8383 ± 0.0391
+    Precision: 0.8600
+    Recall:    0.8181
+
+  Levenshtein (masked texts):
+    Mean:      0.3483 ± 0.0997
+
+  ROUGE-1 (full texts — following Staab et al., ICLR 2025):
+    Mean:      0.6112 ± 0.0910
+
+  BLEU-4 (full texts — following Staab et al., ICLR 2025 / Dorémus et al., JMIR AI 2025):
+    Mean:      0.3738 ± 0.1305
+
+  PII Leakage Rate (privacy metric — lower = better):
+    Mean:      0.0763 ± 0.1051
+    Leaked:    408 / 5137 PII instances
+
+  Complexity: Low (n=218)
+    BERTScore masked F1: 0.8792 ± 0.0308
+    BERTScore full F1:   0.8422 ± 0.0364
+    Levenshtein masked:  0.3171 ± 0.0807
+    ROUGE-1 full:        0.6384 ± 0.0646
+    BLEU-4 full:         0.4267 ± 0.0904
+    PII leakage rate:    0.0637 ± 0.0845
+
+  Complexity: Medium (n=215)
+    BERTScore masked F1: 0.8802 ± 0.0356
+    BERTScore full F1:   0.8468 ± 0.0371
+    Levenshtein masked:  0.3300 ± 0.0903
+    ROUGE-1 full:        0.6303 ± 0.0783
+    BLEU-4 full:         0.4046 ± 0.1093
+    PII leakage rate:    0.0796 ± 0.1079
+
+  Complexity: High (n=205)
+    BERTScore masked F1: 0.8451 ± 0.0436
+    BERTScore full F1:   0.8252 ± 0.0409
+    Levenshtein masked:  0.4006 ± 0.1069
+    ROUGE-1 full:        0.5622 ± 0.1067
+    BLEU-4 full:         0.2853 ± 0.1417
+    PII leakage rate:    0.0864 ± 0.1201
+
+  ======================================================================
+  Pipeline: LLM Llama-3 [prompt few-shot]
+  ======================================================================
+  Documents evaluated: 638
+
+  BERTScore (masked texts — primary metric):
+    F1:        0.8639 ± 0.0363
+    Precision: 0.8642
+    Recall:    0.8640
+
+  BERTScore (full texts — supplementary):
+    F1:        0.8347 ± 0.0347
+    Precision: 0.8647
+    Recall:    0.8072
+
+  Levenshtein (masked texts):
+    Mean:      0.3490 ± 0.0919
+
+  ROUGE-1 (full texts — following Staab et al., ICLR 2025):
+    Mean:      0.5996 ± 0.0842
+
+  BLEU-4 (full texts — following Staab et al., ICLR 2025 / Dorémus et al., JMIR AI 2025):
+    Mean:      0.3379 ± 0.1235
+
+  PII Leakage Rate (privacy metric — lower = better):
+    Mean:      0.0516 ± 0.0828
+    Leaked:    268 / 5137 PII instances
+
+  Complexity: Low (n=218)
+    BERTScore masked F1: 0.8777 ± 0.0253
+    BERTScore full F1:   0.8423 ± 0.0294
+    Levenshtein masked:  0.3137 ± 0.0642
+    ROUGE-1 full:        0.6255 ± 0.0577
+    BLEU-4 full:         0.3853 ± 0.0916
+    PII leakage rate:    0.0431 ± 0.0750
+
+  Complexity: Medium (n=215)
+    BERTScore masked F1: 0.8750 ± 0.0298
+    BERTScore full F1:   0.8439 ± 0.0328
+    Levenshtein masked:  0.3273 ± 0.0807
+    ROUGE-1 full:        0.6201 ± 0.0739
+    BLEU-4 full:         0.3668 ± 0.1028
+    PII leakage rate:    0.0507 ± 0.0816
+
+  Complexity: High (n=205)
+    BERTScore masked F1: 0.8376 ± 0.0384
+    BERTScore full F1:   0.8170 ± 0.0354
+    Levenshtein masked:  0.4092 ± 0.0985
+    ROUGE-1 full:        0.5504 ± 0.0964
+    BLEU-4 full:         0.2572 ± 0.1335
+    PII leakage rate:    0.0617 ± 0.0909
+
+  ======================================================================
+  Pipeline: LLM Qwen2.5 [prompt zero-shot]
+  ======================================================================
+  Documents evaluated: 638
+
+  BERTScore (masked texts — primary metric):
+    F1:        0.8860 ± 0.0326
+    Precision: 0.8772
+    Recall:    0.8952
+
+  BERTScore (full texts — supplementary):
+    F1:        0.8538 ± 0.0346
+    Precision: 0.8778
+    Recall:    0.8315
+
+  Levenshtein (masked texts):
+    Mean:      0.2957 ± 0.0852
+
+  ROUGE-1 (full texts — following Staab et al., ICLR 2025):
+    Mean:      0.6508 ± 0.0806
+
+  BLEU-4 (full texts — following Staab et al., ICLR 2025 / Dorémus et al., JMIR AI 2025):
+    Mean:      0.4126 ± 0.1191
+
+  PII Leakage Rate (privacy metric — lower = better):
+    Mean:      0.1435 ± 0.1278
+    Leaked:    769 / 5137 PII instances
+
+  Complexity: Low (n=218)
+    BERTScore masked F1: 0.8891 ± 0.0301
+    BERTScore full F1:   0.8526 ± 0.0350
+    Levenshtein masked:  0.2846 ± 0.0746
+    ROUGE-1 full:        0.6623 ± 0.0685
+    BLEU-4 full:         0.4356 ± 0.1067
+    PII leakage rate:    0.1379 ± 0.1275
+
+  Complexity: Medium (n=215)
+    BERTScore masked F1: 0.8941 ± 0.0283
+    BERTScore full F1:   0.8599 ± 0.0334
+    Levenshtein masked:  0.2791 ± 0.0792
+    ROUGE-1 full:        0.6618 ± 0.0734
+    BLEU-4 full:         0.4390 ± 0.1043
+    PII leakage rate:    0.1388 ± 0.1235
+
+  Complexity: High (n=205)
+    BERTScore masked F1: 0.8740 ± 0.0360
+    BERTScore full F1:   0.8487 ± 0.0346
+    Levenshtein masked:  0.3249 ± 0.0943
+    ROUGE-1 full:        0.6270 ± 0.0938
+    BLEU-4 full:         0.3604 ± 0.1294
+    PII leakage rate:    0.1543 ± 0.1325
+
+  ======================================================================
+  Pipeline: LLM Qwen2.5 [prompt few-shot]
+  ======================================================================
+  Documents evaluated: 638
+
+  BERTScore (masked texts — primary metric):
+    F1:        0.8820 ± 0.0340
+    Precision: 0.8744
+    Recall:    0.8902
+
+  BERTScore (full texts — supplementary):
+    F1:        0.8541 ± 0.0339
+    Precision: 0.8794
+    Recall:    0.8307
+
+  Levenshtein (masked texts):
+    Mean:      0.3150 ± 0.0877
+
+  ROUGE-1 (full texts — following Staab et al., ICLR 2025):
+    Mean:      0.6434 ± 0.0818
+
+  BLEU-4 (full texts — following Staab et al., ICLR 2025 / Dorémus et al., JMIR AI 2025):
+    Mean:      0.3920 ± 0.1203
+
+  PII Leakage Rate (privacy metric — lower = better):
+    Mean:      0.1920 ± 0.1313
+    Leaked:    1012 / 5137 PII instances
+
+  Complexity: Low (n=218)
+    BERTScore masked F1: 0.8879 ± 0.0281
+    BERTScore full F1:   0.8550 ± 0.0308
+    Levenshtein masked:  0.2981 ± 0.0734
+    ROUGE-1 full:        0.6536 ± 0.0671
+    BLEU-4 full:         0.4162 ± 0.0976
+    PII leakage rate:    0.1728 ± 0.1171
+
+  Complexity: Medium (n=215)
+    BERTScore masked F1: 0.8920 ± 0.0276
+    BERTScore full F1:   0.8609 ± 0.0325
+    Levenshtein masked:  0.2976 ± 0.0823
+    ROUGE-1 full:        0.6571 ± 0.0751
+    BLEU-4 full:         0.4146 ± 0.1098
+    PII leakage rate:    0.1885 ± 0.1280
+
+  Complexity: High (n=205)
+    BERTScore masked F1: 0.8653 ± 0.0393
+    BERTScore full F1:   0.8460 ± 0.0368
+    Levenshtein masked:  0.3511 ± 0.0960
+    ROUGE-1 full:        0.6181 ± 0.0961
+    BLEU-4 full:         0.3425 ± 0.1371
+    PII leakage rate:    0.2160 ± 0.1453
+
+  ======================================================================
+  Pipeline: LLM SauerkrautLM [prompt zero-shot]
+  ======================================================================
+  Documents evaluated: 638
+
+  BERTScore (masked texts — primary metric):
+    F1:        0.8760 ± 0.0427
+    Precision: 0.8597
+    Recall:    0.8932
+
+  BERTScore (full texts — supplementary):
+    F1:        0.8570 ± 0.0433
+    Precision: 0.8715
+    Recall:    0.8435
+
+  Levenshtein (masked texts):
+    Mean:      0.3300 ± 0.1157
+
+  ROUGE-1 (full texts — following Staab et al., ICLR 2025):
+    Mean:      0.6479 ± 0.1003
+
+  BLEU-4 (full texts — following Staab et al., ICLR 2025 / Dorémus et al., JMIR AI 2025):
+    Mean:      0.4333 ± 0.1408
+
+  PII Leakage Rate (privacy metric — lower = better):
+    Mean:      0.1531 ± 0.1368
+    Leaked:    790 / 5137 PII instances
+
+  Complexity: Low (n=218)
+    BERTScore masked F1: 0.8867 ± 0.0344
+    BERTScore full F1:   0.8596 ± 0.0423
+    Levenshtein masked:  0.2979 ± 0.0996
+    ROUGE-1 full:        0.6679 ± 0.0839
+    BLEU-4 full:         0.4819 ± 0.1097
+    PII leakage rate:    0.1273 ± 0.1163
+
+  Complexity: Medium (n=215)
+    BERTScore masked F1: 0.8846 ± 0.0403
+    BERTScore full F1:   0.8636 ± 0.0430
+    Levenshtein masked:  0.3141 ± 0.1118
+    ROUGE-1 full:        0.6647 ± 0.0921
+    BLEU-4 full:         0.4644 ± 0.1203
+    PII leakage rate:    0.1499 ± 0.1289
+
+  Complexity: High (n=205)
+    BERTScore masked F1: 0.8555 ± 0.0460
+    BERTScore full F1:   0.8472 ± 0.0432
+    Levenshtein masked:  0.3806 ± 0.1193
+    ROUGE-1 full:        0.6090 ± 0.1131
+    BLEU-4 full:         0.3491 ± 0.1525
+    PII leakage rate:    0.1840 ± 0.1578
+
+  ======================================================================
+  Pipeline: LLM SauerkrautLM [prompt few-shot]
+  ======================================================================
+  Documents evaluated: 638
+
+  BERTScore (masked texts — primary metric):
+    F1:        0.8661 ± 0.0367
+    Precision: 0.8611
+    Recall:    0.8716
+
+  BERTScore (full texts — supplementary):
+    F1:        0.8424 ± 0.0349
+    Precision: 0.8680
+    Recall:    0.8188
+
+  Levenshtein (masked texts):
+    Mean:      0.3498 ± 0.0908
+
+  ROUGE-1 (full texts — following Staab et al., ICLR 2025):
+    Mean:      0.6144 ± 0.0861
+
+  BLEU-4 (full texts — following Staab et al., ICLR 2025 / Dorémus et al., JMIR AI 2025):
+    Mean:      0.3682 ± 0.1258
+
+  PII Leakage Rate (privacy metric — lower = better):
+    Mean:      0.0717 ± 0.0933
+    Leaked:    356 / 5137 PII instances
+
+  Complexity: Low (n=218)
+    BERTScore masked F1: 0.8769 ± 0.0256
+    BERTScore full F1:   0.8460 ± 0.0296
+    Levenshtein masked:  0.3176 ± 0.0650
+    ROUGE-1 full:        0.6312 ± 0.0607
+    BLEU-4 full:         0.4082 ± 0.0906
+    PII leakage rate:    0.0445 ± 0.0691
+
+  Complexity: Medium (n=215)
+    BERTScore masked F1: 0.8764 ± 0.0295
+    BERTScore full F1:   0.8512 ± 0.0329
+    Levenshtein masked:  0.3332 ± 0.0788
+    ROUGE-1 full:        0.6372 ± 0.0719
+    BLEU-4 full:         0.3987 ± 0.1061
+    PII leakage rate:    0.0694 ± 0.0912
+
+  Complexity: High (n=205)
+    BERTScore masked F1: 0.8439 ± 0.0431
+    BERTScore full F1:   0.8293 ± 0.0384
+    Levenshtein masked:  0.4015 ± 0.1031
+    ROUGE-1 full:        0.5726 ± 0.1058
+    BLEU-4 full:         0.2935 ± 0.1435
+    PII leakage rate:    0.1029 ± 0.1076
+
+  ======================================================================
+  Pipeline: Datenwertschöpfung API
+  ======================================================================
+  Documents evaluated: 638
+
+  BERTScore (masked texts — primary metric):
+    F1:        0.8366 ± 0.0440
+    Precision: 0.7644
+    Recall:    0.9255
+
+  BERTScore (full texts — supplementary):
+    F1:        0.8251 ± 0.0468
+    Precision: 0.7786
+    Recall:    0.8782
+
+  Levenshtein (masked texts):
+    Mean:      0.3256 ± 0.0911
+
+  ROUGE-1 (full texts — following Staab et al., ICLR 2025):
+    Mean:      0.8545 ± 0.0467
+
+  BLEU-4 (full texts — following Staab et al., ICLR 2025 / Dorémus et al., JMIR AI 2025):
+    Mean:      0.6950 ± 0.0794
+
+  PII Leakage Rate (privacy metric — lower = better):
+    Mean:      0.3759 ± 0.1352
+    Leaked:    1921 / 5137 PII instances
+
+  Complexity: Low (n=218)
+    BERTScore masked F1: 0.8278 ± 0.0367
+    BERTScore full F1:   0.8128 ± 0.0406
+    Levenshtein masked:  0.3287 ± 0.0725
+    ROUGE-1 full:        0.8536 ± 0.0398
+    BLEU-4 full:         0.6863 ± 0.0679
+    PII leakage rate:    0.3328 ± 0.1037
+
+  Complexity: Medium (n=215)
+    BERTScore masked F1: 0.8336 ± 0.0420
+    BERTScore full F1:   0.8248 ± 0.0446
+    Levenshtein masked:  0.3354 ± 0.0877
+    ROUGE-1 full:        0.8515 ± 0.0441
+    BLEU-4 full:         0.6918 ± 0.0735
+    PII leakage rate:    0.3676 ± 0.1190
+
+  Complexity: High (n=205)
+    BERTScore masked F1: 0.8491 ± 0.0502
+    BERTScore full F1:   0.8384 ± 0.0515
+    Levenshtein masked:  0.3121 ± 0.1094
+    ROUGE-1 full:        0.8586 ± 0.0553
+    BLEU-4 full:         0.7076 ± 0.0941
+    PII leakage rate:    0.4303 ± 0.1604

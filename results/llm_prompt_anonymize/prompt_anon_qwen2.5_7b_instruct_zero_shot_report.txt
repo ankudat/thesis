@@ -1,0 +1,119 @@
+==============================================================================
+  LLM PROMPT-BASED ANONYMIZATION REPORT
+  Generated: 2026-04-12 20:52:18
+  Model: Qwen/Qwen2.5-7B-Instruct
+  Strategy: zero-shot
+==============================================================================
+
+  Documents: 638
+  Total time: 2723.7s (4.27s/doc)
+  Avg length ratio: 0.96
+
+##############################################################################
+  PII LEAKAGE ANALYSIS
+##############################################################################
+
+  Overall: 769/5137 leaked (15.0%)
+
+  Category        Total   Leaked       Rate
+  ------------------------------------------
+  AGE                81       23      28.4%
+  DATE              508       76      15.0%
+  EDU                48        1       2.1%
+  EMAIL             165        2       1.2%
+  IBAN              107        1       0.9%
+  JOB               802      392      48.9%
+  LOC               632      159      25.2%
+  MONEY             759       49       6.5%
+  NATION             91       31      34.1%
+  ORG               740       18       2.4%
+  PER              1091        9       0.8%
+  PHONE             113        8       7.1%
+
+##############################################################################
+  LEAKAGE BY COMPLEXITY
+##############################################################################
+
+  Low: 218 docs | Leakage: 276/1974 (14.0%)
+
+  Medium: 215 docs | Leakage: 243/1647 (14.8%)
+
+  High: 205 docs | Leakage: 250/1516 (16.5%)
+
+##############################################################################
+  SAMPLE LEAKED PII (first 20)
+##############################################################################
+  [JOB     ] "CFO"  →  ... einer Geschäftsführerin, die CFO einer Firma in einer Stadt in...
+  [JOB     ] "CFO"  →  ...Die Geschäftsführerin und der CFO präsentierten die neue Produk...
+  [JOB     ] "Leiter Finanzen"  →  ...bredeten Termin wurde mit dem Leiter Finanzen ein neuer Maschinenpark finan...
+  [LOC     ] "Zug"  →  ...hrerin Einkauf einer Firma in Zug. Für eine Lieferung von Kompo...
+  [LOC     ] "Südkorea"  →  ...Lieferung von Komponenten aus Südkorea im Wert von einer Summe wird ...
+  [MONEY   ] "CHF 500'000"  →  ...il des Festgeldes in Höhe von CHF 500'000 verpfändet. Die Geschäftsführ...
+  [JOB     ] "CFO"  →  ... die Details intern mit einem CFO, einem Mitarbeiter, klären....
+  [JOB     ] "Geschäftsführers"  →  ...iche Unterschrift des zweiten Geschäftsführers. Ich habe die Assistentin des...
+  [JOB     ] "CEO"  →  ... einem Datum die Position des CEO übernehmen. Der geprüfte Jahr...
+  [JOB     ] "Head of Export"  →  ...Der Head of Export einer Firma, ein Mitarbeiter,...
+  [AGE     ] "65-jährig"  →  ... einem Datum mit einem Kunde (65-jährig), dem Gründer einer Firma. Er...
+  [JOB     ] "Trade Finance Specialist"  →  ...rte mich ein Mitarbeiter, ein Trade Finance Specialist bei einer Firma in Zug. Es ge...
+  [LOC     ] "Zug"  →  ...Specialist bei einer Firma in Zug. Es geht um die Avisierung ei...
+  [DATE    ] "morgen"  →  ...ersprochen, die Dokumente bis morgen nachzureichen....
+  [JOB     ] "Head of Corporate Development"  →  ...lles Meeting kürzlich mit dem Head of Corporate Development einer Firma, Herrn Dr. [Name]...
+  [LOC     ] "Lausanne"  →  ...sichtigung bei einer Firma in Lausanne statt. Die Geschäftsführerin ...
+  [LOC     ] "Basel"  →  ...ührerin eines Unternehmens in Basel. Sie reichte den geprüften Ja...
+  [NATION  ] "US-amerikanischen"  →  ...in der Schweiz. Der Umsatz im US-amerikanischen Markt ist stark gewachsen. Au...
+  [JOB     ] "Leiter Finanzen"  →  ...r Geschäftsführerin und einem Leiter Finanzen einer Firma in einer Stadt in...
+  [JOB     ] "Flottenmanager"  →  ...ein Kunde, ein Flottenmanager bei einer Firma in einer Stad...
+
+##############################################################################
+  QUALITATIVE SAMPLES (10 examples)
+##############################################################################
+
+  ────────────────────────────────────────────────────────────────────────
+  Doc 5734 | Low | Leakage: 8/9
+  ORIGINAL:  Die Kontoeröffnung für die neue Spin-off-Firma, die CleanEnergy Solutions AG, wurde heute mit dem Geschäftsführer Herr Thomas Fischer finalisiert. Es fehlt jedoch noch eine rechtsverbindliche Unterschrift auf dem E-Banking-Vertrag, welche Herr Fischer umgehend nachreichen wird. Die initialen Zugriff...
+  REWRITTEN: Die Kontoeröffnung für die neue Spin-off-Firma wurde heute mit der Geschäftsführerin finalisiert. Es fehlt jedoch noch eine rechtsverbindliche Unterschrift auf dem E-Banking-Vertrag, welche umgehend nachreichen wird. Die initialen Zugriffsberechtigungen für die Buchhalterin wurden gemäß Antrag einge...
+
+  ────────────────────────────────────────────────────────────────────────
+  Doc 6225 | Medium | Leakage: 4/7
+  ORIGINAL:  Anruf von Herrn Luigi Bernasconi, Geschäftsführer der Ticino Logistic SA. Er benötigt für einen neuen Mitarbeiter im Aussendienst, Herrn Marco Galli, eine neue Firmenkreditkarte mit einer Limite von CHF 5'000. Zudem muss für die neue Buchhalterin ein E-Banking-Vertrag mit Leserechten ausgestellt wer...
+  REWRITTEN: Anruf von dem Geschäftsführer eines Unternehmens. Er benötigt für einen neuen Mitarbeiter im Aussendienst, einen Mann namens Marco Galli, eine neue Firmenkreditkarte mit einer Limite von einem Betrag. Zudem muss für die neue Buchhalterin ein E-Banking-Vertrag mit Leserechten ausgestellt werden. Fehl...
+
+  ────────────────────────────────────────────────────────────────────────
+  Doc 5642 | Low | Leakage: 5/10
+  ORIGINAL:  Rücksprache mit Herrn Stefan Egger, Leiter International Projects der Alpenbau AG in Chur, am 29.05.2024. Er berichtete von der erfolgreichen Inbetriebnahme der neuen Produktionsstätte nahe Krakau, Polen. Für geplante Exporte in den asiatischen Markt wurden verschiedene TEF-Lösungen (Trade & Export ...
+  REWRITTEN: Rücksprache mit dem Leiter International Projects einer Firma in einer Stadt in der Schweiz am kürzlichen Datum. Er berichtete von der erfolgreichen Inbetriebnahme der neuen Produktionsstätte nahe Krakau, Polen. Für geplante Exporte in den asiatischen Markt wurden verschiedene TEF-Lösungen (Trade & ...
+
+  ────────────────────────────────────────────────────────────────────────
+  Doc 5728 | Low | Leakage: 3/6
+  ORIGINAL:  Die Global Retail Group AG plant die Eröffnung eines neuen Kontos für ihr E-Commerce-Geschäft in der EU. Das Konto soll auf EUR lauten. Der Leiter Finanzen, Herr Stefan Baumann, hat die Kontoeröffnungsunterlagen angefordert. Er möchte zudem die Limite seiner Firmenkreditkarte temporär auf EUR 20'000...
+  REWRITTEN: Die Global Retail Group AG plant die Eröffnung eines neuen Kontos für ihr E-Commerce-Geschäft in der EU. Das Konto soll auf EUR lauten. Der Leiter Finanzen, ein Mitarbeiter, hat die Kontoeröffnungsunterlagen angefordert. Er möchte zudem die Limite seiner Firmenkreditkarte temporär erhöhen lassen. Se...
+
+  ────────────────────────────────────────────────────────────────────────
+  Doc 6941 | High | Leakage: 4/8
+  ORIGINAL:  - Betriebsbesichtigung bei Alpinholz AG im Kanton Graubünden. Sehr beeindruckend. Umsatz 2023 bei CHF 12 Mio., EBITDA solide. Der Produktionsleiter, Reto Flury, hat uns alles gezeigt. Sie brauche dringend eine neue Maschine aus Österreich für ca. 400'000 EUR. Leasing-Offerte erstellen.
+  REWRITTEN: - Betriebsbesichtigung bei einem Unternehmen im Kanton Graubünden. Sehr beeindruckend. Umsatz 2023 bei einer Summe von CHF 12 Mio., EBITDA solide. Der Produktionsleiter hat uns alles gezeigt. Ein Mitarbeiter braucht dringend eine neue Maschine aus Österreich für einen Betrag von etwa 400'000 EUR. Ei...
+
+  ────────────────────────────────────────────────────────────────────────
+  Doc 5831 | Low | Leakage: 0/8
+  ORIGINAL:  Herr Hans-Peter Zürcher, Inhaber der Zürcher Immobilien AG mit Sitz in Luzern, informierte uns am 27. Mai 2024 über einen Liquiditätszufluss aus einem Liegenschaftsverkauf. Er beabsichtigt, einen Betrag von CHF 4.5 Mio. als Festgeld für eine Laufzeit von sechs Monaten anzulegen. Des Weiteren möchte ...
+  REWRITTEN: ein Geschäftsführer einer Firma mit Sitz in einer Stadt in der Schweiz informierte uns kürzlich über einen Liquiditätszufluss aus einem Liegenschaftsverkauf. Sie beabsichtigen, einen Betrag von mehreren Millionen Franken als Festgeld für eine Laufzeit von sechs Monaten anzulegen. Des Weiteren möchte...
+
+  ────────────────────────────────────────────────────────────────────────
+  Doc 7141 | High | Leakage: 0/6
+  ORIGINAL:  - Frau Simone Frei, CFO bei Immo General AG, hat angerufen. Kauf einer neuen Liegnschaft in Luzern für CHF 3.5 Mio. ist durch. Benötigt dringend ein neues Konto. Habe ihr die Unterlagen an s.frei@immogen.ch geschickt. Sollte schnell gehen.
+  REWRITTEN: - die Geschäftsführerin hat angerufen. Kauf einer neuen Liegenschaft in einer Stadt für eine Summe ist durch. Benötigt dringend ein neues Konto. Habe ihr die Unterlagen an [E-Mail] geschickt. Sollte schnell gehen.
+
+  ────────────────────────────────────────────────────────────────────────
+  Doc 5947 | Low | Leakage: 0/9
+  ORIGINAL:  Am 21. Mai 2024 wurde die Kontoeröffnung für die SensorTech Solutions GmbH, ein Spin-off der Techno Holding AG, abgeschlossen. Der Geschäftsführer, Herr Dr. Martin Keller, leistete eine Ersteinlage von CHF 100'000. Wir vereinbarten, dass der erste Jahresabschluss bis spätestens 30. April 2025 einger...
+  REWRITTEN: Am kürzlichen Datum wurde die Kontoeröffnung für ein Unternehmen, ein Spin-off einer Firma, abgeschlossen. Die Geschäftsführerin leistete eine Ersteinlage von einer Summe. Wir vereinbarten, dass der erste Jahresabschluss bis spätestens am nächsten Jahr eingereicht wird. Die Geschäftsführerin ist für...
+
+  ────────────────────────────────────────────────────────────────────────
+  Doc 5412 | Low | Leakage: 0/7
+  ORIGINAL:  Am 17. Mai 2023 erfolgte eine Betriebsbesichtigung bei der Logistik Solutions SA in Genf. Der Inhaber, Herr Jean-Pierre Dubois, plant den Kauf einer neuen Lagerhalle für CHF 3.2 Mio. und hat eine Hypothekarfinanzierung beantragt. Die Eigenmittel werden vom Konto CH88 0023 3233 4444 5555 6 transferie...
+  REWRITTEN: Am kürzlichen Datum erfolgte eine Betriebsbesichtigung bei einem Unternehmen in einer Stadt in der Schweiz. Die Geschäftsführerin plant den Kauf eines Immobilienobjekts für einen Betrag und hat eine Hypothekarfinanzierung beantragt. Die Eigenmittel werden von einem Konto überwiesen. Die Prüfung der ...
+
+  ────────────────────────────────────────────────────────────────────────
+  Doc 6515 | Medium | Leakage: 0/5
+  ORIGINAL:  Interne Notiz: Für die Kontoeröffnung der MedTech Spin-off AG fehlen noch die rechtsverbindlichen Unterschriften auf dem E-Banking-Vertrag von Frau Dr. Anna Leuenberger. Habe ihre Assistentin unter 044 111 22 33 kontaktiert. Die Überweisung von EUR 250'000 Startkapital auf das Konto CH56 0023 3233 4...
+  REWRITTEN: Interne Notiz: Für die Kontoeröffnung des neuen Unternehmens fehlen noch die rechtsverbindlichen Unterschriften auf dem E-Banking-Vertrag von einer Geschäftsführerin. Habe ihre Assistentin kontaktiert. Die Überweisung eines Betrags auf das Konto ist blockiert, bis die Pendenzen erledigt sind.

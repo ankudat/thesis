@@ -1,0 +1,884 @@
+doc_id,category,gold_label,gold_text,gold_start,gold_end,overlapping_fp_labels,overlapping_fp_texts
+5203,boundary,DATE,Anfang Juni 2024,339,355,DATE,Juni 2024
+5203,boundary,ORG,Swiss Machinery Export SA,79,104,ORG,Swiss Machinery
+5205,boundary,PER,Schmidt,340,347,PER,Frau Schmidt
+5232,omission,ORG,Innovatec Solutions GmbH,42,66,,
+5232,omission,JOB,Geschäftsführers,189,205,,
+5237,omission,JOB,Verwaltungsratspräsidenten,73,99,,
+5243,boundary,ORG,Modehaus Schneider GmbH,73,96,ORG,Schneider GmbH
+5245,boundary,ORG,Romandie Pharma SA,91,109,ORG,SA
+5246,boundary,PER,Bachmann,301,309,PER,Herr Bachmann
+5246,label,ORG,Zuger Logistik GmbH,41,60,LOC,Zuger
+5246,label,JOB,ETH-Ingenieur,419,432,ORG,ETH-Ingenieur
+5257,boundary,ORG,Seoul Heavy Industries Ltd.,222,249,ORG,Seoul Heavy Industries Ltd
+5257,omission,JOB,Head of Export,4,18,,
+5263,boundary,DATE,Ende 2024,132,141,DATE,2024
+5263,boundary,ORG,Vogel Transport GmbH,80,100,ORG,Vogel Transport
+5264,label,JOB,Head of Treasury,45,61,ORG,Head of Treasury
+5264,boundary,ORG,Global Trade Solutions SA,66,91,ORG,Global Trade Solutions
+5266,boundary,ORG,East-West Trading Ltd.,314,336,ORG,East-West Trading Ltd.. Herr Li
+5266,label,PER,Li,343,345,ORG,East-West Trading Ltd.. Herr Li
+5266,label,JOB,Trade Finance Specialist,45,69,ORG,Trade Finance Specialist
+5266,omission,DATE,morgen,381,387,,
+5266,boundary,ORG,East-West Trading Ltd.,78,100,ORG,East-West Trading Ltd
+5267,boundary,ORG,Innovate Software AG,216,236,ORG,Innovate Software
+5267,label,JOB,Head of Corporate Development,62,91,ORG,Head of Corporate Development
+5273,boundary,MONEY,EUR 75'000,302,312,MONEY,EUR 75'000.
+5273,boundary,JOB,Gründer und CEO,103,118,JOB,CEO
+5278,boundary,NATION,US-amerikanischen,117,134,NATION,amerikanischen
+5284,boundary,MONEY,CHF 5 pro Aktie,341,356,MONEY,CHF 5
+5286,boundary,MONEY,CHF 800'000,161,172,MONEY,CHF 800'000.
+5286,boundary,MONEY,CHF 25'000,307,317,MONEY,CHF 25'000.
+5292,omission,JOB,Flottenmanager,19,33,,
+5293,label,EDU,Universität St. Gallen (HSG),442,470,ORG|ORG,HSG|Universität St. Gallen
+5293,omission,PER,Fischer,379,386,,
+5298,label,JOB,Head of Treasury,58,74,ORG,Head of Treasury
+5298,boundary,ORG,Global Trade Solutions SA,83,108,ORG,Global Trade Solutions
+5307,label,JOB,Head of Treasury,64,80,ORG,Head of Treasury
+5307,boundary,ORG,Global Trade Solutions SA,89,114,ORG,Global Trade Solutions
+5313,boundary,MONEY,CHF 200'000,349,360,MONEY,CHF 200'000.
+5313,boundary,ORG,Future Mobility Solutions GmbH,163,193,ORG,Future Mobility Solutions
+5314,boundary,JOB,ETH-Ingenieurin,250,265,JOB,Ingenieurin
+5318,boundary,JOB,Leiter Forschung & Entwicklung,317,347,JOB,Leiter Forschung
+5336,omission,JOB,Managing Partner,199,215,,
+5336,label,JOB,Office Managerin,35,51,ORG,Office
+5343,boundary,AGE,62 Jahre,381,389,AGE,62 Jahre alt
+5343,label,JOB,ETH-Ingenieur,430,443,ORG,ETH-Ingenieur
+5343,omission,PER,Fischer,372,379,,
+5346,boundary,MONEY,USD 150'000,145,156,MONEY,USD 150'000.
+5346,label,JOB,Head of Trade Finance,184,205,ORG,Head of Trade Finance
+5346,omission,PER,Vogel,329,334,,
+5351,label,JOB,Head of Treasury,61,77,ORG,Head of Treasury
+5360,omission,JOB,Head of Treasury,54,70,,
+5360,boundary,ORG,Global Trade Solutions GmbH,79,106,ORG,Global Trade Solutions
+5360,omission,PER,Herzog,233,239,,
+5368,boundary,PER,Keller,475,481,PER,Frau Keller
+5370,omission,JOB,Logistikleiter,334,348,,
+5374,omission,JOB,Liquidatorin,129,141,,
+5387,boundary,ORG,Logistik Express SA,59,78,ORG,Express SA
+5388,omission,JOB,Finanzchef,190,200,,
+5388,boundary,ORG,Precision Watches Holding SA,45,73,ORG|ORG,Precision Watches Holding|SA
+5389,boundary,JOB,Leiter Finanzen & Controlling,293,322,JOB,Leiter Finanzen
+5393,boundary,ORG,Global Trade Solutions SA,82,107,ORG,Global Trade Solutions
+5393,label,JOB,Head of Treasury,57,73,ORG,Head of Treasury
+5393,omission,PER,Fischer,228,235,,
+5403,boundary,JOB,dipl. Architektin ETH,245,266,JOB,Architektin
+5407,label,EDU,HSG-Absolventin,203,218,ORG,HSG-Absolventin
+5407,omission,PER,Keller,190,196,,
+5412,omission,ORG,Logistik Solutions SA,59,80,,
+5417,label,EDU,HSG-Absolventin,122,137,ORG,HSG-Absolventin
+5421,omission,MONEY,15%,302,305,,
+5422,omission,JOB,Finanzchefin,169,181,,
+5422,boundary,PER,Berger,375,381,PER,Dr. Berger
+5422,boundary,PER,Meier,391,396,PER,Frau Meier
+5423,omission,PER,Bachmann,369,377,,
+5423,boundary,ORG,Maschinenbau Schmid AG,256,278,ORG,Maschinenbau Schmid
+5425,label,JOB,Group Treasurer,75,90,ORG,Group Treasurer
+5428,boundary,LOC,USA,425,428,LOC,den USA
+5428,boundary,ORG,Global Trade Solutions SA,89,114,ORG,Global Trade Solutions
+5428,label,JOB,Head of Treasury,64,80,ORG,Head of Treasury
+5430,boundary,PER,Stefan Keller,36,49,PER,Herrn Stefan Keller
+5436,omission,PER,Graf,399,403,,
+5437,boundary,ORG,Moser Baupartner GmbH,66,87,ORG,Moser Baupartner
+5437,boundary,EDU,HSG,222,225,EDU,HSG-Absolvent
+5440,omission,PER,Lehmann,353,360,,
+5440,boundary,PER,John Davis,337,347,PER,Mr. John Davis
+5440,label,EDU,ETH Zürich,96,106,ORG,ETH Zürich
+5445,boundary,ORG,Global Pharma Services GmbH,74,101,ORG,Global Pharma Services
+5445,label,JOB,Head of Treasury,49,65,ORG,Head of Treasury
+5448,label,JOB,Head of Sales,263,276,ORG,Head of Sales
+5448,label,JOB,Treasurer,44,53,ORG,Treasurer
+5449,label,JOB,Legal Counsel,82,95,ORG,Legal Counsel
+5461,label,JOB,Head of Finance,50,65,ORG,Head of Finance der Commodity Trading Partners AG
+5461,boundary,ORG,Commodity Trading Partners AG,70,99,ORG,Head of Finance der Commodity Trading Partners AG
+5463,boundary,ORG,Global Trade Solutions SA,75,100,ORG,Global Trade Solutions
+5463,label,JOB,Head of Treasury,50,66,ORG,Head of Treasury
+5466,omission,JOB,Head of Sales,280,293,,
+5468,omission,ORG,Retail Invest AG,66,82,,
+5469,boundary,PER,Robert Keller,22,35,PER,Herrn Robert Keller
+5469,label,EDU,Hotelfachschule Lausanne,399,423,ORG,Hotelfachschule Lausanne
+5469,omission,AGE,68,37,39,,
+5469,boundary,PER,Keller,310,316,PER,Herr Keller
+5471,boundary,EDU,ETH-Abschluss,395,408,EDU,ETH
+5471,omission,PER,Fischer,247,254,,
+5474,omission,JOB,Sales Director,257,271,,
+5475,boundary,ORG,Innovatec SA,50,62,ORG,SA
+5486,boundary,MONEY,CHF 25'000,353,363,MONEY,CHF 25'000.
+5486,omission,JOB,Sales Director,315,329,,
+5489,boundary,ORG,Graf & Partner Treuhand AG,83,109,ORG,Graf & Partner Treuhand
+5489,omission,PER,Graf,218,222,,
+5490,label,JOB,CFO,401,404,ORG,CFO
+5492,omission,JOB,Prokurist,442,451,,
+5492,boundary,PER,Keller,243,249,PER,Herr Keller
+5494,omission,JOB,Mitarbeiterin,327,340,,
+5500,omission,JOB,Exportleiter,45,57,,
+5500,boundary,MONEY,USD 850'000,236,247,MONEY,USD 850'000.
+5502,boundary,ORG,Digital Ventures GmbH,76,97,ORG,Digital Ventures GmbH.
+5502,omission,JOB,Office Managerin,51,67,,
+5503,boundary,PER,Christoph Meier,45,60,PER,Herrn Christoph Meier
+5504,omission,PER,Ziegler,269,276,,
+5504,omission,ORG,Logistik Transport AG,62,83,,
+5505,omission,ORG,Hoch- und Tiefbau Meier AG,40,66,,
+5514,omission,PER,Graf,301,305,,
+5514,omission,JOB,Managing Partner,51,67,,
+5514,omission,JOB,Senior Partner,188,202,,
+5529,boundary,JOB,Assistentin der Geschäftsleitung,48,80,JOB,Assistentin
+5532,omission,DATE,morgen,408,414,,
+5532,omission,PER,Vogel,278,283,,
+5532,boundary,ORG,Pharma Solutions GmbH,91,112,ORG,Pharma Solutions GmbH.
+5539,boundary,ORG,Montres Précision SA,64,84,ORG,Montres Précision
+5543,boundary,PER,Urs Meier,114,123,PER,Herrn Dr. Urs Meier
+5547,omission,JOB,Liquidator,46,56,,
+5547,omission,PER,Vogel,480,485,,
+5560,omission,ORG,Import Export Solutions AG,55,81,,
+5560,label,JOB,Head of Treasury,34,50,ORG,Head of Treasury
+5568,boundary,ORG,Swiss Commodity Traders Ltd.,70,98,ORG,Swiss Commodity Traders Ltd
+5580,omission,MONEY,EUR,357,360,,
+5580,omission,PER,Graf,193,197,,
+5580,boundary,PER,Thomas Graf,49,60,PER,Herrn Thomas Graf
+5580,label,JOB,Treasurer,62,71,ORG,Treasurer
+5580,omission,MONEY,CHF,340,343,,
+5605,omission,JOB,General Counsel,90,105,,
+5605,boundary,ORG,Swiss Engineering Group Holding AG,36,70,ORG,Swiss Engineering Group
+5609,label,EDU,HSG,326,329,ORG,HSG-Absolventin
+5617,omission,JOB,Eigentümer,46,56,,
+5617,boundary,ORG,Vogel Robotics GmbH,352,371,ORG,Vogel Robotics
+5626,boundary,JOB,IT-Leiter,49,58,JOB,Leiter bei
+5626,omission,JOB,Mitarbeiter,113,124,,
+5630,omission,JOB,Controller,187,197,,
+5633,boundary,JOB,Projektleiterin Finanzen,96,120,JOB,Projektleiterin
+5637,omission,DATE,Ende Mai,424,432,,
+5637,boundary,ORG,Global Trade Solutions GmbH,85,112,ORG,Global Trade Solutions
+5637,label,JOB,Head of Treasury,64,80,ORG,Head of Treasury
+5639,boundary,MONEY,CHF 25'000,198,208,MONEY,CHF 25'000.
+5639,omission,JOB,Verkaufsleiter,179,193,,
+5639,boundary,JOB,Inhaber und Geschäftsführer,23,50,JOB|JOB,Geschäftsführer|Inhaber
+5640,omission,MONEY,2 Mio.,430,436,,
+5640,boundary,ORG,TechSolutions Holding AG,50,74,ORG,TechSolutions
+5640,omission,JOB,Mitarbeiterinnen,325,341,,
+5642,boundary,JOB,Leiter International Projects,36,65,JOB,Leiter International
+5642,omission,NATION,asiatischen,233,244,,
+5642,omission,JOB,Werksleiter,359,370,,
+5644,omission,JOB,Head of Treasury,64,80,,
+5644,boundary,ORG,Global Trade Holding SA,85,108,ORG|ORG,Global Trade Holding|SA
+5649,omission,JOB,Sales Director,211,225,,
+5655,boundary,ORG,Swiss Logistics Solutions AG,170,198,ORG,Swiss Logistics Solutions
+5672,label,AGE,48 Jahre,441,449,DATE,48 Jahre
+5672,label,EDU,ETH Zürich,469,479,ORG,ETH Zürich
+5675,boundary,MONEY,CHF 350'000,239,250,MONEY,CHF 350'000.
+5675,boundary,DATE,Ende nächster Woche,368,387,DATE,nächster Woche
+5680,boundary,ORG,Global Trade Solutions SA,82,107,ORG,Global Trade Solutions
+5680,label,JOB,Head of Treasury,57,73,ORG,Head of Treasury
+5681,boundary,ORG,BioVenture Labs GmbH,141,161,ORG,BioVenture Labs
+5686,boundary,ORG,Digital Solutions GmbH,70,92,ORG,Digital Solutions
+5691,omission,JOB,Exportleiter,389,401,,
+5693,label,JOB,dipl. Bauingenieur ETH,379,401,ORG,ETH
+5693,boundary,JOB,designierter CEO,112,128,JOB,CEO
+5694,boundary,ORG,Logistik Express SA,109,128,ORG,Express SA
+5703,boundary,ORG,Global Trade Solutions Ltd.,66,93,ORG,Global Trade Solutions Ltd
+5703,omission,JOB,Treasury Manager,41,57,,
+5722,boundary,ORG,Swiss Metalworks GmbH,102,123,ORG,Swiss Metalworks
+5726,omission,ORG,Logistik Services GmbH,50,72,,
+5728,label,LOC,EU,101,103,ORG,EU
+5734,omission,PER,Fischer,244,251,,
+5737,omission,JOB,Verkaufsleiter,336,350,,
+5737,boundary,MONEY,CHF 20'000,397,407,MONEY,CHF 20'000.
+5743,omission,PER,Schmidt,351,358,,
+5743,omission,JOB,Head of Export,48,62,,
+5748,boundary,PER,Fischer,495,502,PER,Herr Fischer
+5754,omission,DATE,Juni,359,363,,
+5756,omission,PER,Brunner,419,426,,
+5756,label,JOB,ETH-Ingenieur,199,212,ORG,ETH-Ingenieur
+5762,omission,JOB,Managing Partner,72,88,,
+5767,omission,JOB,Office Managerin,46,62,,
+5767,omission,PER,Keller,437,443,,
+5767,omission,JOB,Controller,165,175,,
+5773,label,JOB,Head of Treasury,53,69,ORG,Head of Treasury
+5778,boundary,ORG,Innovatec Solutions GmbH,238,262,ORG,Innovatec Solutions
+5790,omission,JOB,Produktionsleiter,118,135,,
+5792,omission,JOB,Treasurer,47,56,,
+5794,omission,PER,Keller,306,312,,
+5794,boundary,JOB,IT-Leiter,50,59,JOB,Leiter der
+5799,boundary,LOC,USA,244,247,LOC,den USA
+5799,boundary,ORG,Swiss MedTech GmbH,96,114,ORG,Swiss MedTech GmbH.
+5800,boundary,LOC,Bern,89,93,LOC,Kanton Bern
+5801,label,EDU,HSG,170,173,ORG,HSG-Absolventin
+5801,omission,JOB,Anwalt,478,484,,
+5801,boundary,PER,Gfeller,156,163,PER,Frau Gfeller
+5802,omission,JOB,Head of Export,34,48,,
+5802,boundary,PER,Tanner,319,325,PER,Herrn Tanner
+5802,boundary,ORG,Seoul Bank Corp.,267,283,ORG,Seoul Bank Corp
+5809,boundary,ORG,Familiendruckerei Meier & Söhne AG,15,49,ORG,Meier & Söhne AG
+5809,label,EDU,HSG-Absolventen,128,143,ORG,HSG-Absolventen
+5811,boundary,ORG,BioGenTech GmbH,137,152,ORG,BioGenTech GmbH.
+5815,boundary,ORG,TechComponents Import AG,15,39,ORG,TechComponents
+5824,boundary,ORG,Helvetia Holding SA,41,60,ORG|ORG,Helvetia Holding|SA
+5824,omission,JOB,Treasurer,27,36,,
+5826,boundary,PER,Markus Keller,43,56,PER,Herrn Markus Keller
+5826,omission,PER,Keller,310,316,,
+5831,omission,ORG,Zürcher Immobilien AG,37,58,,
+5844,omission,PER,Herzog,311,317,,
+5852,boundary,PER,Meier,362,367,PER,Herr Meier
+5854,boundary,ORG,Handelsfirma Zuber & Co. AG,15,42,ORG,Zuber & Co. AG
+5854,label,JOB,HSG-Absolventin,236,251,ORG,HSG-Absolventin
+5859,omission,PER,Egger,350,355,,
+5859,omission,ORG,Pharma Holding AG,61,78,,
+5859,boundary,NATION,schweizerisch-deutsche,360,382,NATION|NATION,schweizerisch|deutsche
+5867,omission,PER,Richter,391,398,,
+5870,omission,PER,Berger,245,251,,
+5870,boundary,AGE,62 Jahre,333,341,AGE,62 Jahre alt
+5870,label,JOB,Managing Partner,97,113,ORG,Managing Partner
+5893,boundary,ORG,Swiss Exports SA,15,31,ORG,Swiss Exports
+5894,omission,PER,Fischer,351,358,,
+5894,boundary,ORG,Dublin Pharma Research Ltd.,141,168,ORG,Dublin Pharma Research Ltd
+5896,boundary,ORG,CodeCrafters GmbH,169,186,ORG,CodeCrafters GmbH.
+5896,boundary,ORG,Tech Innovators Holding AG,64,90,ORG,Tech Innovators Holding
+5897,boundary,PER,Markus Keller,43,56,PER,Herrn Markus Keller
+5897,omission,PER,Keller,274,280,,
+5898,boundary,ORG,Global Trade Solutions SA,82,107,ORG,Global Trade Solutions
+5898,label,JOB,Head of Treasury,57,73,ORG,Head of Treasury
+5899,omission,JOB,Finance Managerin,159,176,,
+5903,omission,PER,Schmidt,166,173,,
+5905,boundary,PER,Keller,253,259,PER,Herr Keller
+5905,boundary,PER,Markus Keller,43,56,PER,Herrn Markus Keller
+5910,boundary,JOB,Leiter Finanzen & Administration,50,82,JOB,Leiter Finanzen
+5913,boundary,ORG,LogiCore Transport AG,29,50,ORG,LogiCore
+5913,omission,PER,Fischer,304,311,,
+5916,boundary,LOC,USA,141,144,LOC,den USA
+5917,omission,JOB,Exportrisikoversicherung,205,229,,
+5919,label,JOB,VR-Mitglied,275,286,ORG,VR-Mitglied
+5919,boundary,ORG,Pharma Invest Holding SA,101,125,ORG|ORG,Pharma Invest Holding|SA
+5921,boundary,PER,Oliver Bachmann,31,46,PER,Herrn Oliver Bachmann
+5921,omission,JOB,Managing Partner,48,64,,
+5928,boundary,ORG,Innovatec Robotics SA,59,80,ORG,Robotics SA
+5929,omission,JOB,Treasurer,30,39,,
+5933,boundary,ORG,Global Trade Solutions SA,82,107,ORG,Global Trade Solutions
+5933,label,JOB,Head of Treasury,57,73,ORG,Head of Treasury
+5937,omission,DATE,Ende Juni,313,322,,
+5939,omission,JOB,Managing Partner,210,226,,
+5939,boundary,MONEY,CHF 50'000,269,279,MONEY,CHF 50'000.
+5939,omission,JOB,Office Managerin,47,63,,
+5945,omission,JOB,Gründer,107,114,,
+5945,omission,ORG,PharmaTech Innovations AG,61,86,,
+5947,boundary,MONEY,CHF 100'000,202,213,MONEY,CHF 100'000.
+5947,omission,ORG,Techno Holding AG,93,110,,
+5947,boundary,PER,Keller,317,323,PER,Herr Keller
+5951,boundary,ORG,Global Trade Solutions SA,83,108,ORG,Global Trade Solutions
+5951,label,JOB,Head of Treasury,58,74,ORG,Head of Treasury
+5957,omission,PER,Vogel,478,483,,
+5959,label,JOB,Head of Treasury,60,76,ORG,Head of Treasury
+5959,boundary,ORG,Global Trade Solutions GmbH,85,112,ORG,Global Trade Solutions
+5959,omission,NATION,asiatischen,511,522,,
+5961,boundary,PER,Martin,331,337,PER,Herrn Martin
+5964,omission,DATE,Ende der Woche,369,383,,
+5964,label,JOB,Treasurer,53,62,ORG,Treasurer
+5967,label,JOB,Head of Treasury,54,70,ORG,Head of Treasury
+5969,omission,JOB,Gründer,50,57,,
+5969,boundary,LOC,Waadt,89,94,LOC,Kanton Waadt
+5969,omission,PER,Brunner,327,334,,
+5969,boundary,EDU,HSG,174,177,EDU,HSG-Absolvent
+5971,boundary,PER,Martin Keller,51,64,PER,Herrn Martin Keller
+5992,boundary,JOB,Inhaber und Geschäftsführer,98,125,JOB|JOB,Inhaber|Geschäftsführer
+5992,boundary,LOC,Thurgau,263,270,LOC,Kanton Thurgau
+6002,boundary,PER,Peter Müller,210,222,PER,Herrn Peter Müller
+6003,omission,JOB,Verkaufsleiter,271,285,,
+6007,label,EDU,ETH-Ingenieur,410,423,ORG,ETH-Ingenieur
+6007,boundary,ORG,Tech Innovate Holding AG,67,91,ORG,Tech Innovate Holding
+6028,boundary,MONEY,EUR 850'000,201,212,MONEY,EUR 850'000.
+6034,omission,PER,Zürcher,370,377,,
+6037,label,JOB,ETH-Absolventin,109,124,EDU,ETH-Absolventin
+6042,label,EDU,EPFL,64,68,ORG,EPFL
+6052,label,JOB,Head of Operations,45,63,ORG,Head of Operations
+6052,omission,PER,Graf,224,228,,
+6052,label,EDU,HSG-Absolventin,235,250,ORG,HSG-Absolventin
+6079,omission,JOB,FX-Spezialisten,254,269,,
+6079,boundary,ORG,Global Trade Solutions SA,58,83,ORG,Global Trade Solutions
+6101,boundary,MONEY,CHF 500'000,232,243,MONEY,"CHF 500'000,"
+6105,boundary,MONEY,EUR 750'000,227,238,MONEY,EUR 750'000.
+6105,label,JOB,HSG-Absolvent,258,271,EDU,HSG-Absolvent
+6105,label,AGE,45 Jahre,277,285,DATE,45 Jahre
+6114,omission,JOB,Mitarbeiter,320,331,,
+6114,label,AGE,58 Jahre,94,102,DATE,58 Jahre
+6118,label,JOB,VR-Präsident,119,131,ORG,VR-Präsident
+6118,boundary,ORG,Tech Invest Holding AG,4,26,ORG,Tech Invest Holding
+6124,boundary,ORG,Swiss IT Solutions GmbH,57,80,ORG,Swiss IT Solutions
+6130,omission,PER,Fischer,421,428,,
+6136,omission,JOB,Verwaltungsrätin,89,105,,
+6138,boundary,PER,Klaus Berger,87,99,PER,Herrn Klaus Berger
+6138,label,JOB,Betriebsökonomin FH,296,315,ORG,Betriebsökonomin FH
+6144,boundary,MONEY,CHF 500'000,226,237,MONEY,CHF 500'000.
+6144,boundary,ORG,PharmaCorp Holding SA,56,77,ORG|ORG,SA|PharmaCorp
+6146,omission,ORG,Codex Software GmbH,29,48,,
+6147,label,JOB,ETH-Ingenieur,311,324,ORG,ETH-Ingenieur
+6156,boundary,AGE,38,130,132,AGE,38 Jahre alt
+6156,boundary,EDU,HSG-Abschluss,151,164,EDU,HSG
+6164,boundary,ORG,MedPharma Solutions GmbH,54,78,ORG,MedPharma Solutions
+6166,omission,JOB,Verwaltungsratspräsidenten,16,42,,
+6166,boundary,DATE,Ende Juni 2024,224,238,DATE,Juni 2024
+6166,label,ORG,Berlin Mode GmbH,287,303,LOC,Berlin
+6188,label,EDU,HSG-Absolventin,85,100,ORG,HSG-Absolventin
+6193,boundary,ORG,Digital Solutions GmbH,50,72,ORG,Digital Solutions GmbH i.L.
+6195,boundary,MONEY,EUR 850'000,164,175,MONEY,EUR 850'000.
+6201,omission,JOB,Managing Director,87,104,,
+6202,omission,JOB,Stiftungsratspräsident,32,54,,
+6205,boundary,PER,Baumann,324,331,PER,Herr Baumann
+6211,boundary,AGE,58,363,365,AGE,58 Jahre alt
+6214,boundary,PER,Markus Keller,18,31,PER,Herrn Markus Keller
+6215,boundary,ORG,Familienbäckerei Huber GmbH,42,69,ORG,Huber GmbH
+6215,label,EDU,HSG,133,136,ORG,HSG-Absolventin
+6218,boundary,MONEY,USD 800'000,142,153,MONEY,USD 800'000.
+6219,omission,PER,Schmid,306,312,,
+6223,boundary,PER,Meier,421,426,PER,Frau Meier
+6225,boundary,MONEY,CHF 5'000,199,208,MONEY,CHF 5'000.
+6225,omission,JOB,Mitarbeiter,102,113,,
+6238,boundary,ORG,Projektgesellschaft Windpark GmbH,36,69,ORG,Projektgesellschaft Windpark
+6238,boundary,ORG,Energie Holding AG,140,158,ORG,Energie Holding
+6242,omission,JOB,Betriebsökonom FH,156,173,,
+6242,boundary,ORG,Baumann Transport GmbH,40,62,ORG,Baumann
+6242,omission,AGE,65,83,85,,
+6245,omission,ORG,Energie Werke Luzern AG,46,69,,
+6245,label,JOB,ETH-Ingenieur,231,244,ORG,ETH-Ingenieur
+6246,label,EDU,Universität St. Gallen (HSG),210,238,ORG|ORG,Universität St. Gallen|HSG
+6253,omission,DATE,Freitag,220,227,,
+6253,omission,JOB,TEF-Spezialisten,275,291,,
+6253,boundary,MONEY,USD 750'000,171,182,MONEY,USD 750'000.
+6253,omission,ORG,Import Export Trading Ltd.,40,66,,
+6257,boundary,PER,Baumann,266,273,PER,Herrn Baumann
+6263,boundary,MONEY,EUR 75'000,260,270,MONEY,EUR 75'000.
+6265,boundary,DATE,Ende nächster Woche,184,203,DATE,nächster Woche
+6280,omission,JOB,Controller,127,137,,
+6292,boundary,LOC,Zug,106,109,LOC,Kanton Zug
+6300,omission,JOB,Alleininhaber,22,35,,
+6300,boundary,AGE,58 Jahre,111,119,AGE,58 Jahre alt
+6300,omission,PER,Fischer,281,288,,
+6300,omission,JOB,Anwalt,269,275,,
+6304,boundary,MONEY,EUR 850'000,204,215,MONEY,EUR 850'000.
+6304,boundary,ORG,Milano Meccanica S.p.A.,241,264,ORG,Milano Meccanica S.p
+6304,omission,DATE,Freitag,314,321,,
+6317,omission,JOB,VR-Präsident,91,103,,
+6319,boundary,LOC,Aargau,339,345,LOC,Kanton Aargau
+6319,boundary,MONEY,CHF 450'000,154,165,MONEY,CHF 450'000.
+6323,omission,ORG,Import Export Welt AG,40,61,,
+6323,boundary,ORG,Lisboa Trading Lda.,188,207,ORG,Lisboa Trading Lda
+6340,boundary,MONEY,CHF 100'000,166,177,MONEY,CHF 100'000.
+6340,boundary,ORG,Mode Suisse SA,29,43,ORG,Suisse SA
+6342,boundary,MONEY,USD 200'000,196,207,MONEY,USD 200'000.
+6342,label,JOB,Leiterin Treasury,27,44,ORG,Treasury
+6349,label,JOB,Sohn,124,128,PER,Sohn
+6350,boundary,MONEY,CHF 100'000,248,259,MONEY,CHF 100'000.
+6350,omission,JOB,Prokuristin,22,33,,
+6351,omission,JOB,Wirtschaftsprüfer,303,320,,
+6352,boundary,ORG,Global Chemical Corp.,40,61,ORG,Global Chemical Corp
+6354,boundary,ORG,Kaufmann Transport GmbH,37,60,ORG,Kaufmann Transport
+6371,boundary,MONEY,CHF 850'000,373,384,MONEY,CHF 850'000.
+6371,label,EDU,Holzbau-Ingenieur FH,290,310,ORG,Holzbau-Ingenieur FH
+6378,omission,MONEY,CHF,151,154,,
+6378,label,JOB,Head of Treasury,34,50,ORG,Head of Treasury
+6378,boundary,PER,Baker,333,338,PER,Herrn Baker
+6384,boundary,ORG,Baumann Logistik AG,4,23,ORG,Baumann
+6391,label,JOB,Office Managerin,29,45,ORG,Office
+6397,boundary,PER,Christoph Berger,72,88,PER,Dr. Christoph Berger
+6402,boundary,MONEY,CHF 20'000,242,252,MONEY,CHF 20'000.
+6402,omission,JOB,Verkaufsleiter,149,163,,
+6402,boundary,JOB,Assistentin der Geschäftsleitung,20,52,JOB,Assistentin
+6403,omission,ORG,Feinmechanik GmbH,309,326,,
+6405,boundary,ORG,Innovatech Solutions GmbH,64,89,ORG,Innovatech Solutions GmbH.
+6405,omission,JOB,Office Manager,41,55,,
+6405,omission,JOB,Softwareentwickler,100,118,,
+6421,omission,PER,Schmidt,327,334,,
+6421,boundary,PER,Peter Keller,22,34,PER,Herrn Peter Keller
+6431,boundary,MONEY,EUR 1'245.50,338,350,MONEY,EUR 1'245.50.
+6431,label,MONEY,EUR,296,299,ORG,EUR-Kontos
+6431,omission,ORG,IT-Consulting Frischknecht GmbH,43,74,,
+6431,omission,JOB,Partner,129,136,,
+6432,omission,JOB,VR-Präsident,48,60,,
+6432,boundary,ORG,Innovation Holding SA,65,86,ORG,SA
+6433,boundary,PER,Huber,351,356,PER,Herrn Huber
+6434,boundary,MONEY,CHF 150'000,202,213,MONEY,CHF 150'000.
+6434,boundary,MONEY,CHF 60'000,294,304,MONEY,CHF 60'000.
+6438,boundary,ORG,Swiss Food Solutions SA,29,52,ORG,Swiss Food Solutions
+6438,omission,JOB,Produktionsleiter,70,87,,
+6438,omission,JOB,Finanzchef,146,156,,
+6441,boundary,ORG,Alpin Chemie Holding AG,46,69,ORG,Alpin Chemie Holding
+6441,label,JOB,VRP,89,92,ORG,VRP
+6441,label,JOB,HSG-Absolventin,216,231,ORG,HSG-Absolventin
+6442,boundary,PER,Peter Graf,10,20,PER,Peter Graf von der Digital Solutions AG
+6442,boundary,JOB,designierte Geschäftsführer,266,293,JOB,Geschäftsführer
+6442,label,ORG,Digital Solutions AG,29,49,PER,Peter Graf von der Digital Solutions AG
+6452,boundary,ORG,Immobilien AG Zürich,242,262,ORG,AG Zürich
+6452,boundary,MONEY,CHF 250'000,269,280,MONEY,CHF 250'000.
+6452,boundary,ORG,Immobilien AG Zürich,380,400,ORG,AG Zürich
+6456,label,JOB,Treasurer,4,13,ORG,Treasurer
+6457,boundary,ORG,Metzgerei Brunner & Sohn AG,22,49,ORG,Brunner & Sohn AG
+6457,label,EDU,dipl. Fleischsommelier,152,174,PER,Fleischsommelier
+6462,omission,DATE,Ende dieser Woche,271,288,,
+6479,boundary,ORG,Creative Design GmbH,39,59,ORG,Creative Design GmbH.
+6479,boundary,MONEY,CHF 15'000,322,332,MONEY,CHF 15'000.
+6481,boundary,ORG,Leman Ventures SA,47,64,ORG|ORG,SA|Leman Ventures
+6494,boundary,ORG,Global Trade Partners GmbH,54,80,ORG,Global Trade Partners
+6494,omission,JOB,Head of Treasury,36,52,,
+6509,boundary,PER,Baker,268,273,PER,Herrn Baker
+6510,omission,JOB,Finanzchefin,32,44,,
+6512,boundary,ORG,PharmaChem Logistics SA,60,83,ORG,Logistics SA
+6513,boundary,EDU,ETH-Architektin,199,214,EDU,ETH
+6521,boundary,JOB,Sachbearbeiter Buchhaltung,194,220,JOB,Sachbearbeiter
+6523,boundary,ORG,PharmaChem International SA,43,70,ORG,International SA
+6533,boundary,ORG,Pharma Generica Holding AG,46,72,ORG,Pharma Generica Holding
+6533,label,JOB,VRP,87,90,ORG,VRP
+6533,boundary,JOB,M&A-Berater,281,292,JOB,Berater
+6534,boundary,ORG,Transport & Logistik Meier GmbH,4,35,ORG,Transport & Logistik Meier
+6536,boundary,AGE,45 Jahre,232,240,AGE,45 Jahre alt
+6541,boundary,ORG,Cybersec AI AG,121,135,ORG,AI AG
+6541,boundary,MONEY,CHF 100'000,353,364,MONEY,CHF 100'000.
+6548,boundary,AGE,64 Jahre,89,97,AGE,64 Jahre alt
+6548,omission,JOB,Holzbauingenieur,169,185,,
+6566,omission,JOB,VR-Präsident,27,39,,
+6574,boundary,ORG,Frei Logistik GmbH,40,58,ORG,Frei Logistik GmbH.
+6574,label,EDU,HSG-Absolvent,275,288,ORG,HSG-Absolvent
+6575,boundary,ORG,Modehaus Schneider AG,12,33,ORG,Schneider AG
+6580,omission,JOB,Bauingenieurin,183,197,,
+6581,omission,ORG,Logistik Transport AG,44,65,,
+6586,boundary,PER,Markus Steiner,16,30,PER,Herrn Markus Steiner
+6586,boundary,MONEY,EUR 500'000,160,171,MONEY,EUR 500'000.
+6586,boundary,PER,Steiner,253,260,PER,Herrn Steiner
+6586,omission,DATE,Freitag,299,306,,
+6589,omission,JOB,Geschäftsführers,287,303,,
+6596,omission,PER,Fischer,110,117,,
+6596,boundary,AGE,62 Jahre,119,127,AGE,62 Jahre alt
+6596,omission,JOB,Anwalt,314,320,,
+6597,boundary,MONEY,USD 250'000,238,249,MONEY,USD 250'000.
+6597,omission,ORG,Tech-Import GmbH,71,87,,
+6600,omission,JOB,Gründer,112,119,,
+6600,label,EDU,ETH-Absolvent,147,160,ORG,ETH-Absolvent
+6607,boundary,MONEY,CHF 850'000,135,146,MONEY,CHF 850'000.
+6628,boundary,ORG,Helvetia Logistik SA,50,70,ORG,Helvetia Logistik
+6633,omission,JOB,Controller,178,188,,
+6638,omission,JOB,Gründer,77,84,,
+6638,boundary,MONEY,CHF 150'000,214,225,MONEY,CHF 150'000.
+6638,label,JOB,ETH-Physiker,112,124,ORG,ETH-Physiker
+6638,omission,DATE,Q4,327,329,,
+6639,omission,ORG,Maschinenbau Ost AG,59,78,,
+6645,boundary,LOC,"Rue du Rhône 15, 1204 Genf",143,169,LOC|LOC,Rue du Rhône 15|Genf
+6655,boundary,MONEY,CHF 20'000,345,355,MONEY,CHF 20'000.
+6655,omission,JOB,Verkaufsleiter,308,322,,
+6657,omission,NATION,schwedische,271,282,,
+6666,omission,PER,Graf,294,298,,
+6666,omission,JOB,Immobilienverantwortlichen,16,42,,
+6666,omission,ORG,Retail Invest Holding AG,47,71,,
+6669,boundary,MONEY,CHF 750'000,146,157,MONEY,CHF 750'000.
+6669,label,MONEY,3 Monate,293,301,DATE,3 Monate
+6672,omission,DATE,heute Abend,267,278,,
+6672,boundary,ORG,Global Trade GmbH,60,77,ORG,Global Trade GmbH.
+6673,label,AGE,62 Jahre,96,104,DATE,62 Jahre
+6673,omission,JOB,dipl. Holzbauingenieur,180,202,,
+6677,omission,JOB,Physiker,244,252,,
+6677,label,EDU,ETH Zürich,260,270,ORG,ETH Zürich
+6678,boundary,MONEY,CHF 80'000,192,202,MONEY,CHF 80'000.
+6685,omission,JOB,Flottenmanagerin,20,36,,
+6690,boundary,LOC,Zug,336,339,LOC,Kanton Zug
+6690,boundary,MONEY,CHF 850'000,267,278,MONEY,CHF 850'000.
+6690,label,JOB,ETH-Ingenieur,367,380,ORG,ETH-Ingenieur
+6700,boundary,DATE,Ende nächster Woche,294,313,DATE,nächster Woche
+6704,label,PER,Beat Zürcher,0,12,ORG,Beat Zürcher
+6707,boundary,PER,Peter Baumann,19,32,PER,Herrn Peter Baumann
+6707,label,JOB,ETH-Ingenieur,141,154,ORG,ETH-Ingenieur
+6707,omission,JOB,Patron,49,55,,
+6719,boundary,ORG,Modehaus Gasser AG,35,53,ORG,Gasser AG
+6722,omission,JOB,Gründerin,41,50,,
+6722,label,ORG,Bio-Food Produzenten AG,55,78,LOC,Bio-Food
+6723,label,JOB,ETH-Ingenieur,316,329,ORG,ETH-Ingenieur
+6733,omission,JOB,Controller,216,226,,
+6733,omission,MONEY,CHF,139,142,,
+6739,omission,DATE,morgen Mittag,261,274,,
+6739,omission,ORG,Retail Holding AG,18,35,,
+6739,label,JOB,Treasurer,4,13,ORG,Treasurer
+6747,omission,MONEY,CHF,173,176,,
+6747,omission,JOB,Treasurer,14,23,,
+6747,omission,PER,Lee,289,292,,
+6756,boundary,ORG,Fischer Innovations GmbH,244,268,ORG,Fischer Innovations
+6756,boundary,MONEY,EUR 800'000,150,161,MONEY,EUR 800'000. 2.
+6758,boundary,AGE,32 Jahre,125,133,AGE,32 Jahre alt
+6758,label,JOB,ETH-Ingenieur,142,155,ORG,ETH-Ingenieur
+6762,boundary,MONEY,CHF 100'000,219,230,MONEY,CHF 100'000.
+6762,omission,ORG,Bauplan Totalunternehmung AG,71,99,,
+6771,boundary,PER,Robert Keller,18,31,PER,Herrn Robert Keller
+6776,omission,AGE,45,259,261,,
+6776,label,EDU,HSG-Absolventin,263,278,ORG,HSG-Absolventin
+6780,label,JOB,Treasurer,24,33,ORG,Treasurer
+6782,boundary,MONEY,CHF 50'000,215,225,MONEY,CHF 50'000.
+6783,boundary,ORG,Digital Marketing Holding GmbH,91,121,ORG,Digital Marketing Holding
+6783,omission,ORG,Digital Marketing Services AG,19,48,,
+6783,omission,JOB,Gründer,218,225,,
+6785,omission,DATE,morgen Mittag,202,215,,
+6786,boundary,MONEY,EUR 600'000,153,164,MONEY,EUR 600'000.
+6787,boundary,LOC,USA,217,220,LOC,den USA
+6787,boundary,ORG,Geneva Fine Watchmakers SA,52,78,ORG|ORG,SA|Geneva Fine Watchmakers
+6787,omission,AGE,45,88,90,,
+6792,label,JOB,ETH-Ingenieur,17,30,ORG,ETH-Ingenieur
+6817,omission,JOB,Treasury-Manager,13,29,,
+6817,boundary,ORG,Retail Shops Switzerland AG,34,61,ORG,Switzerland AG
+6820,omission,MONEY,CHF,190,193,,
+6833,label,JOB,VR-Präsident,109,121,ORG,VR-Präsident
+6833,boundary,ORG,Immobilien Invest AG,4,24,ORG,Invest AG
+6838,omission,ORG,Global Exports SA,70,87,,
+6838,omission,MONEY,CHF,229,232,,
+6839,boundary,PER,Peter Fischer,34,47,PER,Herrn Peter Fischer
+6841,label,JOB,COO,113,116,ORG,COO
+6850,omission,DATE,sofort,286,292,,
+6850,boundary,ORG,Alpine Trading Ltd.,29,48,ORG,Alpine Trading Ltd
+6852,omission,PER,Zimmermann,286,296,,
+6852,label,ORG,Zürich Logistik AG,29,47,LOC,Zürich
+6855,omission,JOB,VR-Präsident,153,165,,
+6858,omission,JOB,Partners,162,170,,
+6862,omission,ORG,Logistik Welt AG,45,61,,
+6871,omission,JOB,Business Partner,334,350,,
+6871,omission,AGE,45,96,98,,
+6873,omission,DATE,morgen Mittag,379,392,,
+6874,boundary,ORG,Global Trade Solutions SA,49,74,ORG,Global Trade Solutions
+6874,label,JOB,Head of Treasury,28,44,ORG,Head of Treasury
+6876,omission,DATE,15. Mai,374,381,,
+6876,omission,JOB,Partnerin,16,25,,
+6876,omission,JOB,Senior Consultant,118,135,,
+6876,boundary,LOC,USA,252,255,LOC,den USA
+6881,boundary,DATE,Q1 2024,405,412,DATE,2024
+6883,boundary,ORG,Fischer Deutschland GmbH,488,512,ORG,Fischer Deutschland
+6883,label,AGE,64 Jahre,127,135,DATE,64 Jahre
+6883,label,EDU,ETH,195,198,ORG,ETH-Ingenieur
+6885,boundary,ORG,AlpenEnergie Holding AG,46,69,ORG,AlpenEnergie Holding
+6885,label,JOB,VRP,89,92,ORG,VRP
+6888,omission,DATE,morgen Mittag,316,329,,
+6888,label,JOB,HR-Managerin,22,34,ORG,HR-Managerin
+6892,label,JOB,ETH-Ingenieur,137,150,ORG,ETH-Ingenieur
+6894,omission,JOB,Managing Partner,236,252,,
+6894,omission,JOB,Office Manager,117,131,,
+6899,boundary,ORG,Global Trade Solutions GmbH,59,86,ORG,Global Trade Solutions
+6899,omission,DATE,Ende Q3,177,184,,
+6899,label,JOB,Head of Treasury,34,50,ORG,Head of Treasury
+6908,label,JOB,Leiterin Treasury,326,343,ORG,Treasury
+6908,boundary,PER,Markus Keller,32,45,PER,Herrn Markus Keller
+6910,omission,MONEY,EUR,356,359,,
+6910,omission,ORG,Innovatec Solutions AG,111,133,,
+6910,boundary,JOB,Assistentin der GL,148,166,JOB,Assistentin
+6910,omission,MONEY,USD,364,367,,
+6916,boundary,PER,Simon Weber,74,85,PER,Treasury-Mitarbeiter Simon Weber
+6916,label,JOB,Treasury-Mitarbeiter,53,73,PER,Treasury-Mitarbeiter Simon Weber
+6922,omission,AGE,68,38,40,,
+6927,label,EDU,HSG-Absolventin,127,142,ORG,HSG-Absolventin
+6927,omission,AGE,68,83,85,,
+6935,omission,JOB,Anwalt,308,314,,
+6935,boundary,PER,Fuchs,323,328,PER,Dr. Fuchs
+6935,boundary,ORG,LogiSwiss GmbH,33,47,ORG,LogiSwiss GmbH.
+6941,boundary,MONEY,ca. 400'000 EUR,243,258,MONEY,400'000 EUR
+6941,label,ORG,Alpinholz AG,27,39,LOC,Alpinholz
+6941,omission,JOB,Produktionsleiter,130,147,,
+6943,omission,PER,Keller,265,271,,
+6962,omission,JOB,Anwalt,287,293,,
+6962,omission,AGE,68,24,26,,
+6962,omission,AGE,35,60,62,,
+6962,omission,ORG,Bautechnik Fischer & Sohn AG,72,100,,
+6973,omission,JOB,Partnerin,149,158,,
+6981,omission,MONEY,BRL 5 Mio,172,181,,
+6986,boundary,ORG,ChocoSwiss AG,42,55,ORG,ChocoSwiss
+6986,label,JOB,Head of Treasury,21,37,ORG,Head of Treasury
+6987,omission,MONEY,250k,141,145,,
+6987,omission,ORG,Präzisionsmechanik GmbH,22,45,,
+6987,omission,JOB,Anwalt,257,263,,
+6989,boundary,ORG,Immo-Invest Partner AG,21,43,ORG,Immo-Invest Partner
+6996,omission,PER,Fuchs,232,237,,
+6996,omission,MONEY,25k CHF,183,190,,
+6996,boundary,ORG,Global Food Trading GmbH,54,78,ORG,Global Food Trading GmbH.
+6996,omission,PER,Keller,293,299,,
+6996,omission,JOB,Sales Director,111,125,,
+6997,label,JOB,ETH-Ingenieur,118,131,ORG,ETH-Ingenieur
+6997,boundary,PER,Thomas Fischer,102,116,PER,Sohn Thomas Fischer
+7003,label,AGE,65 Jahre,104,112,DATE,65 Jahre
+7003,omission,MONEY,ca. 180k,157,165,,
+7005,boundary,ORG,Gourmet Food Import GmbH,52,76,ORG,Gourmet Food Import GmbH.
+7009,omission,JOB,Produktionsleiter,68,85,,
+7009,omission,MONEY,CAD 500k,311,319,,
+7010,boundary,ORG,CoreIT Systems GmbH,93,112,ORG,"CoreIT Systems GmbH.
+*   "
+7015,boundary,ORG,IT-Beratung Novatec GmbH,36,60,ORG,Novatec GmbH
+7015,omission,JOB,Office Managerin,15,31,,
+7019,boundary,MONEY,USD 800'000,110,121,MONEY,USD 800'000.
+7020,omission,JOB,Partnerin,26,35,,
+7020,omission,ORG,Architekturbüro Form & Raum AG,40,70,,
+7024,label,JOB,ETH-Absolvent,103,116,EDU,ETH-Absolvent
+7024,omission,AGE,65,25,27,,
+7028,label,LOC,Schweizer,115,124,NATION,Schweizer
+7030,boundary,ORG,Digital Solutions Holding AG,77,105,ORG,Digital Solutions Holding
+7033,omission,AGE,68,28,30,,
+7033,label,EDU,HSG,66,69,ORG,HSG-Absolventin
+7033,boundary,ORG,Brunner Spielwaren AG,98,119,ORG,Brunner
+7044,label,ORG,Textilimport Rossi & Co.,2,26,LOC,Rossi & Co.
+7044,boundary,MONEY,USD 350'000,97,108,MONEY,USD 350'000.
+7047,boundary,ORG,Walter Haustechnik GmbH,37,60,ORG,Walter Haustechnik GmbH.
+7047,omission,DATE,Herbst,248,254,,
+7057,omission,DATE,Q4,120,122,,
+7057,omission,DATE,9 Uhr,224,229,,
+7057,omission,LOC,USA,103,106,,
+7062,boundary,MONEY,EUR 600'000,151,162,MONEY,EUR 600'000.
+7072,omission,DATE,15. September,267,280,,
+7075,omission,MONEY,10 Mio.,133,140,,
+7077,boundary,LOC,Luzern,62,68,LOC,Kanton Luzern
+7077,boundary,ORG,Holzbau Amstutz GmbH,31,51,ORG,Holzbau Amstutz
+7079,omission,MONEY,50k,294,297,,
+7081,omission,DATE,Ende der Woche,382,396,,
+7082,omission,DATE,Freitag,266,273,,
+7083,omission,DATE,gestern,171,178,,
+7085,omission,JOB,Gründer,19,26,,
+7085,omission,AGE,62,104,106,,
+7085,omission,JOB,Anwalt,269,275,,
+7091,boundary,ORG,Frei Transporte GmbH,36,56,ORG,Frei Transporte GmbH. Will
+7098,omission,JOB,Partner,166,173,,
+7098,omission,ORG,IT Consulting Fischer AG,21,45,,
+7112,omission,ORG,Meier Import Export AG,31,53,,
+7119,omission,JOB,Exportleiterin,32,46,,
+7130,boundary,PER,Schmid,282,288,PER,Dr. Schmid
+7130,label,JOB,CFO,106,109,ORG,CFO
+7133,omission,MONEY,3 Mio,191,196,,
+7136,boundary,ORG,Future Robotics GmbH,97,117,ORG,Future Robotics GmbH. Kontoeröffnungsunterlagen
+7139,omission,ORG,Import Export AG,47,63,,
+7139,boundary,MONEY,USD 750'000,86,97,MONEY,USD 750'000.
+7139,omission,JOB,Sales Director,200,214,,
+7139,label,JOB,Head of Treasury,26,42,ORG,Head of Treasury
+7140,boundary,EDU,ETH-Ingenieurin,117,132,EDU,ETH
+7140,omission,DATE,Januar,147,153,,
+7144,boundary,ORG,Handelsfirma Global AG,24,46,ORG,Global AG
+7149,omission,JOB,Produktionsleiter,79,96,,
+7154,omission,JOB,Gründerin,34,43,,
+7162,omission,DATE,Ende der Woche,215,229,,
+7166,omission,ORG,Logistik Express GmbH,21,42,,
+7168,omission,JOB,Sohn,251,255,,
+7173,omission,JOB,Patron,31,37,,
+7173,omission,EDU,IMD-Absolventin,132,147,,
+7185,omission,JOB,Anwältin,46,54,,
+7185,boundary,PER,Thomas Meier,249,261,PER,Sohn Thomas Meier
+7185,omission,AGE,72,202,204,,
+7186,omission,MONEY,CHF,208,211,,
+7187,omission,DATE,morgen,250,256,,
+7187,boundary,JOB,designierte CEO,269,284,JOB,CEO
+7189,omission,DATE,übermorgen,286,296,,
+7190,omission,LOC,Romandie,214,222,,
+7192,boundary,ORG,Ticino Fashion Group SA,31,54,ORG,Ticino Fashion Group
+7197,boundary,AGE,28,186,188,AGE,28 Jahre alt
+7197,label,EDU,ETH-Absolvent,203,216,ORG,ETH-Absolvent
+7197,omission,JOB,Gründer,58,65,,
+7200,omission,DATE,30.06.,160,166,,
+7212,boundary,AGE,32 Jahre,234,242,AGE,32 Jahre alt
+7216,omission,ORG,Export Plus Handels GmbH,50,74,,
+7221,omission,AGE,68,72,74,,
+7221,label,EDU,HSG,133,136,ORG,HSG-Absolventin
+7221,boundary,ORG,Transport Fischer & Co.,23,46,ORG,Transport Fischer & Co
+7230,boundary,ORG,Swiss Food Solutions SA,27,50,ORG,Swiss Food Solutions
+7238,boundary,ORG,Logistik Services SA,27,47,ORG,Logistik Services
+7239,omission,AGE,65,32,34,,
+7239,omission,AGE,38,67,69,,
+7248,boundary,ORG,Swiss IT Solutions GmbH,66,89,ORG,"Swiss IT Solutions GmbH.
+- Die"
+7260,omission,JOB,Sales Director,230,244,,
+7268,omission,JOB,Mitarbeiter Buchhaltung,179,202,,
+7279,boundary,MONEY,USD 80'000,129,139,MONEY,"USD 80'000.
+"
+7283,omission,MONEY,GBP,298,301,,
+7283,omission,MONEY,EUR,290,293,,
+7283,label,PER,Beat Pfister,2,14,ORG,Beat Pfister
+7283,omission,MONEY,ca. 2.5 Mio CHF,169,184,,
+7287,omission,AGE,35,143,145,,
+7287,omission,PER,Beat Lehmann,18,30,,
+7287,boundary,PER,Michael Lehmann,126,141,PER,Sohn Michael Lehmann
+7287,label,EDU,HSG,147,150,ORG,HSG
+7289,boundary,MONEY,USD 300'000,247,258,MONEY,USD 300'000.
+7289,label,PER,Hanspeter Gfeller,370,387,ORG,VR Hanspeter Gfeller
+7289,label,JOB,VR,367,369,ORG,VR Hanspeter Gfeller
+7295,label,JOB,ETH-Ingenieur,233,246,ORG,ETH-Ingenieur
+7298,boundary,ORG,TechSolutions Holding AG,6,30,ORG,TechSolutions
+7298,boundary,ORG,Innovatech Robotics GmbH,57,81,ORG,Innovatech Robotics GmbH.
+7303,boundary,PER,Huber,17,22,PER,Herr Huber
+7304,omission,AGE,32,27,29,,
+7305,boundary,ORG,Swiss IT Solutions SA,2,23,ORG,Swiss IT Solutions
+7306,omission,JOB,Head of Treasury,126,142,,
+7310,omission,JOB,Trader,17,23,,
+7321,omission,ORG,Innovatec Robotics AG,25,46,,
+7326,label,JOB,Head of Trade Finance,31,52,ORG,Head of Trade Finance
+7345,omission,AGE,23,251,253,,
+7354,label,JOB,Leiterin Treasury,47,64,ORG,Treasury
+7354,omission,MONEY,EUR,220,223,,
+7354,omission,AGE,67,314,316,,
+7354,label,MONEY,USD,228,231,ORG,USD Exposures
+7361,boundary,ORG,Handelsfirma Zürich AG,49,71,ORG,Zürich AG
+7361,omission,JOB,Controller,244,254,,
+7375,omission,DATE,Ende der Woche,319,333,,
+7380,boundary,MONEY,CHF 12.5 Mio,98,110,MONEY,CHF 12.5 Mio.
+7380,omission,DATE,morgen,253,259,,
+7385,label,JOB,Verwaltungsrätin,33,49,PER,Verwaltungsrätin
+7386,omission,AGE,65,14,16,,
+7389,omission,JOB,Juristin,39,47,,
+7395,boundary,ORG,Holzbau Gasser GmbH,30,49,ORG,Holzbau Gasser
+7395,boundary,MONEY,CHF 800'000,114,125,MONEY,CHF 800'000.
+7413,boundary,MONEY,EUR 800'000,248,259,MONEY,"EUR 800'000.
+"
+7413,label,JOB,ETH-Ingenieur,132,145,ORG,ETH-Ingenieur
+7413,omission,AGE,65,71,73,,
+7416,omission,PER,Weber,153,158,,
+7416,boundary,ORG,Innovatec Robotics GmbH,29,52,ORG,"Innovatec Robotics GmbH.
+- Planen"
+7416,boundary,ORG,Future Automation AG,123,143,ORG,Future Automation AG heissen
+7421,boundary,MONEY,CHF 3.5 Mio,145,156,MONEY,CHF 3.5 Mio.
+7421,omission,ORG,Baustoff Handel AG,31,49,,
+7427,boundary,MONEY,CHF 600'000,138,149,MONEY,CHF 600'000.
+7427,omission,JOB,Flottenmanager,14,28,,
+7428,omission,JOB,Assistenten,284,295,,
+7428,boundary,ORG,CleanTech Solutions GmbH,72,96,ORG,CleanTech Solutions GmbH.
+7433,boundary,ORG,Hofer Bau GmbH,55,69,ORG,"Hofer Bau GmbH.
+- Will"
+7435,omission,PER,Markus Egger,55,67,,
+7437,omission,JOB,Produktionsleiter,99,116,,
+7437,boundary,MONEY,CHF 500'000,73,84,MONEY,CHF 500'000.
+7456,label,JOB,CFO,17,20,ORG,CFO
+7457,boundary,PER,Meier,57,62,PER,Frau Meier
+7457,omission,JOB,Mitarbeiter,96,107,,
+7459,omission,DATE,morgen Mittag,172,185,,
+7459,omission,ORG,Global Trade SA,2,17,,
+7461,boundary,ORG,Ticino Fashion Group SA,28,51,ORG,Ticino Fashion Group
+7465,boundary,DATE,Q1 2025,183,190,DATE,2025
+7465,omission,MONEY,ca. 1 Mio CHF,139,152,,
+7467,boundary,MONEY,USD 850'000,185,196,MONEY,USD 850'000.
+7467,label,JOB,Head of Trade Finance,40,61,ORG,Head of Trade Finance
+7468,omission,ORG,BH Immobilienverwaltung GmbH,21,49,,
+7474,omission,DATE,20. Mai,97,104,,
+7478,boundary,ORG,IT Consulting Meier GmbH,47,71,ORG,"IT Consulting Meier GmbH.
+- Firma"
+7478,label,JOB,ETH-Ingenieur,225,238,ORG,ETH-Ingenieur
+7481,omission,JOB,Patron,299,305,,
+7481,omission,AGE,68,25,27,,
+7481,label,EDU,HSG-Absolvent,123,136,ORG,HSG-Absolvent
+7481,omission,AGE,32,58,60,,
+7482,omission,JOB,Filialleiter,52,64,,
+7486,omission,JOB,Gründer,28,35,,
+7486,label,EDU,HSG-Absolvent,112,125,ORG,HSG-Absolvent
+7486,boundary,MONEY,EUR 1.5 Mio,219,230,MONEY,EUR 1.5 Mio.
+7490,boundary,MONEY,USD 850'000,148,159,MONEY,"USD 850'000.
+"
+7490,omission,ORG,Maschinenbau International GmbH,33,64,,
+7507,omission,PER,Meier,233,238,,
+7507,label,EDU,ETH,250,253,ORG,ETH
+7513,label,MONEY,USD,298,301,ORG,USD
+7513,omission,JOB,Physiker,142,150,,
+7513,omission,MONEY,EUR,290,293,,
+7514,boundary,ORG,Modehaus Schneider AG,57,78,ORG,Schneider AG
+7514,label,EMAIL,ceo.office@schneider.ch,390,413,JOB,ceo
+7514,omission,DATE,zwei Wochen,276,287,,
+7519,omission,MONEY,50k CHF,132,139,,
+7520,omission,AGE,67,78,80,,
+7526,boundary,ORG,PharmaTec Schweiz GmbH,27,49,ORG,PharmaTec Schweiz
+7526,boundary,MONEY,EUR 4.2 Mio,244,255,MONEY,EUR 4.2 Mio.
+7532,boundary,ORG,Immo Invest Suisse AG,40,61,ORG|ORG,Suisse AG|Immo Invest
+7534,boundary,ORG,TechSpin GmbH,83,96,ORG,TechSpin GmbH.
+7539,boundary,MONEY,CHF 900'000,136,147,MONEY,CHF 900'000.
+7549,label,EDU,Holzbau-Ingenieur FH,154,174,ORG,Holzbau-Ingenieur FH
+7549,omission,AGE,62,93,95,,
+7549,boundary,PER,Reto,148,152,PER,Sohn Reto
+7556,boundary,MONEY,EUR 800'000,138,149,MONEY,"EUR 800'000.
+"
+7556,boundary,ORG,Credit Suisse (Schweiz) AG,199,225,ORG,Credit Suisse
+7556,omission,DATE,Ende der Woche,248,262,,
+7558,omission,MONEY,CHF,115,118,,
+7559,label,JOB,ETH-Ingenieur,146,159,ORG,ETH-Ingenieur
+7559,omission,AGE,68,92,94,,
+7563,omission,ORG,Import AG,23,32,,
+7566,omission,ORG,Präzisionsmechanik AG,37,58,,
+7566,boundary,MONEY,CHF 20'000,240,250,MONEY,CHF 20'000.
+7570,omission,MONEY,250k CHF,121,129,,
+7571,boundary,ORG,Modehaus Schneider AG,47,68,ORG,Schneider AG
+7572,boundary,MONEY,USD 120'000,113,124,MONEY,USD 120'000.
+7572,omission,AGE,55,163,165,,
+7572,omission,ORG,Import Export Mettler GmbH,17,43,,
+7574,omission,MONEY,500k,285,289,,
+7574,label,JOB,ETH-Absolventin,99,114,EDU,ETH-Absolventin
+7574,omission,AGE,38,92,94,,
+7574,omission,MONEY,5 Mio. CHF,159,169,,
+7579,omission,JOB,Gründerin,54,63,,
+7581,boundary,MONEY,CHF 3.2 Mio,121,132,MONEY,CHF 3.2 Mio.
+7581,omission,MONEY,2.5 Mio,162,169,,
+7587,label,EDU,HSG,131,134,ORG,HSG-Absolvent
+7587,boundary,PER,Thomas Wenger,35,48,PER,Sohn Thomas Wenger
+7587,omission,MONEY,250k,283,287,,
+7591,boundary,MONEY,EUR 750'000,118,129,MONEY,"EUR 750'000.
+"
+7593,boundary,ORG,Helvetica Präzision GmbH,34,58,ORG,Helvetica Präzision
+7602,boundary,AGE,55,245,247,AGE,55 Jahre alt
+7604,omission,AGE,62,260,262,,
+7604,omission,MONEY,8 Mio.,212,218,,
+7608,boundary,MONEY,EUR 250'000,234,245,MONEY,EUR 250'000 
+7608,omission,MONEY,CHF,248,251,,
+7608,omission,JOB,Mitarbeiter,106,117,,
+7612,boundary,MONEY,CHF 25'000,190,200,MONEY,"CHF 25'000.
+"
+7615,boundary,JOB,HR Leiterin,27,38,JOB,Leiterin bei
+7615,omission,PER,Frei,288,292,,
+7615,boundary,ORG,IT Solutions GmbH,43,60,ORG,"IT Solutions GmbH.
+- Neue Prokuristin"
+7615,label,JOB,Prokuristin,69,80,ORG,"IT Solutions GmbH.
+- Neue Prokuristin"
+7618,label,EDU,Uni St. Gallen,129,143,ORG,Uni St. Gallen
+7618,omission,AGE,42,125,127,,
+7620,omission,ORG,Zürcher Immobilien & Bau AG,29,56,,
+7620,omission,JOB,Eigentümer,14,24,,
+7620,label,PER,Beat Zürcher,0,12,ORG,Beat Zürcher
+7634,omission,MONEY,250k,144,148,,
+7641,boundary,PER,Christoph Ammann,79,95,PER,Dr. Christoph Ammann
+7646,boundary,MONEY,EUR 80'000,232,242,MONEY,EUR 80'000.
+7649,omission,MONEY,JPY 50 Mio,93,103,,
+7653,omission,AGE,62,249,251,,
+7654,boundary,NATION,schweizerisch-kroatische,272,296,NATION,schweizerisch
+7654,omission,JOB,Gründerin,59,68,,
+7663,omission,ORG,Import Export Welt AG,48,69,,
+7663,boundary,MONEY,USD 150'000,170,181,MONEY,"USD 150'000.
+"
+7663,omission,DATE,morgen,277,283,,
+7670,boundary,PER,Thomas Meier,106,118,PER,Sohn Thomas Meier
+7670,omission,ORG,Holzdesign Meier & Söhne,14,38,,
+7670,label,EDU,ETH-Ingenieur,120,133,ORG,ETH-Ingenieur
+7673,boundary,ORG,Gastro Services Holding,4,27,ORG,Gastro Services
+7674,omission,MONEY,EUR,239,242,,
+7674,label,EDU,HSG,94,97,ORG,HSG-Absolventin
+7674,omission,JOB,Verwaltungsrätin,62,78,,
+7685,omission,JOB,Controller,204,214,,
+7691,omission,DATE,Freitag,234,241,,
+7691,boundary,ORG,Modehaus Schneider AG,25,46,ORG,Schneider AG
+7692,omission,JOB,Stiftungsrätin,195,209,,
+7692,boundary,ORG,Stiftung Abendrot,23,40,ORG,Stiftung Abendrot angerufne
+7695,omission,MONEY,JPY 30 Mio.,227,238,,
+7696,boundary,ORG,Global Trade Partners Ltd.,50,76,ORG,Global Trade Partners Ltd
+7696,omission,PER,Schmidt,183,190,,
+7696,omission,JOB,Compliance Officer,27,45,,
+7696,omission,DATE,Nachmittag,341,351,,
+7698,omission,ORG,Logistik Meister GmbH,38,59,,
+7704,label,JOB,HSG-Absolvent,115,128,EDU,HSG-Absolvent
+7704,label,ORG,Gfeller Druck & Design AG,39,64,PER,Gfeller
+7704,omission,AGE,64,31,33,,
+7704,boundary,PER,Michael,102,109,PER,Sohn Michael
+7707,omission,DATE,Freitag,177,184,,
+7708,boundary,PER,Frau Dubois,2,13,PER,Dubois
+7712,omission,JOB,Partner,157,164,,
+7712,boundary,ORG,WebWorks GmbH,58,71,ORG,WebWorks
+7712,omission,MONEY,EUR,108,111,,
+7716,omission,JOB,Verkaufsleiter,69,83,,
+7716,boundary,ORG,Helvetia Logistik AG,19,39,ORG,Helvetia
+7717,omission,AGE,28,223,225,,
+7717,boundary,ORG,Präzisionsmechanik GmbH,32,55,ORG,Präzisionsmechanik GmbH.
+7717,boundary,MONEY,USD 150'000,107,118,MONEY,USD 150'000.
+7717,omission,DATE,Freitag,139,146,,
+7720,omission,MONEY,CHF,122,125,,
+7720,label,MONEY,USD,135,138,ORG,USD
+7720,label,JOB,HSG-Absolvent,188,201,EDU,HSG-Absolvent
+7720,omission,MONEY,EUR,127,130,,
+7720,boundary,ORG,Innovate Robotics GmbH,79,101,ORG,Innovate Robotics
+7723,omission,ORG,Postfinance,215,226,,
+7723,omission,JOB,Liquidator,110,120,,
+7725,omission,MONEY,250k,132,136,,
+7725,omission,DATE,Freitag,277,284,,
+7727,boundary,PER,Kunz,333,337,PER,Herrn Kunz
+7731,omission,DATE,15. Mai,207,214,,
+7731,omission,JOB,General Counsel,35,50,,

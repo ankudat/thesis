@@ -1,0 +1,9 @@
+{
+  "total_records": 638,
+  "total_time": 525.1,
+  "avg_time_per_doc": 0.82,
+  "api_errors": 0,
+  "avg_leakage_rate": 0.3759,
+  "overall_leaked": 1921,
+  "overall_total_pii": 5137
+}

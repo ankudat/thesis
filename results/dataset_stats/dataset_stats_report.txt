@@ -1,0 +1,93 @@
+==============================================================================
+  DATASET STATISTICS  (Section 3.1.6, Table 3.2)
+  Generated: 2026-05-14 18:20:38
+  Gold:      data\label_studio\20260302_Export_Label_Studio_Client_Notes.json
+  Split-IDs: results\bert_finetuned\split_ids.json
+==============================================================================
+
+DOCUMENTS
+------------------------------------------------------------------------------
+  Total notes (in splits) : 2,542
+  Train                   :  1,270  (50.0%)
+  Dev                     :    634  (24.9%)
+  Test                    :    638  (25.1%)
+
+  Documents by complexity level
+               Low  Medium    High     Total
+  Train        435     427     408     1,270
+  Dev          217     213     204       634
+  Test         218     215     205       638
+  All          870     855     817     2,542
+
+ENTITIES
+------------------------------------------------------------------------------
+  Total gold annotations  : 20,472
+  Train / Dev / Test      : 10,224 / 5,111 / 5,137
+
+  Table 3.2 -- gold entity counts per category and split
+  Tier  Category      Train      Dev     Test     Total
+  -----------------------------------------------------
+  T1    PER           2,185    1,086    1,091     4,362
+  T1    LOC           1,274      653      632     2,559
+  T1    ORG           1,428      711      740     2,879
+        Subtotal      4,887    2,450    2,463     9,800
+  -----------------------------------------------------
+  T2    IBAN            201      104      107       412
+  T2    EMAIL           322      147      165       634
+  T2    PHONE           243      126      113       482
+  T2    DATE            959      514      508     1,981
+  T2    MONEY         1,542      729      759     3,030
+        Subtotal      3,267    1,620    1,652     6,539
+  -----------------------------------------------------
+  T3    JOB           1,621      803      802     3,226
+  T3    AGE             153       83       81       317
+  T3    NATION          180      103       91       374
+  T3    EDU             116       52       48       216
+        Subtotal      2,070    1,041    1,022     4,133
+  -----------------------------------------------------
+  All   12 cats      10,224    5,111    5,137    20,472
+
+  Tier shares of total annotations
+    Tier 1 :   9,800  (47.9%)
+    Tier 2 :   6,539  (31.9%)
+    Tier 3 :   4,133  (20.2%)
+
+  Entities by complexity level (all splits)
+    Low     :   7,790
+    Medium  :   6,643
+    High    :   6,039
+
+PER-NOTE STATISTICS (all splits)
+------------------------------------------------------------------------------
+  Entities per note : mean 8.1, median 8, range 1-16
+  Words per note    : mean 53.7, median 53, range 6-90
+  ("words" = whitespace-delimited tokens of the clean `text` field)
+
+VERIFICATION AGAINST THE THESIS (Section 3.1.6 and Table 3.2)
+------------------------------------------------------------------------------
+  [OK]       Total notes ............................. 2,542
+  [OK]       Train / Dev / Test ...................... 1,270 / 634 / 638
+  [OK]       Test complexity split ................... 218 / 215 / 205
+  [OK]       Total gold annotations .................. 20,472
+  [OK]       Split entity totals ..................... 10,224 / 5,111 / 5,137
+  [OK]       Tier totals ............................. 9,800 / 6,539 / 4,133
+  [OK]       Tier percentages ........................ 47.9 / 31.9 / 20.2
+  [OK]       Entities by complexity .................. 7,790 / 6,643 / 6,039
+  [OK]       Mean entities per note .................. 8.1
+  [OK]       Median entities per note ................ 8
+  [OK]       Entities-per-note range ................. 1-16
+  [OK]       Mean words per note ..................... 53.7
+  [OK]       Median words per note ................... 53
+  [OK]       Words-per-note range .................... 6-90
+  [OK]       Table 3.2 (12 categories x 4 columns) ... 48/48 cells match
+
+  Result: all 15 checks passed.
+
+NOT COMPUTED HERE
+------------------------------------------------------------------------------
+  The per-complexity validation rejection rates in Section
+  3.1.6 (Low 12.9%, Medium 14.5%, High 17.7%) derive from the
+  pre-validation set of 3,000 generated notes (Section 3.1.5),
+  which this script does not load. They cannot be reproduced
+  from the final 2,542-note dataset alone.
+==============================================================================

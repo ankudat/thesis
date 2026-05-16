@@ -1,0 +1,168 @@
+doc_id,category,gold_label,gold_text,gold_start,gold_end,overlapping_fp_labels,overlapping_fp_texts
+5266,omission,DATE,morgen,381,387,,
+5273,boundary,JOB,Gründer und CEO,103,118,JOB,CEO
+5274,omission,DATE,2023,155,159,,
+5284,boundary,MONEY,CHF 5 pro Aktie,341,356,MONEY,CHF 5
+5314,label,JOB,ETH-Ingenieurin,250,265,EDU,ETH-Ingenieurin
+5389,omission,DATE,2023,55,59,,
+5417,boundary,EDU,HSG-Absolventin,122,137,EDU,HSG
+5421,omission,MONEY,15%,302,305,,
+5437,omission,DATE,Ende Jahr,256,265,,
+5437,boundary,EDU,HSG,222,225,EDU,HSG-Absolvent
+5437,omission,JOB,Geschäftsführer,120,135,,
+5469,label,EDU,Hotelfachschule Lausanne,399,423,ORG,Hotelfachschule Lausanne
+5486,omission,DATE,12 Monaten,202,212,,
+5494,omission,DATE,Ende Monat,191,201,,
+5494,omission,JOB,Mitarbeiterin,327,340,,
+5532,omission,DATE,morgen,408,414,,
+5547,omission,JOB,Liquidator,46,56,,
+5626,omission,JOB,Mitarbeiter,113,124,,
+5637,omission,DATE,Ende Mai,424,432,,
+5639,boundary,JOB,Inhaber und Geschäftsführer,23,50,JOB|JOB,Geschäftsführer|Inhaber
+5640,omission,JOB,Mitarbeiterinnen,325,341,,
+5675,omission,DATE,Ende nächster Woche,368,387,,
+5693,label,JOB,dipl. Bauingenieur ETH,379,401,EDU,dipl. Bauingenieur ETH
+5737,label,LOC,Europa,355,361,JOB,Verkaufsleiter für Europa
+5737,omission,DATE,2023,152,156,,
+5737,boundary,JOB,Verkaufsleiter,336,350,JOB,Verkaufsleiter für Europa
+5780,omission,JOB,Inhaber,62,69,,
+5800,boundary,LOC,Bern,89,93,LOC,Kanton Bern
+5801,boundary,EDU,HSG,170,173,EDU,HSG-Absolventin
+5809,boundary,EDU,HSG-Absolventen,128,143,EDU,HSG
+5854,label,JOB,HSG-Absolventin,236,251,EDU,HSG-Absolventin
+5867,label,ORG,ETH Zürich,102,112,EDU,ETH Zürich
+5917,omission,JOB,Exportrisikoversicherung,205,229,,
+5919,omission,JOB,VR-Mitglied,275,286,,
+5937,omission,DATE,Ende Juni,313,322,,
+5937,omission,DATE,2023,107,111,,
+5945,omission,JOB,Gründer,107,114,,
+5964,omission,DATE,Ende der Woche,369,383,,
+5969,boundary,EDU,HSG,174,177,EDU,HSG-Absolvent
+5992,boundary,JOB,Inhaber und Geschäftsführer,98,125,JOB|JOB,Inhaber|Geschäftsführer
+6037,label,JOB,ETH-Absolventin,109,124,EDU,ETH-Absolventin
+6079,omission,JOB,FX-Spezialisten,254,269,,
+6079,omission,DATE,90 Tage,207,214,,
+6105,label,JOB,HSG-Absolvent,258,271,EDU,HSG-Absolvent
+6114,omission,JOB,Mitarbeiter,320,331,,
+6118,omission,JOB,Assistent,340,349,,
+6156,boundary,AGE,38,130,132,AGE,38 Jahre
+6193,boundary,ORG,Digital Solutions GmbH,50,72,ORG,Digital Solutions GmbH i.L.
+6211,boundary,AGE,58,363,365,AGE,58 Jahre
+6215,boundary,EDU,HSG,133,136,EDU,HSG-Absolventin
+6238,boundary,ORG,Projektgesellschaft Windpark GmbH,36,69,ORG,Windpark GmbH
+6245,label,JOB,ETH-Ingenieur,231,244,EDU,ETH-Ingenieur
+6253,omission,JOB,TEF-Spezialisten,275,291,,
+6349,omission,JOB,Sohn,124,128,,
+6371,label,EDU,Holzbau-Ingenieur FH,290,310,JOB,Holzbau-Ingenieur FH
+6410,omission,DATE,Ende Monat,251,261,,
+6431,omission,MONEY,EUR,296,299,,
+6431,omission,JOB,Partner,129,136,,
+6441,label,JOB,HSG-Absolventin,216,231,EDU,HSG-Absolventin
+6442,boundary,JOB,designierte Geschäftsführer,266,293,JOB,Geschäftsführer
+6457,label,EDU,dipl. Fleischsommelier,152,174,JOB,dipl. Fleischsommelier
+6513,label,EDU,ETH-Architektin,199,214,JOB,ETH-Architektin
+6548,omission,JOB,Inhaber,58,65,,
+6574,label,EDU,HSG-Absolvent,275,288,JOB,HSG-Absolvent
+6580,label,EDU,ETH,179,182,JOB,ETH-Bauingenieurin
+6580,boundary,JOB,Bauingenieurin,183,197,JOB,ETH-Bauingenieurin
+6600,label,ORG,Universität Bern,90,106,EDU,Universität Bern
+6601,omission,DATE,Ende Monat,300,310,,
+6638,omission,DATE,2023,168,172,,
+6638,omission,DATE,Q4,327,329,,
+6638,label,JOB,ETH-Physiker,112,124,EDU,ETH-Physiker
+6645,boundary,LOC,"Rue du Rhône 15, 1204 Genf",143,169,LOC,1204 Genf
+6669,omission,MONEY,3 Monate,293,301,,
+6700,omission,LOC,Bahnhofstrasse 15,181,198,,
+6700,omission,DATE,Ende nächster Woche,294,313,,
+6733,omission,MONEY,CHF,139,142,,
+6738,omission,JOB,Assistentin,173,184,,
+6758,omission,DATE,Ende Monat,334,344,,
+6820,omission,MONEY,CHF,190,193,,
+6838,omission,MONEY,CHF,229,232,,
+6850,omission,DATE,sofort,286,292,,
+6858,omission,JOB,Partners,162,170,,
+6871,omission,JOB,Business Partner,334,350,,
+6883,label,EDU,ETH,195,198,JOB,ETH-Ingenieur
+6894,omission,JOB,Managing Partner,236,252,,
+6919,omission,DATE,nächste Woche,244,257,,
+6941,boundary,MONEY,ca. 400'000 EUR,243,258,MONEY,400'000 EUR
+6941,boundary,LOC,Kanton Graubünden,43,60,LOC,Graubünden
+6981,boundary,MONEY,BRL 5 Mio,172,181,MONEY,BRL 5 Mio.
+6981,omission,DATE,Ende Woche,360,370,,
+6986,omission,DATE,3 Monaten,114,123,,
+7003,boundary,MONEY,ca. 180k,157,165,MONEY,180k
+7020,omission,DATE,nächste Woche,200,213,,
+7024,label,JOB,ETH-Absolvent,103,116,EDU,ETH-Absolvent
+7028,label,LOC,Schweizer,115,124,NATION,Schweizer
+7033,boundary,EDU,HSG,66,69,EDU,HSG-Absolventin
+7044,boundary,ORG,Textilimport Rossi & Co.,2,26,ORG,Rossi & Co.
+7057,omission,DATE,9 Uhr,224,229,,
+7057,omission,DATE,Q4,120,122,,
+7077,omission,JOB,Geschäftsführer,72,87,,
+7079,omission,MONEY,50k,294,297,,
+7098,omission,JOB,Partner,166,173,,
+7130,boundary,EDU,ETH,293,296,EDU,ETH-Physikerin
+7133,boundary,MONEY,3 Mio,191,196,MONEY,3 Mio.
+7162,omission,DATE,Ende der Woche,215,229,,
+7168,omission,JOB,Sohn,251,255,,
+7173,boundary,ORG,Horlogerie Suisse SA,38,58,ORG,Patron Horlogerie Suisse SA
+7173,label,JOB,Patron,31,37,ORG,Patron Horlogerie Suisse SA
+7186,omission,MONEY,CHF,208,211,,
+7187,boundary,JOB,designierte CEO,269,284,JOB,CEO
+7189,omission,DATE,übermorgen,286,296,,
+7192,omission,DATE,3 Monate,78,86,,
+7197,boundary,AGE,28,186,188,AGE,28 Jahre
+7212,boundary,EDU,HSG-Absolvent,118,131,EDU,HSG
+7221,boundary,EDU,HSG,133,136,EDU,HSG-Absolventin
+7283,boundary,MONEY,ca. 2.5 Mio CHF,169,184,MONEY,2.5 Mio CHF
+7286,omission,DATE,6 Monate,114,122,,
+7286,omission,DATE,3 Monaten,300,309,,
+7287,omission,DATE,nächstes Jahr,162,175,,
+7287,omission,DATE,nächste Woche,277,290,,
+7354,omission,MONEY,EUR,220,223,,
+7354,omission,MONEY,USD,228,231,,
+7380,boundary,MONEY,CHF 12.5 Mio,98,110,MONEY,CHF 12.5 Mio.
+7421,boundary,MONEY,CHF 3.5 Mio,145,156,MONEY,CHF 3.5 Mio.
+7421,omission,DATE,nächste Woche,236,249,,
+7459,omission,JOB,Geschäftsführer,61,76,,
+7462,omission,DATE,2 Wochen,219,227,,
+7481,omission,JOB,Patron,299,305,,
+7481,boundary,MONEY,CHF 1.8 Mio.,221,233,MONEY,total CHF 1.8 Mio.
+7481,omission,DATE,2 Monate,419,427,,
+7486,boundary,MONEY,EUR 1.5 Mio,219,230,MONEY,EUR 1.5 Mio.
+7486,omission,DATE,nächste Woche,270,283,,
+7513,omission,MONEY,USD,298,301,,
+7513,omission,MONEY,EUR,290,293,,
+7513,label,ORG,ETH Zürich,75,85,EDU,ETH Zürich
+7514,omission,JOB,Assistentin,27,38,,
+7514,omission,DATE,zwei Wochen,276,287,,
+7526,boundary,MONEY,EUR 4.2 Mio,244,255,MONEY,EUR 4.2 Mio.
+7549,label,EDU,Holzbau-Ingenieur FH,154,174,JOB,Holzbau-Ingenieur FH
+7549,boundary,LOC,Kanton Obwalden,49,64,LOC,Obwalden
+7563,boundary,ORG,Saigon Textile Ltd,94,112,ORG,Saigon Textile Ltd.
+7574,label,JOB,ETH-Absolventin,99,114,EDU,ETH-Absolventin
+7581,boundary,MONEY,CHF 3.2 Mio,121,132,MONEY,CHF 3.2 Mio.
+7581,omission,JOB,Assistent,252,261,,
+7581,boundary,MONEY,2.5 Mio,162,169,MONEY,2.5 Mio.
+7587,boundary,EDU,HSG,131,134,EDU,HSG-Absolvent
+7602,omission,JOB,Assistent,264,273,,
+7602,boundary,AGE,55,245,247,AGE,55 Jahre
+7649,boundary,MONEY,JPY 50 Mio,93,103,MONEY,JPY 50 Mio.
+7654,boundary,NATION,schweizerisch-kroatische,272,296,NATION|NATION,schweizerisch|kroatische
+7663,omission,DATE,morgen,277,283,,
+7670,label,EDU,ETH-Ingenieur,120,133,JOB,ETH-Ingenieur
+7674,omission,MONEY,EUR,239,242,,
+7674,boundary,EDU,HSG,94,97,EDU,HSG-Absolventin
+7696,boundary,DATE,Nachmittag,341,351,DATE,heute Nachmittag
+7696,omission,DATE,3 Monate,266,274,,
+7704,label,JOB,HSG-Absolvent,115,128,EDU,HSG
+7704,omission,DATE,nächstes Jahr,135,148,,
+7707,boundary,PER,Herrn Moser,12,23,PER,Moser
+7708,boundary,PER,Frau Dubois,2,13,PER,Dubois
+7712,omission,MONEY,EUR,108,111,,
+7716,omission,DATE,nächsten Monat,134,148,,
+7717,label,ORG,CS,242,244,EDU,CS
+7720,omission,MONEY,CHF,122,125,,
+7720,omission,MONEY,USD,135,138,,
+7720,label,JOB,HSG-Absolvent,188,201,EDU,HSG-Absolvent
+7720,omission,MONEY,EUR,127,130,,

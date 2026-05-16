@@ -1,0 +1,10 @@
+{
+  "total_records": 638,
+  "total_time": 2863.1,
+  "avg_time_per_doc": 4.49,
+  "docs_per_sec": 0.2,
+  "avg_leakage_rate": 0.0516,
+  "overall_leaked": 268,
+  "overall_total_pii": 5137,
+  "avg_length_ratio": 0.9655
+}

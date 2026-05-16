@@ -1,0 +1,2846 @@
+{
+  "spaCy + Regex": {
+    "pipeline": "spaCy + Regex",
+    "overall": {
+      "count": 611,
+      "any_attribute_leak_rate": 0.926,
+      "average_leak_rate": 0.593,
+      "tier1_leak_rate": 0.175,
+      "tier3_leak_rate": 0.906,
+      "per_attribute": {
+        "person": {
+          "match_count": 159,
+          "no_match_count": 452,
+          "skip_count": 0,
+          "evaluable_count": 611,
+          "success_rate": 0.26
+        },
+        "age": {
+          "match_count": 71,
+          "no_match_count": 0,
+          "skip_count": 540,
+          "evaluable_count": 71,
+          "success_rate": 1.0
+        },
+        "location": {
+          "match_count": 54,
+          "no_match_count": 324,
+          "skip_count": 233,
+          "evaluable_count": 378,
+          "success_rate": 0.143
+        },
+        "occupation": {
+          "match_count": 508,
+          "no_match_count": 25,
+          "skip_count": 78,
+          "evaluable_count": 533,
+          "success_rate": 0.953
+        },
+        "education": {
+          "match_count": 91,
+          "no_match_count": 20,
+          "skip_count": 500,
+          "evaluable_count": 111,
+          "success_rate": 0.82
+        },
+        "nationality": {
+          "match_count": 51,
+          "no_match_count": 9,
+          "skip_count": 551,
+          "evaluable_count": 60,
+          "success_rate": 0.85
+        },
+        "organization": {
+          "match_count": 75,
+          "no_match_count": 536,
+          "skip_count": 0,
+          "evaluable_count": 611,
+          "success_rate": 0.123
+        }
+      }
+    },
+    "by_complexity": {
+      "Low": {
+        "count": 204,
+        "any_attribute_leak_rate": 0.941,
+        "average_leak_rate": 0.614,
+        "tier1_leak_rate": 0.207,
+        "tier3_leak_rate": 0.919,
+        "per_attribute": {
+          "person": {
+            "match_count": 78,
+            "no_match_count": 126,
+            "skip_count": 0,
+            "evaluable_count": 204,
+            "success_rate": 0.382
+          },
+          "age": {
+            "match_count": 16,
+            "no_match_count": 0,
+            "skip_count": 188,
+            "evaluable_count": 16,
+            "success_rate": 1.0
+          },
+          "location": {
+            "match_count": 20,
+            "no_match_count": 133,
+            "skip_count": 51,
+            "evaluable_count": 153,
+            "success_rate": 0.131
+          },
+          "occupation": {
+            "match_count": 176,
+            "no_match_count": 9,
+            "skip_count": 19,
+            "evaluable_count": 185,
+            "success_rate": 0.951
+          },
+          "education": {
+            "match_count": 34,
+            "no_match_count": 7,
+            "skip_count": 163,
+            "evaluable_count": 41,
+            "success_rate": 0.829
+          },
+          "nationality": {
+            "match_count": 17,
+            "no_match_count": 2,
+            "skip_count": 185,
+            "evaluable_count": 19,
+            "success_rate": 0.895
+          },
+          "organization": {
+            "match_count": 22,
+            "no_match_count": 182,
+            "skip_count": 0,
+            "evaluable_count": 204,
+            "success_rate": 0.108
+          }
+        }
+      },
+      "Medium": {
+        "count": 206,
+        "any_attribute_leak_rate": 0.927,
+        "average_leak_rate": 0.593,
+        "tier1_leak_rate": 0.151,
+        "tier3_leak_rate": 0.924,
+        "per_attribute": {
+          "person": {
+            "match_count": 35,
+            "no_match_count": 171,
+            "skip_count": 0,
+            "evaluable_count": 206,
+            "success_rate": 0.17
+          },
+          "age": {
+            "match_count": 26,
+            "no_match_count": 0,
+            "skip_count": 180,
+            "evaluable_count": 26,
+            "success_rate": 1.0
+          },
+          "location": {
+            "match_count": 21,
+            "no_match_count": 98,
+            "skip_count": 87,
+            "evaluable_count": 119,
+            "success_rate": 0.176
+          },
+          "occupation": {
+            "match_count": 178,
+            "no_match_count": 5,
+            "skip_count": 23,
+            "evaluable_count": 183,
+            "success_rate": 0.973
+          },
+          "education": {
+            "match_count": 35,
+            "no_match_count": 6,
+            "skip_count": 165,
+            "evaluable_count": 41,
+            "success_rate": 0.854
+          },
+          "nationality": {
+            "match_count": 20,
+            "no_match_count": 3,
+            "skip_count": 183,
+            "evaluable_count": 23,
+            "success_rate": 0.87
+          },
+          "organization": {
+            "match_count": 22,
+            "no_match_count": 184,
+            "skip_count": 0,
+            "evaluable_count": 206,
+            "success_rate": 0.107
+          }
+        }
+      },
+      "High": {
+        "count": 201,
+        "any_attribute_leak_rate": 0.91,
+        "average_leak_rate": 0.568,
+        "tier1_leak_rate": 0.169,
+        "tier3_leak_rate": 0.868,
+        "per_attribute": {
+          "person": {
+            "match_count": 46,
+            "no_match_count": 155,
+            "skip_count": 0,
+            "evaluable_count": 201,
+            "success_rate": 0.229
+          },
+          "age": {
+            "match_count": 29,
+            "no_match_count": 0,
+            "skip_count": 172,
+            "evaluable_count": 29,
+            "success_rate": 1.0
+          },
+          "location": {
+            "match_count": 13,
+            "no_match_count": 93,
+            "skip_count": 95,
+            "evaluable_count": 106,
+            "success_rate": 0.123
+          },
+          "occupation": {
+            "match_count": 154,
+            "no_match_count": 11,
+            "skip_count": 36,
+            "evaluable_count": 165,
+            "success_rate": 0.933
+          },
+          "education": {
+            "match_count": 22,
+            "no_match_count": 7,
+            "skip_count": 172,
+            "evaluable_count": 29,
+            "success_rate": 0.759
+          },
+          "nationality": {
+            "match_count": 14,
+            "no_match_count": 4,
+            "skip_count": 183,
+            "evaluable_count": 18,
+            "success_rate": 0.778
+          },
+          "organization": {
+            "match_count": 31,
+            "no_match_count": 170,
+            "skip_count": 0,
+            "evaluable_count": 201,
+            "success_rate": 0.154
+          }
+        }
+      }
+    }
+  },
+  "BERT (pretrained) + Regex": {
+    "pipeline": "BERT (pretrained) + Regex",
+    "overall": {
+      "count": 611,
+      "any_attribute_leak_rate": 0.887,
+      "average_leak_rate": 0.514,
+      "tier1_leak_rate": 0.139,
+      "tier3_leak_rate": 0.796,
+      "per_attribute": {
+        "person": {
+          "match_count": 111,
+          "no_match_count": 500,
+          "skip_count": 0,
+          "evaluable_count": 611,
+          "success_rate": 0.182
+        },
+        "age": {
+          "match_count": 71,
+          "no_match_count": 0,
+          "skip_count": 540,
+          "evaluable_count": 71,
+          "success_rate": 1.0
+        },
+        "location": {
+          "match_count": 75,
+          "no_match_count": 304,
+          "skip_count": 232,
+          "evaluable_count": 379,
+          "success_rate": 0.198
+        },
+        "occupation": {
+          "match_count": 492,
+          "no_match_count": 41,
+          "skip_count": 78,
+          "evaluable_count": 533,
+          "success_rate": 0.923
+        },
+        "education": {
+          "match_count": 98,
+          "no_match_count": 16,
+          "skip_count": 497,
+          "evaluable_count": 114,
+          "success_rate": 0.86
+        },
+        "nationality": {
+          "match_count": 26,
+          "no_match_count": 39,
+          "skip_count": 546,
+          "evaluable_count": 65,
+          "success_rate": 0.4
+        },
+        "organization": {
+          "match_count": 23,
+          "no_match_count": 588,
+          "skip_count": 0,
+          "evaluable_count": 611,
+          "success_rate": 0.038
+        }
+      }
+    },
+    "by_complexity": {
+      "Low": {
+        "count": 204,
+        "any_attribute_leak_rate": 0.922,
+        "average_leak_rate": 0.554,
+        "tier1_leak_rate": 0.144,
+        "tier3_leak_rate": 0.861,
+        "per_attribute": {
+          "person": {
+            "match_count": 48,
+            "no_match_count": 156,
+            "skip_count": 0,
+            "evaluable_count": 204,
+            "success_rate": 0.235
+          },
+          "age": {
+            "match_count": 16,
+            "no_match_count": 0,
+            "skip_count": 188,
+            "evaluable_count": 16,
+            "success_rate": 1.0
+          },
+          "location": {
+            "match_count": 27,
+            "no_match_count": 126,
+            "skip_count": 51,
+            "evaluable_count": 153,
+            "success_rate": 0.176
+          },
+          "occupation": {
+            "match_count": 175,
+            "no_match_count": 10,
+            "skip_count": 19,
+            "evaluable_count": 185,
+            "success_rate": 0.946
+          },
+          "education": {
+            "match_count": 37,
+            "no_match_count": 5,
+            "skip_count": 162,
+            "evaluable_count": 42,
+            "success_rate": 0.881
+          },
+          "nationality": {
+            "match_count": 13,
+            "no_match_count": 8,
+            "skip_count": 183,
+            "evaluable_count": 21,
+            "success_rate": 0.619
+          },
+          "organization": {
+            "match_count": 4,
+            "no_match_count": 200,
+            "skip_count": 0,
+            "evaluable_count": 204,
+            "success_rate": 0.02
+          }
+        }
+      },
+      "Medium": {
+        "count": 206,
+        "any_attribute_leak_rate": 0.883,
+        "average_leak_rate": 0.522,
+        "tier1_leak_rate": 0.128,
+        "tier3_leak_rate": 0.818,
+        "per_attribute": {
+          "person": {
+            "match_count": 25,
+            "no_match_count": 181,
+            "skip_count": 0,
+            "evaluable_count": 206,
+            "success_rate": 0.121
+          },
+          "age": {
+            "match_count": 26,
+            "no_match_count": 0,
+            "skip_count": 180,
+            "evaluable_count": 26,
+            "success_rate": 1.0
+          },
+          "location": {
+            "match_count": 28,
+            "no_match_count": 92,
+            "skip_count": 86,
+            "evaluable_count": 120,
+            "success_rate": 0.233
+          },
+          "occupation": {
+            "match_count": 173,
+            "no_match_count": 10,
+            "skip_count": 23,
+            "evaluable_count": 183,
+            "success_rate": 0.945
+          },
+          "education": {
+            "match_count": 39,
+            "no_match_count": 3,
+            "skip_count": 164,
+            "evaluable_count": 42,
+            "success_rate": 0.929
+          },
+          "nationality": {
+            "match_count": 10,
+            "no_match_count": 15,
+            "skip_count": 181,
+            "evaluable_count": 25,
+            "success_rate": 0.4
+          },
+          "organization": {
+            "match_count": 6,
+            "no_match_count": 200,
+            "skip_count": 0,
+            "evaluable_count": 206,
+            "success_rate": 0.029
+          }
+        }
+      },
+      "High": {
+        "count": 201,
+        "any_attribute_leak_rate": 0.856,
+        "average_leak_rate": 0.458,
+        "tier1_leak_rate": 0.148,
+        "tier3_leak_rate": 0.691,
+        "per_attribute": {
+          "person": {
+            "match_count": 38,
+            "no_match_count": 163,
+            "skip_count": 0,
+            "evaluable_count": 201,
+            "success_rate": 0.189
+          },
+          "age": {
+            "match_count": 29,
+            "no_match_count": 0,
+            "skip_count": 172,
+            "evaluable_count": 29,
+            "success_rate": 1.0
+          },
+          "location": {
+            "match_count": 20,
+            "no_match_count": 86,
+            "skip_count": 95,
+            "evaluable_count": 106,
+            "success_rate": 0.189
+          },
+          "occupation": {
+            "match_count": 144,
+            "no_match_count": 21,
+            "skip_count": 36,
+            "evaluable_count": 165,
+            "success_rate": 0.873
+          },
+          "education": {
+            "match_count": 22,
+            "no_match_count": 8,
+            "skip_count": 171,
+            "evaluable_count": 30,
+            "success_rate": 0.733
+          },
+          "nationality": {
+            "match_count": 3,
+            "no_match_count": 16,
+            "skip_count": 182,
+            "evaluable_count": 19,
+            "success_rate": 0.158
+          },
+          "organization": {
+            "match_count": 13,
+            "no_match_count": 188,
+            "skip_count": 0,
+            "evaluable_count": 201,
+            "success_rate": 0.065
+          }
+        }
+      }
+    }
+  },
+  "BERT Fine-Tuned": {
+    "pipeline": "BERT Fine-Tuned",
+    "overall": {
+      "count": 611,
+      "any_attribute_leak_rate": 0.771,
+      "average_leak_rate": 0.432,
+      "tier1_leak_rate": 0.095,
+      "tier3_leak_rate": 0.685,
+      "per_attribute": {
+        "person": {
+          "match_count": 106,
+          "no_match_count": 505,
+          "skip_count": 0,
+          "evaluable_count": 611,
+          "success_rate": 0.173
+        },
+        "age": {
+          "match_count": 68,
+          "no_match_count": 3,
+          "skip_count": 540,
+          "evaluable_count": 71,
+          "success_rate": 0.958
+        },
+        "location": {
+          "match_count": 39,
+          "no_match_count": 339,
+          "skip_count": 233,
+          "evaluable_count": 378,
+          "success_rate": 0.103
+        },
+        "occupation": {
+          "match_count": 377,
+          "no_match_count": 158,
+          "skip_count": 76,
+          "evaluable_count": 535,
+          "success_rate": 0.705
+        },
+        "education": {
+          "match_count": 83,
+          "no_match_count": 32,
+          "skip_count": 496,
+          "evaluable_count": 115,
+          "success_rate": 0.722
+        },
+        "nationality": {
+          "match_count": 23,
+          "no_match_count": 42,
+          "skip_count": 546,
+          "evaluable_count": 65,
+          "success_rate": 0.354
+        },
+        "organization": {
+          "match_count": 5,
+          "no_match_count": 606,
+          "skip_count": 0,
+          "evaluable_count": 611,
+          "success_rate": 0.008
+        }
+      }
+    },
+    "by_complexity": {
+      "Low": {
+        "count": 204,
+        "any_attribute_leak_rate": 0.838,
+        "average_leak_rate": 0.487,
+        "tier1_leak_rate": 0.106,
+        "tier3_leak_rate": 0.772,
+        "per_attribute": {
+          "person": {
+            "match_count": 50,
+            "no_match_count": 154,
+            "skip_count": 0,
+            "evaluable_count": 204,
+            "success_rate": 0.245
+          },
+          "age": {
+            "match_count": 16,
+            "no_match_count": 0,
+            "skip_count": 188,
+            "evaluable_count": 16,
+            "success_rate": 1.0
+          },
+          "location": {
+            "match_count": 11,
+            "no_match_count": 142,
+            "skip_count": 51,
+            "evaluable_count": 153,
+            "success_rate": 0.072
+          },
+          "occupation": {
+            "match_count": 140,
+            "no_match_count": 45,
+            "skip_count": 19,
+            "evaluable_count": 185,
+            "success_rate": 0.757
+          },
+          "education": {
+            "match_count": 34,
+            "no_match_count": 8,
+            "skip_count": 162,
+            "evaluable_count": 42,
+            "success_rate": 0.81
+          },
+          "nationality": {
+            "match_count": 12,
+            "no_match_count": 11,
+            "skip_count": 181,
+            "evaluable_count": 23,
+            "success_rate": 0.522
+          },
+          "organization": {
+            "match_count": 0,
+            "no_match_count": 204,
+            "skip_count": 0,
+            "evaluable_count": 204,
+            "success_rate": 0.0
+          }
+        }
+      },
+      "Medium": {
+        "count": 206,
+        "any_attribute_leak_rate": 0.733,
+        "average_leak_rate": 0.432,
+        "tier1_leak_rate": 0.093,
+        "tier3_leak_rate": 0.686,
+        "per_attribute": {
+          "person": {
+            "match_count": 24,
+            "no_match_count": 182,
+            "skip_count": 0,
+            "evaluable_count": 206,
+            "success_rate": 0.117
+          },
+          "age": {
+            "match_count": 25,
+            "no_match_count": 1,
+            "skip_count": 180,
+            "evaluable_count": 26,
+            "success_rate": 0.962
+          },
+          "location": {
+            "match_count": 18,
+            "no_match_count": 101,
+            "skip_count": 87,
+            "evaluable_count": 119,
+            "success_rate": 0.151
+          },
+          "occupation": {
+            "match_count": 124,
+            "no_match_count": 59,
+            "skip_count": 23,
+            "evaluable_count": 183,
+            "success_rate": 0.678
+          },
+          "education": {
+            "match_count": 31,
+            "no_match_count": 10,
+            "skip_count": 165,
+            "evaluable_count": 41,
+            "success_rate": 0.756
+          },
+          "nationality": {
+            "match_count": 8,
+            "no_match_count": 15,
+            "skip_count": 183,
+            "evaluable_count": 23,
+            "success_rate": 0.348
+          },
+          "organization": {
+            "match_count": 2,
+            "no_match_count": 204,
+            "skip_count": 0,
+            "evaluable_count": 206,
+            "success_rate": 0.01
+          }
+        }
+      },
+      "High": {
+        "count": 201,
+        "any_attribute_leak_rate": 0.741,
+        "average_leak_rate": 0.371,
+        "tier1_leak_rate": 0.089,
+        "tier3_leak_rate": 0.582,
+        "per_attribute": {
+          "person": {
+            "match_count": 32,
+            "no_match_count": 169,
+            "skip_count": 0,
+            "evaluable_count": 201,
+            "success_rate": 0.159
+          },
+          "age": {
+            "match_count": 27,
+            "no_match_count": 2,
+            "skip_count": 172,
+            "evaluable_count": 29,
+            "success_rate": 0.931
+          },
+          "location": {
+            "match_count": 10,
+            "no_match_count": 96,
+            "skip_count": 95,
+            "evaluable_count": 106,
+            "success_rate": 0.094
+          },
+          "occupation": {
+            "match_count": 113,
+            "no_match_count": 54,
+            "skip_count": 34,
+            "evaluable_count": 167,
+            "success_rate": 0.677
+          },
+          "education": {
+            "match_count": 18,
+            "no_match_count": 14,
+            "skip_count": 169,
+            "evaluable_count": 32,
+            "success_rate": 0.562
+          },
+          "nationality": {
+            "match_count": 3,
+            "no_match_count": 16,
+            "skip_count": 182,
+            "evaluable_count": 19,
+            "success_rate": 0.158
+          },
+          "organization": {
+            "match_count": 3,
+            "no_match_count": 198,
+            "skip_count": 0,
+            "evaluable_count": 201,
+            "success_rate": 0.015
+          }
+        }
+      }
+    }
+  },
+  "Presidio": {
+    "pipeline": "Presidio",
+    "overall": {
+      "count": 611,
+      "any_attribute_leak_rate": 0.818,
+      "average_leak_rate": 0.473,
+      "tier1_leak_rate": 0.152,
+      "tier3_leak_rate": 0.714,
+      "per_attribute": {
+        "person": {
+          "match_count": 140,
+          "no_match_count": 471,
+          "skip_count": 0,
+          "evaluable_count": 611,
+          "success_rate": 0.229
+        },
+        "age": {
+          "match_count": 69,
+          "no_match_count": 3,
+          "skip_count": 539,
+          "evaluable_count": 72,
+          "success_rate": 0.958
+        },
+        "location": {
+          "match_count": 48,
+          "no_match_count": 330,
+          "skip_count": 233,
+          "evaluable_count": 378,
+          "success_rate": 0.127
+        },
+        "occupation": {
+          "match_count": 402,
+          "no_match_count": 132,
+          "skip_count": 77,
+          "evaluable_count": 534,
+          "success_rate": 0.753
+        },
+        "education": {
+          "match_count": 86,
+          "no_match_count": 28,
+          "skip_count": 497,
+          "evaluable_count": 114,
+          "success_rate": 0.754
+        },
+        "nationality": {
+          "match_count": 25,
+          "no_match_count": 39,
+          "skip_count": 547,
+          "evaluable_count": 64,
+          "success_rate": 0.391
+        },
+        "organization": {
+          "match_count": 61,
+          "no_match_count": 550,
+          "skip_count": 0,
+          "evaluable_count": 611,
+          "success_rate": 0.1
+        }
+      }
+    },
+    "by_complexity": {
+      "Low": {
+        "count": 204,
+        "any_attribute_leak_rate": 0.902,
+        "average_leak_rate": 0.537,
+        "tier1_leak_rate": 0.184,
+        "tier3_leak_rate": 0.802,
+        "per_attribute": {
+          "person": {
+            "match_count": 74,
+            "no_match_count": 130,
+            "skip_count": 0,
+            "evaluable_count": 204,
+            "success_rate": 0.363
+          },
+          "age": {
+            "match_count": 16,
+            "no_match_count": 1,
+            "skip_count": 187,
+            "evaluable_count": 17,
+            "success_rate": 0.941
+          },
+          "location": {
+            "match_count": 19,
+            "no_match_count": 134,
+            "skip_count": 51,
+            "evaluable_count": 153,
+            "success_rate": 0.124
+          },
+          "occupation": {
+            "match_count": 151,
+            "no_match_count": 34,
+            "skip_count": 19,
+            "evaluable_count": 185,
+            "success_rate": 0.816
+          },
+          "education": {
+            "match_count": 34,
+            "no_match_count": 6,
+            "skip_count": 164,
+            "evaluable_count": 40,
+            "success_rate": 0.85
+          },
+          "nationality": {
+            "match_count": 12,
+            "no_match_count": 8,
+            "skip_count": 184,
+            "evaluable_count": 20,
+            "success_rate": 0.6
+          },
+          "organization": {
+            "match_count": 13,
+            "no_match_count": 191,
+            "skip_count": 0,
+            "evaluable_count": 204,
+            "success_rate": 0.064
+          }
+        }
+      },
+      "Medium": {
+        "count": 206,
+        "any_attribute_leak_rate": 0.767,
+        "average_leak_rate": 0.459,
+        "tier1_leak_rate": 0.124,
+        "tier3_leak_rate": 0.71,
+        "per_attribute": {
+          "person": {
+            "match_count": 27,
+            "no_match_count": 179,
+            "skip_count": 0,
+            "evaluable_count": 206,
+            "success_rate": 0.131
+          },
+          "age": {
+            "match_count": 24,
+            "no_match_count": 2,
+            "skip_count": 180,
+            "evaluable_count": 26,
+            "success_rate": 0.923
+          },
+          "location": {
+            "match_count": 16,
+            "no_match_count": 103,
+            "skip_count": 87,
+            "evaluable_count": 119,
+            "success_rate": 0.134
+          },
+          "occupation": {
+            "match_count": 133,
+            "no_match_count": 50,
+            "skip_count": 23,
+            "evaluable_count": 183,
+            "success_rate": 0.727
+          },
+          "education": {
+            "match_count": 32,
+            "no_match_count": 9,
+            "skip_count": 165,
+            "evaluable_count": 41,
+            "success_rate": 0.78
+          },
+          "nationality": {
+            "match_count": 9,
+            "no_match_count": 13,
+            "skip_count": 184,
+            "evaluable_count": 22,
+            "success_rate": 0.409
+          },
+          "organization": {
+            "match_count": 22,
+            "no_match_count": 184,
+            "skip_count": 0,
+            "evaluable_count": 206,
+            "success_rate": 0.107
+          }
+        }
+      },
+      "High": {
+        "count": 201,
+        "any_attribute_leak_rate": 0.786,
+        "average_leak_rate": 0.421,
+        "tier1_leak_rate": 0.149,
+        "tier3_leak_rate": 0.625,
+        "per_attribute": {
+          "person": {
+            "match_count": 39,
+            "no_match_count": 162,
+            "skip_count": 0,
+            "evaluable_count": 201,
+            "success_rate": 0.194
+          },
+          "age": {
+            "match_count": 29,
+            "no_match_count": 0,
+            "skip_count": 172,
+            "evaluable_count": 29,
+            "success_rate": 1.0
+          },
+          "location": {
+            "match_count": 13,
+            "no_match_count": 93,
+            "skip_count": 95,
+            "evaluable_count": 106,
+            "success_rate": 0.123
+          },
+          "occupation": {
+            "match_count": 118,
+            "no_match_count": 48,
+            "skip_count": 35,
+            "evaluable_count": 166,
+            "success_rate": 0.711
+          },
+          "education": {
+            "match_count": 20,
+            "no_match_count": 13,
+            "skip_count": 168,
+            "evaluable_count": 33,
+            "success_rate": 0.606
+          },
+          "nationality": {
+            "match_count": 4,
+            "no_match_count": 18,
+            "skip_count": 179,
+            "evaluable_count": 22,
+            "success_rate": 0.182
+          },
+          "organization": {
+            "match_count": 26,
+            "no_match_count": 175,
+            "skip_count": 0,
+            "evaluable_count": 201,
+            "success_rate": 0.129
+          }
+        }
+      }
+    }
+  },
+  "LLM Llama-3 [few-shot +verify]": {
+    "pipeline": "LLM Llama-3 [few-shot +verify]",
+    "overall": {
+      "count": 611,
+      "any_attribute_leak_rate": 0.795,
+      "average_leak_rate": 0.469,
+      "tier1_leak_rate": 0.169,
+      "tier3_leak_rate": 0.694,
+      "per_attribute": {
+        "person": {
+          "match_count": 222,
+          "no_match_count": 389,
+          "skip_count": 0,
+          "evaluable_count": 611,
+          "success_rate": 0.363
+        },
+        "age": {
+          "match_count": 69,
+          "no_match_count": 3,
+          "skip_count": 539,
+          "evaluable_count": 72,
+          "success_rate": 0.958
+        },
+        "location": {
+          "match_count": 42,
+          "no_match_count": 336,
+          "skip_count": 233,
+          "evaluable_count": 378,
+          "success_rate": 0.111
+        },
+        "occupation": {
+          "match_count": 374,
+          "no_match_count": 157,
+          "skip_count": 80,
+          "evaluable_count": 531,
+          "success_rate": 0.704
+        },
+        "education": {
+          "match_count": 63,
+          "no_match_count": 49,
+          "skip_count": 499,
+          "evaluable_count": 112,
+          "success_rate": 0.562
+        },
+        "nationality": {
+          "match_count": 32,
+          "no_match_count": 26,
+          "skip_count": 553,
+          "evaluable_count": 58,
+          "success_rate": 0.552
+        },
+        "organization": {
+          "match_count": 20,
+          "no_match_count": 591,
+          "skip_count": 0,
+          "evaluable_count": 611,
+          "success_rate": 0.033
+        }
+      }
+    },
+    "by_complexity": {
+      "Low": {
+        "count": 204,
+        "any_attribute_leak_rate": 0.887,
+        "average_leak_rate": 0.549,
+        "tier1_leak_rate": 0.242,
+        "tier3_leak_rate": 0.779,
+        "per_attribute": {
+          "person": {
+            "match_count": 124,
+            "no_match_count": 80,
+            "skip_count": 0,
+            "evaluable_count": 204,
+            "success_rate": 0.608
+          },
+          "age": {
+            "match_count": 17,
+            "no_match_count": 0,
+            "skip_count": 187,
+            "evaluable_count": 17,
+            "success_rate": 1.0
+          },
+          "location": {
+            "match_count": 15,
+            "no_match_count": 138,
+            "skip_count": 51,
+            "evaluable_count": 153,
+            "success_rate": 0.098
+          },
+          "occupation": {
+            "match_count": 142,
+            "no_match_count": 43,
+            "skip_count": 19,
+            "evaluable_count": 185,
+            "success_rate": 0.768
+          },
+          "education": {
+            "match_count": 25,
+            "no_match_count": 16,
+            "skip_count": 163,
+            "evaluable_count": 41,
+            "success_rate": 0.61
+          },
+          "nationality": {
+            "match_count": 14,
+            "no_match_count": 5,
+            "skip_count": 185,
+            "evaluable_count": 19,
+            "success_rate": 0.737
+          },
+          "organization": {
+            "match_count": 4,
+            "no_match_count": 200,
+            "skip_count": 0,
+            "evaluable_count": 204,
+            "success_rate": 0.02
+          }
+        }
+      },
+      "Medium": {
+        "count": 206,
+        "any_attribute_leak_rate": 0.714,
+        "average_leak_rate": 0.426,
+        "tier1_leak_rate": 0.133,
+        "tier3_leak_rate": 0.645,
+        "per_attribute": {
+          "person": {
+            "match_count": 47,
+            "no_match_count": 159,
+            "skip_count": 0,
+            "evaluable_count": 206,
+            "success_rate": 0.228
+          },
+          "age": {
+            "match_count": 24,
+            "no_match_count": 2,
+            "skip_count": 180,
+            "evaluable_count": 26,
+            "success_rate": 0.923
+          },
+          "location": {
+            "match_count": 17,
+            "no_match_count": 102,
+            "skip_count": 87,
+            "evaluable_count": 119,
+            "success_rate": 0.143
+          },
+          "occupation": {
+            "match_count": 118,
+            "no_match_count": 64,
+            "skip_count": 24,
+            "evaluable_count": 182,
+            "success_rate": 0.648
+          },
+          "education": {
+            "match_count": 20,
+            "no_match_count": 23,
+            "skip_count": 163,
+            "evaluable_count": 43,
+            "success_rate": 0.465
+          },
+          "nationality": {
+            "match_count": 12,
+            "no_match_count": 10,
+            "skip_count": 184,
+            "evaluable_count": 22,
+            "success_rate": 0.545
+          },
+          "organization": {
+            "match_count": 6,
+            "no_match_count": 200,
+            "skip_count": 0,
+            "evaluable_count": 206,
+            "success_rate": 0.029
+          }
+        }
+      },
+      "High": {
+        "count": 201,
+        "any_attribute_leak_rate": 0.786,
+        "average_leak_rate": 0.436,
+        "tier1_leak_rate": 0.133,
+        "tier3_leak_rate": 0.664,
+        "per_attribute": {
+          "person": {
+            "match_count": 51,
+            "no_match_count": 150,
+            "skip_count": 0,
+            "evaluable_count": 201,
+            "success_rate": 0.254
+          },
+          "age": {
+            "match_count": 28,
+            "no_match_count": 1,
+            "skip_count": 172,
+            "evaluable_count": 29,
+            "success_rate": 0.966
+          },
+          "location": {
+            "match_count": 10,
+            "no_match_count": 96,
+            "skip_count": 95,
+            "evaluable_count": 106,
+            "success_rate": 0.094
+          },
+          "occupation": {
+            "match_count": 114,
+            "no_match_count": 50,
+            "skip_count": 37,
+            "evaluable_count": 164,
+            "success_rate": 0.695
+          },
+          "education": {
+            "match_count": 18,
+            "no_match_count": 10,
+            "skip_count": 173,
+            "evaluable_count": 28,
+            "success_rate": 0.643
+          },
+          "nationality": {
+            "match_count": 6,
+            "no_match_count": 11,
+            "skip_count": 184,
+            "evaluable_count": 17,
+            "success_rate": 0.353
+          },
+          "organization": {
+            "match_count": 10,
+            "no_match_count": 191,
+            "skip_count": 0,
+            "evaluable_count": 201,
+            "success_rate": 0.05
+          }
+        }
+      }
+    }
+  },
+  "LLM Qwen2.5 [few-shot +verify]": {
+    "pipeline": "LLM Qwen2.5 [few-shot +verify]",
+    "overall": {
+      "count": 611,
+      "any_attribute_leak_rate": 0.882,
+      "average_leak_rate": 0.557,
+      "tier1_leak_rate": 0.306,
+      "tier3_leak_rate": 0.745,
+      "per_attribute": {
+        "person": {
+          "match_count": 315,
+          "no_match_count": 296,
+          "skip_count": 0,
+          "evaluable_count": 611,
+          "success_rate": 0.516
+        },
+        "age": {
+          "match_count": 71,
+          "no_match_count": 4,
+          "skip_count": 536,
+          "evaluable_count": 75,
+          "success_rate": 0.947
+        },
+        "location": {
+          "match_count": 83,
+          "no_match_count": 295,
+          "skip_count": 233,
+          "evaluable_count": 378,
+          "success_rate": 0.22
+        },
+        "occupation": {
+          "match_count": 422,
+          "no_match_count": 113,
+          "skip_count": 76,
+          "evaluable_count": 535,
+          "success_rate": 0.789
+        },
+        "education": {
+          "match_count": 85,
+          "no_match_count": 36,
+          "skip_count": 490,
+          "evaluable_count": 121,
+          "success_rate": 0.702
+        },
+        "nationality": {
+          "match_count": 37,
+          "no_match_count": 31,
+          "skip_count": 543,
+          "evaluable_count": 68,
+          "success_rate": 0.544
+        },
+        "organization": {
+          "match_count": 111,
+          "no_match_count": 500,
+          "skip_count": 0,
+          "evaluable_count": 611,
+          "success_rate": 0.182
+        }
+      }
+    },
+    "by_complexity": {
+      "Low": {
+        "count": 204,
+        "any_attribute_leak_rate": 0.917,
+        "average_leak_rate": 0.596,
+        "tier1_leak_rate": 0.297,
+        "tier3_leak_rate": 0.82,
+        "per_attribute": {
+          "person": {
+            "match_count": 128,
+            "no_match_count": 76,
+            "skip_count": 0,
+            "evaluable_count": 204,
+            "success_rate": 0.627
+          },
+          "age": {
+            "match_count": 17,
+            "no_match_count": 1,
+            "skip_count": 186,
+            "evaluable_count": 18,
+            "success_rate": 0.944
+          },
+          "location": {
+            "match_count": 24,
+            "no_match_count": 129,
+            "skip_count": 51,
+            "evaluable_count": 153,
+            "success_rate": 0.157
+          },
+          "occupation": {
+            "match_count": 153,
+            "no_match_count": 32,
+            "skip_count": 19,
+            "evaluable_count": 185,
+            "success_rate": 0.827
+          },
+          "education": {
+            "match_count": 34,
+            "no_match_count": 7,
+            "skip_count": 163,
+            "evaluable_count": 41,
+            "success_rate": 0.829
+          },
+          "nationality": {
+            "match_count": 15,
+            "no_match_count": 7,
+            "skip_count": 182,
+            "evaluable_count": 22,
+            "success_rate": 0.682
+          },
+          "organization": {
+            "match_count": 22,
+            "no_match_count": 182,
+            "skip_count": 0,
+            "evaluable_count": 204,
+            "success_rate": 0.108
+          }
+        }
+      },
+      "Medium": {
+        "count": 206,
+        "any_attribute_leak_rate": 0.83,
+        "average_leak_rate": 0.534,
+        "tier1_leak_rate": 0.237,
+        "tier3_leak_rate": 0.756,
+        "per_attribute": {
+          "person": {
+            "match_count": 72,
+            "no_match_count": 134,
+            "skip_count": 0,
+            "evaluable_count": 206,
+            "success_rate": 0.35
+          },
+          "age": {
+            "match_count": 25,
+            "no_match_count": 1,
+            "skip_count": 180,
+            "evaluable_count": 26,
+            "success_rate": 0.962
+          },
+          "location": {
+            "match_count": 29,
+            "no_match_count": 90,
+            "skip_count": 87,
+            "evaluable_count": 119,
+            "success_rate": 0.244
+          },
+          "occupation": {
+            "match_count": 142,
+            "no_match_count": 42,
+            "skip_count": 22,
+            "evaluable_count": 184,
+            "success_rate": 0.772
+          },
+          "education": {
+            "match_count": 32,
+            "no_match_count": 16,
+            "skip_count": 158,
+            "evaluable_count": 48,
+            "success_rate": 0.667
+          },
+          "nationality": {
+            "match_count": 15,
+            "no_match_count": 9,
+            "skip_count": 182,
+            "evaluable_count": 24,
+            "success_rate": 0.625
+          },
+          "organization": {
+            "match_count": 24,
+            "no_match_count": 182,
+            "skip_count": 0,
+            "evaluable_count": 206,
+            "success_rate": 0.117
+          }
+        }
+      },
+      "High": {
+        "count": 201,
+        "any_attribute_leak_rate": 0.9,
+        "average_leak_rate": 0.541,
+        "tier1_leak_rate": 0.393,
+        "tier3_leak_rate": 0.653,
+        "per_attribute": {
+          "person": {
+            "match_count": 115,
+            "no_match_count": 86,
+            "skip_count": 0,
+            "evaluable_count": 201,
+            "success_rate": 0.572
+          },
+          "age": {
+            "match_count": 29,
+            "no_match_count": 2,
+            "skip_count": 170,
+            "evaluable_count": 31,
+            "success_rate": 0.935
+          },
+          "location": {
+            "match_count": 30,
+            "no_match_count": 76,
+            "skip_count": 95,
+            "evaluable_count": 106,
+            "success_rate": 0.283
+          },
+          "occupation": {
+            "match_count": 127,
+            "no_match_count": 39,
+            "skip_count": 35,
+            "evaluable_count": 166,
+            "success_rate": 0.765
+          },
+          "education": {
+            "match_count": 19,
+            "no_match_count": 13,
+            "skip_count": 169,
+            "evaluable_count": 32,
+            "success_rate": 0.594
+          },
+          "nationality": {
+            "match_count": 7,
+            "no_match_count": 15,
+            "skip_count": 179,
+            "evaluable_count": 22,
+            "success_rate": 0.318
+          },
+          "organization": {
+            "match_count": 65,
+            "no_match_count": 136,
+            "skip_count": 0,
+            "evaluable_count": 201,
+            "success_rate": 0.323
+          }
+        }
+      }
+    }
+  },
+  "LLM SauerkrautLM [few-shot +verify]": {
+    "pipeline": "LLM SauerkrautLM [few-shot +verify]",
+    "overall": {
+      "count": 611,
+      "any_attribute_leak_rate": 0.82,
+      "average_leak_rate": 0.484,
+      "tier1_leak_rate": 0.174,
+      "tier3_leak_rate": 0.716,
+      "per_attribute": {
+        "person": {
+          "match_count": 236,
+          "no_match_count": 375,
+          "skip_count": 0,
+          "evaluable_count": 611,
+          "success_rate": 0.386
+        },
+        "age": {
+          "match_count": 70,
+          "no_match_count": 1,
+          "skip_count": 540,
+          "evaluable_count": 71,
+          "success_rate": 0.986
+        },
+        "location": {
+          "match_count": 39,
+          "no_match_count": 339,
+          "skip_count": 233,
+          "evaluable_count": 378,
+          "success_rate": 0.103
+        },
+        "occupation": {
+          "match_count": 395,
+          "no_match_count": 138,
+          "skip_count": 78,
+          "evaluable_count": 533,
+          "success_rate": 0.741
+        },
+        "education": {
+          "match_count": 78,
+          "no_match_count": 36,
+          "skip_count": 497,
+          "evaluable_count": 114,
+          "success_rate": 0.684
+        },
+        "nationality": {
+          "match_count": 28,
+          "no_match_count": 34,
+          "skip_count": 549,
+          "evaluable_count": 62,
+          "success_rate": 0.452
+        },
+        "organization": {
+          "match_count": 20,
+          "no_match_count": 591,
+          "skip_count": 0,
+          "evaluable_count": 611,
+          "success_rate": 0.033
+        }
+      }
+    },
+    "by_complexity": {
+      "Low": {
+        "count": 204,
+        "any_attribute_leak_rate": 0.902,
+        "average_leak_rate": 0.561,
+        "tier1_leak_rate": 0.247,
+        "tier3_leak_rate": 0.796,
+        "per_attribute": {
+          "person": {
+            "match_count": 127,
+            "no_match_count": 77,
+            "skip_count": 0,
+            "evaluable_count": 204,
+            "success_rate": 0.623
+          },
+          "age": {
+            "match_count": 16,
+            "no_match_count": 0,
+            "skip_count": 188,
+            "evaluable_count": 16,
+            "success_rate": 1.0
+          },
+          "location": {
+            "match_count": 15,
+            "no_match_count": 138,
+            "skip_count": 51,
+            "evaluable_count": 153,
+            "success_rate": 0.098
+          },
+          "occupation": {
+            "match_count": 144,
+            "no_match_count": 41,
+            "skip_count": 19,
+            "evaluable_count": 185,
+            "success_rate": 0.778
+          },
+          "education": {
+            "match_count": 33,
+            "no_match_count": 8,
+            "skip_count": 163,
+            "evaluable_count": 41,
+            "success_rate": 0.805
+          },
+          "nationality": {
+            "match_count": 12,
+            "no_match_count": 8,
+            "skip_count": 184,
+            "evaluable_count": 20,
+            "success_rate": 0.6
+          },
+          "organization": {
+            "match_count": 4,
+            "no_match_count": 200,
+            "skip_count": 0,
+            "evaluable_count": 204,
+            "success_rate": 0.02
+          }
+        }
+      },
+      "Medium": {
+        "count": 206,
+        "any_attribute_leak_rate": 0.786,
+        "average_leak_rate": 0.472,
+        "tier1_leak_rate": 0.15,
+        "tier3_leak_rate": 0.714,
+        "per_attribute": {
+          "person": {
+            "match_count": 53,
+            "no_match_count": 153,
+            "skip_count": 0,
+            "evaluable_count": 206,
+            "success_rate": 0.257
+          },
+          "age": {
+            "match_count": 26,
+            "no_match_count": 0,
+            "skip_count": 180,
+            "evaluable_count": 26,
+            "success_rate": 1.0
+          },
+          "location": {
+            "match_count": 17,
+            "no_match_count": 102,
+            "skip_count": 87,
+            "evaluable_count": 119,
+            "success_rate": 0.143
+          },
+          "occupation": {
+            "match_count": 132,
+            "no_match_count": 51,
+            "skip_count": 23,
+            "evaluable_count": 183,
+            "success_rate": 0.721
+          },
+          "education": {
+            "match_count": 28,
+            "no_match_count": 16,
+            "skip_count": 162,
+            "evaluable_count": 44,
+            "success_rate": 0.636
+          },
+          "nationality": {
+            "match_count": 12,
+            "no_match_count": 12,
+            "skip_count": 182,
+            "evaluable_count": 24,
+            "success_rate": 0.5
+          },
+          "organization": {
+            "match_count": 10,
+            "no_match_count": 196,
+            "skip_count": 0,
+            "evaluable_count": 206,
+            "success_rate": 0.049
+          }
+        }
+      },
+      "High": {
+        "count": 201,
+        "any_attribute_leak_rate": 0.771,
+        "average_leak_rate": 0.41,
+        "tier1_leak_rate": 0.125,
+        "tier3_leak_rate": 0.624,
+        "per_attribute": {
+          "person": {
+            "match_count": 56,
+            "no_match_count": 145,
+            "skip_count": 0,
+            "evaluable_count": 201,
+            "success_rate": 0.279
+          },
+          "age": {
+            "match_count": 28,
+            "no_match_count": 1,
+            "skip_count": 172,
+            "evaluable_count": 29,
+            "success_rate": 0.966
+          },
+          "location": {
+            "match_count": 7,
+            "no_match_count": 99,
+            "skip_count": 95,
+            "evaluable_count": 106,
+            "success_rate": 0.066
+          },
+          "occupation": {
+            "match_count": 119,
+            "no_match_count": 46,
+            "skip_count": 36,
+            "evaluable_count": 165,
+            "success_rate": 0.721
+          },
+          "education": {
+            "match_count": 17,
+            "no_match_count": 12,
+            "skip_count": 172,
+            "evaluable_count": 29,
+            "success_rate": 0.586
+          },
+          "nationality": {
+            "match_count": 4,
+            "no_match_count": 14,
+            "skip_count": 183,
+            "evaluable_count": 18,
+            "success_rate": 0.222
+          },
+          "organization": {
+            "match_count": 6,
+            "no_match_count": 195,
+            "skip_count": 0,
+            "evaluable_count": 201,
+            "success_rate": 0.03
+          }
+        }
+      }
+    }
+  },
+  "LLM Llama-3 [fine-tuned]": {
+    "pipeline": "LLM Llama-3 [fine-tuned]",
+    "overall": {
+      "count": 611,
+      "any_attribute_leak_rate": 0.759,
+      "average_leak_rate": 0.429,
+      "tier1_leak_rate": 0.091,
+      "tier3_leak_rate": 0.682,
+      "per_attribute": {
+        "person": {
+          "match_count": 108,
+          "no_match_count": 503,
+          "skip_count": 0,
+          "evaluable_count": 611,
+          "success_rate": 0.177
+        },
+        "age": {
+          "match_count": 67,
+          "no_match_count": 4,
+          "skip_count": 540,
+          "evaluable_count": 71,
+          "success_rate": 0.944
+        },
+        "location": {
+          "match_count": 32,
+          "no_match_count": 346,
+          "skip_count": 233,
+          "evaluable_count": 378,
+          "success_rate": 0.085
+        },
+        "occupation": {
+          "match_count": 373,
+          "no_match_count": 160,
+          "skip_count": 78,
+          "evaluable_count": 533,
+          "success_rate": 0.7
+        },
+        "education": {
+          "match_count": 86,
+          "no_match_count": 29,
+          "skip_count": 496,
+          "evaluable_count": 115,
+          "success_rate": 0.748
+        },
+        "nationality": {
+          "match_count": 22,
+          "no_match_count": 43,
+          "skip_count": 546,
+          "evaluable_count": 65,
+          "success_rate": 0.338
+        },
+        "organization": {
+          "match_count": 7,
+          "no_match_count": 604,
+          "skip_count": 0,
+          "evaluable_count": 611,
+          "success_rate": 0.011
+        }
+      }
+    },
+    "by_complexity": {
+      "Low": {
+        "count": 204,
+        "any_attribute_leak_rate": 0.819,
+        "average_leak_rate": 0.481,
+        "tier1_leak_rate": 0.1,
+        "tier3_leak_rate": 0.766,
+        "per_attribute": {
+          "person": {
+            "match_count": 48,
+            "no_match_count": 156,
+            "skip_count": 0,
+            "evaluable_count": 204,
+            "success_rate": 0.235
+          },
+          "age": {
+            "match_count": 16,
+            "no_match_count": 0,
+            "skip_count": 188,
+            "evaluable_count": 16,
+            "success_rate": 1.0
+          },
+          "location": {
+            "match_count": 10,
+            "no_match_count": 143,
+            "skip_count": 51,
+            "evaluable_count": 153,
+            "success_rate": 0.065
+          },
+          "occupation": {
+            "match_count": 139,
+            "no_match_count": 46,
+            "skip_count": 19,
+            "evaluable_count": 185,
+            "success_rate": 0.751
+          },
+          "education": {
+            "match_count": 35,
+            "no_match_count": 8,
+            "skip_count": 161,
+            "evaluable_count": 43,
+            "success_rate": 0.814
+          },
+          "nationality": {
+            "match_count": 11,
+            "no_match_count": 11,
+            "skip_count": 182,
+            "evaluable_count": 22,
+            "success_rate": 0.5
+          },
+          "organization": {
+            "match_count": 0,
+            "no_match_count": 204,
+            "skip_count": 0,
+            "evaluable_count": 204,
+            "success_rate": 0.0
+          }
+        }
+      },
+      "Medium": {
+        "count": 206,
+        "any_attribute_leak_rate": 0.718,
+        "average_leak_rate": 0.423,
+        "tier1_leak_rate": 0.086,
+        "tier3_leak_rate": 0.677,
+        "per_attribute": {
+          "person": {
+            "match_count": 25,
+            "no_match_count": 181,
+            "skip_count": 0,
+            "evaluable_count": 206,
+            "success_rate": 0.121
+          },
+          "age": {
+            "match_count": 24,
+            "no_match_count": 2,
+            "skip_count": 180,
+            "evaluable_count": 26,
+            "success_rate": 0.923
+          },
+          "location": {
+            "match_count": 15,
+            "no_match_count": 104,
+            "skip_count": 87,
+            "evaluable_count": 119,
+            "success_rate": 0.126
+          },
+          "occupation": {
+            "match_count": 120,
+            "no_match_count": 63,
+            "skip_count": 23,
+            "evaluable_count": 183,
+            "success_rate": 0.656
+          },
+          "education": {
+            "match_count": 32,
+            "no_match_count": 9,
+            "skip_count": 165,
+            "evaluable_count": 41,
+            "success_rate": 0.78
+          },
+          "nationality": {
+            "match_count": 8,
+            "no_match_count": 15,
+            "skip_count": 183,
+            "evaluable_count": 23,
+            "success_rate": 0.348
+          },
+          "organization": {
+            "match_count": 2,
+            "no_match_count": 204,
+            "skip_count": 0,
+            "evaluable_count": 206,
+            "success_rate": 0.01
+          }
+        }
+      },
+      "High": {
+        "count": 201,
+        "any_attribute_leak_rate": 0.741,
+        "average_leak_rate": 0.379,
+        "tier1_leak_rate": 0.088,
+        "tier3_leak_rate": 0.596,
+        "per_attribute": {
+          "person": {
+            "match_count": 35,
+            "no_match_count": 166,
+            "skip_count": 0,
+            "evaluable_count": 201,
+            "success_rate": 0.174
+          },
+          "age": {
+            "match_count": 27,
+            "no_match_count": 2,
+            "skip_count": 172,
+            "evaluable_count": 29,
+            "success_rate": 0.931
+          },
+          "location": {
+            "match_count": 7,
+            "no_match_count": 99,
+            "skip_count": 95,
+            "evaluable_count": 106,
+            "success_rate": 0.066
+          },
+          "occupation": {
+            "match_count": 114,
+            "no_match_count": 51,
+            "skip_count": 36,
+            "evaluable_count": 165,
+            "success_rate": 0.691
+          },
+          "education": {
+            "match_count": 19,
+            "no_match_count": 12,
+            "skip_count": 170,
+            "evaluable_count": 31,
+            "success_rate": 0.613
+          },
+          "nationality": {
+            "match_count": 3,
+            "no_match_count": 17,
+            "skip_count": 181,
+            "evaluable_count": 20,
+            "success_rate": 0.15
+          },
+          "organization": {
+            "match_count": 5,
+            "no_match_count": 196,
+            "skip_count": 0,
+            "evaluable_count": 201,
+            "success_rate": 0.025
+          }
+        }
+      }
+    }
+  },
+  "LLM Llama-3 [prompt few-shot]": {
+    "pipeline": "LLM Llama-3 [prompt few-shot]",
+    "overall": {
+      "count": 611,
+      "any_attribute_leak_rate": 0.835,
+      "average_leak_rate": 0.452,
+      "tier1_leak_rate": 0.19,
+      "tier3_leak_rate": 0.649,
+      "per_attribute": {
+        "person": {
+          "match_count": 110,
+          "no_match_count": 501,
+          "skip_count": 0,
+          "evaluable_count": 611,
+          "success_rate": 0.18
+        },
+        "age": {
+          "match_count": 62,
+          "no_match_count": 9,
+          "skip_count": 540,
+          "evaluable_count": 71,
+          "success_rate": 0.873
+        },
+        "location": {
+          "match_count": 133,
+          "no_match_count": 246,
+          "skip_count": 232,
+          "evaluable_count": 379,
+          "success_rate": 0.351
+        },
+        "occupation": {
+          "match_count": 437,
+          "no_match_count": 102,
+          "skip_count": 72,
+          "evaluable_count": 539,
+          "success_rate": 0.811
+        },
+        "education": {
+          "match_count": 66,
+          "no_match_count": 49,
+          "skip_count": 496,
+          "evaluable_count": 115,
+          "success_rate": 0.574
+        },
+        "nationality": {
+          "match_count": 22,
+          "no_match_count": 43,
+          "skip_count": 546,
+          "evaluable_count": 65,
+          "success_rate": 0.338
+        },
+        "organization": {
+          "match_count": 23,
+          "no_match_count": 588,
+          "skip_count": 0,
+          "evaluable_count": 611,
+          "success_rate": 0.038
+        }
+      }
+    },
+    "by_complexity": {
+      "Low": {
+        "count": 204,
+        "any_attribute_leak_rate": 0.897,
+        "average_leak_rate": 0.525,
+        "tier1_leak_rate": 0.226,
+        "tier3_leak_rate": 0.749,
+        "per_attribute": {
+          "person": {
+            "match_count": 48,
+            "no_match_count": 156,
+            "skip_count": 0,
+            "evaluable_count": 204,
+            "success_rate": 0.235
+          },
+          "age": {
+            "match_count": 16,
+            "no_match_count": 0,
+            "skip_count": 188,
+            "evaluable_count": 16,
+            "success_rate": 1.0
+          },
+          "location": {
+            "match_count": 64,
+            "no_match_count": 89,
+            "skip_count": 51,
+            "evaluable_count": 153,
+            "success_rate": 0.418
+          },
+          "occupation": {
+            "match_count": 162,
+            "no_match_count": 23,
+            "skip_count": 19,
+            "evaluable_count": 185,
+            "success_rate": 0.876
+          },
+          "education": {
+            "match_count": 26,
+            "no_match_count": 16,
+            "skip_count": 162,
+            "evaluable_count": 42,
+            "success_rate": 0.619
+          },
+          "nationality": {
+            "match_count": 11,
+            "no_match_count": 11,
+            "skip_count": 182,
+            "evaluable_count": 22,
+            "success_rate": 0.5
+          },
+          "organization": {
+            "match_count": 5,
+            "no_match_count": 199,
+            "skip_count": 0,
+            "evaluable_count": 204,
+            "success_rate": 0.025
+          }
+        }
+      },
+      "Medium": {
+        "count": 206,
+        "any_attribute_leak_rate": 0.811,
+        "average_leak_rate": 0.444,
+        "tier1_leak_rate": 0.175,
+        "tier3_leak_rate": 0.645,
+        "per_attribute": {
+          "person": {
+            "match_count": 27,
+            "no_match_count": 179,
+            "skip_count": 0,
+            "evaluable_count": 206,
+            "success_rate": 0.131
+          },
+          "age": {
+            "match_count": 23,
+            "no_match_count": 3,
+            "skip_count": 180,
+            "evaluable_count": 26,
+            "success_rate": 0.885
+          },
+          "location": {
+            "match_count": 41,
+            "no_match_count": 79,
+            "skip_count": 86,
+            "evaluable_count": 120,
+            "success_rate": 0.342
+          },
+          "occupation": {
+            "match_count": 140,
+            "no_match_count": 43,
+            "skip_count": 23,
+            "evaluable_count": 183,
+            "success_rate": 0.765
+          },
+          "education": {
+            "match_count": 23,
+            "no_match_count": 19,
+            "skip_count": 164,
+            "evaluable_count": 42,
+            "success_rate": 0.548
+          },
+          "nationality": {
+            "match_count": 8,
+            "no_match_count": 13,
+            "skip_count": 185,
+            "evaluable_count": 21,
+            "success_rate": 0.381
+          },
+          "organization": {
+            "match_count": 11,
+            "no_match_count": 195,
+            "skip_count": 0,
+            "evaluable_count": 206,
+            "success_rate": 0.053
+          }
+        }
+      },
+      "High": {
+        "count": 201,
+        "any_attribute_leak_rate": 0.796,
+        "average_leak_rate": 0.391,
+        "tier1_leak_rate": 0.158,
+        "tier3_leak_rate": 0.567,
+        "per_attribute": {
+          "person": {
+            "match_count": 35,
+            "no_match_count": 166,
+            "skip_count": 0,
+            "evaluable_count": 201,
+            "success_rate": 0.174
+          },
+          "age": {
+            "match_count": 23,
+            "no_match_count": 6,
+            "skip_count": 172,
+            "evaluable_count": 29,
+            "success_rate": 0.793
+          },
+          "location": {
+            "match_count": 28,
+            "no_match_count": 78,
+            "skip_count": 95,
+            "evaluable_count": 106,
+            "success_rate": 0.264
+          },
+          "occupation": {
+            "match_count": 135,
+            "no_match_count": 36,
+            "skip_count": 30,
+            "evaluable_count": 171,
+            "success_rate": 0.789
+          },
+          "education": {
+            "match_count": 17,
+            "no_match_count": 14,
+            "skip_count": 170,
+            "evaluable_count": 31,
+            "success_rate": 0.548
+          },
+          "nationality": {
+            "match_count": 3,
+            "no_match_count": 19,
+            "skip_count": 179,
+            "evaluable_count": 22,
+            "success_rate": 0.136
+          },
+          "organization": {
+            "match_count": 7,
+            "no_match_count": 194,
+            "skip_count": 0,
+            "evaluable_count": 201,
+            "success_rate": 0.035
+          }
+        }
+      }
+    }
+  },
+  "LLM Qwen2.5 [prompt few-shot]": {
+    "pipeline": "LLM Qwen2.5 [prompt few-shot]",
+    "overall": {
+      "count": 611,
+      "any_attribute_leak_rate": 0.925,
+      "average_leak_rate": 0.528,
+      "tier1_leak_rate": 0.246,
+      "tier3_leak_rate": 0.738,
+      "per_attribute": {
+        "person": {
+          "match_count": 135,
+          "no_match_count": 476,
+          "skip_count": 0,
+          "evaluable_count": 611,
+          "success_rate": 0.221
+        },
+        "age": {
+          "match_count": 61,
+          "no_match_count": 11,
+          "skip_count": 539,
+          "evaluable_count": 72,
+          "success_rate": 0.847
+        },
+        "location": {
+          "match_count": 173,
+          "no_match_count": 206,
+          "skip_count": 232,
+          "evaluable_count": 379,
+          "success_rate": 0.456
+        },
+        "occupation": {
+          "match_count": 506,
+          "no_match_count": 29,
+          "skip_count": 76,
+          "evaluable_count": 535,
+          "success_rate": 0.946
+        },
+        "education": {
+          "match_count": 69,
+          "no_match_count": 44,
+          "skip_count": 498,
+          "evaluable_count": 113,
+          "success_rate": 0.611
+        },
+        "nationality": {
+          "match_count": 33,
+          "no_match_count": 27,
+          "skip_count": 551,
+          "evaluable_count": 60,
+          "success_rate": 0.55
+        },
+        "organization": {
+          "match_count": 38,
+          "no_match_count": 573,
+          "skip_count": 0,
+          "evaluable_count": 611,
+          "success_rate": 0.062
+        }
+      }
+    },
+    "by_complexity": {
+      "Low": {
+        "count": 204,
+        "any_attribute_leak_rate": 0.946,
+        "average_leak_rate": 0.559,
+        "tier1_leak_rate": 0.281,
+        "tier3_leak_rate": 0.768,
+        "per_attribute": {
+          "person": {
+            "match_count": 55,
+            "no_match_count": 149,
+            "skip_count": 0,
+            "evaluable_count": 204,
+            "success_rate": 0.27
+          },
+          "age": {
+            "match_count": 15,
+            "no_match_count": 2,
+            "skip_count": 187,
+            "evaluable_count": 17,
+            "success_rate": 0.882
+          },
+          "location": {
+            "match_count": 81,
+            "no_match_count": 72,
+            "skip_count": 51,
+            "evaluable_count": 153,
+            "success_rate": 0.529
+          },
+          "occupation": {
+            "match_count": 177,
+            "no_match_count": 8,
+            "skip_count": 19,
+            "evaluable_count": 185,
+            "success_rate": 0.957
+          },
+          "education": {
+            "match_count": 26,
+            "no_match_count": 15,
+            "skip_count": 163,
+            "evaluable_count": 41,
+            "success_rate": 0.634
+          },
+          "nationality": {
+            "match_count": 12,
+            "no_match_count": 8,
+            "skip_count": 184,
+            "evaluable_count": 20,
+            "success_rate": 0.6
+          },
+          "organization": {
+            "match_count": 9,
+            "no_match_count": 195,
+            "skip_count": 0,
+            "evaluable_count": 204,
+            "success_rate": 0.044
+          }
+        }
+      },
+      "Medium": {
+        "count": 206,
+        "any_attribute_leak_rate": 0.922,
+        "average_leak_rate": 0.532,
+        "tier1_leak_rate": 0.223,
+        "tier3_leak_rate": 0.764,
+        "per_attribute": {
+          "person": {
+            "match_count": 35,
+            "no_match_count": 171,
+            "skip_count": 0,
+            "evaluable_count": 206,
+            "success_rate": 0.17
+          },
+          "age": {
+            "match_count": 24,
+            "no_match_count": 2,
+            "skip_count": 180,
+            "evaluable_count": 26,
+            "success_rate": 0.923
+          },
+          "location": {
+            "match_count": 53,
+            "no_match_count": 66,
+            "skip_count": 87,
+            "evaluable_count": 119,
+            "success_rate": 0.445
+          },
+          "occupation": {
+            "match_count": 175,
+            "no_match_count": 10,
+            "skip_count": 21,
+            "evaluable_count": 185,
+            "success_rate": 0.946
+          },
+          "education": {
+            "match_count": 25,
+            "no_match_count": 17,
+            "skip_count": 164,
+            "evaluable_count": 42,
+            "success_rate": 0.595
+          },
+          "nationality": {
+            "match_count": 13,
+            "no_match_count": 9,
+            "skip_count": 184,
+            "evaluable_count": 22,
+            "success_rate": 0.591
+          },
+          "organization": {
+            "match_count": 11,
+            "no_match_count": 195,
+            "skip_count": 0,
+            "evaluable_count": 206,
+            "success_rate": 0.053
+          }
+        }
+      },
+      "High": {
+        "count": 201,
+        "any_attribute_leak_rate": 0.905,
+        "average_leak_rate": 0.488,
+        "tier1_leak_rate": 0.226,
+        "tier3_leak_rate": 0.684,
+        "per_attribute": {
+          "person": {
+            "match_count": 45,
+            "no_match_count": 156,
+            "skip_count": 0,
+            "evaluable_count": 201,
+            "success_rate": 0.224
+          },
+          "age": {
+            "match_count": 22,
+            "no_match_count": 7,
+            "skip_count": 172,
+            "evaluable_count": 29,
+            "success_rate": 0.759
+          },
+          "location": {
+            "match_count": 39,
+            "no_match_count": 68,
+            "skip_count": 94,
+            "evaluable_count": 107,
+            "success_rate": 0.364
+          },
+          "occupation": {
+            "match_count": 154,
+            "no_match_count": 11,
+            "skip_count": 36,
+            "evaluable_count": 165,
+            "success_rate": 0.933
+          },
+          "education": {
+            "match_count": 18,
+            "no_match_count": 12,
+            "skip_count": 171,
+            "evaluable_count": 30,
+            "success_rate": 0.6
+          },
+          "nationality": {
+            "match_count": 8,
+            "no_match_count": 10,
+            "skip_count": 183,
+            "evaluable_count": 18,
+            "success_rate": 0.444
+          },
+          "organization": {
+            "match_count": 18,
+            "no_match_count": 183,
+            "skip_count": 0,
+            "evaluable_count": 201,
+            "success_rate": 0.09
+          }
+        }
+      }
+    }
+  },
+  "LLM SauerkrautLM [prompt few-shot]": {
+    "pipeline": "LLM SauerkrautLM [prompt few-shot]",
+    "overall": {
+      "count": 611,
+      "any_attribute_leak_rate": 0.876,
+      "average_leak_rate": 0.512,
+      "tier1_leak_rate": 0.227,
+      "tier3_leak_rate": 0.726,
+      "per_attribute": {
+        "person": {
+          "match_count": 110,
+          "no_match_count": 501,
+          "skip_count": 0,
+          "evaluable_count": 611,
+          "success_rate": 0.18
+        },
+        "age": {
+          "match_count": 61,
+          "no_match_count": 10,
+          "skip_count": 540,
+          "evaluable_count": 71,
+          "success_rate": 0.859
+        },
+        "location": {
+          "match_count": 164,
+          "no_match_count": 214,
+          "skip_count": 233,
+          "evaluable_count": 378,
+          "success_rate": 0.434
+        },
+        "occupation": {
+          "match_count": 466,
+          "no_match_count": 71,
+          "skip_count": 74,
+          "evaluable_count": 537,
+          "success_rate": 0.868
+        },
+        "education": {
+          "match_count": 72,
+          "no_match_count": 39,
+          "skip_count": 500,
+          "evaluable_count": 111,
+          "success_rate": 0.649
+        },
+        "nationality": {
+          "match_count": 30,
+          "no_match_count": 27,
+          "skip_count": 554,
+          "evaluable_count": 57,
+          "success_rate": 0.526
+        },
+        "organization": {
+          "match_count": 41,
+          "no_match_count": 570,
+          "skip_count": 0,
+          "evaluable_count": 611,
+          "success_rate": 0.067
+        }
+      }
+    },
+    "by_complexity": {
+      "Low": {
+        "count": 204,
+        "any_attribute_leak_rate": 0.897,
+        "average_leak_rate": 0.543,
+        "tier1_leak_rate": 0.243,
+        "tier3_leak_rate": 0.767,
+        "per_attribute": {
+          "person": {
+            "match_count": 43,
+            "no_match_count": 161,
+            "skip_count": 0,
+            "evaluable_count": 204,
+            "success_rate": 0.211
+          },
+          "age": {
+            "match_count": 14,
+            "no_match_count": 2,
+            "skip_count": 188,
+            "evaluable_count": 16,
+            "success_rate": 0.875
+          },
+          "location": {
+            "match_count": 71,
+            "no_match_count": 82,
+            "skip_count": 51,
+            "evaluable_count": 153,
+            "success_rate": 0.464
+          },
+          "occupation": {
+            "match_count": 168,
+            "no_match_count": 17,
+            "skip_count": 19,
+            "evaluable_count": 185,
+            "success_rate": 0.908
+          },
+          "education": {
+            "match_count": 29,
+            "no_match_count": 12,
+            "skip_count": 163,
+            "evaluable_count": 41,
+            "success_rate": 0.707
+          },
+          "nationality": {
+            "match_count": 11,
+            "no_match_count": 8,
+            "skip_count": 185,
+            "evaluable_count": 19,
+            "success_rate": 0.579
+          },
+          "organization": {
+            "match_count": 11,
+            "no_match_count": 193,
+            "skip_count": 0,
+            "evaluable_count": 204,
+            "success_rate": 0.054
+          }
+        }
+      },
+      "Medium": {
+        "count": 206,
+        "any_attribute_leak_rate": 0.85,
+        "average_leak_rate": 0.499,
+        "tier1_leak_rate": 0.205,
+        "tier3_leak_rate": 0.72,
+        "per_attribute": {
+          "person": {
+            "match_count": 27,
+            "no_match_count": 179,
+            "skip_count": 0,
+            "evaluable_count": 206,
+            "success_rate": 0.131
+          },
+          "age": {
+            "match_count": 22,
+            "no_match_count": 4,
+            "skip_count": 180,
+            "evaluable_count": 26,
+            "success_rate": 0.846
+          },
+          "location": {
+            "match_count": 50,
+            "no_match_count": 69,
+            "skip_count": 87,
+            "evaluable_count": 119,
+            "success_rate": 0.42
+          },
+          "occupation": {
+            "match_count": 152,
+            "no_match_count": 30,
+            "skip_count": 24,
+            "evaluable_count": 182,
+            "success_rate": 0.835
+          },
+          "education": {
+            "match_count": 25,
+            "no_match_count": 18,
+            "skip_count": 163,
+            "evaluable_count": 43,
+            "success_rate": 0.581
+          },
+          "nationality": {
+            "match_count": 13,
+            "no_match_count": 8,
+            "skip_count": 185,
+            "evaluable_count": 21,
+            "success_rate": 0.619
+          },
+          "organization": {
+            "match_count": 13,
+            "no_match_count": 193,
+            "skip_count": 0,
+            "evaluable_count": 206,
+            "success_rate": 0.063
+          }
+        }
+      },
+      "High": {
+        "count": 201,
+        "any_attribute_leak_rate": 0.881,
+        "average_leak_rate": 0.49,
+        "tier1_leak_rate": 0.23,
+        "tier3_leak_rate": 0.685,
+        "per_attribute": {
+          "person": {
+            "match_count": 40,
+            "no_match_count": 161,
+            "skip_count": 0,
+            "evaluable_count": 201,
+            "success_rate": 0.199
+          },
+          "age": {
+            "match_count": 25,
+            "no_match_count": 4,
+            "skip_count": 172,
+            "evaluable_count": 29,
+            "success_rate": 0.862
+          },
+          "location": {
+            "match_count": 43,
+            "no_match_count": 63,
+            "skip_count": 95,
+            "evaluable_count": 106,
+            "success_rate": 0.406
+          },
+          "occupation": {
+            "match_count": 146,
+            "no_match_count": 24,
+            "skip_count": 31,
+            "evaluable_count": 170,
+            "success_rate": 0.859
+          },
+          "education": {
+            "match_count": 18,
+            "no_match_count": 9,
+            "skip_count": 174,
+            "evaluable_count": 27,
+            "success_rate": 0.667
+          },
+          "nationality": {
+            "match_count": 6,
+            "no_match_count": 11,
+            "skip_count": 184,
+            "evaluable_count": 17,
+            "success_rate": 0.353
+          },
+          "organization": {
+            "match_count": 17,
+            "no_match_count": 184,
+            "skip_count": 0,
+            "evaluable_count": 201,
+            "success_rate": 0.085
+          }
+        }
+      }
+    }
+  },
+  "Datenwertschöpfung API": {
+    "pipeline": "Datenwertschöpfung API",
+    "overall": {
+      "count": 611,
+      "any_attribute_leak_rate": 0.998,
+      "average_leak_rate": 0.739,
+      "tier1_leak_rate": 0.569,
+      "tier3_leak_rate": 0.866,
+      "per_attribute": {
+        "person": {
+          "match_count": 183,
+          "no_match_count": 428,
+          "skip_count": 0,
+          "evaluable_count": 611,
+          "success_rate": 0.3
+        },
+        "age": {
+          "match_count": 66,
+          "no_match_count": 6,
+          "skip_count": 539,
+          "evaluable_count": 72,
+          "success_rate": 0.917
+        },
+        "location": {
+          "match_count": 166,
+          "no_match_count": 213,
+          "skip_count": 232,
+          "evaluable_count": 379,
+          "success_rate": 0.438
+        },
+        "occupation": {
+          "match_count": 519,
+          "no_match_count": 18,
+          "skip_count": 74,
+          "evaluable_count": 537,
+          "success_rate": 0.966
+        },
+        "education": {
+          "match_count": 88,
+          "no_match_count": 30,
+          "skip_count": 493,
+          "evaluable_count": 118,
+          "success_rate": 0.746
+        },
+        "nationality": {
+          "match_count": 51,
+          "no_match_count": 10,
+          "skip_count": 550,
+          "evaluable_count": 61,
+          "success_rate": 0.836
+        },
+        "organization": {
+          "match_count": 592,
+          "no_match_count": 19,
+          "skip_count": 0,
+          "evaluable_count": 611,
+          "success_rate": 0.969
+        }
+      }
+    },
+    "by_complexity": {
+      "Low": {
+        "count": 204,
+        "any_attribute_leak_rate": 1.0,
+        "average_leak_rate": 0.748,
+        "tier1_leak_rate": 0.583,
+        "tier3_leak_rate": 0.872,
+        "per_attribute": {
+          "person": {
+            "match_count": 63,
+            "no_match_count": 141,
+            "skip_count": 0,
+            "evaluable_count": 204,
+            "success_rate": 0.309
+          },
+          "age": {
+            "match_count": 16,
+            "no_match_count": 1,
+            "skip_count": 187,
+            "evaluable_count": 17,
+            "success_rate": 0.941
+          },
+          "location": {
+            "match_count": 74,
+            "no_match_count": 79,
+            "skip_count": 51,
+            "evaluable_count": 153,
+            "success_rate": 0.484
+          },
+          "occupation": {
+            "match_count": 181,
+            "no_match_count": 4,
+            "skip_count": 19,
+            "evaluable_count": 185,
+            "success_rate": 0.978
+          },
+          "education": {
+            "match_count": 29,
+            "no_match_count": 14,
+            "skip_count": 161,
+            "evaluable_count": 43,
+            "success_rate": 0.674
+          },
+          "nationality": {
+            "match_count": 17,
+            "no_match_count": 2,
+            "skip_count": 185,
+            "evaluable_count": 19,
+            "success_rate": 0.895
+          },
+          "organization": {
+            "match_count": 195,
+            "no_match_count": 9,
+            "skip_count": 0,
+            "evaluable_count": 204,
+            "success_rate": 0.956
+          }
+        }
+      },
+      "Medium": {
+        "count": 206,
+        "any_attribute_leak_rate": 1.0,
+        "average_leak_rate": 0.745,
+        "tier1_leak_rate": 0.539,
+        "tier3_leak_rate": 0.899,
+        "per_attribute": {
+          "person": {
+            "match_count": 47,
+            "no_match_count": 159,
+            "skip_count": 0,
+            "evaluable_count": 206,
+            "success_rate": 0.228
+          },
+          "age": {
+            "match_count": 24,
+            "no_match_count": 2,
+            "skip_count": 180,
+            "evaluable_count": 26,
+            "success_rate": 0.923
+          },
+          "location": {
+            "match_count": 49,
+            "no_match_count": 70,
+            "skip_count": 87,
+            "evaluable_count": 119,
+            "success_rate": 0.412
+          },
+          "occupation": {
+            "match_count": 181,
+            "no_match_count": 2,
+            "skip_count": 23,
+            "evaluable_count": 183,
+            "success_rate": 0.989
+          },
+          "education": {
+            "match_count": 34,
+            "no_match_count": 10,
+            "skip_count": 162,
+            "evaluable_count": 44,
+            "success_rate": 0.773
+          },
+          "nationality": {
+            "match_count": 21,
+            "no_match_count": 2,
+            "skip_count": 183,
+            "evaluable_count": 23,
+            "success_rate": 0.913
+          },
+          "organization": {
+            "match_count": 201,
+            "no_match_count": 5,
+            "skip_count": 0,
+            "evaluable_count": 206,
+            "success_rate": 0.976
+          }
+        }
+      },
+      "High": {
+        "count": 201,
+        "any_attribute_leak_rate": 0.995,
+        "average_leak_rate": 0.722,
+        "tier1_leak_rate": 0.58,
+        "tier3_leak_rate": 0.829,
+        "per_attribute": {
+          "person": {
+            "match_count": 73,
+            "no_match_count": 128,
+            "skip_count": 0,
+            "evaluable_count": 201,
+            "success_rate": 0.363
+          },
+          "age": {
+            "match_count": 26,
+            "no_match_count": 3,
+            "skip_count": 172,
+            "evaluable_count": 29,
+            "success_rate": 0.897
+          },
+          "location": {
+            "match_count": 43,
+            "no_match_count": 64,
+            "skip_count": 94,
+            "evaluable_count": 107,
+            "success_rate": 0.402
+          },
+          "occupation": {
+            "match_count": 157,
+            "no_match_count": 12,
+            "skip_count": 32,
+            "evaluable_count": 169,
+            "success_rate": 0.929
+          },
+          "education": {
+            "match_count": 25,
+            "no_match_count": 6,
+            "skip_count": 170,
+            "evaluable_count": 31,
+            "success_rate": 0.806
+          },
+          "nationality": {
+            "match_count": 13,
+            "no_match_count": 6,
+            "skip_count": 182,
+            "evaluable_count": 19,
+            "success_rate": 0.684
+          },
+          "organization": {
+            "match_count": 196,
+            "no_match_count": 5,
+            "skip_count": 0,
+            "evaluable_count": 201,
+            "success_rate": 0.975
+          }
+        }
+      }
+    }
+  }
+}

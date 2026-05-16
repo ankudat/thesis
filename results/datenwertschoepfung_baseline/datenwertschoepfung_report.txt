@@ -1,0 +1,34 @@
+================================================================================
+  DATENWERTSCHÖPFUNG ANONYMIZER — EVALUATION REPORT
+  Generated: 2026-04-17 07:53:33
+  API: https://185.229.90.29/anonymize
+  Options: ['names', 'numbers', 'e-mails', 'addresses']
+================================================================================
+
+  Documents: 638
+  API errors: 0
+  Total time: 525.1s (0.82s/doc)
+  Overall leakage: 1921/5137 (37.4%)
+
+  PII LEAKAGE BY CATEGORY:
+  Category     Leaked    Total     Rate
+  --------------------------------------
+  AGE               0       81     0.0%
+  DATE             67      508    13.2%
+  EDU              41       48    85.4%
+  EMAIL             0      165     0.0%
+  IBAN              0      107     0.0%
+  JOB             792      802    98.8%
+  LOC             215      632    34.0%
+  MONEY            64      759     8.4%
+  NATION           91       91   100.0%
+  ORG             640      740    86.5%
+  PER              11     1091     1.0%
+  PHONE             0      113     0.0%
+
+  PII LEAKAGE BY COMPLEXITY:
+  Complexity   Leaked    Total     Rate
+  --------------------------------------
+  Low             656     1974    33.2%
+  Medium          608     1647    36.9%
+  High            657     1516    43.3%

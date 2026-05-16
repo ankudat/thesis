@@ -1115,8 +1115,8 @@
       [PER   ] Keller (chars 190:196)
   [!] FALSE POSITIVES (Model hallucinated these, or boundaries are wrong):
       [PER   ] Keller (chars 24:30)
-      [NATION] EU (chars 140:142)
       [MONEY ] EUR (chars 140:143)
+      [NATION] EU (chars 140:142)
 
 --------------------------------------------------------------------------------
 

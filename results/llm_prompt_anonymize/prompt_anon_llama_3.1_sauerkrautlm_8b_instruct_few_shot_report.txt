@@ -1,0 +1,119 @@
+==============================================================================
+  LLM PROMPT-BASED ANONYMIZATION REPORT
+  Generated: 2026-04-12 23:28:05
+  Model: VAGOsolutions/Llama-3.1-SauerkrautLM-8b-Instruct
+  Strategy: few-shot
+==============================================================================
+
+  Documents: 638
+  Total time: 3126.5s (4.9s/doc)
+  Avg length ratio: 1.00
+
+##############################################################################
+  PII LEAKAGE ANALYSIS
+##############################################################################
+
+  Overall: 356/5137 leaked (6.9%)
+
+  Category        Total   Leaked       Rate
+  ------------------------------------------
+  AGE                81        0       0.0%
+  DATE              508      104      20.5%
+  EDU                48        2       4.2%
+  EMAIL             165        2       1.2%
+  IBAN              107        4       3.7%
+  JOB               802      148      18.5%
+  LOC               632       46       7.3%
+  MONEY             759        7       0.9%
+  NATION             91       16      17.6%
+  ORG               740       24       3.2%
+  PER              1091        3       0.3%
+  PHONE             113        0       0.0%
+
+##############################################################################
+  LEAKAGE BY COMPLEXITY
+##############################################################################
+
+  Low: 218 docs | Leakage: 90/1974 (4.6%)
+
+  Medium: 215 docs | Leakage: 113/1647 (6.9%)
+
+  High: 205 docs | Leakage: 153/1516 (10.1%)
+
+##############################################################################
+  SAMPLE LEAKED PII (first 20)
+##############################################################################
+  [DATE    ] "2023"  →  ... Der geprüfte Jahresabschluss 2023, welcher einen Gewinn ausweis...
+  [JOB     ] "Inhaberin"  →  ...e Strategiegespräch mit einer Inhaberin eines Modehauses fand an eine...
+  [LOC     ] "Genf"  →  ...teilung eines Unternehmens in Genf. Er reichte den geprüften Jah...
+  [EMAIL   ] "s.meier@logistik-express.ch"  →  ...e Offerte soll direkt an ihn (s.meier@logistik-express.ch) gesendet werden....
+  [LOC     ] "Deutschland"  →  ...-Pooling-System für Konten in Deutschland und Frankreich besprochen....
+  [LOC     ] "Frankreich"  →  ...für Konten in Deutschland und Frankreich besprochen....
+  [JOB     ] "CEO"  →  ... einem Datum die Position des CEO von einer anderen Führungskra...
+  [JOB     ] "Logistikleiter"  →  ...Wunsch geäussert, einen neuen Logistikleiter für das E-Banking mit Leserec...
+  [JOB     ] "Liquidatorin"  →  ...rgesellschaft veranlasst. Die Liquidatorin hat die rechtsverbindlichen U...
+  [DATE    ] "2023"  →  ...achen wir den Jahresabschluss 2023 eines Medizintechnikunternehm...
+  [JOB     ] "Leiter Finanzen & Controlling"  →  ...henden Kreditlimite. Der neue Leiter Finanzen & Controlling wird die detaillierten Unterl...
+  [JOB     ] "Inhaber"  →  ...in einer Schweizer Stadt. Ein Inhaber plant den Kauf einer neuen La...
+  [JOB     ] "Leiterin Finanzen"  →  ...Antrittsbesuch bei der neuen Leiterin Finanzen eines Medizintechnikunternehm...
+  [JOB     ] "Verwaltungsratspräsident"  →  ...r Schweiz. Anwesend waren der Verwaltungsratspräsident und die Leiterin der Finanzab...
+  [LOC     ] "Südkorea"  →  ...r eine Maschinenlieferung aus Südkorea. Ein Mitarbeiter der Firma kü...
+  [DATE    ] "Ende Jahr"  →  ...absolvent, wird die Firma per Ende Jahr übernehmen. Zur Finanzierung ...
+  [JOB     ] "Geschäftsführer"  →  ... im Frühjahr. Der designierte Geschäftsführer war anwesend. Für die finale ...
+  [LOC     ] "Europa"  →  ... für Tochtergesellschaften in Europa. Des Weiteren wurden die fehl...
+  [LOC     ] "Frankreich"  →  ...ihre Tochtergesellschaften in Frankreich und Italien evaluiert werden....
+  [LOC     ] "Italien"  →  ...ellschaften in Frankreich und Italien evaluiert werden. Ein Mitarbe...
+
+##############################################################################
+  QUALITATIVE SAMPLES (10 examples)
+##############################################################################
+
+  ────────────────────────────────────────────────────────────────────────
+  Doc 7298 | High | Leakage: 3/6
+  ORIGINAL:  - Die TechSolutions Holding AG gründet ein Spin-off, die Innovatech Robotics GmbH. Der neue Geschäftsführer David Chen war hier. Brauchen das volle Programm: Konten, E-Banking, etc. Kapitaleinzahlung über CHF 100'000 auf das Konto CH56 0079 0016 1234 5678 9 ist erfolgt. Kontoeröffnung in die Wege ge...
+  REWRITTEN: - Die TechSolutions Holding AG gründet ein Spin-off, die Innovatech Robotics GmbH. Ein Mitarbeiter der Geschäftsleitung war anwesend. Es ist notwendig, das volle Programm einzurichten: Firmenkonten, E-Banking, etc. Die Kapitaleinzahlung in Höhe von CHF 100'000 auf ein Konto ist erfolgt. Die Kontoerö...
+
+  ────────────────────────────────────────────────────────────────────────
+  Doc 7673 | High | Leakage: 3/6
+  ORIGINAL:  Die Gastro Services Holding möchte eine Hypothek für ein neues Objekt in St. Gallen. Kaufpreis ist CHF 1.8 Mio.. Kontaktperson ist der Inhaber, Luigi Bernasconi. Der Jahresabschluss 2023 ist imemr noch ausstehend, habne ihn erneut urgiert.
+  REWRITTEN: Die Gastro Services Holding möchte eine Hypothek für ein neues Objekt in einer Stadt in der Ostschweiz. Der Kaufpreis beträgt einen erheblichen Betrag. Die Kontaktperson ist der Inhaber. Der Jahresabschluss 2023 ist noch ausstehend, wir haben ihn erneut angesprochen.
+
+  ────────────────────────────────────────────────────────────────────────
+  Doc 6225 | Medium | Leakage: 3/7
+  ORIGINAL:  Anruf von Herrn Luigi Bernasconi, Geschäftsführer der Ticino Logistic SA. Er benötigt für einen neuen Mitarbeiter im Aussendienst, Herrn Marco Galli, eine neue Firmenkreditkarte mit einer Limite von CHF 5'000. Zudem muss für die neue Buchhalterin ein E-Banking-Vertrag mit Leserechten ausgestellt wer...
+  REWRITTEN: Anruf von einem Geschäftsführer eines Logistikunternehmens. Er benötigt für einen neuen Mitarbeiter im Aussendienst eine neue Firmenkreditkarte mit einer Limite. Zudem muss für die neue Buchhalterin ein E-Banking-Vertrag mit Leserechten ausgestellt werden. Fehlende Dokumente für das letzte Update wu...
+
+  ────────────────────────────────────────────────────────────────────────
+  Doc 7112 | High | Leakage: 2/5
+  ORIGINAL:  - Dokuemnte fehlen immer noch! Meier Import Export AG hat den Jahresabschluss 2023 nicht eingereicht. Claudia Muster am 044 123 45 67 kontaktiert. Hat versprochen, die Unterlagen bis Ende Woche zu senden. Reminder in meinem Kalender gesetzt.
+  REWRITTEN: - Dokumente fehlen immer noch! Ein Unternehmen hat den Jahresabschluss 2023 nicht eingereicht. Eine Mitarbeiterin am Telefon kontaktiert. Hat versprochen, die Unterlagen bis Ende Woche zu senden. Ein Reminder in meinem Kalender ist gesetzt.
+
+  ────────────────────────────────────────────────────────────────────────
+  Doc 7691 | High | Leakage: 2/5
+  ORIGINAL:  Jahresabschluss 2023 der Modehaus Schneider AG erhalten. Kurzes Telefonat mit dem CFO Patrick Dubois. Umsatz ist leicht rückläufig, aber EBITDA dank Kostensenkungen stabil. Fianziell gesund. Er vershprach, die detaillierte Bilanz bis Freitag zu senden.
+  REWRITTEN: Jahresabschluss 2023 eines Modeunternehmens erhalten. Kurzes Telefonat mit einer Führungskraft. Der Umsatz ist leicht rückläufig, aber der EBITDA dank Kostensenkungen stabil. Das Unternehmen ist finanziell gesund. Sie versprach, die detaillierte Bilanz bis Freitag zu senden.
+
+  ────────────────────────────────────────────────────────────────────────
+  Doc 6523 | Medium | Leakage: 0/7
+  ORIGINAL:  Frau Dr. Anna Weber, Leiterin Treasury bei PharmaChem International SA, hat heute eine Festgeldanlage über EUR 10 Mio. für 6 Monate getätigt. Die Konditionen wurden von unserem Trading Desk bestätigt. Die Gutschrift erfolgt auf das Konto CH55 0078 1123 4567 8901 B. Sie zeigt zudem Interesse an unser...
+  REWRITTEN: Frau Dr. eine Führungskraft bei einem Pharmaunternehmen hat heute eine Festgeldanlage über einen erheblichen Betrag für 6 Monate getätigt. Die Konditionen wurden von unserem Trading Desk bestätigt. Die Gutschrift erfolgt auf ein Konto. Sie zeigt zudem Interesse an unseren Cash-Pooling-Lösungen für i...
+
+  ────────────────────────────────────────────────────────────────────────
+  Doc 6513 | Medium | Leakage: 0/7
+  ORIGINAL:  Meeting in Zug bezüglich Nachfolgeregelung der Baumann Bau AG. Der Gründer, Herr Walter Baumann (67-jährig), übergibt die Geschäftsführung per 01.01.2025 an seine Tochter, Frau Claudia Baumann, eine ETH-Architektin. Für die neue Holding-Struktur wird ein zusätzliches Konto benötigt. Die Kontoeröffnu...
+  REWRITTEN: Meeting in einer Schweizer Stadt bezüglich einer Nachfolgeregelung eines Unternehmens. Der Gründer übergibt die Geschäftsführung an eine Führungskraft, die eine Firma übernimmt. Für die neue Unternehmensstruktur wird ein zusätzliches Konto benötigt. Die Kontoeröffnungsunterlagen wurden übergeben.
+
+  ────────────────────────────────────────────────────────────────────────
+  Doc 6105 | Medium | Leakage: 0/10
+  ORIGINAL:  Betriebsbesichtigung bei der Alpin Food AG in Chur mit dem neuen Geschäftsführer Marco Bianchi. Er plant eine Expansion in den deutschen Markt und benötigt dafür eine Exportfinanzierung. Erste Schätzungen belaufen sich auf ca. EUR 750'000. Herr Bianchi, ein HSG-Absolvent, ist 45 Jahre alt und hat di...
+  REWRITTEN: Betriebsbesichtigung bei einem Lebensmittelunternehmen in einer Stadt in der Ostschweiz mit einem neuen Mitarbeiter der Geschäftsleitung. Er plant eine Expansion in den europäischen Markt und benötigt dafür eine Exportfinanzierung. Erste Schätzungen belaufen sich auf einen erheblichen Betrag. Der Ve...
+
+  ────────────────────────────────────────────────────────────────────────
+  Doc 6690 | Medium | Leakage: 0/11
+  ORIGINAL:  Betriebsbesichtigung bei der Holzbau Gasser GmbH in Luzern am 16.05.2024. Der Geschäftsführer, Herr Markus Gasser (58 Jahre), führte mich durch die neue Produktionshalle. Das Investitionsvolumen betrug CHF 2.8 Mio.. Das Geschäft läuft gut, aktuelles EBITDA liegt bei CHF 850'000. Er plant den Kauf ei...
+  REWRITTEN: Betriebsbesichtigung bei einem Holzunternehmen an einem Standort in der Schweiz an einem Datum im Frühjahr. Ein Mitarbeiter der Geschäftsleitung führte mich durch die neue Produktionshalle. Das Investitionsvolumen betrug einen erheblichen Betrag. Das Geschäft läuft gut, das aktuelle EBITDA liegt bei...
+
+  ────────────────────────────────────────────────────────────────────────
+  Doc 7168 | High | Leakage: 0/6
+  ORIGINAL:  - Rechtsverbindliche Unterschriften für den neuen E-Banking Vertrag der Walter Frei AG sind eingetroffen. Der Geschäftsführer Thomas Walter hat persönlich unterschrieben. Ich hab die IT informiert, die neuen Zugriffsberechtigungen aufzuschalten. Sein Sohn Michael Walter (m.walter@frei-ag.ch) ist neu...
+  REWRITTEN: - Rechtsverbindliche Unterschriften für einen neuen E-Banking Vertrag sind eingetroffen. Eine Führungskraft hat persönlich unterschrieben. Ich habe die IT informiert, die neuen Zugriffsberechtigungen aufzuschalten. Ein Mitarbeiter ist neu auch berechtigt.

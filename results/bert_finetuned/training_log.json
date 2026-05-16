@@ -1,0 +1,46 @@
+{
+  "base_model": "bert-base-german-cased",
+  "epochs": 5,
+  "batch_size": 16,
+  "lr": 3e-05,
+  "weight_decay": 0.01,
+  "warmup_ratio": 0.1,
+  "seed": 42,
+  "train_ratio": 0.5,
+  "dev_ratio": 0.25,
+  "best_epoch": 5,
+  "best_dev_f1": 0.9606908735366414,
+  "training_time_seconds": 25.850919008255005,
+  "epochs_log": [
+    {
+      "epoch": 1,
+      "train_loss": 0.9738,
+      "dev_loss": 0.0526,
+      "dev_f1": 0.9335
+    },
+    {
+      "epoch": 2,
+      "train_loss": 0.0385,
+      "dev_loss": 0.0343,
+      "dev_f1": 0.9532
+    },
+    {
+      "epoch": 3,
+      "train_loss": 0.0232,
+      "dev_loss": 0.0338,
+      "dev_f1": 0.9596
+    },
+    {
+      "epoch": 4,
+      "train_loss": 0.0166,
+      "dev_loss": 0.0341,
+      "dev_f1": 0.9593
+    },
+    {
+      "epoch": 5,
+      "train_loss": 0.013,
+      "dev_loss": 0.0342,
+      "dev_f1": 0.9607
+    }
+  ]
+}

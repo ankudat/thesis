@@ -1,0 +1,666 @@
+doc_id,category,gold_label,gold_text,gold_start,gold_end,overlapping_fp_labels,overlapping_fp_texts
+5203,boundary,DATE,Anfang Juni 2024,339,355,DATE,Juni 2024
+5205,omission,PER,Schmidt,340,347,,
+5205,boundary,PER,Elena Schmidt,48,61,PER|PER,Schmidt|Dr. Elena Schmidt
+5205,omission,DATE,2023,142,146,,
+5208,omission,PER,Rochat,400,406,,
+5217,omission,MONEY,CHF 9.8 Mio.,390,402,,
+5224,boundary,MONEY,CHF 2.1 Mio.,186,198,MONEY,CHF 2.1 Mio
+5231,omission,PER,Gasser,349,355,,
+5237,omission,AGE,35-jähriger,205,216,,
+5237,omission,DATE,2023,314,318,,
+5243,omission,DATE,2024,182,186,,
+5245,boundary,JOB,Leiterin Treasury,65,82,JOB,Leiterin
+5246,omission,AGE,58-jährig,311,320,,
+5246,omission,PER,Bachmann,301,309,,
+5246,label,JOB,ETH-Ingenieur,419,432,EDU,ETH-Ingenieur
+5257,omission,PER,Schmid,265,271,,
+5263,omission,AGE,65-jährig,52,61,,
+5264,omission,DATE,2023,159,163,,
+5266,omission,PER,Li,343,345,,
+5266,omission,DATE,morgen,381,387,,
+5266,label,LOC,China,191,196,NATION,China
+5267,boundary,PER,Andreas Meyer,47,60,PER,Dr. Andreas Meyer
+5267,boundary,MONEY,CHF 4 Mio.,364,374,MONEY,CHF 4 Mio
+5267,omission,LOC,Zürich,249,255,,
+5273,boundary,JOB,Gründer und CEO,103,118,JOB,CEO
+5273,boundary,PER,Luc Dubois,129,139,PER,Dr. Luc Dubois
+5274,omission,DATE,2023,155,159,,
+5278,label,NATION,US-amerikanischen,117,134,LOC,US-amerikanischen
+5278,boundary,PER,Elena Fischer,44,57,PER,Dr. Elena Fischer
+5284,boundary,DATE,2022,159,163,DATE,Jahresabschluss 2022
+5284,boundary,MONEY,CHF 5 pro Aktie,341,356,MONEY,CHF 5
+5284,boundary,PER,Anna Wyss,45,54,PER,Dr. Anna Wyss
+5293,omission,PER,Fischer,379,386,,
+5296,omission,PER,Schmid,376,382,,
+5307,omission,PER,Dubois,355,361,,
+5307,boundary,PER,Isabelle Dubois,47,62,PER|PER,Dr. Isabelle Dubois|Dubois
+5308,omission,LOC,Zürich,175,181,,
+5314,label,JOB,ETH-Ingenieurin,250,265,EDU,ETH-Ingenieurin
+5318,boundary,PER,Claudia Wyss,99,111,PER,Dr. Claudia Wyss
+5320,boundary,MONEY,CHF 3.5 Mio.,299,311,MONEY,CHF 3.5 Mio
+5320,omission,DATE,2023,140,144,,
+5336,boundary,PHONE,044 222 33 44,107,120,PHONE,(044 222 33 44
+5343,label,JOB,ETH-Ingenieur,430,443,EDU,ETH-Ingenieur
+5343,boundary,JOB,Inhaber,93,100,JOB,Inhaber und Geschäftsführer
+5343,boundary,JOB,Geschäftsführer,105,120,JOB,Inhaber und Geschäftsführer
+5343,omission,PER,Fischer,372,379,,
+5346,omission,PER,Vogel,329,334,,
+5351,omission,PER,Dubois,188,194,,
+5355,boundary,PER,Elena Petrova,47,60,PER,Dr. Elena Petrova
+5360,omission,PER,Herzog,233,239,,
+5368,omission,PER,Keller,475,481,,
+5368,omission,PER,Steiner,243,250,,
+5374,omission,JOB,Liquidatorin,129,141,,
+5376,omission,PER,Bachmann,438,446,,
+5380,boundary,PER,Isabelle Renaud,56,71,PER|PER,Dr. Isabelle Renaud|Renaud
+5380,omission,DATE,2023,155,159,,
+5380,omission,PER,Renaud,297,303,,
+5387,omission,NATION,französischer,338,351,,
+5387,omission,PER,Fournier,325,333,,
+5389,boundary,MONEY,CHF 10 Mio.,271,282,MONEY,CHF 10 Mio
+5389,omission,DATE,2023,55,59,,
+5389,boundary,PER,Eva Meier,110,119,PER,Dr. Eva Meier
+5393,omission,PER,Fischer,228,235,,
+5403,label,JOB,dipl. Architektin ETH,245,266,EDU,dipl. Architektin ETH
+5403,omission,PER,Baumann,111,118,,
+5407,omission,PER,Keller,190,196,,
+5417,boundary,PER,Isabelle Schmidt,100,116,PER,Dr. Isabelle Schmidt
+5421,omission,PER,Moretti,234,241,,
+5421,label,LOC,Italien,220,227,NATION,Italien
+5421,omission,MONEY,15%,302,305,,
+5422,omission,PER,Berger,375,381,,
+5422,omission,PER,Meier,391,396,,
+5423,omission,PER,Bachmann,369,377,,
+5428,boundary,PER,Elena Schmidt,49,62,PER,Dr. Elena Schmidt
+5430,boundary,MONEY,CHF 12 Mio.,366,377,MONEY,CHF 12 Mio
+5436,omission,PER,Graf,399,403,,
+5437,omission,DATE,Ende Jahr,256,265,,
+5437,boundary,EDU,HSG,222,225,EDU,HSG-Absolvent
+5437,omission,AGE,64 Jahre,154,162,,
+5440,omission,NATION,amerikanischen,307,321,,
+5440,omission,PER,Lehmann,353,360,,
+5445,omission,PER,Wyss,335,339,,
+5445,label,LOC,Europa,206,212,NATION,Europa
+5449,omission,MONEY,EUR 5 Mio.,291,301,,
+5463,omission,JOB,Assistent,438,447,,
+5469,omission,EDU,Hotelfachschule Lausanne,399,423,,
+5469,omission,JOB,Inhaber,57,64,,
+5469,omission,PER,Keller,310,316,,
+5471,boundary,NATION,deutsche,367,375,NATION,deutsche Staatsbürgerin
+5471,omission,PER,Fischer,247,254,,
+5475,boundary,DATE,2023,245,249,DATE,Jahresabschluss 2023
+5480,omission,PER,Steiner,263,270,,
+5480,omission,EDU,MBA,346,349,,
+5480,boundary,NATION,deutsche,318,326,NATION,deutsche Staatsbürgerin
+5480,omission,ORG,INSEAD,354,360,,
+5482,boundary,MONEY,CHF 3.2 Mio.,221,233,MONEY,CHF 3.2 Mio
+5482,boundary,MONEY,CHF 2.5 Mio.,319,331,MONEY,CHF 2.5 Mio
+5486,boundary,DATE,12 Monaten,202,212,DATE,12 Monate
+5489,omission,PER,Graf,218,222,,
+5490,omission,PER,Baumann,234,241,,
+5492,omission,PER,Keller,243,249,,
+5494,omission,JOB,Mitarbeiterin,327,340,,
+5495,omission,AGE,62-jährigen,54,65,,
+5504,omission,PER,Ziegler,269,276,,
+5504,boundary,DATE,2023,134,138,DATE,Jahresabschluss 2023
+5504,label,NATION,deutschen,227,236,LOC,deutschen
+5504,omission,DATE,2024,311,315,,
+5514,omission,PER,Graf,301,305,,
+5521,omission,NATION,deutsche,278,286,,
+5529,omission,PER,Wyss,290,294,,
+5532,omission,DATE,morgen,408,414,,
+5532,boundary,PER,Elena Vogel,52,63,PER|PER,Vogel|Dr. Elena Vogel
+5532,omission,PER,Vogel,278,283,,
+5539,omission,PER,Dubois,371,377,,
+5543,boundary,PER,Urs Meier,114,123,PER,Dr. Urs Meier
+5547,omission,PER,Vogel,480,485,,
+5551,boundary,MONEY,CHF 3.0 Mio.,210,222,MONEY,CHF 3.0 Mio
+5551,boundary,MONEY,CHF 4.2 Mio.,143,155,MONEY,CHF 4.2 Mio
+5551,omission,JOB,Inhaber,24,31,,
+5560,boundary,MONEY,USD 1.8 Mio.,251,263,MONEY,USD 1.8 Mio
+5580,omission,PER,Graf,193,197,,
+5580,omission,MONEY,CHF,340,343,,
+5601,omission,DATE,2023,355,359,,
+5601,omission,PER,Baumann,298,305,,
+5603,omission,PER,Steiner,434,441,,
+5609,boundary,EDU,HSG,326,329,EDU,HSG-Absolventin
+5609,omission,PER,Steiner,267,274,,
+5617,omission,JOB,Eigentümer,46,56,,
+5626,omission,JOB,Mitarbeiter,113,124,,
+5626,omission,PER,Moser,373,378,,
+5637,boundary,DATE,2023,410,414,DATE,Jahresabschluss 2023
+5637,omission,PER,Bianchi,258,265,,
+5639,boundary,JOB,Inhaber und Geschäftsführer,23,50,JOB,Geschäftsführer
+5640,boundary,MONEY,2 Mio.,430,436,MONEY,2 Mio
+5640,omission,JOB,Mitarbeiterinnen,325,341,,
+5640,omission,PER,Bieri,257,262,,
+5642,label,LOC,Polen,198,203,NATION,Polen
+5642,omission,NATION,asiatischen,233,244,,
+5643,omission,PER,Schmid,405,411,,
+5643,omission,PER,Frei,255,259,,
+5652,boundary,PER,Elena Schmid,267,279,PER,Dr. Elena Schmid
+5652,omission,PER,Frei,235,239,,
+5670,omission,PER,Frischknecht,264,276,,
+5671,boundary,PER,Valérie Dubois,37,51,PER,Dr. Valérie Dubois
+5672,omission,PER,Aebischer,427,436,,
+5675,omission,DATE,Ende nächster Woche,368,387,,
+5678,omission,PER,Frei,221,225,,
+5680,omission,PER,Dubois,214,220,,
+5681,boundary,PER,Elena Bianchi,43,56,PER|PER,Dr. Elena Bianchi|Bianchi
+5681,omission,PER,Bianchi,223,230,,
+5686,boundary,MONEY,CHF 12.4 Mio.,211,224,MONEY,CHF 12.4 Mio
+5693,label,JOB,dipl. Bauingenieur ETH,379,401,EDU,Bauingenieur ETH
+5693,boundary,JOB,designierter CEO,112,128,JOB,CEO
+5694,omission,NATION,französischer,306,319,,
+5694,omission,PER,Richard,293,300,,
+5694,boundary,MONEY,CHF 2.8 Mio.,274,286,MONEY,CHF 2.8 Mio
+5696,omission,PER,Frey,231,235,,
+5703,omission,PER,Li,181,183,,
+5734,omission,PER,Fischer,244,251,,
+5737,omission,DATE,2023,152,156,,
+5739,omission,PER,Steiner,260,267,,
+5743,omission,PER,Schmidt,351,358,,
+5743,omission,MONEY,USD 12 Mio.,233,244,,
+5748,boundary,LOC,Steffisburg,379,390,LOC,Industriegebiet von Steffisburg
+5748,omission,PER,Fischer,495,502,,
+5748,boundary,DATE,2023,453,457,DATE,Jahresabschluss 2023
+5754,omission,PER,Baumann,249,256,,
+5754,boundary,DATE,Juni,359,363,DATE,Ende Juni
+5756,omission,PER,Brunner,419,426,,
+5756,omission,AGE,68-jährigen,55,66,,
+5756,label,JOB,ETH-Ingenieur,199,212,EDU,ETH-Ingenieur
+5757,boundary,MONEY,CHF 4.8 Mio.,172,184,MONEY,CHF 4.8 Mio
+5757,boundary,MONEY,CHF 1.2 Mio.,432,444,MONEY,CHF 1.2 Mio
+5759,boundary,DATE,2023,168,172,DATE,Jahresabschluss 2023
+5762,omission,PER,Bachmann,301,309,,
+5767,omission,PER,Keller,437,443,,
+5773,boundary,MONEY,EUR 50 Mio.,428,439,MONEY,EUR 50 Mio
+5773,omission,PER,Dubois,446,452,,
+5778,omission,PER,Frei,380,384,,
+5780,omission,AGE,62-jährigen,50,61,,
+5780,omission,JOB,Inhaber,62,69,,
+5780,omission,PER,Brunner,352,359,,
+5781,boundary,DATE,2023,424,428,DATE,Jahresabschlusses 2023
+5781,boundary,PER,Ulrich Frisch,301,314,PER,Dr. Ulrich Frisch
+5781,omission,PER,Steiner,260,267,,
+5794,omission,PER,Keller,306,312,,
+5799,boundary,JOB,Leiterin Treasury,70,87,JOB,Leiterin
+5799,omission,PER,Bachmann,361,369,,
+5801,omission,PER,Gfeller,156,163,,
+5801,boundary,EDU,HSG,170,173,EDU,HSG-Absolventin
+5801,omission,AGE,66 Jahre,100,108,,
+5801,boundary,PER,Peter Hug,493,502,PER,Dr. Peter Hug
+5802,omission,PER,Tanner,319,325,,
+5811,boundary,PER,Eva Lang,25,33,PER,Dr. Eva Lang
+5815,omission,JOB,Inhaber,55,62,,
+5815,omission,PER,Bianchi,456,463,,
+5826,omission,PER,Keller,310,316,,
+5831,omission,JOB,Inhaber,25,32,,
+5835,boundary,DATE,2022,390,394,DATE,Jahresabschluss 2022
+5841,omission,DATE,2022,120,124,,
+5841,boundary,PER,Martin Keller,44,57,PER,Dr. Martin Keller
+5844,omission,PER,Herzog,311,317,,
+5852,omission,PER,Meier,362,367,,
+5854,omission,PER,Zuber,224,229,,
+5854,omission,DATE,1. Januar 2025,262,276,,
+5854,label,JOB,HSG-Absolventin,236,251,EDU,HSG-Absolventin
+5859,boundary,MONEY,CHF 35 Mio.,228,239,MONEY,CHF 35 Mio
+5859,omission,PER,Egger,350,355,,
+5859,boundary,DATE,2023,118,122,DATE,Jahresabschluss 2023
+5867,omission,PER,Richter,391,398,,
+5867,omission,ORG,ETH Zürich,102,112,,
+5868,omission,PER,Frei,194,198,,
+5870,boundary,MONEY,CHF 18 Mio.,227,238,MONEY,CHF 18 Mio
+5870,omission,PER,Berger,245,251,,
+5893,omission,PER,Rochat,396,402,,
+5894,omission,PER,Fischer,351,358,,
+5897,omission,PER,Keller,274,280,,
+5898,omission,PER,Dubois,427,433,,
+5899,omission,PER,Ricci,406,411,,
+5903,omission,PER,Schmidt,166,173,,
+5905,omission,PER,Keller,253,259,,
+5910,omission,MONEY,EUR 2 Mio.,305,315,,
+5910,omission,PER,Gerber,257,263,,
+5913,omission,PER,Fischer,304,311,,
+5917,boundary,PER,Elena Bianchi,9,22,PER,Dr. Elena Bianchi
+5917,omission,JOB,Exportrisikoversicherung,205,229,,
+5917,boundary,MONEY,EUR 2.2 Mio.,186,198,MONEY,EUR 2.2 Mio
+5919,omission,JOB,VR-Mitglied,275,286,,
+5919,boundary,NATION,deutsche,307,315,NATION,deutsche Staatsbürgerin
+5928,boundary,DATE,2023,146,150,DATE,Jahresabschluss 2023
+5931,omission,PER,Frey,177,181,,
+5931,boundary,DATE,2023,366,370,DATE,Jahresabschluss 2023
+5937,boundary,DATE,Ende Juni,313,322,DATE,Juni
+5937,omission,DATE,2023,107,111,,
+5939,boundary,PHONE,031 333 44 55,117,130,PHONE,(031 333 44 55
+5945,omission,JOB,Gründer,107,114,,
+5947,omission,PER,Keller,317,323,,
+5947,boundary,PER,Martin Keller,157,170,PER|PER,Dr. Martin Keller|Keller
+5954,omission,LOC,Bern,232,236,,
+5957,omission,PER,Vogel,478,483,,
+5959,omission,PER,Dubois,383,389,,
+5959,label,NATION,asiatischen,511,522,LOC,asiatischen
+5961,omission,PER,Schmid,456,462,,
+5961,omission,PER,Martin,331,337,,
+5961,boundary,PER,Anna Schmid,43,54,PER|PER,Schmid|Dr. Anna Schmid
+5964,omission,PER,Frei,276,280,,
+5966,omission,PER,Steiner,229,236,,
+5969,omission,JOB,Gründer,50,57,,
+5969,boundary,EDU,HSG,174,177,EDU,HSG-Absolvent
+5969,boundary,PER,Brunner,327,334,PER,Brunner senior
+5992,boundary,LOC,Thurgau,263,270,LOC,Kanton Thurgau
+6002,boundary,MONEY,CHF 5 Mio.,335,345,MONEY,Kredit von CHF 5 Mio.
+6002,omission,AGE,64-jährig,136,145,,
+6007,boundary,PER,Simon Tanner,428,440,PER,Dr. Simon Tanner
+6029,boundary,PER,Valérie Dupont,100,114,PER,Dr. Valérie Dupont
+6034,omission,PER,Zürcher,370,377,,
+6037,boundary,MONEY,CHF 10 Mio.,463,474,MONEY,CHF 10 Mio
+6037,label,JOB,ETH-Absolventin,109,124,EDU,ETH-Absolventin
+6037,label,NATION,amerikanischen,396,410,LOC,amerikanischen
+6052,boundary,MONEY,CHF 1.8 Mio.,205,217,MONEY,CHF 1.8 Mio
+6052,omission,PER,Graf,224,228,,
+6079,omission,DATE,90 Tage,207,214,,
+6103,omission,PER,Frischknecht,242,254,,
+6103,boundary,DATE,2023,279,283,DATE,Jahresabschluss 2023
+6105,label,NATION,deutschen,127,136,LOC,deutschen
+6105,omission,PER,Bianchi,245,252,,
+6105,label,JOB,HSG-Absolvent,258,271,EDU,HSG-Absolvent
+6114,omission,JOB,Mitarbeiter,320,331,,
+6118,omission,JOB,Assistent,340,349,,
+6118,boundary,PER,Christoph Keller,101,117,PER,Dr. Christoph Keller
+6130,omission,PER,Fischer,421,428,,
+6136,boundary,MONEY,CHF 12 Mio.,69,80,MONEY,CHF 12 Mio
+6138,label,JOB,Betriebsökonomin FH,296,315,EDU,Betriebsökonomin FH
+6147,label,JOB,ETH-Ingenieur,311,324,EDU,ETH-Ingenieur
+6147,omission,PER,Baumann,192,199,,
+6147,omission,DATE,2025,334,338,,
+6153,omission,DATE,2023,51,55,,
+6156,boundary,PER,Eliane Girard,21,34,PER,Dr. Eliane Girard
+6156,boundary,AGE,38,130,132,AGE,38 Jahre
+6164,boundary,PER,Elena Rossi,19,30,PER,Dr. Elena Rossi
+6166,omission,NATION,deutsche,263,271,,
+6191,boundary,MONEY,CHF 15 Mio.,155,166,MONEY,CHF 15 Mio
+6191,boundary,MONEY,CHF 10 Mio.,205,216,MONEY,CHF 10 Mio
+6193,boundary,ORG,Digital Solutions GmbH,50,72,ORG,Digital Solutions GmbH i.L.
+6195,boundary,PER,Elena Rossi,9,20,PER,Dr. Elena Rossi
+6201,omission,ORG,Novartis,73,81,,
+6202,boundary,PER,Urs Tanner,20,30,PER|PER,Dr. Urs Tanner|Tanner
+6202,omission,JOB,Stiftungsratspräsident,32,54,,
+6202,omission,PER,Tanner,252,258,,
+6202,boundary,MONEY,EUR 3.5 Mio.,155,167,MONEY,EUR 3.5 Mio
+6205,omission,PER,Baumann,324,331,,
+6205,boundary,DATE,2023,300,304,DATE,Jahresabschluss 2023
+6211,boundary,AGE,58,363,365,AGE,58 Jahre
+6215,omission,JOB,Inhaber,30,37,,
+6215,boundary,EDU,HSG,133,136,EDU,HSG-Absolventin
+6219,boundary,PER,Ulrich Schmid,108,121,PER|PER,Schmid|Dr. Ulrich Schmid
+6219,omission,PER,Schmid,306,312,,
+6225,omission,JOB,Mitarbeiter,102,113,,
+6227,label,DATE,2023,391,395,MONEY,Umsatz 2023
+6227,omission,MONEY,CHF 25 Mio.,403,414,,
+6230,boundary,PER,Andreas Gasser,61,75,PER,Dr. Andreas Gasser
+6230,boundary,MONEY,EUR 1.5 Mio.,196,208,MONEY,EUR 1.5 Mio
+6242,label,JOB,Betriebsökonom FH,156,173,EDU,Betriebsökonom FH
+6242,omission,ORG,Baumann Transport GmbH,40,62,,
+6245,label,JOB,ETH-Ingenieur,231,244,EDU,ETH-Ingenieur
+6245,boundary,MONEY,CHF 10 Mio.,320,331,MONEY,CHF 10 Mio
+6253,omission,JOB,TEF-Spezialisten,275,291,,
+6257,omission,PER,Baumann,266,273,,
+6265,boundary,DATE,2023,128,132,DATE,Jahresabschluss 2023
+6265,omission,DATE,Ende nächster Woche,184,203,,
+6280,omission,LOC,Zürich,192,198,,
+6292,boundary,LOC,Zug,106,109,LOC,Kanton Zug
+6300,boundary,MONEY,CHF 1.8 Mio.,204,216,MONEY,CHF 1.8 Mio
+6300,omission,JOB,Alleininhaber,22,35,,
+6300,boundary,PER,Hans-Peter Moser,0,16,PER,Moser
+6305,omission,ORG,Immo Generalbau AG,10,28,,
+6319,omission,DATE,2023,262,266,,
+6319,boundary,LOC,Aargau,339,345,LOC,Kanton Aargau
+6323,boundary,ORG,Lisboa Trading Lda.,188,207,ORG,Lisboa Trading Lda
+6340,omission,PER,Leblanc,304,311,,
+6349,omission,JOB,Inhaber,19,26,,
+6349,omission,JOB,Sohn,124,128,,
+6350,omission,PER,Dubois,197,203,,
+6363,boundary,PER,Eliane Dubois,21,34,PER,Dr. Eliane Dubois
+6371,omission,PER,Sutter,225,231,,
+6378,omission,PER,Baker,333,338,,
+6384,boundary,MONEY,CHF 3.2 Mio.,74,86,MONEY,CHF 3.2 Mio
+6397,omission,JOB,Inhaber,60,67,,
+6398,boundary,MONEY,CHF 3.5 Mio.,95,107,MONEY,CHF 3.5 Mio
+6402,boundary,JOB,Assistentin der Geschäftsleitung,20,52,JOB,Geschäftsleitung
+6403,omission,NATION,deutschen,274,283,,
+6405,omission,JOB,Softwareentwickler,100,118,,
+6410,boundary,DATE,2023,237,241,DATE,Jahresabschluss 2023
+6410,boundary,DATE,Ende Monat,251,261,DATE,Monat
+6419,boundary,DATE,2023,213,217,DATE,Jahresabschluss 2023
+6421,omission,JOB,Inhaber,36,43,,
+6431,omission,JOB,Partner,129,136,,
+6432,boundary,PER,Pascal Fournier,31,46,PER,Dr. Pascal Fournier
+6433,omission,DATE,2023,113,117,,
+6433,omission,PER,Huber,351,356,,
+6434,omission,LOC,Genf,121,125,,
+6437,boundary,LOC,Zürich,343,349,LOC,Filiale Zürich
+6437,omission,JOB,Inhaber,30,37,,
+6441,omission,AGE,45-jährige,205,215,,
+6441,label,JOB,HSG-Absolventin,216,231,EDU,HSG-Absolventin
+6442,boundary,JOB,designierte Geschäftsführer,266,293,JOB,Geschäftsführer
+6446,omission,DATE,2023,348,352,,
+6454,boundary,DATE,2023,287,291,DATE,Jahresabschluss 2023
+6457,boundary,MONEY,CHF 2.8 Mio.,211,223,MONEY,CHF 2.8 Mio
+6462,boundary,DATE,Ende dieser Woche,271,288,DATE,Woche
+6462,boundary,MONEY,CHF 3 Mio.,234,244,MONEY,CHF 3 Mio
+6494,omission,ORG,Global Trade Partners GmbH,54,80,,
+6494,omission,JOB,Head of Treasury,36,52,,
+6508,omission,DATE,2023,16,20,,
+6508,omission,ORG,Bau AG Zürich,25,38,,
+6509,omission,PER,Baker,268,273,,
+6511,omission,PER,Steiner,320,327,,
+6511,omission,MONEY,CHF 8 Mio.,303,313,,
+6513,omission,AGE,67-jährig,97,106,,
+6515,boundary,PER,Anna Leuenberger,152,168,PER,Dr. Anna Leuenberger
+6521,boundary,JOB,Sachbearbeiter Buchhaltung,194,220,JOB|JOB,Buchhaltung|Sachbearbeiter
+6523,boundary,PER,Anna Weber,9,19,PER,Dr. Anna Weber
+6536,boundary,MONEY,CHF 1.8 Mio.,110,122,MONEY,CHF 1.8 Mio
+6548,omission,AGE,32-jähriger,157,168,,
+6566,omission,JOB,VR-Präsident,27,39,,
+6566,boundary,PER,Christoph Berger,9,25,PER,Dr. Christoph Berger
+6574,omission,NATION,schweizerische,260,274,,
+6577,boundary,PER,François Lambert,74,90,PER,Lambert
+6580,boundary,EDU,ETH,179,182,EDU,ETH-Bauingenieurin
+6580,label,JOB,Bauingenieurin,183,197,EDU,ETH-Bauingenieurin
+6586,omission,PER,Steiner,253,260,,
+6596,boundary,PER,Elena Fischer,25,38,PER|PER,Dr. Elena Fischer|Fischer
+6596,omission,PER,Fischer,110,117,,
+6596,boundary,PER,Markus Gisin,329,341,PER,Dr. Markus Gisin
+6596,boundary,MONEY,EUR 25 Mio.,232,243,MONEY,EUR 25 Mio
+6600,omission,JOB,Gründer,112,119,,
+6600,label,ORG,Universität Bern,90,106,LOC,Universität Bern
+6632,boundary,MONEY,CHF 1.2 Mio.,271,283,MONEY,CHF 1.2 Mio
+6638,omission,DATE,2023,168,172,,
+6638,label,JOB,ETH-Physiker,112,124,EDU,ETH-Physiker
+6639,boundary,ORG,Riyadh Manufacturing Ltd,247,271,ORG,Riyadh Manufacturing Ltd.
+6645,boundary,LOC,"Rue du Rhône 15, 1204 Genf",143,169,LOC|LOC,Rue du Rhône 15|Genf
+6646,boundary,DATE,2023,348,352,DATE,Jahresabschlusses 2023
+6646,label,NATION,deutschen,257,266,LOC,deutschen
+6654,omission,AGE,58-jähriger,281,292,,
+6654,omission,PER,Bernasconi,265,275,,
+6657,omission,PER,Lindberg,258,266,,
+6666,omission,PER,Graf,294,298,,
+6666,omission,LOC,Schweiz,347,354,,
+6669,label,MONEY,3 Monate,293,301,DATE,3 Monate
+6672,boundary,IBAN,CH45 0023 3788 1234 5678 A,330,356,IBAN,CH45 0023 3788 1234 5678
+6672,omission,DATE,heute Abend,267,278,,
+6673,label,JOB,dipl. Holzbauingenieur,180,202,EDU,dipl. Holzbauingenieur
+6673,boundary,MONEY,CHF 1.5 Mio.,301,313,MONEY,CHF 1.5 Mio
+6677,omission,JOB,Physiker,244,252,,
+6677,omission,MONEY,CHF 100'000,77,88,,
+6680,boundary,DATE,2022,192,196,DATE,Jahresabschluss 2022
+6690,boundary,MONEY,CHF 2.8 Mio.,202,214,MONEY,CHF 2.8 Mio
+6690,label,JOB,ETH-Ingenieur,367,380,EDU,ETH-Ingenieur
+6693,boundary,MONEY,CHF 5 Mio.,227,237,MONEY,CHF 5 Mio
+6693,boundary,MONEY,CHF 10 Mio.,199,210,MONEY,CHF 10 Mio
+6693,boundary,MONEY,CHF 15 Mio.,95,106,MONEY,CHF 15 Mio
+6703,boundary,MONEY,USD 5 Mio.,214,224,MONEY,USD 5 Mio
+6704,boundary,PER,Beat Zürcher,0,12,PER,Zürcher
+6707,label,JOB,ETH-Ingenieur,141,154,EDU,ETH-Ingenieur
+6707,omission,JOB,Patron,49,55,,
+6719,boundary,DATE,Ende Woche,347,357,DATE,Woche
+6719,omission,JOB,Inhaberin,21,30,,
+6722,omission,NATION,französische,245,257,,
+6722,omission,JOB,Gründerin,41,50,,
+6723,label,JOB,ETH-Ingenieur,316,329,EDU,ETH-Ingenieur
+6723,boundary,DATE,2023,214,218,DATE,Jahresabschluss 2023
+6737,boundary,DATE,2023,27,31,DATE,finale Jahresabschluss 2023
+6738,omission,JOB,Assistentin,173,184,,
+6739,omission,DATE,morgen Mittag,261,274,,
+6740,boundary,MONEY,CHF 4 Mio.,243,253,MONEY,CHF 4 Mio
+6747,omission,PER,Lee,289,292,,
+6758,omission,DATE,2023,320,324,,
+6758,label,JOB,ETH-Ingenieur,142,155,EDU,ETH-Ingenieur
+6758,boundary,MONEY,CHF 3.5 Mio.,290,302,MONEY,CHF 3.5 Mio
+6758,boundary,DATE,Ende Monat,334,344,DATE,Monat
+6783,omission,JOB,Gründer,218,225,,
+6785,boundary,DATE,morgen Mittag,202,215,DATE,Mittag
+6786,omission,DATE,2023,196,200,,
+6786,omission,DATE,2022,187,191,,
+6792,boundary,MONEY,USD 8 Mio.,171,181,MONEY,USD 8 Mio
+6792,label,JOB,ETH-Ingenieur,17,30,EDU,ETH-Ingenieur
+6798,boundary,PER,Lena Weber,115,125,PER,Dr. Lena Weber
+6802,boundary,PER,Anna Leuenberger,272,288,PER,Dr. Anna Leuenberger
+6833,omission,JOB,Treuhänder,306,316,,
+6833,boundary,MONEY,CHF 6 Mio.,146,156,MONEY,CHF 6 Mio
+6833,boundary,PER,Beat Ammann,96,107,PER,Dr. Beat Ammann
+6833,boundary,MONEY,CHF 8.7 Mio.,73,85,MONEY,CHF 8.7 Mio
+6841,boundary,PER,Eva Schmidt,100,111,PER,Dr. Eva Schmidt
+6850,omission,DATE,sofort,286,292,,
+6850,boundary,PER,Peter Frei,160,170,PER,Dr. Peter Frei
+6852,omission,PER,Zimmermann,286,296,,
+6855,omission,ORG,Diagnostica Spin-Off AG,221,244,,
+6858,boundary,PER,Anna Berger,21,32,PER,Dr. Anna Berger
+6858,omission,JOB,Partners,162,170,,
+6871,omission,JOB,Business Partner,334,350,,
+6871,boundary,DATE,2023,292,296,DATE,Jahresabschluss 2023
+6876,omission,JOB,Partnerin,16,25,,
+6881,omission,PER,Steiner,295,302,,
+6883,boundary,EDU,ETH,195,198,EDU,ETH-Ingenieur
+6885,boundary,MONEY,CHF 10 Mio.,337,348,MONEY,CHF 10 Mio
+6892,label,JOB,ETH-Ingenieur,137,150,EDU,ETH-Ingenieur
+6897,boundary,PER,Urs Baumann,27,38,PER,Dr. Urs Baumann
+6899,boundary,DATE,Ende Q3,177,184,DATE,Q3
+6899,omission,NATION,französische,257,269,,
+6910,omission,JOB,Assistentin der GL,148,166,,
+6919,boundary,DATE,nächste Woche,244,257,DATE,Woche
+6935,omission,PER,Fuchs,323,328,,
+6941,boundary,MONEY,ca. 400'000 EUR,243,258,MONEY,400'000 EUR
+6941,omission,DATE,2023,89,93,,
+6943,label,NATION,deutschen,129,138,LOC,deutschen
+6943,omission,PER,Keller,265,271,,
+6948,label,NATION,französischen,199,212,ORG,französischen Tochtergesellschaft
+6948,boundary,PER,Jean-Pierre Dubois,6,24,PER,Dubois
+6962,omission,JOB,Anwalt,287,293,,
+6962,boundary,PER,Emil Frey,302,311,PER,Dr. Emil Frey
+6964,omission,JOB,Assistent,249,258,,
+6973,omission,JOB,Partnerin,149,158,,
+6975,omission,IBAN,CH44 0023 3233 4444 5555 6,132,158,,
+6975,omission,LOC,Les Jardins du Lac,233,251,,
+6987,omission,JOB,Anwalt,257,263,,
+6989,omission,NATION,französischer,205,218,,
+6989,boundary,MONEY,CHF 3.2 Mio.,126,138,MONEY,CHF 3.2 Mio..
+6996,omission,PER,Keller,293,299,,
+6996,omission,PER,Fuchs,232,237,,
+6997,boundary,MONEY,CHF 5 Mio.,220,230,MONEY,CHF 5 Mio
+6997,label,JOB,ETH-Ingenieur,118,131,EDU,ETH-Ingenieur
+6997,omission,JOB,Inhaber,30,37,,
+6997,omission,NATION,Schweizer,285,294,,
+7003,boundary,MONEY,ca. 180k,157,165,MONEY,180k
+7005,omission,DATE,2023,288,292,,
+7011,boundary,MONEY,CHF 1 Mio.,156,166,MONEY,CHF 1 Mio..
+7011,boundary,PER,Martin Hess,0,11,PER,Hess
+7015,boundary,PER,Lukas Baumgartner,108,125,PER,Herr Lukas Baumgartner
+7020,omission,DATE,nächste Woche,200,213,,
+7024,label,JOB,ETH-Absolvent,103,116,EDU,ETH-Absolvent
+7028,omission,NATION,deutsche,152,160,,
+7028,omission,ORG,Helvetia DE GmbH,180,196,,
+7030,omission,PER,Ziegler,310,317,,
+7033,boundary,MONEY,CHF 3.5 Mio.,240,252,MONEY,CHF 3.5 Mio
+7033,boundary,EDU,HSG,66,69,EDU,HSG-Absolventin
+7033,omission,PER,Anna,134,138,,
+7043,omission,ORG,Knecht Transport AG,29,48,,
+7047,boundary,DATE,2023,82,86,DATE,Jahresabschluss 2023
+7057,omission,DATE,9 Uhr,224,229,,
+7057,omission,DATE,Q4,120,122,,
+7058,omission,DATE,2023,204,208,,
+7072,omission,NATION,französische,96,108,,
+7075,boundary,DATE,nächste Woche,330,343,DATE,Woche
+7077,boundary,MONEY,CHF 1.2 Mio.,156,168,MONEY,CHF 1.2 Mio
+7077,omission,DATE,2023,354,358,,
+7081,boundary,MONEY,CHF 5'000,130,139,MONEY,CHF 5'000/Monat
+7082,boundary,PER,Hans Gerber,0,11,PER,Gerber
+7083,omission,DATE,gestern,171,178,,
+7085,omission,JOB,Gründer,19,26,,
+7085,boundary,PER,Martin Keller,0,13,PER,Keller
+7085,omission,JOB,Anwalt,269,275,,
+7098,omission,JOB,Partner,166,173,,
+7112,boundary,DATE,Ende Woche,183,193,DATE,Woche
+7112,omission,DATE,2023,78,82,,
+7130,boundary,EDU,ETH,293,296,EDU,ETH-Physikerin
+7130,boundary,PER,Anna Schmid,70,81,PER,Dr. Anna Schmid
+7130,label,NATION,amerikanischen,138,152,LOC,amerikanischen
+7130,omission,PER,Schmid,282,288,,
+7133,boundary,MONEY,3 Mio,191,196,MONEY,3 Mio.
+7140,boundary,PER,Lea Maurer,105,115,PER,Tochter Lea Maurer
+7144,omission,NATION,chinesischen,87,99,,
+7149,boundary,DATE,2023,312,316,DATE,Jahresabschluss 2023
+7149,boundary,PER,Hans-Jörg Frei,97,111,PER,Frei
+7154,omission,JOB,Gründerin,34,43,,
+7162,omission,DATE,2023,163,167,,
+7168,omission,JOB,Sohn,251,255,,
+7173,omission,PER,Jean-Pierre,242,253,,
+7173,omission,PER,Marie,286,291,,
+7173,omission,JOB,Patron,31,37,,
+7187,omission,DATE,morgen,250,256,,
+7187,boundary,JOB,designierte CEO,269,284,JOB,CEO
+7190,boundary,DATE,Ende Monat,135,145,DATE,Monat
+7192,omission,NATION,italienische,188,200,,
+7197,boundary,AGE,28,186,188,AGE,28 Jahre
+7197,omission,JOB,Gründer,58,65,,
+7200,omission,JOB,Inhaber,15,22,,
+7200,boundary,PER,Stefan Keller,0,13,PER,Keller
+7212,omission,PER,Thomas,223,229,,
+7221,boundary,EDU,HSG,133,136,EDU,HSG-Absolventin
+7230,omission,DATE,2023,224,228,,
+7239,omission,PER,Michael,133,140,,
+7247,boundary,MONEY,CHF 3.5 Mio.,83,95,MONEY,CHF 3.5 Mio..
+7264,boundary,PER,Verena Huber,176,188,PER,Dr. Verena Huber
+7264,omission,MONEY,CHF 1 Mio.,141,151,,
+7264,omission,JOB,CEO,162,165,,
+7268,boundary,JOB,Mitarbeiter Buchhaltung,179,202,JOB,Buchhaltung
+7283,omission,MONEY,ca. 2.5 Mio CHF,169,184,,
+7286,boundary,DATE,6 Monate,114,122,DATE,Monate
+7286,boundary,DATE,3 Monaten,300,309,DATE,Monate
+7287,boundary,MONEY,CHF 4.5 Mio.,240,252,MONEY,CHF 4.5 Mio
+7287,omission,DATE,nächstes Jahr,162,175,,
+7287,boundary,MONEY,CHF 2.1 Mio.,355,367,MONEY,CHF 2.1 Mio
+7287,omission,DATE,nächste Woche,277,290,,
+7287,omission,DATE,2023,321,325,,
+7287,omission,JOB,Inhaber,32,39,,
+7295,label,JOB,ETH-Ingenieur,233,246,EDU,ETH-Ingenieur
+7303,boundary,DATE,2023,283,287,DATE,Jahresabschluss 2023
+7310,boundary,PER,François Dubois,0,15,PER,Dubois
+7321,boundary,MONEY,CHF 1.5 Mio.,138,150,MONEY,CHF 1.5 Mio
+7321,boundary,MONEY,CHF 3 Mio.,173,183,MONEY,CHF 3 Mio
+7324,boundary,MONEY,CHF 8.2 Mio.,75,87,MONEY,CHF 8.2 Mio
+7324,boundary,MONEY,CHF 5 Mio.,160,170,MONEY,CHF 5 Mio
+7348,boundary,DATE,Ende Monat,141,151,DATE,Monat
+7354,boundary,JOB,Leiterin Treasury,47,64,JOB,Leiterin
+7361,omission,JOB,Controller,244,254,,
+7380,boundary,MONEY,CHF 12.5 Mio,98,110,MONEY,CHF 12.5 Mio.
+7386,omission,AGE,65,14,16,,
+7386,boundary,PER,Reto Baumann,0,12,PER,Baumann
+7386,omission,ORG,KIBAG,100,105,,
+7395,omission,DATE,2023,143,147,,
+7413,omission,DATE,2023,270,274,,
+7413,label,JOB,ETH-Ingenieur,132,145,EDU,ETH-Ingenieur
+7416,omission,PER,Weber,153,158,,
+7421,boundary,MONEY,CHF 3.5 Mio,145,156,MONEY,CHF 3.5 Mio.
+7421,omission,JOB,Inhaber,67,74,,
+7421,omission,DATE,nächste Woche,236,249,,
+7428,omission,JOB,Assistenten,284,295,,
+7435,label,LOC,Asien,228,233,NATION,Asien
+7457,omission,JOB,Buchhalterin,16,28,,
+7461,omission,MONEY,USD 200k,257,265,,
+7462,boundary,DATE,2 Wochen,219,227,DATE,Wochen
+7465,omission,MONEY,ca. 1 Mio CHF,139,152,,
+7468,label,DATE,12.04.1965,321,331,AGE,12.04.1965
+7478,label,JOB,ETH-Ingenieur,225,238,EDU,ETH-Ingenieur
+7481,omission,JOB,Patron,299,305,,
+7481,omission,PER,Walter,306,312,,
+7481,boundary,DATE,2 Monate,419,427,DATE,Monate
+7481,omission,PER,Thomas,115,121,,
+7482,omission,PER,Bianchi,342,349,,
+7486,omission,JOB,Gründer,28,35,,
+7486,omission,DATE,nächste Woche,270,283,,
+7490,omission,PER,Gerber,275,281,,
+7496,boundary,DATE,2023,225,229,DATE,Jahresabschluss 2023
+7507,omission,ORG,DigitalPrint Solutions AG,22,47,,
+7507,omission,PER,Meier,233,238,,
+7507,boundary,MONEY,CHF 1.2 Mio.,118,130,MONEY,CHF 1.2 Mio
+7513,omission,JOB,Physiker,142,150,,
+7513,omission,ORG,ETH Zürich,75,85,,
+7514,omission,PER,Bachmann,97,105,,
+7514,omission,DATE,zwei Wochen,276,287,,
+7526,boundary,MONEY,EUR 4.2 Mio,244,255,MONEY,EUR 4.2 Mio.
+7529,boundary,JOB,CEO,288,291,JOB,Ex-CEO
+7534,omission,PER,Anna,132,136,,
+7534,boundary,LOC,Kanton Zug,222,232,LOC,Zug
+7549,boundary,LOC,Kanton Obwalden,49,64,LOC,Obwalden
+7549,omission,PER,Toni Amstutz,79,91,,
+7549,omission,JOB,Inhaber,70,77,,
+7556,omission,PER,Schmid,155,161,,
+7559,label,JOB,ETH-Ingenieur,146,159,EDU,ETH-Ingenieur
+7563,omission,ORG,Import AG,23,32,,
+7563,boundary,ORG,Saigon Textile Ltd,94,112,ORG,Saigon Textile Ltd.
+7574,label,JOB,ETH-Absolventin,99,114,EDU,ETH-Absolventin
+7579,boundary,ORG,InnoTech Lab GmbH,30,47,ORG,Spin-off InnoTech Lab GmbH
+7579,boundary,PER,Eva Fischer,68,79,PER,Dr. Eva Fischer
+7579,omission,JOB,Gründerin,54,63,,
+7581,boundary,MONEY,CHF 3.2 Mio,121,132,MONEY,CHF 3.2 Mio.
+7581,boundary,MONEY,2.5 Mio,162,169,MONEY,2.5 Mio.
+7587,boundary,EDU,HSG,131,134,EDU,HSG-Absolvent
+7587,omission,PER,Thomas,123,129,,
+7602,omission,JOB,Assistent,264,273,,
+7602,boundary,DATE,2023,177,181,DATE,Jahresabschluss 2023
+7602,boundary,AGE,55,245,247,AGE,55 Jahre
+7602,omission,MONEY,CHF 4 Mio.,197,207,,
+7604,omission,DATE,2023,178,182,,
+7604,omission,JOB,Inhaber,69,76,,
+7608,omission,JOB,Mitarbeiter,106,117,,
+7615,omission,PER,Frei,288,292,,
+7615,omission,JOB,Prokuristin,69,80,,
+7617,boundary,PER,Markus Steiner,0,14,PER,Steiner
+7617,boundary,IBAN,CH56 0023 3233 4455 6677 A,236,262,IBAN,CH56 0023 3233 4455 6677
+7618,omission,DATE,2023,189,193,,
+7618,boundary,MONEY,CHF 1.8 Mio.,202,214,MONEY,CHF 1.8 Mio
+7620,omission,JOB,Eigentümer,14,24,,
+7620,boundary,MONEY,CHF 1.5 Mio.,184,196,MONEY,CHF 1.5 Mio
+7630,omission,JOB,Inhaberin,16,25,,
+7634,omission,MONEY,250k,144,148,,
+7634,omission,DATE,2023,216,220,,
+7637,boundary,ORG,Immo Invest AG,2,16,ORG,Invest AG
+7637,boundary,MONEY,CHF 3.5 Mio.,53,65,MONEY,CHF 3.5 Mio
+7641,omission,NATION,britisch,146,154,,
+7641,omission,LOC,England,137,144,,
+7641,omission,PER,Laura Bianchi,104,117,,
+7644,boundary,MONEY,CHF 4.5 Mio.,202,214,MONEY,CHF 4.5 Mio
+7649,boundary,MONEY,JPY 50 Mio,93,103,MONEY,JPY 50 Mio.
+7653,omission,DATE,2023,188,192,,
+7653,omission,PER,Schmid,241,247,,
+7654,omission,NATION,schweizerisch-kroatische,272,296,,
+7654,omission,JOB,Gründerin,59,68,,
+7663,omission,DATE,morgen,277,283,,
+7670,omission,JOB,Inhaber,78,85,,
+7671,boundary,MONEY,CHF 3.2 Mio.,269,281,MONEY,CHF 3.2 Mio
+7671,boundary,MONEY,EUR 4.5 Mio.,203,215,MONEY,EUR 4.5 Mio
+7673,omission,JOB,Inhaber,135,142,,
+7674,boundary,EDU,HSG,94,97,EDU,HSG-Absolventin
+7675,boundary,PER,Sandra Egger,0,12,PER,Egger
+7676,boundary,MONEY,CHF 25 Mio.,151,162,MONEY,CHF 25 Mio
+7691,omission,DATE,2023,16,20,,
+7692,boundary,PER,Werner Zürcher,0,14,PER,Zürcher
+7696,omission,NATION,deutschen,163,172,,
+7696,omission,DATE,Nachmittag,341,351,,
+7696,boundary,DATE,3 Monate,266,274,DATE,Monate
+7698,omission,PER,Klaus Berger,92,104,,
+7704,label,JOB,HSG-Absolvent,115,128,EDU,HSG-Absolvent
+7704,omission,DATE,nächstes Jahr,135,148,,
+7707,boundary,PER,Herrn Moser,12,23,PER,Moser
+7708,boundary,PER,Frau Dubois,2,13,PER,Dubois
+7712,omission,JOB,Partner,157,164,,
+7716,omission,DATE,nächsten Monat,134,148,,
+7717,label,ORG,CS,242,244,EDU,CS
+7720,label,JOB,HSG-Absolvent,188,201,EDU,HSG-Absolvent
+7723,omission,ORG,Zürcher Bau & Partner AG,22,46,,
+7727,boundary,MONEY,CHF 3.0 Mio.,203,215,MONEY,CHF 3.0 Mio
+7727,boundary,MONEY,CHF 4.2 Mio.,123,135,MONEY,CHF 4.2 Mio
+7731,boundary,MONEY,CHF 5 Mio.,313,323,MONEY,CHF 5 Mio

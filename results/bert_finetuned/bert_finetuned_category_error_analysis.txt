@@ -1,0 +1,333 @@
+================================================================================
+  SYSTEMATIC ERROR ANALYSIS BY CATEGORY (FREQUENCY RANKED)
+================================================================================
+  This report shows the most frequent strict-match errors.
+  Compare the Top FNs vs Top FPs in a category to spot boundary issues.
+
+
+############################## CATEGORY: AGE ##############################
+
+  [✗] TOP 25 FALSE NEGATIVES (Gold standard wanted these, model missed them):
+         1x : '58'
+         1x : '55'
+         1x : '28'
+         1x : '38'
+
+  [!] TOP 25 FALSE POSITIVES (Model hallucinated these, or bounds are wrong):
+         1x : '58 Jahre'
+         1x : '55 Jahre'
+         1x : '28 Jahre'
+         1x : '38 Jahre'
+
+--------------------------------------------------------------------------------
+
+############################## CATEGORY: DATE ##############################
+
+  [✗] TOP 25 FALSE NEGATIVES (Gold standard wanted these, model missed them):
+         5x : 'Ende Monat'
+         5x : 'nächste Woche'
+         2x : 'nächstes Jahr'
+         2x : 'morgen'
+         2x : 'Q4'
+         2x : 'Ende nächster Woche'
+         2x : '3 Monate'
+         1x : '12 Monaten'
+         1x : '90 Tage'
+         1x : 'heute Abend'
+         1x : 'zwei Wochen'
+         1x : 'sofort'
+         1x : 'Ende der Woche'
+         1x : 'übermorgen'
+         1x : 'Anfang Juni 2024'
+         1x : '2 Monate'
+         1x : 'Nachmittag'
+         1x : 'Ende Mai'
+         1x : 'Juni'
+         1x : 'nächsten Monat'
+         1x : '3 Monaten'
+         1x : '6 Monate'
+
+  [!] TOP 25 FALSE POSITIVES (Model hallucinated these, or bounds are wrong):
+        11x : '2023'
+         2x : 'morgen'
+         2x : 'Ende Monat'
+         1x : '6 Monate'
+         1x : 'Vormittag'
+         1x : 'Ende Woche'
+         1x : 'nächste'
+         1x : '15 Jahren'
+         1x : '3'
+         1x : 'Juni 2024'
+         1x : '2'
+         1x : 'Mai'
+         1x : 'nächste Woche'
+         1x : 'Ende dieser Woche'
+         1x : 'Ende'
+
+--------------------------------------------------------------------------------
+
+############################## CATEGORY: EDU ##############################
+
+  [✗] TOP 25 FALSE NEGATIVES (Gold standard wanted these, model missed them):
+         9x : 'HSG'
+         3x : 'ETH'
+         2x : 'Holzbau-Ingenieur FH'
+         2x : 'ETH-Ingenieur'
+         1x : 'MBA'
+         1x : 'EPFL'
+         1x : 'ETH-Ingenieurin'
+         1x : 'ETH-Architektin'
+         1x : 'dipl. Fleischsommelier'
+
+  [!] TOP 25 FALSE POSITIVES (Model hallucinated these, or bounds are wrong):
+         8x : 'HSG-Absolventin'
+         6x : 'HSG-Absolvent'
+         2x : 'ETH Zürich'
+         2x : 'ETH-Absolventin'
+         1x : 'CS'
+         1x : 'Ingenieur'
+         1x : 'Absolvent'
+         1x : 'ETH'
+         1x : 'ETH-Absolvent'
+         1x : 'MBA der INSEAD'
+         1x : 'Universität'
+         1x : 'ETH-Architekt'
+
+--------------------------------------------------------------------------------
+
+############################## CATEGORY: EMAIL ##############################
+
+  [✗] TOP 25 FALSE NEGATIVES (Gold standard wanted these, model missed them):
+         1x : 'lukas.frei@swissmetal.ch'
+
+  [!] TOP 25 FALSE POSITIVES (Model hallucinated these, or bounds are wrong):
+         1x : 'stv'
+         1x : 'l'
+         1x : 'ukas.frei@swissmetal.ch'
+
+--------------------------------------------------------------------------------
+
+############################## CATEGORY: IBAN ##############################
+
+  [✗] TOP 25 FALSE NEGATIVES (Gold standard wanted these, model missed them):
+      (None)
+
+  [!] TOP 25 FALSE POSITIVES (Model hallucinated these, or bounds are wrong):
+         1x : '23 4567'
+
+--------------------------------------------------------------------------------
+
+############################## CATEGORY: JOB ##############################
+
+  [✗] TOP 25 FALSE NEGATIVES (Gold standard wanted these, model missed them):
+         6x : 'Inhaber'
+         3x : 'HSG-Absolvent'
+         2x : 'Inhaber und Geschäftsführer'
+         2x : 'Sohn'
+         2x : 'HSG-Absolventin'
+         2x : 'ETH-Absolventin'
+         2x : 'Mitarbeiter'
+         1x : 'TEF-Spezialisten'
+         1x : 'Mitarbeiterin'
+         1x : 'ETH-Ingenieurin'
+         1x : 'FX-Spezialisten'
+         1x : 'Assistentin der GL'
+         1x : 'Mitarbeiterinnen'
+         1x : 'Partnerin'
+         1x : 'Bauingenieurin'
+         1x : 'dipl. Architektin ETH'
+         1x : 'ETH-Absolvent'
+         1x : 'Gründer und CEO'
+         1x : 'Partners'
+         1x : 'M&A-Berater'
+         1x : 'Patron'
+         1x : 'Exportrisikoversicherung'
+         1x : 'designierte CEO'
+         1x : 'Gründer'
+         1x : 'designierte Geschäftsführer'
+
+  [!] TOP 25 FALSE POSITIVES (Model hallucinated these, or bounds are wrong):
+        13x : 'Inhaber'
+        10x : 'Verwaltungsrat'
+         9x : 'Gründer'
+         6x : 'Assistent'
+         4x : 'Assistentin'
+         3x : 'Geschäftsführer'
+         3x : 'ETH-Ingenieur'
+         3x : 'Liquidator'
+         3x : 'CEO'
+         2x : 'Holzbau-Ingenieur FH'
+         2x : 'Stellvertreterin'
+         2x : 'in'
+         2x : 'Stellvertreter'
+         2x : 'M&A'
+         2x : 'Mitarbeiterin'
+         1x : 'Treasury'
+         1x : 'Architekt'
+         1x : 'Treasury-'
+         1x : 'ETH-'
+         1x : 'GL'
+         1x : 'ETH-Bauingenieurin'
+         1x : 'dipl. Architektin'
+         1x : 'Finanzteam'
+         1x : 'Mitarbeiter'
+         1x : 'Inhaber und'
+
+--------------------------------------------------------------------------------
+
+############################## CATEGORY: LOC ##############################
+
+  [✗] TOP 25 FALSE NEGATIVES (Gold standard wanted these, model missed them):
+         3x : 'Zürich-Altstetten'
+         1x : 'Schweizer'
+         1x : 'Kanton Graubünden'
+         1x : 'Kanton Obwalden'
+         1x : 'Zürich-Oerlikon'
+         1x : 'Bern'
+         1x : 'Rue du Rhône 15, 1204 Genf'
+         1x : 'Les Jardins du Lac'
+         1x : 'Bahnhofstrasse 15'
+         1x : 'Kanton Zug'
+
+  [!] TOP 25 FALSE POSITIVES (Model hallucinated these, or bounds are wrong):
+         4x : 'Zürich'
+         3x : 'Altstetten'
+         2x : 'Kanton'
+         1x : 'EU'
+         1x : 'Graubünden'
+         1x : 'Obwalden'
+         1x : 'Oerlikon'
+         1x : 'Kanton Bern'
+         1x : 'Freiburgstra'
+         1x : 'USA'
+         1x : 'Zug'
+
+--------------------------------------------------------------------------------
+
+############################## CATEGORY: MONEY ##############################
+
+  [✗] TOP 25 FALSE NEGATIVES (Gold standard wanted these, model missed them):
+         8x : 'EUR'
+         5x : 'CHF'
+         4x : 'USD'
+         1x : 'CHF 5 pro Aktie'
+         1x : 'JPY 50 Mio'
+         1x : '3 Mio'
+         1x : 'CHF 12.5 Mio'
+         1x : '15%'
+         1x : 'ca. 2.5 Mio CHF'
+         1x : 'GBP'
+         1x : 'CHF 3.2 Mio'
+         1x : '2.5 Mio'
+         1x : 'EUR 1.5 Mio'
+         1x : 'CHF 3.5 Mio'
+         1x : '8 Mio.'
+         1x : '10 Mio.'
+         1x : 'EUR 4.2 Mio'
+         1x : '3 Monate'
+         1x : 'BRL 5 Mio'
+
+  [!] TOP 25 FALSE POSITIVES (Model hallucinated these, or bounds are wrong):
+         4x : 'C'
+         3x : 'CHF'
+         3x : 'EUR'
+         2x : 'USD'
+         1x : 'CHF 5'
+         1x : 'JPY 50 Mio.'
+         1x : '3 Mio.'
+         1x : 'CHF 12.5 Mio.'
+         1x : '2.5 Mio CHF'
+         1x : '2.5 Mio.'
+         1x : 'CHF 3.2 Mio.'
+         1x : 'EUR 1.5 Mio.'
+         1x : 'CHF 3.5 Mio.'
+         1x : 'Umsatz 8 Mio.'
+         1x : 'EUR 4.2 Mio.'
+         1x : 'BRL 5 Mio.'
+
+--------------------------------------------------------------------------------
+
+############################## CATEGORY: NATION ##############################
+
+  [✗] TOP 25 FALSE NEGATIVES (Gold standard wanted these, model missed them):
+      (None)
+
+  [!] TOP 25 FALSE POSITIVES (Model hallucinated these, or bounds are wrong):
+         1x : 'chilenischen'
+         1x : 'Schweizer'
+         1x : '-'
+         1x : 'US'
+
+--------------------------------------------------------------------------------
+
+############################## CATEGORY: ORG ##############################
+
+  [✗] TOP 25 FALSE NEGATIVES (Gold standard wanted these, model missed them):
+         2x : 'ETH Zürich'
+         1x : 'CS'
+         1x : 'Neubau West AG'
+         1x : 'Shanghai Machinery Corp'
+         1x : 'Santos Coffee Ltd'
+         1x : 'Raiffeisen'
+         1x : 'Lisboa Trading Lda.'
+         1x : 'Précision Horlogère SA'
+         1x : 'Meier & Partner Consulting AG'
+         1x : 'Saigon Textile Ltd'
+         1x : 'Schweizer Präzisionstechnik AG'
+         1x : 'Horlogerie Suisse SA'
+         1x : 'Riyadh Manufacturing Ltd'
+         1x : 'INSEAD'
+         1x : 'Universität Bern'
+         1x : 'Textilimport Rossi & Co.'
+         1x : 'Digital Solutions GmbH'
+         1x : 'Milano Meccanica S.p.A.'
+
+  [!] TOP 25 FALSE POSITIVES (Model hallucinated these, or bounds are wrong):
+         1x : 'Mandantin Neubau West AG'
+         1x : 'Shanghai Machinery Corp.'
+         1x : 'Santos Coffee Ltd.'
+         1x : 'Raiffeisen.'
+         1x : 'Lisboa Trading L'
+         1x : 'Horlogère SA'
+         1x : 'Précision'
+         1x : 'Partner Consulting AG'
+         1x : 'Partnerbank'
+         1x : 'Saigon Textile Ltd.'
+         1x : 'Präzisionstechnik AG'
+         1x : 'Schweizer'
+         1x : 'Patron Horlogerie Suisse SA'
+         1x : 'Riyadh Manufacturing Ltd.'
+         1x : 'NeuroCore SA'
+         1x : 'EPFL'
+         1x : 'Bern'
+         1x : 'Rossi & Co.'
+         1x : 'Tech-'
+         1x : 'Digital Solutions GmbH i.L'
+         1x : 'Milano Meccanica S.'
+         1x : 'Spinoff-Firma'
+
+--------------------------------------------------------------------------------
+
+############################## CATEGORY: PER ##############################
+
+  [✗] TOP 25 FALSE NEGATIVES (Gold standard wanted these, model missed them):
+         1x : 'Herrn Moser'
+         1x : 'Frau Dubois'
+
+  [!] TOP 25 FALSE POSITIVES (Model hallucinated these, or bounds are wrong):
+         1x : 'Moser'
+         1x : 'Meier'
+         1x : 'Dr'
+         1x : 'Dubois'
+
+--------------------------------------------------------------------------------
+
+############################## CATEGORY: PHONE ##############################
+
+  [✗] TOP 25 FALSE NEGATIVES (Gold standard wanted these, model missed them):
+         1x : '+44 20 7123 4567'
+
+  [!] TOP 25 FALSE POSITIVES (Model hallucinated these, or bounds are wrong):
+         1x : '+44 20 71'
+
+--------------------------------------------------------------------------------

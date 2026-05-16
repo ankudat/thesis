@@ -1,0 +1,41 @@
+{
+  "base_model": "meta-llama/Meta-Llama-3-8B-Instruct",
+  "lora_rank": 32,
+  "lora_alpha": 64,
+  "epochs": 5,
+  "batch_size": 2,
+  "grad_accum": 12,
+  "lr": 5e-05,
+  "seed": 42,
+  "best_epoch": 5,
+  "best_dev_f1": 0.9691025012260912,
+  "training_time": 56014.9,
+  "test_inference_time": 5470.077821493149,
+  "log": [
+    {
+      "epoch": 1,
+      "avg_loss": 0.0408,
+      "dev_f1": 0.9582
+    },
+    {
+      "epoch": 2,
+      "avg_loss": 0.0074,
+      "dev_f1": 0.963
+    },
+    {
+      "epoch": 3,
+      "avg_loss": 0.0053,
+      "dev_f1": 0.9662
+    },
+    {
+      "epoch": 4,
+      "avg_loss": 0.0039,
+      "dev_f1": 0.9682
+    },
+    {
+      "epoch": 5,
+      "avg_loss": 0.0029,
+      "dev_f1": 0.9691
+    }
+  ]
+}

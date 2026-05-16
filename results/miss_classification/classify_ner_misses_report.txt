@@ -1,0 +1,797 @@
+==============================================================================
+  NER MISS-CLASSIFICATION REPORT
+  Generated: 2026-05-10 23:37:06
+  Split: test
+  Gold: data\label_studio\20260302_Export_Label_Studio_Client_Notes.json
+  Split-IDs: results\bert_finetuned\split_ids.json
+  Category definitions:
+    Boundary disagreement: same label, overlapping span
+    Label disagreement   : different label, overlapping span
+    True omission        : no overlapping prediction
+==============================================================================
+
+##############################################################################
+  SUMMARY: Composition of missed entities, all pipelines
+##############################################################################
+
+  Pipeline                                  Gold    FN   Recall  Bound.   Label  Omiss.
+  -------------------------------------------------------------------------------------
+  spaCy + Regex                             5137  1580    69.2%     324     151    1105
+  BERT (pretrained) + Regex                 5137  1406    72.6%     219     308     879
+  Presidio                                  5137   869    83.1%     348     149     372
+  BERT Fine-Tuned                           5137   168    96.7%      71      24      73
+  LLM Llama-3 [few-shot +verify]            5137   665    87.1%     250      51     364
+  LLM Qwen2.5 [few-shot +verify]            5137  1272    75.2%     110      31    1131
+  LLM SauerkrautLM [few-shot +verify]       5137   654    87.3%     144      40     470
+  LLM Llama-3 [fine-tuned]                  5137   167    96.7%      50      28      89
+
+  Recall is strict (exact span and label match).
+  Bound./Label/Omiss. counts of false negatives by category.
+
+##############################################################################
+  spaCy + Regex
+##############################################################################
+
+  Documents parsed : 638
+  Gold entities    : 5137
+  Exact matches    : 3557
+  False negatives  : 1580
+  False positives  : 987
+  Strict recall    : 0.6924
+
+  False negatives by category
+  ------------------------------------------------------------------------
+  Boundary disagreement (same label, overlapping span)     324 (20.5%)
+  Label disagreement (overlapping span, different label)   151 ( 9.6%)
+  True omission (no overlapping prediction)               1105 (69.9%)
+
+  Label       Gold  Miss   Recall  Bound.   Label  Omiss.
+  -------------------------------------------------------
+  PER         1091   114    89.6%      59       5      50
+  JOB          802   802     0.0%       0      85     717
+  MONEY        759   109    85.6%      97       2      10
+  ORG          740   208    71.9%     152       8      48
+  LOC          632    17    97.3%      13       1       3
+  DATE         508    93    81.7%       3       7      83
+  EMAIL        165     0   100.0%       0       0       0
+  PHONE        113     1    99.1%       0       0       1
+  IBAN         107    16    85.0%       0       8       8
+  NATION        91    91     0.0%       0       0      91
+  AGE           81    81     0.0%       0       0      81
+  EDU           48    48     0.0%       0      35      13
+
+##############################################################################
+  BERT (pretrained) + Regex
+##############################################################################
+
+  Documents parsed : 638
+  Gold entities    : 5137
+  Exact matches    : 3731
+  False negatives  : 1406
+  False positives  : 956
+  Strict recall    : 0.7263
+
+  False negatives by category
+  ------------------------------------------------------------------------
+  Boundary disagreement (same label, overlapping span)     219 (15.6%)
+  Label disagreement (overlapping span, different label)   308 (21.9%)
+  True omission (no overlapping prediction)                879 (62.5%)
+
+  Label       Gold  Miss   Recall  Bound.   Label  Omiss.
+  -------------------------------------------------------
+  PER         1091    19    98.3%      15       1       3
+  JOB          802   802     0.0%       0     174     628
+  MONEY        759   107    85.9%      97       0      10
+  ORG          740   102    86.2%      93       3       6
+  LOC          632    55    91.3%      11       2      42
+  DATE         508    86    83.1%       3       0      83
+  EMAIL        165     0   100.0%       0       0       0
+  PHONE        113     1    99.1%       0       0       1
+  IBAN         107    14    86.9%       0       0      14
+  NATION        91    91     0.0%       0      90       1
+  AGE           81    81     0.0%       0       0      81
+  EDU           48    48     0.0%       0      38      10
+
+##############################################################################
+  Presidio
+##############################################################################
+
+  Documents parsed : 638
+  Gold entities    : 5137
+  Exact matches    : 4268
+  False negatives  : 869
+  False positives  : 1093
+  Strict recall    : 0.8308
+
+  False negatives by category
+  ------------------------------------------------------------------------
+  Boundary disagreement (same label, overlapping span)     348 (40.0%)
+  Label disagreement (overlapping span, different label)   149 (17.1%)
+  True omission (no overlapping prediction)                372 (42.8%)
+
+  Label       Gold  Miss   Recall  Bound.   Label  Omiss.
+  -------------------------------------------------------
+  PER         1091   114    89.6%      58       5      51
+  JOB          802   254    68.3%      21      87     146
+  MONEY        759   123    83.8%      75       5      43
+  ORG          740   208    71.9%     152       8      48
+  LOC          632    17    97.3%      13       2       2
+  DATE         508    52    89.8%       8       0      44
+  EMAIL        165     1    99.4%       0       1       0
+  PHONE        113     0   100.0%       0       0       0
+  IBAN         107     0   100.0%       0       0       0
+  NATION        91     6    93.4%       3       0       3
+  AGE           81    52    35.8%      12       6      34
+  EDU           48    42    12.5%       6      35       1
+
+##############################################################################
+  BERT Fine-Tuned
+##############################################################################
+
+  Documents parsed : 638
+  Gold entities    : 5137
+  Exact matches    : 4969
+  False negatives  : 168
+  False positives  : 222
+  Strict recall    : 0.9673
+
+  False negatives by category
+  ------------------------------------------------------------------------
+  Boundary disagreement (same label, overlapping span)      71 (42.3%)
+  Label disagreement (overlapping span, different label)    24 (14.3%)
+  True omission (no overlapping prediction)                 73 (43.5%)
+
+  Label       Gold  Miss   Recall  Bound.   Label  Omiss.
+  -------------------------------------------------------
+  PER         1091     2    99.8%       2       0       0
+  JOB          802    40    95.0%      13       9      18
+  MONEY        759    33    95.7%      13       0      20
+  ORG          740    19    97.4%      15       4       0
+  LOC          632    12    98.1%       8       1       3
+  DATE         508    35    93.1%       3       0      32
+  EMAIL        165     1    99.4%       1       0       0
+  PHONE        113     1    99.1%       1       0       0
+  IBAN         107     0   100.0%       0       0       0
+  NATION        91     0   100.0%       0       0       0
+  AGE           81     4    95.1%       4       0       0
+  EDU           48    21    56.2%      11      10       0
+
+##############################################################################
+  LLM Llama-3 [few-shot +verify]
+##############################################################################
+
+  Documents parsed : 638
+  Gold entities    : 5137
+  Exact matches    : 4472
+  False negatives  : 665
+  False positives  : 720
+  Strict recall    : 0.8705
+
+  False negatives by category
+  ------------------------------------------------------------------------
+  Boundary disagreement (same label, overlapping span)     250 (37.6%)
+  Label disagreement (overlapping span, different label)    51 ( 7.7%)
+  True omission (no overlapping prediction)                364 (54.7%)
+
+  Label       Gold  Miss   Recall  Bound.   Label  Omiss.
+  -------------------------------------------------------
+  PER         1091   221    79.7%      70       0     151
+  JOB          802   123    84.7%      14      32      77
+  MONEY        759    98    87.1%      82       1      15
+  ORG          740    23    96.9%       6       2      15
+  LOC          632    21    96.7%       8       5       8
+  DATE         508   111    78.1%      47       2      62
+  EMAIL        165     0   100.0%       0       0       0
+  PHONE        113     2    98.2%       2       0       0
+  IBAN         107     3    97.2%       2       0       1
+  NATION        91    31    65.9%       3       9      19
+  AGE           81    18    77.8%       4       0      14
+  EDU           48    14    70.8%      12       0       2
+
+##############################################################################
+  LLM Qwen2.5 [few-shot +verify]
+##############################################################################
+
+  Documents parsed : 638
+  Gold entities    : 5137
+  Exact matches    : 3865
+  False negatives  : 1272
+  False positives  : 289
+  Strict recall    : 0.7524
+
+  False negatives by category
+  ------------------------------------------------------------------------
+  Boundary disagreement (same label, overlapping span)     110 ( 8.6%)
+  Label disagreement (overlapping span, different label)    31 ( 2.4%)
+  True omission (no overlapping prediction)               1131 (88.9%)
+
+  Label       Gold  Miss   Recall  Bound.   Label  Omiss.
+  -------------------------------------------------------
+  PER         1091   310    71.6%      43       0     267
+  JOB          802   269    66.5%       4      29     236
+  MONEY        759    91    88.0%      34       0      57
+  ORG          740    94    87.3%       7       2      85
+  LOC          632   154    75.6%       2       0     152
+  DATE         508   175    65.6%       1       0     174
+  EMAIL        165    40    75.8%       0       0      40
+  PHONE        113    29    74.3%       0       0      29
+  IBAN         107    15    86.0%       2       0      13
+  NATION        91    46    49.5%       0       0      46
+  AGE           81    23    71.6%       5       0      18
+  EDU           48    26    45.8%      12       0      14
+
+##############################################################################
+  LLM SauerkrautLM [few-shot +verify]
+##############################################################################
+
+  Documents parsed : 638
+  Gold entities    : 5137
+  Exact matches    : 4483
+  False negatives  : 654
+  False positives  : 455
+  Strict recall    : 0.8727
+
+  False negatives by category
+  ------------------------------------------------------------------------
+  Boundary disagreement (same label, overlapping span)     144 (22.0%)
+  Label disagreement (overlapping span, different label)    40 ( 6.1%)
+  True omission (no overlapping prediction)                470 (71.9%)
+
+  Label       Gold  Miss   Recall  Bound.   Label  Omiss.
+  -------------------------------------------------------
+  PER         1091   215    80.3%      37       0     178
+  JOB          802   163    79.7%       4      32     127
+  MONEY        759    47    93.8%      18       1      28
+  ORG          740    31    95.8%      18       2      11
+  LOC          632    28    95.6%       7       1      20
+  DATE         508   115    77.4%      36       1      78
+  EMAIL        165     0   100.0%       0       0       0
+  PHONE        113     1    99.1%       0       0       1
+  IBAN         107     4    96.3%       3       0       1
+  NATION        91    24    73.6%       3       1      20
+  AGE           81    10    87.7%       4       0       6
+  EDU           48    16    66.7%      14       2       0
+
+##############################################################################
+  LLM Llama-3 [fine-tuned]
+##############################################################################
+
+  Documents parsed : 638
+  Gold entities    : 5137
+  Exact matches    : 4970
+  False negatives  : 167
+  False positives  : 155
+  Strict recall    : 0.9675
+
+  False negatives by category
+  ------------------------------------------------------------------------
+  Boundary disagreement (same label, overlapping span)      50 (29.9%)
+  Label disagreement (overlapping span, different label)    28 (16.8%)
+  True omission (no overlapping prediction)                 89 (53.3%)
+
+  Label       Gold  Miss   Recall  Bound.   Label  Omiss.
+  -------------------------------------------------------
+  PER         1091     2    99.8%       2       0       0
+  JOB          802    48    94.0%       7      13      28
+  MONEY        759    31    95.9%      14       0      17
+  ORG          740     9    98.8%       5       4       0
+  LOC          632     7    98.9%       4       2       1
+  DATE         508    44    91.3%       1       0      43
+  EMAIL        165     0   100.0%       0       0       0
+  PHONE        113     0   100.0%       0       0       0
+  IBAN         107     0   100.0%       0       0       0
+  NATION        91     1    98.9%       1       0       0
+  AGE           81     4    95.1%       4       0       0
+  EDU           48    21    56.2%      12       9       0
+
+##############################################################################
+  APPENDIX: Example misses per category, per pipeline
+##############################################################################
+
+  Examples (up to 10 per category) for spaCy + Regex
+  ------------------------------------------------------------------------
+
+  >>> Boundary disagreement (same label, overlapping span) (324 total) <<<
+    Doc 5203: GOLD [DATE] 'Anfang Juni 2024'  (339:355)
+          MODEL [DATE] 'Juni 2024'  (346:355)
+    Doc 5203: GOLD [ORG] 'Swiss Machinery Export SA'  (79:104)
+          MODEL [ORG] 'Swiss Machinery'  (79:94)
+    Doc 5205: GOLD [PER] 'Schmidt'  (340:347)
+          MODEL [PER] 'Frau Schmidt'  (335:347)
+    Doc 5243: GOLD [ORG] 'Modehaus Schneider GmbH'  (73:96)
+          MODEL [ORG] 'Schneider GmbH'  (82:96)
+    Doc 5245: GOLD [ORG] 'Romandie Pharma SA'  (91:109)
+          MODEL [ORG] 'SA'  (107:109)
+    Doc 5246: GOLD [PER] 'Bachmann'  (301:309)
+          MODEL [PER] 'Herr Bachmann'  (296:309)
+    Doc 5257: GOLD [ORG] 'Seoul Heavy Industries Ltd.'  (222:249)
+          MODEL [ORG] 'Seoul Heavy Industries Ltd'  (222:248)
+    Doc 5263: GOLD [DATE] 'Ende 2024'  (132:141)
+          MODEL [DATE] '2024'  (137:141)
+    Doc 5263: GOLD [ORG] 'Vogel Transport GmbH'  (80:100)
+          MODEL [ORG] 'Vogel Transport'  (80:95)
+    Doc 5264: GOLD [ORG] 'Global Trade Solutions SA'  (66:91)
+          MODEL [ORG] 'Global Trade Solutions'  (66:88)
+    ... and 314 more
+
+  >>> Label disagreement (overlapping span, different label) (151 total) <<<
+    Doc 5246: GOLD [ORG] 'Zuger Logistik GmbH'  (41:60)
+          MODEL [LOC] 'Zuger'  (41:46)
+    Doc 5246: GOLD [JOB] 'ETH-Ingenieur'  (419:432)
+          MODEL [ORG] 'ETH-Ingenieur'  (419:432)
+    Doc 5264: GOLD [JOB] 'Head of Treasury'  (45:61)
+          MODEL [ORG] 'Head of Treasury'  (45:61)
+    Doc 5266: GOLD [PER] 'Li'  (343:345)
+          MODEL [ORG] 'East-West Trading Ltd.. Herr Li'  (314:345)
+    Doc 5266: GOLD [JOB] 'Trade Finance Specialist'  (45:69)
+          MODEL [ORG] 'Trade Finance Specialist'  (45:69)
+    Doc 5267: GOLD [JOB] 'Head of Corporate Development'  (62:91)
+          MODEL [ORG] 'Head of Corporate Development'  (62:91)
+    Doc 5293: GOLD [EDU] 'Universität St. Gallen (HSG)'  (442:470)
+          MODEL [ORG] 'Universität St. Gallen'  (442:464)
+          MODEL [ORG] 'HSG'  (466:469)
+    Doc 5298: GOLD [JOB] 'Head of Treasury'  (58:74)
+          MODEL [ORG] 'Head of Treasury'  (58:74)
+    Doc 5307: GOLD [JOB] 'Head of Treasury'  (64:80)
+          MODEL [ORG] 'Head of Treasury'  (64:80)
+    Doc 5336: GOLD [JOB] 'Office Managerin'  (35:51)
+          MODEL [ORG] 'Office'  (35:41)
+    ... and 141 more
+
+  >>> True omission (no overlapping prediction) (1105 total) <<<
+    Doc 5193: GOLD [JOB] 'Geschäftsführer'  (137:152)
+    Doc 5203: GOLD [JOB] 'Export Managerin'  (54:70)
+    Doc 5205: GOLD [JOB] 'CFO'  (63:66)
+    Doc 5205: GOLD [NATION] 'deutsche'  (357:365)
+    Doc 5208: GOLD [JOB] 'CFO'  (156:159)
+    Doc 5208: GOLD [JOB] 'CEO'  (121:124)
+    Doc 5212: GOLD [JOB] 'Geschäftsführer'  (44:59)
+    Doc 5217: GOLD [JOB] 'CFO'  (146:149)
+    Doc 5217: GOLD [JOB] 'CEO'  (118:121)
+    Doc 5224: GOLD [JOB] 'Leiter Finanzen'  (49:64)
+    ... and 1095 more
+
+  Examples (up to 10 per category) for BERT (pretrained) + Regex
+  ------------------------------------------------------------------------
+
+  >>> Boundary disagreement (same label, overlapping span) (219 total) <<<
+    Doc 5203: GOLD [DATE] 'Anfang Juni 2024'  (339:355)
+          MODEL [DATE] 'Juni 2024'  (346:355)
+    Doc 5245: GOLD [ORG] 'Romandie Pharma SA'  (91:109)
+          MODEL [ORG] 'Romandie'  (91:99)
+          MODEL [ORG] 'Pharma SA'  (100:109)
+    Doc 5257: GOLD [ORG] 'Seoul Heavy Industries Ltd.'  (222:249)
+          MODEL [ORG] 'Seoul Heavy Industries Ltd'  (222:248)
+    Doc 5263: GOLD [DATE] 'Ende 2024'  (132:141)
+          MODEL [DATE] '2024'  (137:141)
+    Doc 5264: GOLD [ORG] 'Global Trade Solutions SA'  (66:91)
+          MODEL [ORG] 'SA'  (89:91)
+          MODEL [ORG] 'Global Trade Solutions'  (66:88)
+    Doc 5266: GOLD [ORG] 'East-West Trading Ltd.'  (314:336)
+          MODEL [ORG] 'East-West Trading Ltd'  (314:335)
+    Doc 5266: GOLD [ORG] 'East-West Trading Ltd.'  (78:100)
+          MODEL [ORG] 'East-West Trading Ltd'  (78:99)
+    Doc 5273: GOLD [MONEY] 'EUR 75'000'  (302:312)
+          MODEL [MONEY] 'EUR 75'000.'  (302:313)
+    Doc 5284: GOLD [MONEY] 'CHF 5 pro Aktie'  (341:356)
+          MODEL [MONEY] 'CHF 5'  (341:346)
+    Doc 5286: GOLD [ORG] 'Logistik Express AG'  (57:76)
+          MODEL [ORG] 'Logistik'  (57:65)
+          MODEL [ORG] 'Express AG'  (66:76)
+    ... and 209 more
+
+  >>> Label disagreement (overlapping span, different label) (308 total) <<<
+    Doc 5205: GOLD [JOB] 'CFO'  (63:66)
+          MODEL [ORG] 'CFO'  (63:66)
+    Doc 5205: GOLD [NATION] 'deutsche'  (357:365)
+          MODEL [LOC] 'deutsche'  (357:365)
+    Doc 5208: GOLD [JOB] 'CFO'  (156:159)
+          MODEL [ORG] 'CFO'  (156:159)
+    Doc 5208: GOLD [JOB] 'CEO'  (121:124)
+          MODEL [ORG] 'CEO'  (121:124)
+    Doc 5217: GOLD [JOB] 'CFO'  (146:149)
+          MODEL [ORG] 'CFO'  (146:149)
+    Doc 5231: GOLD [JOB] 'CFO'  (388:391)
+          MODEL [ORG] 'CFO'  (388:391)
+    Doc 5237: GOLD [EDU] 'HSG-Absolvent'  (217:230)
+          MODEL [ORG] 'HSG'  (217:220)
+    Doc 5243: GOLD [NATION] 'deutschen'  (286:295)
+          MODEL [LOC] 'deutschen'  (286:295)
+    Doc 5243: GOLD [NATION] 'österreichischen'  (265:281)
+          MODEL [LOC] 'österreichischen'  (265:281)
+    Doc 5245: GOLD [JOB] 'Leiterin Treasury'  (65:82)
+          MODEL [PER] 'Treasury'  (74:82)
+    ... and 298 more
+
+  >>> True omission (no overlapping prediction) (879 total) <<<
+    Doc 5193: GOLD [JOB] 'Geschäftsführer'  (137:152)
+    Doc 5193: GOLD [LOC] 'Zug'  (93:96)
+    Doc 5203: GOLD [JOB] 'Export Managerin'  (54:70)
+    Doc 5212: GOLD [JOB] 'Geschäftsführer'  (44:59)
+    Doc 5217: GOLD [JOB] 'CEO'  (118:121)
+    Doc 5224: GOLD [JOB] 'Leiter Finanzen'  (49:64)
+    Doc 5231: GOLD [JOB] 'Leiterin Einkauf'  (37:53)
+    Doc 5231: GOLD [LOC] 'Zug'  (79:82)
+    Doc 5232: GOLD [JOB] 'Geschäftsführers'  (189:205)
+    Doc 5237: GOLD [AGE] '35-jähriger'  (205:216)
+    ... and 869 more
+
+  Examples (up to 10 per category) for Presidio
+  ------------------------------------------------------------------------
+
+  >>> Boundary disagreement (same label, overlapping span) (348 total) <<<
+    Doc 5203: GOLD [DATE] 'Anfang Juni 2024'  (339:355)
+          MODEL [DATE] 'Juni 2024'  (346:355)
+    Doc 5203: GOLD [ORG] 'Swiss Machinery Export SA'  (79:104)
+          MODEL [ORG] 'Swiss Machinery'  (79:94)
+    Doc 5205: GOLD [PER] 'Schmidt'  (340:347)
+          MODEL [PER] 'Frau Schmidt'  (335:347)
+    Doc 5243: GOLD [ORG] 'Modehaus Schneider GmbH'  (73:96)
+          MODEL [ORG] 'Schneider GmbH'  (82:96)
+    Doc 5245: GOLD [ORG] 'Romandie Pharma SA'  (91:109)
+          MODEL [ORG] 'SA'  (107:109)
+    Doc 5246: GOLD [PER] 'Bachmann'  (301:309)
+          MODEL [PER] 'Herr Bachmann'  (296:309)
+    Doc 5257: GOLD [ORG] 'Seoul Heavy Industries Ltd.'  (222:249)
+          MODEL [ORG] 'Seoul Heavy Industries Ltd'  (222:248)
+    Doc 5263: GOLD [DATE] 'Ende 2024'  (132:141)
+          MODEL [DATE] '2024'  (137:141)
+    Doc 5263: GOLD [ORG] 'Vogel Transport GmbH'  (80:100)
+          MODEL [ORG] 'Vogel Transport'  (80:95)
+    Doc 5264: GOLD [ORG] 'Global Trade Solutions SA'  (66:91)
+          MODEL [ORG] 'Global Trade Solutions'  (66:88)
+    ... and 338 more
+
+  >>> Label disagreement (overlapping span, different label) (149 total) <<<
+    Doc 5246: GOLD [ORG] 'Zuger Logistik GmbH'  (41:60)
+          MODEL [LOC] 'Zuger'  (41:46)
+    Doc 5246: GOLD [JOB] 'ETH-Ingenieur'  (419:432)
+          MODEL [ORG] 'ETH-Ingenieur'  (419:432)
+    Doc 5264: GOLD [JOB] 'Head of Treasury'  (45:61)
+          MODEL [ORG] 'Head of Treasury'  (45:61)
+    Doc 5266: GOLD [PER] 'Li'  (343:345)
+          MODEL [ORG] 'East-West Trading Ltd.. Herr Li'  (314:345)
+    Doc 5266: GOLD [JOB] 'Trade Finance Specialist'  (45:69)
+          MODEL [ORG] 'Trade Finance Specialist'  (45:69)
+    Doc 5267: GOLD [JOB] 'Head of Corporate Development'  (62:91)
+          MODEL [ORG] 'Head of Corporate Development'  (62:91)
+    Doc 5293: GOLD [EDU] 'Universität St. Gallen (HSG)'  (442:470)
+          MODEL [ORG] 'HSG'  (466:469)
+          MODEL [ORG] 'Universität St. Gallen'  (442:464)
+    Doc 5298: GOLD [JOB] 'Head of Treasury'  (58:74)
+          MODEL [ORG] 'Head of Treasury'  (58:74)
+    Doc 5307: GOLD [JOB] 'Head of Treasury'  (64:80)
+          MODEL [ORG] 'Head of Treasury'  (64:80)
+    Doc 5336: GOLD [JOB] 'Office Managerin'  (35:51)
+          MODEL [ORG] 'Office'  (35:41)
+    ... and 139 more
+
+  >>> True omission (no overlapping prediction) (372 total) <<<
+    Doc 5232: GOLD [ORG] 'Innovatec Solutions GmbH'  (42:66)
+    Doc 5232: GOLD [JOB] 'Geschäftsführers'  (189:205)
+    Doc 5237: GOLD [JOB] 'Verwaltungsratspräsidenten'  (73:99)
+    Doc 5257: GOLD [JOB] 'Head of Export'  (4:18)
+    Doc 5266: GOLD [DATE] 'morgen'  (381:387)
+    Doc 5292: GOLD [JOB] 'Flottenmanager'  (19:33)
+    Doc 5293: GOLD [PER] 'Fischer'  (379:386)
+    Doc 5336: GOLD [JOB] 'Managing Partner'  (199:215)
+    Doc 5343: GOLD [PER] 'Fischer'  (372:379)
+    Doc 5346: GOLD [PER] 'Vogel'  (329:334)
+    ... and 362 more
+
+  Examples (up to 10 per category) for BERT Fine-Tuned
+  ------------------------------------------------------------------------
+
+  >>> Boundary disagreement (same label, overlapping span) (71 total) <<<
+    Doc 5203: GOLD [DATE] 'Anfang Juni 2024'  (339:355)
+          MODEL [DATE] 'Juni 2024'  (346:355)
+    Doc 5273: GOLD [JOB] 'Gründer und CEO'  (103:118)
+          MODEL [JOB] 'CEO'  (115:118)
+          MODEL [JOB] 'Gründer'  (103:110)
+    Doc 5284: GOLD [MONEY] 'CHF 5 pro Aktie'  (341:356)
+          MODEL [MONEY] 'CHF 5'  (341:346)
+    Doc 5314: GOLD [JOB] 'ETH-Ingenieurin'  (250:265)
+          MODEL [JOB] 'ETH-'  (250:254)
+          MODEL [JOB] 'in'  (263:265)
+    Doc 5403: GOLD [JOB] 'dipl. Architektin ETH'  (245:266)
+          MODEL [JOB] 'dipl. Architektin'  (245:262)
+    Doc 5437: GOLD [EDU] 'HSG'  (222:225)
+          MODEL [EDU] 'HSG-Absolvent'  (222:235)
+    Doc 5480: GOLD [EDU] 'MBA'  (346:349)
+          MODEL [EDU] 'MBA der INSEAD'  (346:360)
+    Doc 5489: GOLD [ORG] 'Neubau West AG'  (186:200)
+          MODEL [ORG] 'Mandantin Neubau West AG'  (176:200)
+    Doc 5543: GOLD [LOC] 'Zürich-Altstetten'  (82:99)
+          MODEL [LOC] 'Altstetten'  (89:99)
+          MODEL [LOC] 'Zürich'  (82:88)
+    Doc 5580: GOLD [MONEY] 'CHF'  (340:343)
+          MODEL [MONEY] 'C'  (340:341)
+    ... and 61 more
+
+  >>> Label disagreement (overlapping span, different label) (24 total) <<<
+    Doc 5480: GOLD [ORG] 'INSEAD'  (354:360)
+          MODEL [EDU] 'MBA der INSEAD'  (346:360)
+    Doc 5854: GOLD [JOB] 'HSG-Absolventin'  (236:251)
+          MODEL [EDU] 'HSG-Absolventin'  (236:251)
+    Doc 5867: GOLD [ORG] 'ETH Zürich'  (102:112)
+          MODEL [EDU] 'ETH Zürich'  (102:112)
+    Doc 6007: GOLD [EDU] 'ETH-Ingenieur'  (410:423)
+          MODEL [JOB] 'ETH-Ingenieur'  (410:423)
+    Doc 6037: GOLD [JOB] 'ETH-Absolventin'  (109:124)
+          MODEL [EDU] 'ETH-Absolventin'  (109:124)
+    Doc 6042: GOLD [EDU] 'EPFL'  (64:68)
+          MODEL [ORG] 'EPFL'  (64:68)
+    Doc 6105: GOLD [JOB] 'HSG-Absolvent'  (258:271)
+          MODEL [EDU] 'HSG-Absolvent'  (258:271)
+    Doc 6371: GOLD [EDU] 'Holzbau-Ingenieur FH'  (290:310)
+          MODEL [JOB] 'Holzbau-Ingenieur FH'  (290:310)
+    Doc 6441: GOLD [JOB] 'HSG-Absolventin'  (216:231)
+          MODEL [EDU] 'HSG-Absolventin'  (216:231)
+    Doc 6457: GOLD [EDU] 'dipl. Fleischsommelier'  (152:174)
+          MODEL [JOB] 'dipl. Fleischsommelier'  (152:174)
+    ... and 14 more
+
+  >>> True omission (no overlapping prediction) (73 total) <<<
+    Doc 5266: GOLD [DATE] 'morgen'  (381:387)
+    Doc 5412: GOLD [JOB] 'Inhaber'  (94:101)
+    Doc 5421: GOLD [MONEY] '15%'  (302:305)
+    Doc 5482: GOLD [JOB] 'Inhaber'  (83:90)
+    Doc 5486: GOLD [DATE] '12 Monaten'  (202:212)
+    Doc 5494: GOLD [JOB] 'Mitarbeiterin'  (327:340)
+    Doc 5532: GOLD [DATE] 'morgen'  (408:414)
+    Doc 5580: GOLD [MONEY] 'EUR'  (357:360)
+    Doc 5640: GOLD [JOB] 'Mitarbeiterinnen'  (325:341)
+    Doc 5675: GOLD [DATE] 'Ende nächster Woche'  (368:387)
+    ... and 63 more
+
+  Examples (up to 10 per category) for LLM Llama-3 [few-shot +verify]
+  ------------------------------------------------------------------------
+
+  >>> Boundary disagreement (same label, overlapping span) (250 total) <<<
+    Doc 5203: GOLD [DATE] 'Anfang Juni 2024'  (339:355)
+          MODEL [DATE] 'Juni 2024'  (346:355)
+    Doc 5205: GOLD [PER] 'Elena Schmidt'  (48:61)
+          MODEL [PER] 'Schmidt'  (54:61)
+          MODEL [PER] 'Dr. Elena Schmidt'  (44:61)
+    Doc 5224: GOLD [MONEY] 'CHF 2.1 Mio.'  (186:198)
+          MODEL [MONEY] 'CHF 2.1 Mio'  (186:197)
+    Doc 5245: GOLD [JOB] 'Leiterin Treasury'  (65:82)
+          MODEL [JOB] 'Leiterin'  (65:73)
+    Doc 5267: GOLD [PER] 'Andreas Meyer'  (47:60)
+          MODEL [PER] 'Dr. Andreas Meyer'  (43:60)
+    Doc 5267: GOLD [MONEY] 'CHF 4 Mio.'  (364:374)
+          MODEL [MONEY] 'CHF 4 Mio'  (364:373)
+    Doc 5273: GOLD [JOB] 'Gründer und CEO'  (103:118)
+          MODEL [JOB] 'CEO'  (115:118)
+    Doc 5273: GOLD [PER] 'Luc Dubois'  (129:139)
+          MODEL [PER] 'Dr. Luc Dubois'  (125:139)
+    Doc 5278: GOLD [PER] 'Elena Fischer'  (44:57)
+          MODEL [PER] 'Dr. Elena Fischer'  (40:57)
+    Doc 5284: GOLD [DATE] '2022'  (159:163)
+          MODEL [DATE] 'Jahresabschluss 2022'  (143:163)
+    ... and 240 more
+
+  >>> Label disagreement (overlapping span, different label) (51 total) <<<
+    Doc 5246: GOLD [JOB] 'ETH-Ingenieur'  (419:432)
+          MODEL [EDU] 'ETH-Ingenieur'  (419:432)
+    Doc 5266: GOLD [LOC] 'China'  (191:196)
+          MODEL [NATION] 'China'  (191:196)
+    Doc 5278: GOLD [NATION] 'US-amerikanischen'  (117:134)
+          MODEL [LOC] 'US-amerikanischen'  (117:134)
+    Doc 5314: GOLD [JOB] 'ETH-Ingenieurin'  (250:265)
+          MODEL [EDU] 'ETH-Ingenieurin'  (250:265)
+    Doc 5343: GOLD [JOB] 'ETH-Ingenieur'  (430:443)
+          MODEL [EDU] 'ETH-Ingenieur'  (430:443)
+    Doc 5403: GOLD [JOB] 'dipl. Architektin ETH'  (245:266)
+          MODEL [EDU] 'dipl. Architektin ETH'  (245:266)
+    Doc 5421: GOLD [LOC] 'Italien'  (220:227)
+          MODEL [NATION] 'Italien'  (220:227)
+    Doc 5445: GOLD [LOC] 'Europa'  (206:212)
+          MODEL [NATION] 'Europa'  (206:212)
+    Doc 5504: GOLD [NATION] 'deutschen'  (227:236)
+          MODEL [LOC] 'deutschen'  (227:236)
+    Doc 5642: GOLD [LOC] 'Polen'  (198:203)
+          MODEL [NATION] 'Polen'  (198:203)
+    ... and 41 more
+
+  >>> True omission (no overlapping prediction) (364 total) <<<
+    Doc 5205: GOLD [PER] 'Schmidt'  (340:347)
+    Doc 5205: GOLD [DATE] '2023'  (142:146)
+    Doc 5208: GOLD [PER] 'Rochat'  (400:406)
+    Doc 5217: GOLD [MONEY] 'CHF 9.8 Mio.'  (390:402)
+    Doc 5231: GOLD [PER] 'Gasser'  (349:355)
+    Doc 5237: GOLD [AGE] '35-jähriger'  (205:216)
+    Doc 5237: GOLD [DATE] '2023'  (314:318)
+    Doc 5243: GOLD [DATE] '2024'  (182:186)
+    Doc 5246: GOLD [AGE] '58-jährig'  (311:320)
+    Doc 5246: GOLD [PER] 'Bachmann'  (301:309)
+    ... and 354 more
+
+  Examples (up to 10 per category) for LLM Qwen2.5 [few-shot +verify]
+  ------------------------------------------------------------------------
+
+  >>> Boundary disagreement (same label, overlapping span) (110 total) <<<
+    Doc 5217: GOLD [MONEY] 'CHF 9.8 Mio.'  (390:402)
+          MODEL [MONEY] 'CHF 9.8 Mio..'  (390:403)
+    Doc 5237: GOLD [ORG] 'Familienholding Meier AG'  (104:128)
+          MODEL [ORG] 'Meier AG'  (120:128)
+    Doc 5273: GOLD [JOB] 'Gründer und CEO'  (103:118)
+          MODEL [JOB] 'CEO'  (115:118)
+          MODEL [JOB] 'Gründer'  (103:110)
+    Doc 5284: GOLD [MONEY] 'CHF 5 pro Aktie'  (341:356)
+          MODEL [MONEY] 'CHF 5'  (341:346)
+    Doc 5308: GOLD [IBAN] 'CH44 0023 3233 1234 5678 A'  (348:374)
+          MODEL [IBAN] 'CH44 0023 3233 1234 5678'  (348:372)
+    Doc 5320: GOLD [MONEY] 'CHF 3.5 Mio.'  (299:311)
+          MODEL [MONEY] 'CHF 3.5 Mio..'  (299:312)
+    Doc 5389: GOLD [MONEY] 'CHF 10 Mio.'  (271:282)
+          MODEL [MONEY] 'CHF 10 Mio..'  (271:283)
+    Doc 5437: GOLD [EDU] 'HSG'  (222:225)
+          MODEL [EDU] 'HSG-Absolvent'  (222:235)
+    Doc 5480: GOLD [EDU] 'MBA'  (346:349)
+          MODEL [EDU] 'MBA der INSEAD'  (346:360)
+    Doc 5482: GOLD [MONEY] 'CHF 3.2 Mio.'  (221:233)
+          MODEL [MONEY] 'CHF 3.2 Mio..'  (221:234)
+    ... and 100 more
+
+  >>> Label disagreement (overlapping span, different label) (31 total) <<<
+    Doc 5246: GOLD [JOB] 'ETH-Ingenieur'  (419:432)
+          MODEL [EDU] 'ETH-Ingenieur'  (419:432)
+    Doc 5314: GOLD [JOB] 'ETH-Ingenieurin'  (250:265)
+          MODEL [EDU] 'ETH-Ingenieurin'  (250:265)
+    Doc 5343: GOLD [JOB] 'ETH-Ingenieur'  (430:443)
+          MODEL [EDU] 'ETH-Ingenieur'  (430:443)
+    Doc 5403: GOLD [JOB] 'dipl. Architektin ETH'  (245:266)
+          MODEL [EDU] 'dipl. Architektin ETH'  (245:266)
+    Doc 5480: GOLD [ORG] 'INSEAD'  (354:360)
+          MODEL [EDU] 'MBA der INSEAD'  (346:360)
+    Doc 5693: GOLD [JOB] 'dipl. Bauingenieur ETH'  (379:401)
+          MODEL [EDU] 'ETH'  (398:401)
+    Doc 5756: GOLD [JOB] 'ETH-Ingenieur'  (199:212)
+          MODEL [EDU] 'ETH-Ingenieur'  (199:212)
+    Doc 5815: GOLD [JOB] 'Inhaber'  (55:62)
+          MODEL [PER] 'Inhaber Roberto Bianchi'  (55:78)
+    Doc 5854: GOLD [JOB] 'HSG-Absolventin'  (236:251)
+          MODEL [EDU] 'HSG-Absolventin'  (236:251)
+    Doc 6037: GOLD [JOB] 'ETH-Absolventin'  (109:124)
+          MODEL [EDU] 'ETH-Absolventin'  (109:124)
+    ... and 21 more
+
+  >>> True omission (no overlapping prediction) (1131 total) <<<
+    Doc 5193: GOLD [JOB] 'Geschäftsführer'  (137:152)
+    Doc 5193: GOLD [LOC] 'Zug'  (93:96)
+    Doc 5203: GOLD [DATE] 'Anfang Juni 2024'  (339:355)
+    Doc 5205: GOLD [PER] 'Schmidt'  (340:347)
+    Doc 5205: GOLD [DATE] '2023'  (142:146)
+    Doc 5208: GOLD [PER] 'Rochat'  (400:406)
+    Doc 5217: GOLD [DATE] '2023'  (345:349)
+    Doc 5231: GOLD [PER] 'Gasser'  (349:355)
+    Doc 5232: GOLD [JOB] 'Geschäftsführers'  (189:205)
+    Doc 5237: GOLD [DATE] '2023'  (314:318)
+    ... and 1121 more
+
+  Examples (up to 10 per category) for LLM SauerkrautLM [few-shot +verify]
+  ------------------------------------------------------------------------
+
+  >>> Boundary disagreement (same label, overlapping span) (144 total) <<<
+    Doc 5205: GOLD [PER] 'Elena Schmidt'  (48:61)
+          MODEL [PER] 'Dr. Elena Schmidt'  (44:61)
+    Doc 5217: GOLD [DATE] '2023'  (345:349)
+          MODEL [DATE] 'Jahresumsatz 2023'  (332:349)
+    Doc 5237: GOLD [DATE] '2023'  (314:318)
+          MODEL [DATE] 'Jahresabschluss 2023'  (298:318)
+    Doc 5273: GOLD [JOB] 'Gründer und CEO'  (103:118)
+          MODEL [JOB] 'CEO'  (115:118)
+    Doc 5284: GOLD [DATE] '2022'  (159:163)
+          MODEL [DATE] 'Jahresabschluss 2022'  (143:163)
+    Doc 5284: GOLD [MONEY] 'CHF 5 pro Aktie'  (341:356)
+          MODEL [MONEY] 'CHF 5'  (341:346)
+    Doc 5389: GOLD [PER] 'Eva Meier'  (110:119)
+          MODEL [PER] 'Dr. Eva Meier'  (106:119)
+    Doc 5422: GOLD [PER] 'Klaus Berger'  (148:160)
+          MODEL [PER] 'Dr. Klaus Berger'  (144:160)
+    Doc 5422: GOLD [PER] 'Berger'  (375:381)
+          MODEL [PER] 'Dr. Berger'  (371:381)
+    Doc 5437: GOLD [EDU] 'HSG'  (222:225)
+          MODEL [EDU] 'HSG-Absolvent'  (222:235)
+    ... and 134 more
+
+  >>> Label disagreement (overlapping span, different label) (40 total) <<<
+    Doc 5246: GOLD [JOB] 'ETH-Ingenieur'  (419:432)
+          MODEL [EDU] 'ETH-Ingenieur'  (419:432)
+    Doc 5314: GOLD [JOB] 'ETH-Ingenieurin'  (250:265)
+          MODEL [EDU] 'ETH-Ingenieurin'  (250:265)
+    Doc 5343: GOLD [JOB] 'ETH-Ingenieur'  (430:443)
+          MODEL [EDU] 'ETH-Ingenieur'  (430:443)
+    Doc 5403: GOLD [JOB] 'dipl. Architektin ETH'  (245:266)
+          MODEL [EDU] 'dipl. Architektin ETH'  (245:266)
+    Doc 5449: GOLD [LOC] 'Frankreich'  (333:343)
+          MODEL [NATION] 'Frankreich'  (333:343)
+    Doc 5480: GOLD [ORG] 'INSEAD'  (354:360)
+          MODEL [EDU] 'MBA der INSEAD'  (346:360)
+    Doc 5693: GOLD [JOB] 'dipl. Bauingenieur ETH'  (379:401)
+          MODEL [EDU] 'dipl. Bauingenieur ETH'  (379:401)
+    Doc 5756: GOLD [JOB] 'ETH-Ingenieur'  (199:212)
+          MODEL [EDU] 'ETH-Ingenieur'  (199:212)
+    Doc 5854: GOLD [JOB] 'HSG-Absolventin'  (236:251)
+          MODEL [EDU] 'HSG-Absolventin'  (236:251)
+    Doc 6037: GOLD [JOB] 'ETH-Absolventin'  (109:124)
+          MODEL [EDU] 'ETH-Absolventin'  (109:124)
+    ... and 30 more
+
+  >>> True omission (no overlapping prediction) (470 total) <<<
+    Doc 5205: GOLD [PER] 'Schmidt'  (340:347)
+    Doc 5208: GOLD [PER] 'Rochat'  (400:406)
+    Doc 5217: GOLD [MONEY] 'CHF 9.8 Mio.'  (390:402)
+    Doc 5231: GOLD [PER] 'Gasser'  (349:355)
+    Doc 5243: GOLD [DATE] '2024'  (182:186)
+    Doc 5243: GOLD [JOB] 'Inhaberin'  (59:68)
+    Doc 5246: GOLD [AGE] '58-jährig'  (311:320)
+    Doc 5246: GOLD [PER] 'Bachmann'  (301:309)
+    Doc 5257: GOLD [PER] 'Schmid'  (265:271)
+    Doc 5264: GOLD [DATE] '2023'  (159:163)
+    ... and 460 more
+
+  Examples (up to 10 per category) for LLM Llama-3 [fine-tuned]
+  ------------------------------------------------------------------------
+
+  >>> Boundary disagreement (same label, overlapping span) (50 total) <<<
+    Doc 5273: GOLD [JOB] 'Gründer und CEO'  (103:118)
+          MODEL [JOB] 'CEO'  (115:118)
+    Doc 5284: GOLD [MONEY] 'CHF 5 pro Aktie'  (341:356)
+          MODEL [MONEY] 'CHF 5'  (341:346)
+    Doc 5417: GOLD [EDU] 'HSG-Absolventin'  (122:137)
+          MODEL [EDU] 'HSG'  (122:125)
+    Doc 5437: GOLD [EDU] 'HSG'  (222:225)
+          MODEL [EDU] 'HSG-Absolvent'  (222:235)
+    Doc 5639: GOLD [JOB] 'Inhaber und Geschäftsführer'  (23:50)
+          MODEL [JOB] 'Geschäftsführer'  (35:50)
+          MODEL [JOB] 'Inhaber'  (23:30)
+    Doc 5737: GOLD [JOB] 'Verkaufsleiter'  (336:350)
+          MODEL [JOB] 'Verkaufsleiter für Europa'  (336:361)
+    Doc 5800: GOLD [LOC] 'Bern'  (89:93)
+          MODEL [LOC] 'Kanton Bern'  (82:93)
+    Doc 5801: GOLD [EDU] 'HSG'  (170:173)
+          MODEL [EDU] 'HSG-Absolventin'  (170:185)
+    Doc 5809: GOLD [EDU] 'HSG-Absolventen'  (128:143)
+          MODEL [EDU] 'HSG'  (128:131)
+    Doc 5969: GOLD [EDU] 'HSG'  (174:177)
+          MODEL [EDU] 'HSG-Absolvent'  (174:187)
+    ... and 40 more
+
+  >>> Label disagreement (overlapping span, different label) (28 total) <<<
+    Doc 5314: GOLD [JOB] 'ETH-Ingenieurin'  (250:265)
+          MODEL [EDU] 'ETH-Ingenieurin'  (250:265)
+    Doc 5469: GOLD [EDU] 'Hotelfachschule Lausanne'  (399:423)
+          MODEL [ORG] 'Hotelfachschule Lausanne'  (399:423)
+    Doc 5693: GOLD [JOB] 'dipl. Bauingenieur ETH'  (379:401)
+          MODEL [EDU] 'dipl. Bauingenieur ETH'  (379:401)
+    Doc 5737: GOLD [LOC] 'Europa'  (355:361)
+          MODEL [JOB] 'Verkaufsleiter für Europa'  (336:361)
+    Doc 5854: GOLD [JOB] 'HSG-Absolventin'  (236:251)
+          MODEL [EDU] 'HSG-Absolventin'  (236:251)
+    Doc 5867: GOLD [ORG] 'ETH Zürich'  (102:112)
+          MODEL [EDU] 'ETH Zürich'  (102:112)
+    Doc 6037: GOLD [JOB] 'ETH-Absolventin'  (109:124)
+          MODEL [EDU] 'ETH-Absolventin'  (109:124)
+    Doc 6105: GOLD [JOB] 'HSG-Absolvent'  (258:271)
+          MODEL [EDU] 'HSG-Absolvent'  (258:271)
+    Doc 6245: GOLD [JOB] 'ETH-Ingenieur'  (231:244)
+          MODEL [EDU] 'ETH-Ingenieur'  (231:244)
+    Doc 6371: GOLD [EDU] 'Holzbau-Ingenieur FH'  (290:310)
+          MODEL [JOB] 'Holzbau-Ingenieur FH'  (290:310)
+    ... and 18 more
+
+  >>> True omission (no overlapping prediction) (89 total) <<<
+    Doc 5266: GOLD [DATE] 'morgen'  (381:387)
+    Doc 5274: GOLD [DATE] '2023'  (155:159)
+    Doc 5389: GOLD [DATE] '2023'  (55:59)
+    Doc 5421: GOLD [MONEY] '15%'  (302:305)
+    Doc 5437: GOLD [DATE] 'Ende Jahr'  (256:265)
+    Doc 5437: GOLD [JOB] 'Geschäftsführer'  (120:135)
+    Doc 5486: GOLD [DATE] '12 Monaten'  (202:212)
+    Doc 5494: GOLD [DATE] 'Ende Monat'  (191:201)
+    Doc 5494: GOLD [JOB] 'Mitarbeiterin'  (327:340)
+    Doc 5532: GOLD [DATE] 'morgen'  (408:414)
+    ... and 79 more
+

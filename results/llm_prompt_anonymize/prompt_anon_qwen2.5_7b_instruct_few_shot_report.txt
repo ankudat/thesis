@@ -1,0 +1,138 @@
+==============================================================================
+  LLM PROMPT-BASED ANONYMIZATION REPORT
+  Generated: 2026-04-12 21:37:47
+  Model: Qwen/Qwen2.5-7B-Instruct
+  Strategy: few-shot
+==============================================================================
+
+  Documents: 638
+  Total time: 2728.5s (4.28s/doc)
+  Avg length ratio: 0.97
+
+##############################################################################
+  PII LEAKAGE ANALYSIS
+##############################################################################
+
+  Overall: 1012/5137 leaked (19.7%)
+
+  Category        Total   Leaked       Rate
+  ------------------------------------------
+  AGE                81       11      13.6%
+  DATE              508      129      25.4%
+  EDU                48        4       8.3%
+  EMAIL             165        2       1.2%
+  IBAN              107        1       0.9%
+  JOB               802      581      72.4%
+  LOC               632      162      25.6%
+  MONEY             759       42       5.5%
+  NATION             91       41      45.1%
+  ORG               740       26       3.5%
+  PER              1091       13       1.2%
+  PHONE             113        0       0.0%
+
+##############################################################################
+  LEAKAGE BY COMPLEXITY
+##############################################################################
+
+  Low: 218 docs | Leakage: 349/1974 (17.7%)
+
+  Medium: 215 docs | Leakage: 322/1647 (19.6%)
+
+  High: 205 docs | Leakage: 341/1516 (22.5%)
+
+##############################################################################
+  SAMPLE LEAKED PII (first 20)
+##############################################################################
+  [LOC     ] "Zug"  →  ...egenschaft an einer Straße in Zug. Der Geschäftsführer einer Fi...
+  [JOB     ] "Geschäftsführer"  →  ...t an einer Straße in Zug. Der Geschäftsführer einer Firma benötigt eine Hyp...
+  [JOB     ] "Export Managerin"  →  ...hung an einem Datum mit einer Export Managerin eines Maschinenexportunterneh...
+  [LOC     ] "Lausanne"  →  ...aschinenexportunternehmens in Lausanne. Das Unternehmen benötigt ein...
+  [JOB     ] "CFO"  →  ...h anfallenden Datum mit einer CFO eines Pharmaunternehmens in d...
+  [LOC     ] "Grenchen"  →  ...gung bei einem Unternehmen in Grenchen statt. Der CEO und die CFO fü...
+  [JOB     ] "CEO"  →  ...nehmen in Grenchen statt. Der CEO und die CFO führten durch die...
+  [JOB     ] "CFO"  →  ...enchen statt. Der CEO und die CFO führten durch die neue Produk...
+  [JOB     ] "Geschäftsführer"  →  ...ich fand ein Gespräch mit dem Geschäftsführer einer Immobilienfirma statt. ...
+  [LOC     ] "Grenchen"  →  ...gung bei einem Unternehmen in Grenchen statt. Der CEO und die CFO pr...
+  [JOB     ] "CEO"  →  ...nehmen in Grenchen statt. Der CEO und die CFO präsentierten die...
+  [JOB     ] "CFO"  →  ...enchen statt. Der CEO und die CFO präsentierten die neue Produk...
+  [DATE    ] "2023"  →  ...n US-Dollar. Der Jahresumsatz 2023 betrug eine beträchtliche Sum...
+  [LOC     ] "Zug"  →  ...nternationalen Unternehmen in Zug. Für eine Lieferung von Kompo...
+  [LOC     ] "Südkorea"  →  ...Lieferung von Komponenten aus Südkorea im Wert von einer erheblichen...
+  [JOB     ] "Geschäftsführers"  →  ...iche Unterschrift des zweiten Geschäftsführers. Ich habe die Assistentin des...
+  [DATE    ] "17.05.2024"  →  ...n eines Meetings in Luzern am 17.05.2024 mit dem Verwaltungsratspräsid...
+  [LOC     ] "Luzern"  →  ...Im Rahmen eines Meetings in Luzern am 17.05.2024 mit dem Verwalt...
+  [JOB     ] "Verwaltungsratspräsidenten"  →  ... Luzern am 17.05.2024 mit dem Verwaltungsratspräsidenten einer Familienholding, wurde ...
+  [AGE     ] "35-jähriger"  →  ...g finalisiert. Sein Sohn, ein 35-jähriger Absolvent, wird per 01.07.202...
+
+##############################################################################
+  QUALITATIVE SAMPLES (10 examples)
+##############################################################################
+
+  ────────────────────────────────────────────────────────────────────────
+  Doc 7192 | High | Leakage: 5/8
+  ORIGINAL:  - Herr Giovanni Rossi, CFO der Ticino Fashion Group SA, will EUR 1.5 Mio. für 3 Monate als Festgeld anlegen. Habe ihm Konditionen durchgegeben. Passt für ihn. Das Cash Management für ihre italienische Tochter in Mailand ist ineffizient. Cross-border Pooling als Lösung vorschlagen. Treffen in Lugano ...
+  REWRITTEN: - Ein CFO eines Unternehmens, Herr Giovanni Rossi, möchte EUR 1.5 Mio. für 3 Monate als Festgeld anlegen. Ich habe ihm Konditionen durchgegeben, die für ihn zutreffen. Das Cash Management für ihre italienische Tochter in einer Stadt in Italien ist ineffizient. Cross-border Pooling als Lösung vorschl...
+
+  ────────────────────────────────────────────────────────────────────────
+  Doc 7496 | High | Leakage: 5/8
+  ORIGINAL:  - Betriebsbesichtigung bei Swiss Precision Parts SA in Yverdon.
+- CEO Michel Favre hat die neue Produktionsanlage gezeigt. Investition von CHF 10 Mio..
+- EBITDA soll um 15% steigen dank Effizienzsteigerung.
+- Jahresabschluss 2023 wurde eingereicht. Sieht sehr gut aus.
+- Exportieren hauptsächlich nac...
+  REWRITTEN: - Betriebsbesichtigung bei einem Unternehmen in Yverdon.
+- Der CEO hat die neue Produktionsanlage gezeigt. Es wurde eine Investition von einer erheblichen Summe getätigt.
+- Das EBITDA soll um einen beträchtlichen Prozentsatz steigen dank Effizienzverbesserungen.
+- Der Jahresabschluss 2023 wurde eing...
+
+  ────────────────────────────────────────────────────────────────────────
+  Doc 7173 | High | Leakage: 6/10
+  ORIGINAL:  - Info von Jean-Pierre Rochat (Patron Horlogerie Suisse SA). Wechsel in der Geschäftsführung steht an.
+- Tochter Marie Rochat, eine IMD-Absolventin, übernimt per 01.07.2024 als neue CEO.
+- Neue Unterschriftenregelung muss eingereicht werden. Jean-Pierre nur noch Kollektivunterschrift, Marie bekommt ...
+  REWRITTEN: - Info von einem Patron eines Uhrenunternehmens. Wechsel in der Geschäftsleitung steht an.
+- Die Tochter einer Führungskraft, eine Absolventin einer Top-Hochschule, übernimmt ab dem 01.07.2024 als neue CEO.
+- Eine neue Unterschriftenregelung muss eingereicht werden. Jean-Pierre Rochat hat nun nur no...
+
+  ────────────────────────────────────────────────────────────────────────
+  Doc 7375 | High | Leakage: 3/5
+  ORIGINAL:  - Anruf von Beat Stauffer, neuer CFO bei der MedTech Solutions AG in Zug.
+- Er beklagt sich, dass die E-Banking Zugriffsrechte ein Chaos sind.
+- Sein Vorgänger hat nie was aufgeräumt.
+- Wir brauchen eine aktuelle Liste aller berechtigten Personen mit den gewünschten Rechten.
+- Er schickt uns eine be...
+  REWRITTEN: - Anruf von einem neuen CFO bei einem Medizintechnikunternehmen in Zug.
+- Er beklagt sich, dass die E-Banking Zugriffsrechte ein Chaos sind.
+- Sein Vorgänger hat nie was aufgeräumt.
+- Wir brauchen eine aktuelle Liste aller berechtigten Personen mit den gewünschten Rechten.
+- Er schickt uns eine bere...
+
+  ────────────────────────────────────────────────────────────────────────
+  Doc 7691 | High | Leakage: 3/5
+  ORIGINAL:  Jahresabschluss 2023 der Modehaus Schneider AG erhalten. Kurzes Telefonat mit dem CFO Patrick Dubois. Umsatz ist leicht rückläufig, aber EBITDA dank Kostensenkungen stabil. Fianziell gesund. Er vershprach, die detaillierte Bilanz bis Freitag zu senden.
+  REWRITTEN: Jahresabschluss 2023 eines Modehauses erhalten. Kurzes Telefonat mit dem CFO. Umsatz ist leicht rückläufig, aber EBITDA dank Kostensenkungen stabil. Finanziell gesund. Er versprach, die detaillierte Bilanz bis Freitag zu senden.
+
+  ────────────────────────────────────────────────────────────────────────
+  Doc 6798 | Medium | Leakage: 0/6
+  ORIGINAL:  Kontoeröffnung für die Digital Ventures Spin-off GmbH, eine Ausgliederung der Innovate AG. Die Gründerin, Frau Dr. Lena Weber, war anwesend. Das Startkapital von CHF 100'000 wird auf das neue Konto mit der CH88 0070 0111 2345 6789 0 einbezahlt. Benötigt werden auch Devisenkonten in EUR und USD. Kont...
+  REWRITTEN: Kontoeröffnung für eine Ausgliederung eines Unternehmens. Die Gründerin, eine Geschäftsführerin, war anwesend. Das Startkapital wird auf das neue Konto eingezahlt. Benötigt werden auch Devisenkonten in verschiedenen Währungen. Kontakt via [E-Mail].
+
+  ────────────────────────────────────────────────────────────────────────
+  Doc 5403 | Low | Leakage: 0/9
+  ORIGINAL:  Persönliches Treffen am 17. Mai 2024 in Luzern mit dem Gründer der Helvetia Bau AG, Herrn Walter Baumann. Herr Baumann (68 Jahre) plant seine Nachfolge und möchte die Geschäftsführung per 1. Januar 2025 an seine Tochter, Frau Anna Baumann, eine dipl. Architektin ETH, übergeben. Wir diskutierten die ...
+  REWRITTEN: Persönliches Treffen an einem Datum in einer Stadt mit dem Gründer einer Bauunternehmensgruppe. Der Gründer (über 65 Jahre) plant seine Nachfolge und möchte die Geschäftsführung an seine Tochter, eine diplomierte Architektin, übergeben. Wir diskutierten die finanziellen Aspekte der Unternehmensüberg...
+
+  ────────────────────────────────────────────────────────────────────────
+  Doc 7395 | High | Leakage: 0/5
+  ORIGINAL:  - Telko mit Markus Gasser von Holzbau Gasser GmbH. Geht um Kauf einer Liegnschaft in Thun. Benötigt Hypothek über CHF 800'000. Jahresabschluss 2023 hab ich erhalten, EBITDA scheint i.O. zu sein. Will auch gleich ein neues Konto für die Imobilienverwaltung. Muss ihm IBAN zustellen.
+  REWRITTEN: - Telefonat mit einem Mitarbeiter eines Holzbauunternehmens. Geht um den Kauf einer Immobilie in einer Stadt. Benötigt eine Hypothek in einem Betrag. Der Jahresabschluss für das Vorjahr wurde erhalten, EBITDA scheint i.O. zu sein. Will auch gleich ein neues Konto für die Immobilienverwaltung. Muss i...
+
+  ────────────────────────────────────────────────────────────────────────
+  Doc 7646 | High | Leakage: 0/5
+  ORIGINAL:  - Hans Meier von Gastro Services Meier & Co. hat angerufen (078 123 45 67). Umsatz ist eingebrochn, EBITDA negativ. Will ein ungenutztes Konto (CH44 0023 5235 9876 5432 1) saldieren. Prüft Leasing für neue Küchengeräte, Volumen ca. EUR 80'000.
+  REWRITTEN: - Ein Mitarbeiter von einem Unternehmensverband hat angerufen. Es gibt einen Umsatzrückgang und ein negativeres EBITDA. Der Kunde möchte ein ungenutztes Konto saldieren. Er prüft Leasing für neue Geräte, wobei das aktuelle Volumen einen erheblichen Betrag betragen könnte.
+
+  ────────────────────────────────────────────────────────────────────────
+  Doc 5824 | Low | Leakage: 0/8
+  ORIGINAL:  Am 28.05.2024 traf ich den Treasurer der Helvetia Holding SA, Herrn Pascal Fournier, in Genf. Aufgrund der hohen Liquiditätsposition möchte das Unternehmen CHF 10 Mio. als Festgeld für 6 Monate anlegen. Ich habe ihm unsere aktuellen Konditionen unterbreitet. Zudem prüft er die Implementierung eines ...
+  REWRITTEN: Am kürzlich fand ich ein Gespräch mit dem Finanzchef einer Holdinggesellschaft in einer Schweizer Stadt statt. Aufgrund der hohen Liquiditätsposition plant das Unternehmen, CHF 10 Mio. als Festgeld für sechs Monate anzulegen. Ich habe ihm unsere aktuellen Konditionen vorgestellt. Zudem prüft er die ...

@@ -1,0 +1,2871 @@
+==============================================================================
+  QUALITATIVE SAMPLES: Side-by-Side Anonymization Comparison
+  Generated: 2026-04-18 20:26:25
+==============================================================================
+
+──────────────────────────────────────────────────────────────────────────────
+  Document ID: 5237 | Complexity: Low
+──────────────────────────────────────────────────────────────────────────────
+  ORIGINAL (412 chars, 12 PII entities):
+    Im Rahmen eines Meetings am 17.05.2024 in Luzern mit Dr. Hans Meier, dem Verwaltungsratspräsidenten der Familienholding Meier AG, wurde die Nachfolgeregelung finalisiert. Sein Sohn, Herr Thomas Meier, ein 35-jähriger HSG-Absolvent, wird per 01.07.2024 die Position des CEO übernehmen. Der geprüfte Jahresabschluss 2023, welcher einen Gewinn von CHF 1.2 Mio. ausweist, wurde uns bei dieser Gelegenheit überreicht.
+
+  GOLD STANDARD ANONYMIZATION:
+    Im Rahmen eines Meetings am [DATE] in [LOC] mit Dr. [PER], dem [JOB] der [ORG], wurde die Nachfolgeregelung finalisiert. Sein Sohn, Herr [PER], ein [AGE] [EDU], wird per [DATE] die Position des [JOB] übernehmen. Der geprüfte Jahresabschluss [DATE], welcher einen Gewinn von [MONEY] ausweist, wurde uns bei dieser Gelegenheit überreicht.
+
+  spaCy + Regex:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9083 | BERTScore (full): F1=0.8338 | Levenshtein: 0.1733 | ROUGE-1: 0.7736 | BLEU-4: 0.4784
+
+  BERT (pretrained) + Regex:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9166 | BERTScore (full): F1=0.8433 | Levenshtein: 0.1515 | ROUGE-1: 0.7736 | BLEU-4: 0.4731
+
+  BERT Fine-Tuned:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=1.0000 | BERTScore (full): F1=0.7768 | Levenshtein: 0.0000 | ROUGE-1: 0.7170 | BLEU-4: 0.3932
+
+  Presidio:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9560 | BERTScore (full): F1=0.7464 | Levenshtein: 0.0984 | ROUGE-1: 0.7170 | BLEU-4: 0.3703
+
+  LLM Llama-3 [zero-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9175 | BERTScore (full): F1=0.7544 | Levenshtein: 0.2155 | ROUGE-1: 0.6796 | BLEU-4: 0.3200
+
+  LLM Llama-3 [few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9618 | BERTScore (full): F1=0.8137 | Levenshtein: 0.0507 | ROUGE-1: 0.7547 | BLEU-4: 0.4570
+
+  LLM Llama-3 [few-shot +verify]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9618 | BERTScore (full): F1=0.8137 | Levenshtein: 0.0507 | ROUGE-1: 0.7547 | BLEU-4: 0.4570
+
+  LLM Qwen2.5 [zero-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9053 | BERTScore (full): F1=0.8634 | Levenshtein: 0.1936 | ROUGE-1: 0.8148 | BLEU-4: 0.5724
+
+  LLM Qwen2.5 [few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9664 | BERTScore (full): F1=0.8022 | Levenshtein: 0.0662 | ROUGE-1: 0.7477 | BLEU-4: 0.4577
+
+  LLM Qwen2.5 [few-shot +verify]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9664 | BERTScore (full): F1=0.8022 | Levenshtein: 0.0662 | ROUGE-1: 0.7477 | BLEU-4: 0.4577
+
+  LLM SauerkrautLM [zero-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9680 | BERTScore (full): F1=0.7677 | Levenshtein: 0.1131 | ROUGE-1: 0.7170 | BLEU-4: 0.3792
+
+  LLM SauerkrautLM [few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9822 | BERTScore (full): F1=0.7597 | Levenshtein: 0.0565 | ROUGE-1: 0.7048 | BLEU-4: 0.3723
+
+  LLM SauerkrautLM [few-shot +verify]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9822 | BERTScore (full): F1=0.7597 | Levenshtein: 0.0565 | ROUGE-1: 0.7048 | BLEU-4: 0.3723
+
+  LLM Llama-3 [fine-tuned]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=1.0000 | BERTScore (full): F1=0.7768 | Levenshtein: 0.0000 | ROUGE-1: 0.7170 | BLEU-4: 0.3932
+
+  LLM Llama-3 [prompt zero-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8625 | BERTScore (full): F1=0.8216 | Levenshtein: 0.3740 | ROUGE-1: 0.6055 | BLEU-4: 0.3838
+
+  LLM Llama-3 [prompt few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8615 | BERTScore (full): F1=0.8342 | Levenshtein: 0.3418 | ROUGE-1: 0.6095 | BLEU-4: 0.3370
+
+  LLM Qwen2.5 [prompt zero-shot]:
+    Anonymized: Im Rahmen eines Meetings kürzlich in einer Stadt in der Schweiz mit einer Führungskraft wurde die Nachfolgeregelung finalisiert. Ihr Sohn, ein Mitarbeiter, wird per einem Datum die Position des CEO übernehmen. Der geprüfte Jahresabschluss für das vorletzte Jahr, welcher einen Gewinn ausweist, wurde uns bei dieser Gelegenheit überreicht.
+    BERTScore (masked): F1=0.8712 | BERTScore (full): F1=0.8044 | Levenshtein: 0.3125 | ROUGE-1: 0.6346 | BLEU-4: 0.3443
+
+  LLM Qwen2.5 [prompt few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9304 | BERTScore (full): F1=0.9213 | Levenshtein: 0.1573 | ROUGE-1: 0.8200 | BLEU-4: 0.5048
+
+  LLM SauerkrautLM [prompt zero-shot]:
+    Anonymized: Im Rahmen eines Meetings in einer Stadt in der Schweiz, das kürzlich stattfand, wurde die Nachfolgeregelung mit der Geschäftsführerin einer Firma finalisiert. Ihr Sohn, ein Mitarbeiter, der ein Hochschulabschluss erworben hat, wird per einem Datum im Sommer die Position des CEO übernehmen. Der geprüfte Jahresabschluss 2023, der einen Betrag ausweist, wurde uns bei dieser Gelegenheit überreicht.
+    BERTScore (masked): F1=0.8510 | BERTScore (full): F1=0.8123 | Levenshtein: 0.4286 | ROUGE-1: 0.5714 | BLEU-4: 0.3308
+
+  LLM SauerkrautLM [prompt few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8430 | BERTScore (full): F1=0.8064 | Levenshtein: 0.3770 | ROUGE-1: 0.5794 | BLEU-4: 0.3410
+
+  Datenwertschöpfung API:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.7487 | BERTScore (full): F1=0.7407 | Levenshtein: 0.4944 | ROUGE-1: 0.8000 | BLEU-4: 0.5220
+
+
+──────────────────────────────────────────────────────────────────────────────
+  Document ID: 5252 | Complexity: Low
+──────────────────────────────────────────────────────────────────────────────
+  ORIGINAL (423 chars, 8 PII entities):
+    Am 23. Mai 2024 habe ich den CEO der Urban Living AG, Herrn Christoph Meier, in Basel getroffen. Das Unternehmen hat den Jahresabschluss 2023 eingereicht, welcher einen Umsatz von CHF 45 Mio. und einen EBITDA von CHF 6.2 Mio. ausweist. Wir haben die positive Geschäftsentwicklung und die geplante Expansion nach Österreich besprochen. Ein Antrag auf eine Leasingfinanzierung für den neuen Fahrzeugpark wird in Kürze folgen.
+
+  GOLD STANDARD ANONYMIZATION:
+    Am [DATE] habe ich den [JOB] der [ORG], Herrn [PER], in [LOC] getroffen. Das Unternehmen hat den Jahresabschluss 2023 eingereicht, welcher einen Umsatz von [MONEY] und einen EBITDA von [MONEY] ausweist. Wir haben die positive Geschäftsentwicklung und die geplante Expansion nach [LOC] besprochen. Ein Antrag auf eine Leasingfinanzierung für den neuen Fahrzeugpark wird in Kürze folgen.
+
+  spaCy + Regex:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9764 | BERTScore (full): F1=0.8589 | Levenshtein: 0.0201 | ROUGE-1: 0.7934 | BLEU-4: 0.5616
+
+  BERT (pretrained) + Regex:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9764 | BERTScore (full): F1=0.8589 | Levenshtein: 0.0201 | ROUGE-1: 0.7934 | BLEU-4: 0.5616
+
+  BERT Fine-Tuned:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9886 | BERTScore (full): F1=0.8044 | Levenshtein: 0.0115 | ROUGE-1: 0.7769 | BLEU-4: 0.5325
+
+  Presidio:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9886 | BERTScore (full): F1=0.8044 | Levenshtein: 0.0115 | ROUGE-1: 0.7769 | BLEU-4: 0.5325
+
+  LLM Llama-3 [zero-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8613 | BERTScore (full): F1=0.7648 | Levenshtein: 0.3218 | ROUGE-1: 0.7680 | BLEU-4: 0.4914
+
+  LLM Llama-3 [few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=1.0000 | BERTScore (full): F1=0.8591 | Levenshtein: 0.0000 | ROUGE-1: 0.7934 | BLEU-4: 0.5760
+
+  LLM Llama-3 [few-shot +verify]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=1.0000 | BERTScore (full): F1=0.8591 | Levenshtein: 0.0000 | ROUGE-1: 0.7934 | BLEU-4: 0.5760
+
+  LLM Qwen2.5 [zero-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9633 | BERTScore (full): F1=0.7820 | Levenshtein: 0.0891 | ROUGE-1: 0.7500 | BLEU-4: 0.4813
+
+  LLM Qwen2.5 [few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=1.0000 | BERTScore (full): F1=0.8591 | Levenshtein: 0.0000 | ROUGE-1: 0.7934 | BLEU-4: 0.5760
+
+  LLM Qwen2.5 [few-shot +verify]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=1.0000 | BERTScore (full): F1=0.8591 | Levenshtein: 0.0000 | ROUGE-1: 0.7934 | BLEU-4: 0.5760
+
+  LLM SauerkrautLM [zero-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8553 | BERTScore (full): F1=0.6962 | Levenshtein: 0.3075 | ROUGE-1: 0.6379 | BLEU-4: 0.2438
+
+  LLM SauerkrautLM [few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=1.0000 | BERTScore (full): F1=0.8591 | Levenshtein: 0.0000 | ROUGE-1: 0.7934 | BLEU-4: 0.5760
+
+  LLM SauerkrautLM [few-shot +verify]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=1.0000 | BERTScore (full): F1=0.8591 | Levenshtein: 0.0000 | ROUGE-1: 0.7934 | BLEU-4: 0.5760
+
+  LLM Llama-3 [fine-tuned]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9886 | BERTScore (full): F1=0.8044 | Levenshtein: 0.0115 | ROUGE-1: 0.7769 | BLEU-4: 0.5325
+
+  LLM Llama-3 [prompt zero-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8692 | BERTScore (full): F1=0.8647 | Levenshtein: 0.3390 | ROUGE-1: 0.6565 | BLEU-4: 0.4466
+
+  LLM Llama-3 [prompt few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9018 | BERTScore (full): F1=0.8852 | Levenshtein: 0.2562 | ROUGE-1: 0.7059 | BLEU-4: 0.4681
+
+  LLM Qwen2.5 [prompt zero-shot]:
+    Anonymized: Am kürzlichen Treffen habe ich die Geschäftsführerin einer Firma in der Schweiz getroffen. Das Unternehmen hat den Jahresabschluss des letzten Jahres eingereicht, welcher einen Umsatz und ein EBITDA ausweist. Wir haben die positive Entwicklung und die geplante Expansion besprochen. Ein Antrag auf eine Finanzierung wird in Kürze folgen.
+    BERTScore (masked): F1=0.8619 | BERTScore (full): F1=0.8507 | Levenshtein: 0.4023 | ROUGE-1: 0.6195 | BLEU-4: 0.2860
+
+  LLM Qwen2.5 [prompt few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8946 | BERTScore (full): F1=0.8743 | Levenshtein: 0.2943 | ROUGE-1: 0.7167 | BLEU-4: 0.4154
+
+  LLM SauerkrautLM [prompt zero-shot]:
+    Anonymized: An einem Datum habe ich die Geschäftsführerin eines Unternehmens in einer Stadt in der Schweiz getroffen. Das Unternehmen hat den Jahresabschluss eingereicht, welcher einen Umsatz von einer Summe ausweist und einen EBITDA von einer anderen Summe. Wir haben die positive Geschäftsentwicklung und die geplante Expansion in ein anderes Land besprochen. Ein Antrag auf eine Leasingfinanzierung für einen neuen Fahrzeugpark wird in Kürze folgen.
+    BERTScore (masked): F1=0.8808 | BERTScore (full): F1=0.8703 | Levenshtein: 0.2864 | ROUGE-1: 0.6406 | BLEU-4: 0.4427
+
+  LLM SauerkrautLM [prompt few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9031 | BERTScore (full): F1=0.8864 | Levenshtein: 0.2443 | ROUGE-1: 0.7009 | BLEU-4: 0.4619
+
+  Datenwertschöpfung API:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8239 | BERTScore (full): F1=0.8232 | Levenshtein: 0.3185 | ROUGE-1: 0.8682 | BLEU-4: 0.7085
+
+
+──────────────────────────────────────────────────────────────────────────────
+  Document ID: 5308 | Complexity: Low
+──────────────────────────────────────────────────────────────────────────────
+  ORIGINAL (433 chars, 8 PII entities):
+    Meeting am 18. Juni 2023 mit Herrn Robert Moretti, Geschäftsführer der ImmoInvest Zürich AG. Das Unternehmen plant den Kauf einer Gewerbeliegenschaft an der Bahnhofstrasse in Zürich für CHF 12.5 Mio. Wir haben eine Festhypothek über CHF 8 Mio. mit einer Laufzeit von 10 Jahren diskutiert. Die Eigenmittel werden vom Kapitaleinzahlungskonto mit der CH44 0023 3233 1234 5678 A transferiert. Die Kreditanalyse wird umgehend eingeleitet.
+
+  GOLD STANDARD ANONYMIZATION:
+    Meeting am [DATE] mit Herrn [PER], [JOB] der [ORG]. Das Unternehmen plant den Kauf einer Gewerbeliegenschaft an der Bahnhofstrasse in [LOC] für [MONEY] Wir haben eine Festhypothek über [MONEY] mit einer Laufzeit von 10 Jahren diskutiert. Die Eigenmittel werden vom Kapitaleinzahlungskonto mit der [IBAN] transferiert. Die Kreditanalyse wird umgehend eingeleitet.
+
+  spaCy + Regex:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9111 | BERTScore (full): F1=0.8339 | Levenshtein: 0.1763 | ROUGE-1: 0.7899 | BLEU-4: 0.5400
+
+  BERT (pretrained) + Regex:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9517 | BERTScore (full): F1=0.8783 | Levenshtein: 0.1129 | ROUGE-1: 0.8235 | BLEU-4: 0.6277
+
+  BERT Fine-Tuned:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=1.0000 | BERTScore (full): F1=0.8278 | Levenshtein: 0.0000 | ROUGE-1: 0.7368 | BLEU-4: 0.4879
+
+  Presidio:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9400 | BERTScore (full): F1=0.7684 | Levenshtein: 0.1389 | ROUGE-1: 0.6726 | BLEU-4: 0.3432
+
+  LLM Llama-3 [zero-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8801 | BERTScore (full): F1=0.7166 | Levenshtein: 0.2870 | ROUGE-1: 0.6552 | BLEU-4: 0.2760
+
+  LLM Llama-3 [few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9687 | BERTScore (full): F1=0.8101 | Levenshtein: 0.0741 | ROUGE-1: 0.7080 | BLEU-4: 0.4091
+
+  LLM Llama-3 [few-shot +verify]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9687 | BERTScore (full): F1=0.8101 | Levenshtein: 0.0741 | ROUGE-1: 0.7080 | BLEU-4: 0.4091
+
+  LLM Qwen2.5 [zero-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9786 | BERTScore (full): F1=0.8319 | Levenshtein: 0.0586 | ROUGE-1: 0.7478 | BLEU-4: 0.5061
+
+  LLM Qwen2.5 [few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9365 | BERTScore (full): F1=0.8944 | Levenshtein: 0.0881 | ROUGE-1: 0.8403 | BLEU-4: 0.6913
+
+  LLM Qwen2.5 [few-shot +verify]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9365 | BERTScore (full): F1=0.8944 | Levenshtein: 0.0881 | ROUGE-1: 0.8403 | BLEU-4: 0.6913
+
+  LLM SauerkrautLM [zero-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9461 | BERTScore (full): F1=0.7797 | Levenshtein: 0.1296 | ROUGE-1: 0.7130 | BLEU-4: 0.4095
+
+  LLM SauerkrautLM [few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9687 | BERTScore (full): F1=0.8110 | Levenshtein: 0.0772 | ROUGE-1: 0.7080 | BLEU-4: 0.4091
+
+  LLM SauerkrautLM [few-shot +verify]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9687 | BERTScore (full): F1=0.8110 | Levenshtein: 0.0772 | ROUGE-1: 0.7080 | BLEU-4: 0.4091
+
+  LLM Llama-3 [fine-tuned]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=1.0000 | BERTScore (full): F1=0.8278 | Levenshtein: 0.0000 | ROUGE-1: 0.7368 | BLEU-4: 0.4879
+
+  LLM Llama-3 [prompt zero-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8776 | BERTScore (full): F1=0.8362 | Levenshtein: 0.3472 | ROUGE-1: 0.5854 | BLEU-4: 0.4080
+
+  LLM Llama-3 [prompt few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8656 | BERTScore (full): F1=0.8231 | Levenshtein: 0.3744 | ROUGE-1: 0.5043 | BLEU-4: 0.2427
+
+  LLM Qwen2.5 [prompt zero-shot]:
+    Anonymized: Meeting kürzlich mit dem Geschäftsführer eines Unternehmens. Das Unternehmen plant den Kauf einer Gewerbeliegenschaft in einer Stadt für einen Betrag. Wir haben eine Festhypothek über einen Betrag mit einer Laufzeit von mehreren Jahren diskutiert. Die Eigenmittel werden vom Kapitaleinzahlungskonto mit dem Konto [Konto] überwiesen. Die Kreditanalyse wird umgehend eingeleitet.
+    BERTScore (masked): F1=0.8857 | BERTScore (full): F1=0.8379 | Levenshtein: 0.2479 | ROUGE-1: 0.6018 | BLEU-4: 0.3347
+
+  LLM Qwen2.5 [prompt few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8717 | BERTScore (full): F1=0.8348 | Levenshtein: 0.3418 | ROUGE-1: 0.5690 | BLEU-4: 0.2789
+
+  LLM SauerkrautLM [prompt zero-shot]:
+    Anonymized: Meeting an einem Datum im Juni 2023 mit Herrn einer Person, die Geschäftsführerin einer Firma, die in der Schweiz ansässig ist. Das Unternehmen plant den Kauf einer Gewerbeliegenschaft in einer Stadt in der Schweiz für einen Betrag von CHF 12.5 Mio. Wir haben eine Festhypothek über CHF 8 Mio. mit einer Laufzeit von 10 Jahren diskutiert. Die Eigenmittel werden vom Kapitaleinzahlungskonto mit der CH44 0023 3233 1234 5678 A transferiert. Die Kreditanalyse wird umgehend eingeleitet.
+    BERTScore (masked): F1=0.9060 | BERTScore (full): F1=0.9170 | Levenshtein: 0.2813 | ROUGE-1: 0.7770 | BLEU-4: 0.6078
+
+  LLM SauerkrautLM [prompt few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8754 | BERTScore (full): F1=0.8439 | Levenshtein: 0.3349 | ROUGE-1: 0.5593 | BLEU-4: 0.3822
+
+  Datenwertschöpfung API:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.7671 | BERTScore (full): F1=0.7704 | Levenshtein: 0.4454 | ROUGE-1: 0.7874 | BLEU-4: 0.5510
+
+
+──────────────────────────────────────────────────────────────────────────────
+  Document ID: 5440 | Complexity: Low
+──────────────────────────────────────────────────────────────────────────────
+  ORIGINAL (442 chars, 10 PII entities):
+    Meeting zur Kontoeröffnung für die Pharma Spin-Off AG, ein neues Unternehmen aus dem Umfeld der ETH Zürich, am 17.05.2024. Der designierte Geschäftsführer, Dr. Michael Lehmann, war anwesend. Für die finale Eröffnung des Kontos mit der IBAN CH55 0070 0111 2345 6789 0 fehlt noch die beglaubigte ID-Kopie des amerikanischen Investors, Mr. John Davis. Dr. Lehmann wird die Unterlagen via seine E-Mail-Adresse m.lehmann@pharmaspin.ch nachreichen.
+
+  GOLD STANDARD ANONYMIZATION:
+    Meeting zur Kontoeröffnung für die [ORG], ein neues Unternehmen aus dem Umfeld der [EDU], am [DATE]. Der designierte [JOB], Dr. [PER], war anwesend. Für die finale Eröffnung des Kontos mit der IBAN [IBAN] fehlt noch die beglaubigte ID-Kopie des [NATION] Investors, Mr. [PER]. Dr. [PER] wird die Unterlagen via seine E-Mail-Adresse [EMAIL] nachreichen.
+
+  spaCy + Regex:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9606 | BERTScore (full): F1=0.8079 | Levenshtein: 0.1350 | ROUGE-1: 0.7652 | BLEU-4: 0.4945
+
+  BERT (pretrained) + Regex:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9849 | BERTScore (full): F1=0.8369 | Levenshtein: 0.0603 | ROUGE-1: 0.7414 | BLEU-4: 0.4714
+
+  BERT Fine-Tuned:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=1.0000 | BERTScore (full): F1=0.8320 | Levenshtein: 0.0000 | ROUGE-1: 0.7414 | BLEU-4: 0.4632
+
+  Presidio:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9725 | BERTScore (full): F1=0.8225 | Levenshtein: 0.0625 | ROUGE-1: 0.7304 | BLEU-4: 0.4553
+
+  LLM Llama-3 [zero-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9676 | BERTScore (full): F1=0.8002 | Levenshtein: 0.0818 | ROUGE-1: 0.7652 | BLEU-4: 0.5292
+
+  LLM Llama-3 [few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9844 | BERTScore (full): F1=0.8494 | Levenshtein: 0.0650 | ROUGE-1: 0.7759 | BLEU-4: 0.5339
+
+  LLM Llama-3 [few-shot +verify]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9844 | BERTScore (full): F1=0.8494 | Levenshtein: 0.0650 | ROUGE-1: 0.7759 | BLEU-4: 0.5339
+
+  LLM Qwen2.5 [zero-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9059 | BERTScore (full): F1=0.9144 | Levenshtein: 0.1892 | ROUGE-1: 0.8595 | BLEU-4: 0.6958
+
+  LLM Qwen2.5 [few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8895 | BERTScore (full): F1=0.9377 | Levenshtein: 0.2417 | ROUGE-1: 0.9016 | BLEU-4: 0.7667
+
+  LLM Qwen2.5 [few-shot +verify]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8895 | BERTScore (full): F1=0.9377 | Levenshtein: 0.2417 | ROUGE-1: 0.9016 | BLEU-4: 0.7667
+
+  LLM SauerkrautLM [zero-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9844 | BERTScore (full): F1=0.8494 | Levenshtein: 0.0650 | ROUGE-1: 0.7759 | BLEU-4: 0.5339
+
+  LLM SauerkrautLM [few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9844 | BERTScore (full): F1=0.8494 | Levenshtein: 0.0650 | ROUGE-1: 0.7759 | BLEU-4: 0.5339
+
+  LLM SauerkrautLM [few-shot +verify]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9844 | BERTScore (full): F1=0.8494 | Levenshtein: 0.0650 | ROUGE-1: 0.7759 | BLEU-4: 0.5339
+
+  LLM Llama-3 [fine-tuned]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=1.0000 | BERTScore (full): F1=0.8320 | Levenshtein: 0.0000 | ROUGE-1: 0.7414 | BLEU-4: 0.4632
+
+  LLM Llama-3 [prompt zero-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8673 | BERTScore (full): F1=0.7908 | Levenshtein: 0.3669 | ROUGE-1: 0.5714 | BLEU-4: 0.2902
+
+  LLM Llama-3 [prompt few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8559 | BERTScore (full): F1=0.7858 | Levenshtein: 0.3354 | ROUGE-1: 0.5688 | BLEU-4: 0.3333
+
+  LLM Qwen2.5 [prompt zero-shot]:
+    Anonymized: Meeting zur Kontoeröffnung für ein neues Unternehmen aus dem Umfeld einer technischen Universität, am kürzlich verabredeten Datum. Die Geschäftsführerin war anwesend. Für die finale Eröffnung des Kontos mit der IBAN [Konto] fehlt noch die beglaubigte ID-Kopie eines Investors. Die Unterlagen werden via E-Mail nachge.sent.
+    BERTScore (masked): F1=0.8384 | BERTScore (full): F1=0.7723 | Levenshtein: 0.3734 | ROUGE-1: 0.5794 | BLEU-4: 0.3147
+
+  LLM Qwen2.5 [prompt few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8717 | BERTScore (full): F1=0.8148 | Levenshtein: 0.3651 | ROUGE-1: 0.5714 | BLEU-4: 0.2246
+
+  LLM SauerkrautLM [prompt zero-shot]:
+    Anonymized: Meeting zur Kontoeröffnung für ein Unternehmen, das sich aus dem Umfeld einer Schweizer Hochschule entwickelt hat, fand kürzlich statt. Der designierte Geschäftsführer, eine Person, die für das Unternehmen tätig ist, war anwesend. Für die finale Eröffnung des Kontos mit der IBAN [Konto] fehlt noch die beglaubigte ID-Kopie eines Investors aus den USA. Der Geschäftsführer wird die Unterlagen via seine E-Mail-Adresse nachreichen.
+    BERTScore (masked): F1=0.8777 | BERTScore (full): F1=0.7981 | Levenshtein: 0.3657 | ROUGE-1: 0.5968 | BLEU-4: 0.3706
+
+  LLM SauerkrautLM [prompt few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8896 | BERTScore (full): F1=0.8050 | Levenshtein: 0.2921 | ROUGE-1: 0.6372 | BLEU-4: 0.3940
+
+  Datenwertschöpfung API:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.7897 | BERTScore (full): F1=0.7342 | Levenshtein: 0.4126 | ROUGE-1: 0.7869 | BLEU-4: 0.6257
+
+
+──────────────────────────────────────────────────────────────────────────────
+  Document ID: 5482 | Complexity: Low
+──────────────────────────────────────────────────────────────────────────────
+  ORIGINAL (415 chars, 8 PII entities):
+    Am 17.05.2024 erfolgte eine Betriebsbesichtigung bei der Kaufmann Logistik AG. Der Inhaber, Herr Peter Kaufmann, führte durch das neu erworbene Grundstück in Emmen, Luzern. Der Kaufpreis der Liegenschaft beläuft sich auf CHF 3.2 Mio.. Zur Finanzierung des Ausbaus beantragt die Firma eine neue Hypothek in der Höhe von CHF 2.5 Mio.. Die detaillierten Baupläne und der Businessplan werden uns zur Prüfung zugestellt.
+
+  GOLD STANDARD ANONYMIZATION:
+    Am [DATE] erfolgte eine Betriebsbesichtigung bei der [ORG]. Der [JOB], Herr [PER], führte durch das neu erworbene Grundstück in [LOC], [LOC]. Der Kaufpreis der Liegenschaft beläuft sich auf [MONEY]. Zur Finanzierung des Ausbaus beantragt die Firma eine neue Hypothek in der Höhe von [MONEY]. Die detaillierten Baupläne und der Businessplan werden uns zur Prüfung zugestellt.
+
+  spaCy + Regex:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9904 | BERTScore (full): F1=0.8685 | Levenshtein: 0.0204 | ROUGE-1: 0.8205 | BLEU-4: 0.6189
+
+  BERT (pretrained) + Regex:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9904 | BERTScore (full): F1=0.8685 | Levenshtein: 0.0204 | ROUGE-1: 0.8205 | BLEU-4: 0.6189
+
+  BERT Fine-Tuned:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9904 | BERTScore (full): F1=0.8685 | Levenshtein: 0.0204 | ROUGE-1: 0.8205 | BLEU-4: 0.6189
+
+  Presidio:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=1.0000 | BERTScore (full): F1=0.8130 | Levenshtein: 0.0000 | ROUGE-1: 0.8034 | BLEU-4: 0.6036
+
+  LLM Llama-3 [zero-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9038 | BERTScore (full): F1=0.7720 | Levenshtein: 0.1632 | ROUGE-1: 0.7009 | BLEU-4: 0.3640
+
+  LLM Llama-3 [few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9663 | BERTScore (full): F1=0.7835 | Levenshtein: 0.0475 | ROUGE-1: 0.7692 | BLEU-4: 0.5270
+
+  LLM Llama-3 [few-shot +verify]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9663 | BERTScore (full): F1=0.7835 | Levenshtein: 0.0475 | ROUGE-1: 0.7692 | BLEU-4: 0.5270
+
+  LLM Qwen2.5 [zero-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9787 | BERTScore (full): F1=0.8805 | Levenshtein: 0.0346 | ROUGE-1: 0.8376 | BLEU-4: 0.6356
+
+  LLM Qwen2.5 [few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9632 | BERTScore (full): F1=0.8743 | Levenshtein: 0.0406 | ROUGE-1: 0.8376 | BLEU-4: 0.6356
+
+  LLM Qwen2.5 [few-shot +verify]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9632 | BERTScore (full): F1=0.8743 | Levenshtein: 0.0406 | ROUGE-1: 0.8376 | BLEU-4: 0.6356
+
+  LLM SauerkrautLM [zero-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9774 | BERTScore (full): F1=0.8076 | Levenshtein: 0.0475 | ROUGE-1: 0.8034 | BLEU-4: 0.5885
+
+  LLM SauerkrautLM [few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9774 | BERTScore (full): F1=0.8076 | Levenshtein: 0.0475 | ROUGE-1: 0.8034 | BLEU-4: 0.5885
+
+  LLM SauerkrautLM [few-shot +verify]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9904 | BERTScore (full): F1=0.8685 | Levenshtein: 0.0204 | ROUGE-1: 0.8205 | BLEU-4: 0.6189
+
+  LLM Llama-3 [fine-tuned]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=1.0000 | BERTScore (full): F1=0.8130 | Levenshtein: 0.0000 | ROUGE-1: 0.8034 | BLEU-4: 0.6036
+
+  LLM Llama-3 [prompt zero-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8965 | BERTScore (full): F1=0.8678 | Levenshtein: 0.2627 | ROUGE-1: 0.6723 | BLEU-4: 0.4727
+
+  LLM Llama-3 [prompt few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8994 | BERTScore (full): F1=0.8718 | Levenshtein: 0.2639 | ROUGE-1: 0.6833 | BLEU-4: 0.4844
+
+  LLM Qwen2.5 [prompt zero-shot]:
+    Anonymized: Am kürzlichen Datum fand eine Betriebsbesichtigung bei einem Unternehmen statt. Die Geschäftsführerin führte durch ein neues Grundstück in einer Stadt in der Schweiz. Der Kaufpreis der Liegenschaft beträgt einen Betrag. Zur Finanzierung des Ausbaus beantragt die Firma eine neue Hypothek in der Höhe von einer Summe. Die detaillierten Baupläne und der Businessplan werden uns zur Prüfung zugestellt.
+    BERTScore (masked): F1=0.8867 | BERTScore (full): F1=0.8628 | Levenshtein: 0.2982 | ROUGE-1: 0.6387 | BLEU-4: 0.4490
+
+  LLM Qwen2.5 [prompt few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8915 | BERTScore (full): F1=0.8662 | Levenshtein: 0.2589 | ROUGE-1: 0.6897 | BLEU-4: 0.4667
+
+  LLM SauerkrautLM [prompt zero-shot]:
+    Anonymized: Am einem Datum im Mai 2024 fand eine Betriebsbesichtigung bei einer Firma statt. Die Geschäftsführerin führte durch ein neu erworbener Standort in einer Stadt in der Schweiz. Der Kaufpreis der Liegenschaft beläuft sich auf einen Betrag. Zur Finanzierung des Ausbaus beantragt die Firma eine neue Hypothek in der Höhe von einem Betrag. Die detaillierten Baupläne und der Businessplan werden uns zur Prüfung zugestellt.
+    BERTScore (masked): F1=0.8880 | BERTScore (full): F1=0.8823 | Levenshtein: 0.2806 | ROUGE-1: 0.6560 | BLEU-4: 0.4886
+
+  LLM SauerkrautLM [prompt few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8975 | BERTScore (full): F1=0.8682 | Levenshtein: 0.2649 | ROUGE-1: 0.6441 | BLEU-4: 0.4586
+
+  Datenwertschöpfung API:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.7912 | BERTScore (full): F1=0.7828 | Levenshtein: 0.3944 | ROUGE-1: 0.8618 | BLEU-4: 0.6824
+
+
+──────────────────────────────────────────────────────────────────────────────
+  Document ID: 5640 | Complexity: Low
+──────────────────────────────────────────────────────────────────────────────
+  ORIGINAL (436 chars, 11 PII entities):
+    Am 24.05.2024 wurde mit Herrn Reto Bieri, CFO der TechSolutions Holding AG in Zug, die administrative Integration der übernommenen Dataflow GmbH besprochen. Das bisherige Konto der Dataflow GmbH mit der CH88 0070 0111 5555 6666 7 soll saldiert werden. Herr Bieri benötigt zudem neue E-Banking-Zugriffsberechtigungen für zwei Mitarbeiterinnen und erkundigte sich nach den Konditionen für Festgelder in USD und EUR im Umfang von je 2 Mio.
+
+  GOLD STANDARD ANONYMIZATION:
+    Am [DATE] wurde mit Herrn [PER], [JOB] der [ORG] in [LOC], die administrative Integration der übernommenen [ORG] besprochen. Das bisherige Konto der [ORG] mit der [IBAN] soll saldiert werden. Herr [PER] benötigt zudem neue E-Banking-Zugriffsberechtigungen für zwei [JOB] und erkundigte sich nach den Konditionen für Festgelder in USD und EUR im Umfang von je [MONEY]
+
+  spaCy + Regex:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8976 | BERTScore (full): F1=0.8444 | Levenshtein: 0.1210 | ROUGE-1: 0.7742 | BLEU-4: 0.4930
+
+  BERT (pretrained) + Regex:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9024 | BERTScore (full): F1=0.8439 | Levenshtein: 0.1006 | ROUGE-1: 0.7705 | BLEU-4: 0.5038
+
+  BERT Fine-Tuned:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9756 | BERTScore (full): F1=0.8048 | Levenshtein: 0.0669 | ROUGE-1: 0.7107 | BLEU-4: 0.4352
+
+  Presidio:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9212 | BERTScore (full): F1=0.8568 | Levenshtein: 0.0946 | ROUGE-1: 0.7903 | BLEU-4: 0.5606
+
+  LLM Llama-3 [zero-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9489 | BERTScore (full): F1=0.8241 | Levenshtein: 0.0642 | ROUGE-1: 0.7273 | BLEU-4: 0.4645
+
+  LLM Llama-3 [few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9604 | BERTScore (full): F1=0.7971 | Levenshtein: 0.0376 | ROUGE-1: 0.7107 | BLEU-4: 0.4352
+
+  LLM Llama-3 [few-shot +verify]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9495 | BERTScore (full): F1=0.8104 | Levenshtein: 0.0838 | ROUGE-1: 0.7273 | BLEU-4: 0.4796
+
+  LLM Qwen2.5 [zero-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8315 | BERTScore (full): F1=0.9061 | Levenshtein: 0.2787 | ROUGE-1: 0.9848 | BLEU-4: 0.9727
+
+  LLM Qwen2.5 [few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9121 | BERTScore (full): F1=0.8338 | Levenshtein: 0.0896 | ROUGE-1: 0.7642 | BLEU-4: 0.5244
+
+  LLM Qwen2.5 [few-shot +verify]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9030 | BERTScore (full): F1=0.8457 | Levenshtein: 0.1314 | ROUGE-1: 0.7805 | BLEU-4: 0.5672
+
+  LLM SauerkrautLM [zero-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9489 | BERTScore (full): F1=0.8241 | Levenshtein: 0.0642 | ROUGE-1: 0.7273 | BLEU-4: 0.4645
+
+  LLM SauerkrautLM [few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9761 | BERTScore (full): F1=0.7960 | Levenshtein: 0.0346 | ROUGE-1: 0.7107 | BLEU-4: 0.4352
+
+  LLM SauerkrautLM [few-shot +verify]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9667 | BERTScore (full): F1=0.8108 | Levenshtein: 0.0811 | ROUGE-1: 0.7273 | BLEU-4: 0.4796
+
+  LLM Llama-3 [fine-tuned]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9899 | BERTScore (full): F1=0.8287 | Levenshtein: 0.0480 | ROUGE-1: 0.7438 | BLEU-4: 0.5082
+
+  LLM Llama-3 [prompt zero-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8564 | BERTScore (full): F1=0.7994 | Levenshtein: 0.3218 | ROUGE-1: 0.6825 | BLEU-4: 0.4870
+
+  LLM Llama-3 [prompt few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8278 | BERTScore (full): F1=0.7812 | Levenshtein: 0.3781 | ROUGE-1: 0.6179 | BLEU-4: 0.3308
+
+  LLM Qwen2.5 [prompt zero-shot]:
+    Anonymized: Am kürzlichen Treffen wurde mit dem CFO ein Unternehmen in Zug die administrative Integration der übernommenen Firma besprochen. Das bisherige Konto der Firma soll saldiert werden. Die Geschäftsführerin benötigt zudem neue E-Banking-Zugriffsberechtigungen für Mitarbeiter und erkundigte sich nach den Konditionen für Festgelder in Währungen im Umfang von jeweils einer Million.
+    BERTScore (masked): F1=0.8679 | BERTScore (full): F1=0.8103 | Levenshtein: 0.2884 | ROUGE-1: 0.6034 | BLEU-4: 0.3123
+
+  LLM Qwen2.5 [prompt few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8679 | BERTScore (full): F1=0.8246 | Levenshtein: 0.3868 | ROUGE-1: 0.7000 | BLEU-4: 0.3808
+
+  LLM SauerkrautLM [prompt zero-shot]:
+    Anonymized: Am einem Datum wurde mit einer Führungskraft von ein Unternehmen, das in einer Stadt in der Schweiz ansässig ist, die administrative Integration der übernommenen Dataflow GmbH besprochen. Das bisherige Konto der Dataflow GmbH mit der CH88 0070 0111 5555 6666 7 soll saldiert werden. Die Führungskraft benötigt zudem neue E-Banking-Zugriffsberechtigungen für zwei Mitarbeiterinnen und erkundigte sich nach den Konditionen für Festgelder in USD und EUR im Umfang von je einer Summe.
+    BERTScore (masked): F1=0.8743 | BERTScore (full): F1=0.8495 | Levenshtein: 0.2705 | ROUGE-1: 0.7737 | BLEU-4: 0.6666
+
+  LLM SauerkrautLM [prompt few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8598 | BERTScore (full): F1=0.7987 | Levenshtein: 0.3224 | ROUGE-1: 0.6613 | BLEU-4: 0.4539
+
+  Datenwertschöpfung API:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.7633 | BERTScore (full): F1=0.7427 | Levenshtein: 0.3909 | ROUGE-1: 0.8397 | BLEU-4: 0.7068
+
+
+──────────────────────────────────────────────────────────────────────────────
+  Document ID: 5642 | Complexity: Low
+──────────────────────────────────────────────────────────────────────────────
+  ORIGINAL (388 chars, 10 PII entities):
+    Rücksprache mit Herrn Stefan Egger, Leiter International Projects der Alpenbau AG in Chur, am 29.05.2024. Er berichtete von der erfolgreichen Inbetriebnahme der neuen Produktionsstätte nahe Krakau, Polen. Für geplante Exporte in den asiatischen Markt wurden verschiedene TEF-Lösungen (Trade & Export Finance) besprochen. Der operative Kontakt vor Ort ist der Werksleiter Herr Marek Nowak.
+
+  GOLD STANDARD ANONYMIZATION:
+    Rücksprache mit Herrn [PER], [JOB] der [ORG] in [LOC], am [DATE]. Er berichtete von der erfolgreichen Inbetriebnahme der neuen Produktionsstätte nahe [LOC], [LOC]. Für geplante Exporte in den [NATION] Markt wurden verschiedene TEF-Lösungen (Trade & Export Finance) besprochen. Der operative Kontakt vor Ort ist der [JOB] Herr [PER].
+
+  spaCy + Regex:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9088 | BERTScore (full): F1=0.8477 | Levenshtein: 0.2357 | ROUGE-1: 0.7800 | BLEU-4: 0.5678
+
+  BERT (pretrained) + Regex:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9527 | BERTScore (full): F1=0.8587 | Levenshtein: 0.1227 | ROUGE-1: 0.8155 | BLEU-4: 0.6294
+
+  BERT Fine-Tuned:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=1.0000 | BERTScore (full): F1=0.8088 | Levenshtein: 0.0000 | ROUGE-1: 0.7525 | BLEU-4: 0.5508
+
+  Presidio:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9283 | BERTScore (full): F1=0.8306 | Levenshtein: 0.1791 | ROUGE-1: 0.7475 | BLEU-4: 0.5334
+
+  LLM Llama-3 [zero-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9821 | BERTScore (full): F1=0.8233 | Levenshtein: 0.0369 | ROUGE-1: 0.7723 | BLEU-4: 0.6037
+
+  LLM Llama-3 [few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9821 | BERTScore (full): F1=0.8233 | Levenshtein: 0.0369 | ROUGE-1: 0.7723 | BLEU-4: 0.6037
+
+  LLM Llama-3 [few-shot +verify]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9821 | BERTScore (full): F1=0.8233 | Levenshtein: 0.0369 | ROUGE-1: 0.7723 | BLEU-4: 0.6037
+
+  LLM Qwen2.5 [zero-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9035 | BERTScore (full): F1=0.9269 | Levenshtein: 0.1429 | ROUGE-1: 0.8713 | BLEU-4: 0.7786
+
+  LLM Qwen2.5 [few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9548 | BERTScore (full): F1=0.8564 | Levenshtein: 0.0717 | ROUGE-1: 0.8119 | BLEU-4: 0.6747
+
+  LLM Qwen2.5 [few-shot +verify]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9548 | BERTScore (full): F1=0.8564 | Levenshtein: 0.0717 | ROUGE-1: 0.8119 | BLEU-4: 0.6747
+
+  LLM SauerkrautLM [zero-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9710 | BERTScore (full): F1=0.8470 | Levenshtein: 0.0714 | ROUGE-1: 0.7921 | BLEU-4: 0.6389
+
+  LLM SauerkrautLM [few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9696 | BERTScore (full): F1=0.8505 | Levenshtein: 0.0530 | ROUGE-1: 0.7921 | BLEU-4: 0.6063
+
+  LLM SauerkrautLM [few-shot +verify]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9558 | BERTScore (full): F1=0.8679 | Levenshtein: 0.0865 | ROUGE-1: 0.8119 | BLEU-4: 0.6585
+
+  LLM Llama-3 [fine-tuned]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=1.0000 | BERTScore (full): F1=0.8088 | Levenshtein: 0.0000 | ROUGE-1: 0.7525 | BLEU-4: 0.5508
+
+  LLM Llama-3 [prompt zero-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8978 | BERTScore (full): F1=0.8898 | Levenshtein: 0.2756 | ROUGE-1: 0.6857 | BLEU-4: 0.5233
+
+  LLM Llama-3 [prompt few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8529 | BERTScore (full): F1=0.8555 | Levenshtein: 0.4234 | ROUGE-1: 0.5825 | BLEU-4: 0.3867
+
+  LLM Qwen2.5 [prompt zero-shot]:
+    Anonymized: Rücksprache mit dem Leiter International Projects einer Firma in einer Stadt in der Schweiz am kürzlichen Datum. Er berichtete von der erfolgreichen Inbetriebnahme der neuen Produktionsstätte nahe Krakau, Polen. Für geplante Exporte in den asiatischen Markt wurden verschiedene TEF-Lösungen (Trade & Export Finance) besprochen. Der operative Kontakt vor Ort ist der Werksleiter ein Mitarbeiter.
+    BERTScore (masked): F1=0.9153 | BERTScore (full): F1=0.8990 | Levenshtein: 0.1929 | ROUGE-1: 0.8037 | BLEU-4: 0.6911
+
+  LLM Qwen2.5 [prompt few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8723 | BERTScore (full): F1=0.8719 | Levenshtein: 0.3709 | ROUGE-1: 0.6733 | BLEU-4: 0.4494
+
+  LLM SauerkrautLM [prompt zero-shot]:
+    Anonymized: Rücksprache mit einem Mitarbeiter der Alpenbau AG in einer Stadt in der Schweiz, an einem Datum im Mai 2024. Er berichtete von der erfolgreichen Inbetriebnahme einer neuen Produktionsstätte in einer Region nahe Krakau. Für geplante Exporte in den asiatischen Markt wurden verschiedene TEF-Lösungen (Trade & Export Finance) besprochen. Der operative Kontakt vor Ort ist ein Mitarbeiter, der als Werksleiter fungiert.
+    BERTScore (masked): F1=0.8871 | BERTScore (full): F1=0.9027 | Levenshtein: 0.2947 | ROUGE-1: 0.6903 | BLEU-4: 0.4842
+
+  LLM SauerkrautLM [prompt few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8775 | BERTScore (full): F1=0.8699 | Levenshtein: 0.3333 | ROUGE-1: 0.6415 | BLEU-4: 0.5012
+
+  Datenwertschöpfung API:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8561 | BERTScore (full): F1=0.8039 | Levenshtein: 0.2675 | ROUGE-1: 0.8846 | BLEU-4: 0.7569
+
+
+──────────────────────────────────────────────────────────────────────────────
+  Document ID: 5693 | Complexity: Low
+──────────────────────────────────────────────────────────────────────────────
+  ORIGINAL (434 chars, 11 PII entities):
+    Am 10.06.2024 trafen wir Herrn Walter Brunner (Verwaltungsratspräsident) und seinen Sohn, Herrn Thomas Brunner (designierter CEO), der Brunner Holzbau AG in Luzern. Die Nachfolgeregelung ist im Gange und soll per Ende Jahr abgeschlossen sein. Der eingereichte Jahresabschluss 2023 weist einen Umsatz von CHF 35 Mio. und einen EBITDA von CHF 4.2 Mio. aus. Herr Thomas Brunner ist dipl. Bauingenieur ETH und seit fünf Jahren im Betrieb.
+
+  GOLD STANDARD ANONYMIZATION:
+    Am [DATE] trafen wir Herrn [PER] ([JOB]) und seinen Sohn, Herrn [PER] ([JOB]), der [ORG] in [LOC]. Die Nachfolgeregelung ist im Gange und soll per Ende Jahr abgeschlossen sein. Der eingereichte Jahresabschluss 2023 weist einen Umsatz von [MONEY] und einen EBITDA von [MONEY] aus. Herr [PER] ist [JOB] und seit fünf Jahren im Betrieb.
+
+  spaCy + Regex:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9099 | BERTScore (full): F1=0.7895 | Levenshtein: 0.2000 | ROUGE-1: 0.7480 | BLEU-4: 0.4394
+
+  BERT (pretrained) + Regex:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9165 | BERTScore (full): F1=0.8017 | Levenshtein: 0.1864 | ROUGE-1: 0.7642 | BLEU-4: 0.4697
+
+  BERT Fine-Tuned:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9745 | BERTScore (full): F1=0.7316 | Levenshtein: 0.0657 | ROUGE-1: 0.6777 | BLEU-4: 0.3722
+
+  Presidio:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9255 | BERTScore (full): F1=0.7867 | Levenshtein: 0.1623 | ROUGE-1: 0.6885 | BLEU-4: 0.3493
+
+  LLM Llama-3 [zero-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8852 | BERTScore (full): F1=0.7886 | Levenshtein: 0.2621 | ROUGE-1: 0.7419 | BLEU-4: 0.4901
+
+  LLM Llama-3 [few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9309 | BERTScore (full): F1=0.7424 | Levenshtein: 0.1690 | ROUGE-1: 0.6833 | BLEU-4: 0.3451
+
+  LLM Llama-3 [few-shot +verify]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9309 | BERTScore (full): F1=0.7424 | Levenshtein: 0.1690 | ROUGE-1: 0.6833 | BLEU-4: 0.3451
+
+  LLM Qwen2.5 [zero-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8968 | BERTScore (full): F1=0.8883 | Levenshtein: 0.2356 | ROUGE-1: 0.8480 | BLEU-4: 0.6640
+
+  LLM Qwen2.5 [few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9340 | BERTScore (full): F1=0.8074 | Levenshtein: 0.1652 | ROUGE-1: 0.7642 | BLEU-4: 0.5016
+
+  LLM Qwen2.5 [few-shot +verify]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9340 | BERTScore (full): F1=0.8074 | Levenshtein: 0.1652 | ROUGE-1: 0.7642 | BLEU-4: 0.5016
+
+  LLM SauerkrautLM [zero-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8803 | BERTScore (full): F1=0.8283 | Levenshtein: 0.2991 | ROUGE-1: 0.7213 | BLEU-4: 0.3792
+
+  LLM SauerkrautLM [few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9538 | BERTScore (full): F1=0.7252 | Levenshtein: 0.1021 | ROUGE-1: 0.6610 | BLEU-4: 0.3350
+
+  LLM SauerkrautLM [few-shot +verify]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9538 | BERTScore (full): F1=0.7252 | Levenshtein: 0.1021 | ROUGE-1: 0.6610 | BLEU-4: 0.3350
+
+  LLM Llama-3 [fine-tuned]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9736 | BERTScore (full): F1=0.7371 | Levenshtein: 0.0458 | ROUGE-1: 0.6723 | BLEU-4: 0.3530
+
+  LLM Llama-3 [prompt zero-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.7995 | BERTScore (full): F1=0.7894 | Levenshtein: 0.4955 | ROUGE-1: 0.5077 | BLEU-4: 0.2429
+
+  LLM Llama-3 [prompt few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8275 | BERTScore (full): F1=0.8210 | Levenshtein: 0.4737 | ROUGE-1: 0.5692 | BLEU-4: 0.3845
+
+  LLM Qwen2.5 [prompt zero-shot]:
+    Anonymized: Am kürzlichen Termin trafen wir die Geschäftsführerin und ein Kunde, die beide ein Unternehmen leiten. Die Nachfolgeregelung ist im Gange und soll bald abgeschlossen sein. Der eingereichte Jahresabschluss des letzten Geschäftsjahres zeigt einen Umsatz und ein EBITDA von jeweils einer bestimmten Summe. Der designierte CEO hat einen Hochschulabschluss und ist mehrere Jahre im Betrieb.
+    BERTScore (masked): F1=0.7918 | BERTScore (full): F1=0.7619 | Levenshtein: 0.5169 | ROUGE-1: 0.4500 | BLEU-4: 0.1771
+
+  LLM Qwen2.5 [prompt few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8029 | BERTScore (full): F1=0.7872 | Levenshtein: 0.4654 | ROUGE-1: 0.5000 | BLEU-4: 0.1855
+
+  LLM SauerkrautLM [prompt zero-shot]:
+    Anonymized: Am einem Datum im Juni 2024 trafen wir den Verwaltungsratspräsidenten einer Firma und seinen Sohn, der als designierter CEO vorgesehen ist, in einer Stadt in der Schweiz. Die Nachfolgeregelung ist im Gange und soll in Kürze abgeschlossen sein. Der eingereichte Jahresabschluss 2023 weist einen Umsatz von CHF 35 Mio. und einen EBITDA von CHF 4.2 Mio. aus. Der designierte CEO ist dipl. Bauingenieur und seit fünf Jahren im Unternehmen tätig.
+    BERTScore (masked): F1=0.8541 | BERTScore (full): F1=0.8687 | Levenshtein: 0.3639 | ROUGE-1: 0.6471 | BLEU-4: 0.4698
+
+  LLM SauerkrautLM [prompt few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8556 | BERTScore (full): F1=0.8538 | Levenshtein: 0.3909 | ROUGE-1: 0.6230 | BLEU-4: 0.3990
+
+  Datenwertschöpfung API:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.7907 | BERTScore (full): F1=0.7859 | Levenshtein: 0.4194 | ROUGE-1: 0.8372 | BLEU-4: 0.6100
+
+
+──────────────────────────────────────────────────────────────────────────────
+  Document ID: 5793 | Complexity: Low
+──────────────────────────────────────────────────────────────────────────────
+  ORIGINAL (379 chars, 6 PII entities):
+    Herr Markus Frei, Inhaber der Frei Immobilien AG, hat am 28. Mai 2024 den Kauf einer Gewerbeliegenschaft an der Industriestrasse 15 in Schlieren bestätigt. Der Kaufpreis beträgt CHF 8.5 Mio.. Wir haben ihm eine indikative Offerte für eine Hypothekenfinanzierung über CHF 6 Mio. unterbreitet. Die finalen Unterlagen und der Grundbuchauszug werden zur definitiven Prüfung benötigt.
+
+  GOLD STANDARD ANONYMIZATION:
+    Herr [PER], Inhaber der [ORG], hat am [DATE] den Kauf einer Gewerbeliegenschaft an der Industriestrasse 15 in [LOC] bestätigt. Der Kaufpreis beträgt [MONEY]. Wir haben ihm eine indikative Offerte für eine Hypothekenfinanzierung über [MONEY] unterbreitet. Die finalen Unterlagen und der Grundbuchauszug werden zur definitiven Prüfung benötigt.
+
+  spaCy + Regex:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=1.0000 | BERTScore (full): F1=0.8717 | Levenshtein: 0.0000 | ROUGE-1: 0.7921 | BLEU-4: 0.5562
+
+  BERT (pretrained) + Regex:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9750 | BERTScore (full): F1=0.8462 | Levenshtein: 0.0607 | ROUGE-1: 0.7600 | BLEU-4: 0.5008
+
+  BERT Fine-Tuned:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9883 | BERTScore (full): F1=0.8542 | Levenshtein: 0.0224 | ROUGE-1: 0.7723 | BLEU-4: 0.5484
+
+  Presidio:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9883 | BERTScore (full): F1=0.8542 | Levenshtein: 0.0224 | ROUGE-1: 0.7723 | BLEU-4: 0.5484
+
+  LLM Llama-3 [zero-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9423 | BERTScore (full): F1=0.8645 | Levenshtein: 0.1470 | ROUGE-1: 0.7843 | BLEU-4: 0.5424
+
+  LLM Llama-3 [few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9442 | BERTScore (full): F1=0.8038 | Levenshtein: 0.1374 | ROUGE-1: 0.7200 | BLEU-4: 0.4185
+
+  LLM Llama-3 [few-shot +verify]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9587 | BERTScore (full): F1=0.8212 | Levenshtein: 0.0895 | ROUGE-1: 0.7400 | BLEU-4: 0.4724
+
+  LLM Qwen2.5 [zero-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9758 | BERTScore (full): F1=0.8703 | Levenshtein: 0.0508 | ROUGE-1: 0.7921 | BLEU-4: 0.5988
+
+  LLM Qwen2.5 [few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=1.0000 | BERTScore (full): F1=0.8717 | Levenshtein: 0.0000 | ROUGE-1: 0.7921 | BLEU-4: 0.5562
+
+  LLM Qwen2.5 [few-shot +verify]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=1.0000 | BERTScore (full): F1=0.8717 | Levenshtein: 0.0000 | ROUGE-1: 0.7921 | BLEU-4: 0.5562
+
+  LLM SauerkrautLM [zero-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9442 | BERTScore (full): F1=0.8038 | Levenshtein: 0.1374 | ROUGE-1: 0.7200 | BLEU-4: 0.4185
+
+  LLM SauerkrautLM [few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9609 | BERTScore (full): F1=0.8307 | Levenshtein: 0.1086 | ROUGE-1: 0.7400 | BLEU-4: 0.4473
+
+  LLM SauerkrautLM [few-shot +verify]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9750 | BERTScore (full): F1=0.8462 | Levenshtein: 0.0607 | ROUGE-1: 0.7600 | BLEU-4: 0.5008
+
+  LLM Llama-3 [fine-tuned]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9883 | BERTScore (full): F1=0.8542 | Levenshtein: 0.0224 | ROUGE-1: 0.7723 | BLEU-4: 0.5484
+
+  LLM Llama-3 [prompt zero-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8962 | BERTScore (full): F1=0.8638 | Levenshtein: 0.2706 | ROUGE-1: 0.6667 | BLEU-4: 0.4731
+
+  LLM Llama-3 [prompt few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8985 | BERTScore (full): F1=0.8655 | Levenshtein: 0.2580 | ROUGE-1: 0.6869 | BLEU-4: 0.4459
+
+  LLM Qwen2.5 [prompt zero-shot]:
+    Anonymized: ein Geschäftsführer eines Unternehmens hat kürzlich die Erwerbung einer Gewerombiegenschaft an einer Straße in einer Stadt bestätigt. Der Kaufpreis beträgt einen Betrag. Wir haben ihm eine indikative Offerte für eine Hypothekenfinanzierung über eine Summe unterbreitet. Die finalen Unterlagen und der Grundbuchauszug werden zur definitiven Prüfung benötigt.
+    BERTScore (masked): F1=0.8847 | BERTScore (full): F1=0.8463 | Levenshtein: 0.2745 | ROUGE-1: 0.5941 | BLEU-4: 0.4068
+
+  LLM Qwen2.5 [prompt few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9133 | BERTScore (full): F1=0.8871 | Levenshtein: 0.2269 | ROUGE-1: 0.7358 | BLEU-4: 0.5654
+
+  LLM SauerkrautLM [prompt zero-shot]:
+    Anonymized: Ein Kunde, Inhaber einer Firma, hat kürzlich den Kauf einer Gewerbeliegenschaft an einem Standort in der Schweiz bestätigt. Der Kaufpreis beträgt eine Summe von CHF 8.5 Mio.. Wir haben ihm eine indikative Offerte für eine Hypothekenfinanzierung über CHF 6 Mio. unterbreitet. Die finalen Unterlagen und der Grundbuchauszug werden zur definitiven Prüfung benötigt.
+    BERTScore (masked): F1=0.9205 | BERTScore (full): F1=0.9074 | Levenshtein: 0.1901 | ROUGE-1: 0.7664 | BLEU-4: 0.6201
+
+  LLM SauerkrautLM [prompt few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9060 | BERTScore (full): F1=0.8681 | Levenshtein: 0.2438 | ROUGE-1: 0.6869 | BLEU-4: 0.4459
+
+  Datenwertschöpfung API:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8173 | BERTScore (full): F1=0.8115 | Levenshtein: 0.3451 | ROUGE-1: 0.8440 | BLEU-4: 0.6667
+
+
+──────────────────────────────────────────────────────────────────────────────
+  Document ID: 5868 | Complexity: Low
+──────────────────────────────────────────────────────────────────────────────
+  ORIGINAL (425 chars, 8 PII entities):
+    Gespräch am 27.05.2024 mit dem CFO der PharmaLogistics AG, Herrn Peter Frei, in Basel. Aufgrund der hohen Liquiditätsposition von über CHF 20 Mio. haben wir Anlagemöglichkeiten besprochen. Herr Frei hat sich für ein Festgeld über CHF 10 Mio. mit einer Laufzeit von 6 Monaten entschieden. Die restliche Liquidität soll kurzfristig verfügbar bleiben. Wir haben zudem eine Analyse der aktuellen Kontoführungsgebühren vereinbart.
+
+  GOLD STANDARD ANONYMIZATION:
+    Gespräch am [DATE] mit dem [JOB] der [ORG], Herrn [PER], in [LOC]. Aufgrund der hohen Liquiditätsposition von über [MONEY] haben wir Anlagemöglichkeiten besprochen. Herr [PER] hat sich für ein Festgeld über [MONEY] mit einer Laufzeit von 6 Monaten entschieden. Die restliche Liquidität soll kurzfristig verfügbar bleiben. Wir haben zudem eine Analyse der aktuellen Kontoführungsgebühren vereinbart.
+
+  spaCy + Regex:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9895 | BERTScore (full): F1=0.8792 | Levenshtein: 0.0083 | ROUGE-1: 0.8276 | BLEU-4: 0.6218
+
+  BERT (pretrained) + Regex:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=1.0000 | BERTScore (full): F1=0.8252 | Levenshtein: 0.0000 | ROUGE-1: 0.8103 | BLEU-4: 0.5962
+
+  BERT Fine-Tuned:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=1.0000 | BERTScore (full): F1=0.8249 | Levenshtein: 0.0000 | ROUGE-1: 0.8103 | BLEU-4: 0.5962
+
+  Presidio:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9891 | BERTScore (full): F1=0.8100 | Levenshtein: 0.0249 | ROUGE-1: 0.7826 | BLEU-4: 0.5311
+
+  LLM Llama-3 [zero-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9317 | BERTScore (full): F1=0.8380 | Levenshtein: 0.1524 | ROUGE-1: 0.8571 | BLEU-4: 0.7090
+
+  LLM Llama-3 [few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9833 | BERTScore (full): F1=0.8165 | Levenshtein: 0.0360 | ROUGE-1: 0.8000 | BLEU-4: 0.5782
+
+  LLM Llama-3 [few-shot +verify]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9833 | BERTScore (full): F1=0.8165 | Levenshtein: 0.0360 | ROUGE-1: 0.8000 | BLEU-4: 0.5782
+
+  LLM Qwen2.5 [zero-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9554 | BERTScore (full): F1=0.9127 | Levenshtein: 0.0677 | ROUGE-1: 0.9000 | BLEU-4: 0.8003
+
+  LLM Qwen2.5 [few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9941 | BERTScore (full): F1=0.8704 | Levenshtein: 0.0110 | ROUGE-1: 0.8276 | BLEU-4: 0.6419
+
+  LLM Qwen2.5 [few-shot +verify]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9941 | BERTScore (full): F1=0.8704 | Levenshtein: 0.0110 | ROUGE-1: 0.8276 | BLEU-4: 0.6419
+
+  LLM SauerkrautLM [zero-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9833 | BERTScore (full): F1=0.8137 | Levenshtein: 0.0332 | ROUGE-1: 0.8000 | BLEU-4: 0.5782
+
+  LLM SauerkrautLM [few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9833 | BERTScore (full): F1=0.8165 | Levenshtein: 0.0360 | ROUGE-1: 0.8000 | BLEU-4: 0.5782
+
+  LLM SauerkrautLM [few-shot +verify]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9833 | BERTScore (full): F1=0.8165 | Levenshtein: 0.0360 | ROUGE-1: 0.8000 | BLEU-4: 0.5782
+
+  LLM Llama-3 [fine-tuned]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=1.0000 | BERTScore (full): F1=0.8249 | Levenshtein: 0.0000 | ROUGE-1: 0.8103 | BLEU-4: 0.5962
+
+  LLM Llama-3 [prompt zero-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9007 | BERTScore (full): F1=0.8763 | Levenshtein: 0.2768 | ROUGE-1: 0.6942 | BLEU-4: 0.5364
+
+  LLM Llama-3 [prompt few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8843 | BERTScore (full): F1=0.8602 | Levenshtein: 0.3077 | ROUGE-1: 0.6207 | BLEU-4: 0.3883
+
+  LLM Qwen2.5 [prompt zero-shot]:
+    Anonymized: Gespräch kürzlich mit der Geschäftsführerin eines Unternehmens in der Schweiz. Aufgrund der hohen Liquiditätsposition von über einer Million haben wir Anlagemöglichkeiten besprochen. Die Geschäftsführerin hat sich für ein Festgeld über einer halben Million mit einer Laufzeit von sechs Monaten entschieden. Die restliche Liquidität soll kurzfristig verfügbar bleiben. Wir haben zudem eine Analyse der aktuellen Kontoführungsgebühren vereinbart.
+    BERTScore (masked): F1=0.9099 | BERTScore (full): F1=0.8925 | Levenshtein: 0.2387 | ROUGE-1: 0.7179 | BLEU-4: 0.5159
+
+  LLM Qwen2.5 [prompt few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9167 | BERTScore (full): F1=0.8847 | Levenshtein: 0.2347 | ROUGE-1: 0.7018 | BLEU-4: 0.4481
+
+  LLM SauerkrautLM [prompt zero-shot]:
+    Anonymized: Gespräch an einem Datum mit der Geschäftsführerin eines Unternehmens, das sich auf Logistik im Gesundheitsbereich spezialisiert, in einer Stadt in der Schweiz. Aufgrund der hohen Liquiditätsposition von über CHF 10 Mio. haben wir Anlagemöglichkeiten besprochen. Die Geschäftsführerin hat sich für ein Festgeld über CHF 5 Mio. mit einer Laufzeit von 6 Monaten entschieden. Die restliche Liquidität soll kurzfristig verfügbar bleiben. Wir haben zudem eine Analyse der aktuellen Kontoführungsgebühren ve...
+    BERTScore (masked): F1=0.8929 | BERTScore (full): F1=0.8738 | Levenshtein: 0.3046 | ROUGE-1: 0.7385 | BLEU-4: 0.5789
+
+  LLM SauerkrautLM [prompt few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8823 | BERTScore (full): F1=0.8610 | Levenshtein: 0.3013 | ROUGE-1: 0.6610 | BLEU-4: 0.4805
+
+  Datenwertschöpfung API:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8372 | BERTScore (full): F1=0.8375 | Levenshtein: 0.2976 | ROUGE-1: 0.8760 | BLEU-4: 0.6939
+
+
+──────────────────────────────────────────────────────────────────────────────
+  Document ID: 6147 | Complexity: Medium
+──────────────────────────────────────────────────────────────────────────────
+  ORIGINAL (455 chars, 10 PII entities):
+    Am 28. Mai 2024 Treffen mit Herrn Urs Baumann, CFO der Präzisionsmechanik AG in Grenchen. Traktanden: Erhöhung der Betriebskreditlimite um CHF 1.5 Mio. zur Finanzierung des Lageraufbaus. Herr Baumann hat den unterzeichneten Antrag mitgebracht. Ausserdem wurde die Nachfolgeregelung thematisiert; sein Sohn, ein ETH-Ingenieur, wird ab 2025 in die Geschäftsleitung eintreten. Pendenzen: Zustellung der aktualisierten Vertragsdokumente an u.baumann@pm-ag.ch.
+
+  GOLD STANDARD ANONYMIZATION:
+    Am [DATE] Treffen mit Herrn [PER], [JOB] der [ORG] in [LOC]. Traktanden: Erhöhung der Betriebskreditlimite um [MONEY] zur Finanzierung des Lageraufbaus. Herr [PER] hat den unterzeichneten Antrag mitgebracht. Ausserdem wurde die Nachfolgeregelung thematisiert; sein Sohn, ein [JOB], wird ab [DATE] in die Geschäftsleitung eintreten. Pendenzen: Zustellung der aktualisierten Vertragsdokumente an [EMAIL].
+
+  spaCy + Regex:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9688 | BERTScore (full): F1=0.8130 | Levenshtein: 0.0534 | ROUGE-1: 0.7407 | BLEU-4: 0.4610
+
+  BERT (pretrained) + Regex:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9647 | BERTScore (full): F1=0.7978 | Levenshtein: 0.0691 | ROUGE-1: 0.7778 | BLEU-4: 0.5234
+
+  BERT Fine-Tuned:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=1.0000 | BERTScore (full): F1=0.8287 | Levenshtein: 0.0000 | ROUGE-1: 0.7593 | BLEU-4: 0.5226
+
+  Presidio:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9781 | BERTScore (full): F1=0.8031 | Levenshtein: 0.0449 | ROUGE-1: 0.7222 | BLEU-4: 0.4541
+
+  LLM Llama-3 [zero-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9553 | BERTScore (full): F1=0.8279 | Levenshtein: 0.0983 | ROUGE-1: 0.7706 | BLEU-4: 0.5419
+
+  LLM Llama-3 [few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9777 | BERTScore (full): F1=0.7945 | Levenshtein: 0.0414 | ROUGE-1: 0.7778 | BLEU-4: 0.5836
+
+  LLM Llama-3 [few-shot +verify]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9777 | BERTScore (full): F1=0.7945 | Levenshtein: 0.0414 | ROUGE-1: 0.7778 | BLEU-4: 0.5836
+
+  LLM Qwen2.5 [zero-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8446 | BERTScore (full): F1=0.9427 | Levenshtein: 0.1484 | ROUGE-1: 0.9107 | BLEU-4: 0.8221
+
+  LLM Qwen2.5 [few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9455 | BERTScore (full): F1=0.8850 | Levenshtein: 0.0759 | ROUGE-1: 0.8148 | BLEU-4: 0.6347
+
+  LLM Qwen2.5 [few-shot +verify]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9455 | BERTScore (full): F1=0.8850 | Levenshtein: 0.0759 | ROUGE-1: 0.8148 | BLEU-4: 0.6347
+
+  LLM SauerkrautLM [zero-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9486 | BERTScore (full): F1=0.8344 | Levenshtein: 0.0881 | ROUGE-1: 0.8649 | BLEU-4: 0.7240
+
+  LLM SauerkrautLM [few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9921 | BERTScore (full): F1=0.7933 | Levenshtein: 0.0193 | ROUGE-1: 0.7778 | BLEU-4: 0.5730
+
+  LLM SauerkrautLM [few-shot +verify]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9921 | BERTScore (full): F1=0.7933 | Levenshtein: 0.0193 | ROUGE-1: 0.7778 | BLEU-4: 0.5730
+
+  LLM Llama-3 [fine-tuned]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=1.0000 | BERTScore (full): F1=0.8287 | Levenshtein: 0.0000 | ROUGE-1: 0.7593 | BLEU-4: 0.5226
+
+  LLM Llama-3 [prompt zero-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.7901 | BERTScore (full): F1=0.7734 | Levenshtein: 0.3726 | ROUGE-1: 0.5333 | BLEU-4: 0.3252
+
+  LLM Llama-3 [prompt few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8512 | BERTScore (full): F1=0.8222 | Levenshtein: 0.3552 | ROUGE-1: 0.5841 | BLEU-4: 0.3888
+
+  LLM Qwen2.5 [prompt zero-shot]:
+    Anonymized: Am kürzlichen Treffen mit dem CFO einer Firma in einer Stadt in der Schweiz wurde die Erhöhung der Betriebskreditlimite um einen Betrag besprochen, um den Lageraufbau zu finanzieren. Der unterzeichnete Antrag wurde mitgebracht. Zudem wurde die Nachfolgeregelung thematisiert; sein Nachfolger, ein Ingenieur, wird ab einem bestimmten Datum in die Geschäftsleitung eintreten. Pendenzen: Zustellung der aktualisierten Vertragsdokumente an [E-Mail].
+    BERTScore (masked): F1=0.8455 | BERTScore (full): F1=0.8176 | Levenshtein: 0.3431 | ROUGE-1: 0.5391 | BLEU-4: 0.2905
+
+  LLM Qwen2.5 [prompt few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8371 | BERTScore (full): F1=0.8005 | Levenshtein: 0.3054 | ROUGE-1: 0.6726 | BLEU-4: 0.4435
+
+  LLM SauerkrautLM [prompt zero-shot]:
+    Anonymized: Am einem Datum im Mai 2024 fand ein Treffen statt, an dem eine Führungskraft von einer Firma in der Schweiz teilnahm. Die Tagesordnung umfasste die Erhöhung eines Betriebskreditlimites um einen Betrag in Höhe von CHF 1.5 Mio. zur Finanzierung eines Lageraufbaus. Die Führungskraft hatte den entsprechenden Antrag eingereicht. Darüber hinaus wurde die Nachfolgeregelung diskutiert; ein Sohn der Führungskraft, der über einen Hochschulabschluss verfügt, wird ab 2025 in die Geschäftsleitung eintreten. ...
+    BERTScore (masked): F1=0.8015 | BERTScore (full): F1=0.8023 | Levenshtein: 0.4777 | ROUGE-1: 0.4889 | BLEU-4: 0.1992
+
+  LLM SauerkrautLM [prompt few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8398 | BERTScore (full): F1=0.8195 | Levenshtein: 0.4226 | ROUGE-1: 0.5593 | BLEU-4: 0.3724
+
+  Datenwertschöpfung API:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8172 | BERTScore (full): F1=0.8069 | Levenshtein: 0.3229 | ROUGE-1: 0.8319 | BLEU-4: 0.6121
+
+
+──────────────────────────────────────────────────────────────────────────────
+  Document ID: 6166 | Complexity: Medium
+──────────────────────────────────────────────────────────────────────────────
+  ORIGINAL (304 chars, 8 PII entities):
+    Meeting mit dem Verwaltungsratspräsidenten der Immo Invest Holding AG, Herr Konrad Ammann. Thema war die Finanzierung (CHF 15 Mio. Hypothek) für den Kauf einer Liegenschaft an der Bahnhofstrasse in Zürich. Der Deal soll bis Ende Juni 2024 abgeschlossen sein. Der deutsche Mieter ist die Berlin Mode GmbH.
+
+  GOLD STANDARD ANONYMIZATION:
+    Meeting mit dem [JOB] der [ORG], Herr [PER]. Thema war die Finanzierung ([MONEY] Hypothek) für den Kauf einer Liegenschaft an der Bahnhofstrasse in [LOC]. Der Deal soll bis [DATE] abgeschlossen sein. Der [NATION] Mieter ist die [ORG].
+
+  spaCy + Regex:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8870 | BERTScore (full): F1=0.8393 | Levenshtein: 0.2739 | ROUGE-1: 0.7586 | BLEU-4: 0.4721
+
+  BERT (pretrained) + Regex:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9269 | BERTScore (full): F1=0.7977 | Levenshtein: 0.2113 | ROUGE-1: 0.7059 | BLEU-4: 0.3899
+
+  BERT Fine-Tuned:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=1.0000 | BERTScore (full): F1=0.7685 | Levenshtein: 0.0000 | ROUGE-1: 0.6905 | BLEU-4: 0.3642
+
+  Presidio:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8959 | BERTScore (full): F1=0.8200 | Levenshtein: 0.2466 | ROUGE-1: 0.7356 | BLEU-4: 0.4041
+
+  LLM Llama-3 [zero-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9302 | BERTScore (full): F1=0.7958 | Levenshtein: 0.1923 | ROUGE-1: 0.6905 | BLEU-4: 0.3642
+
+  LLM Llama-3 [few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9641 | BERTScore (full): F1=0.7677 | Levenshtein: 0.1122 | ROUGE-1: 0.6905 | BLEU-4: 0.3892
+
+  LLM Llama-3 [few-shot +verify]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9641 | BERTScore (full): F1=0.7677 | Levenshtein: 0.1122 | ROUGE-1: 0.6905 | BLEU-4: 0.3892
+
+  LLM Qwen2.5 [zero-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8686 | BERTScore (full): F1=0.8966 | Levenshtein: 0.2836 | ROUGE-1: 0.8667 | BLEU-4: 0.7181
+
+  LLM Qwen2.5 [few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9259 | BERTScore (full): F1=0.8571 | Levenshtein: 0.1384 | ROUGE-1: 0.8182 | BLEU-4: 0.6504
+
+  LLM Qwen2.5 [few-shot +verify]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9259 | BERTScore (full): F1=0.8571 | Levenshtein: 0.1384 | ROUGE-1: 0.8182 | BLEU-4: 0.6504
+
+  LLM SauerkrautLM [zero-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8571 | BERTScore (full): F1=0.8809 | Levenshtein: 0.3426 | ROUGE-1: 0.8315 | BLEU-4: 0.6169
+
+  LLM SauerkrautLM [few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9396 | BERTScore (full): F1=0.7449 | Levenshtein: 0.1531 | ROUGE-1: 0.6667 | BLEU-4: 0.3662
+
+  LLM SauerkrautLM [few-shot +verify]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9641 | BERTScore (full): F1=0.7677 | Levenshtein: 0.1122 | ROUGE-1: 0.6905 | BLEU-4: 0.3892
+
+  LLM Llama-3 [fine-tuned]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=1.0000 | BERTScore (full): F1=0.7685 | Levenshtein: 0.0000 | ROUGE-1: 0.6905 | BLEU-4: 0.3642
+
+  LLM Llama-3 [prompt zero-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.7477 | BERTScore (full): F1=0.7297 | Levenshtein: 0.6697 | ROUGE-1: 0.3826 | BLEU-4: 0.1632
+
+  LLM Llama-3 [prompt few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.7173 | BERTScore (full): F1=0.6864 | Levenshtein: 0.7522 | ROUGE-1: 0.3611 | BLEU-4: 0.1158
+
+  LLM Qwen2.5 [prompt zero-shot]:
+    Anonymized: Meeting mit dem Verwaltungsratspräsidenten eines Unternehmens. Thema war die Finanzierung (einen Betrag) für den Kauf einer Liegenschaft an einer Straße in einer Stadt. Der Deal soll bis kürzlich abgeschlossen sein. Der Mieter ist ein Unternehmen.
+    BERTScore (masked): F1=0.8541 | BERTScore (full): F1=0.8129 | Levenshtein: 0.3198 | ROUGE-1: 0.5854 | BLEU-4: 0.2715
+
+  LLM Qwen2.5 [prompt few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8238 | BERTScore (full): F1=0.8346 | Levenshtein: 0.5213 | ROUGE-1: 0.5974 | BLEU-4: 0.2525
+
+  LLM SauerkrautLM [prompt zero-shot]:
+    Anonymized: Meeting mit dem Verwaltungsratspräsidenten einer Firma, Herrn Konrad Ammann. Thema war die Finanzierung (einen Betrag) für den Kauf einer Liegenschaft in einer Stadt in der Schweiz. Der Deal soll bis Ende Juni abgeschlossen sein. Ein deutscher Mieter ist eine GmbH.
+
+Oder alternativ:
+
+Meeting mit dem Verwaltungsratspräsidenten einer Firma, Herrn Konrad Ammann. Thema war die Finanzierung (einen Betrag) für den Kauf einer Liegenschaft in einer Stadt in der Schweiz. Der Deal soll bis Ende Juni abges...
+    BERTScore (masked): F1=0.7315 | BERTScore (full): F1=0.7019 | Levenshtein: 0.6622 | ROUGE-1: 0.4493 | BLEU-4: 0.1810
+
+  LLM SauerkrautLM [prompt few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8285 | BERTScore (full): F1=0.8348 | Levenshtein: 0.4254 | ROUGE-1: 0.6173 | BLEU-4: 0.2929
+
+  Datenwertschöpfung API:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8364 | BERTScore (full): F1=0.8637 | Levenshtein: 0.3100 | ROUGE-1: 0.8817 | BLEU-4: 0.7085
+
+
+──────────────────────────────────────────────────────────────────────────────
+  Document ID: 6202 | Complexity: Medium
+──────────────────────────────────────────────────────────────────────────────
+  ORIGINAL (325 chars, 7 PII entities):
+    Telco mit Herrn Dr. Urs Tanner, Stiftungsratspräsident der Helvetia Futura Stiftung. Wir besprachen die Wiederanlage eines fälligen Festgeldes in Höhe von EUR 3.5 Mio.. Der Stiftungsrat wird an seiner Sitzung vom 25. Mai 2024 darüber entscheiden. Herr Tanner (044 555 90 90) bat um eine Offerte für eine dreijährige Laufzeit.
+
+  GOLD STANDARD ANONYMIZATION:
+    Telco mit Herrn Dr. [PER], [JOB] der [ORG]. Wir besprachen die Wiederanlage eines fälligen Festgeldes in Höhe von [MONEY]. Der Stiftungsrat wird an seiner Sitzung vom [DATE] darüber entscheiden. Herr [PER] ([PHONE]) bat um eine Offerte für eine dreijährige Laufzeit.
+
+  spaCy + Regex:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9506 | BERTScore (full): F1=0.8275 | Levenshtein: 0.1632 | ROUGE-1: 0.7111 | BLEU-4: 0.4347
+
+  BERT (pretrained) + Regex:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9564 | BERTScore (full): F1=0.8405 | Levenshtein: 0.1080 | ROUGE-1: 0.7333 | BLEU-4: 0.4734
+
+  BERT Fine-Tuned:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=1.0000 | BERTScore (full): F1=0.8243 | Levenshtein: 0.0000 | ROUGE-1: 0.7333 | BLEU-4: 0.4862
+
+  Presidio:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9506 | BERTScore (full): F1=0.8275 | Levenshtein: 0.1632 | ROUGE-1: 0.7111 | BLEU-4: 0.4347
+
+  LLM Llama-3 [zero-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9497 | BERTScore (full): F1=0.8501 | Levenshtein: 0.1211 | ROUGE-1: 0.7640 | BLEU-4: 0.4915
+
+  LLM Llama-3 [few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9497 | BERTScore (full): F1=0.8501 | Levenshtein: 0.1211 | ROUGE-1: 0.7640 | BLEU-4: 0.4915
+
+  LLM Llama-3 [few-shot +verify]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9497 | BERTScore (full): F1=0.8501 | Levenshtein: 0.1211 | ROUGE-1: 0.7640 | BLEU-4: 0.4915
+
+  LLM Qwen2.5 [zero-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8729 | BERTScore (full): F1=0.9796 | Levenshtein: 0.2816 | ROUGE-1: 0.9697 | BLEU-4: 0.9273
+
+  LLM Qwen2.5 [few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9580 | BERTScore (full): F1=0.8585 | Levenshtein: 0.1081 | ROUGE-1: 0.7778 | BLEU-4: 0.5152
+
+  LLM Qwen2.5 [few-shot +verify]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9580 | BERTScore (full): F1=0.8585 | Levenshtein: 0.1081 | ROUGE-1: 0.7778 | BLEU-4: 0.5152
+
+  LLM SauerkrautLM [zero-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9535 | BERTScore (full): F1=0.8510 | Levenshtein: 0.1176 | ROUGE-1: 0.7640 | BLEU-4: 0.4915
+
+  LLM SauerkrautLM [few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9535 | BERTScore (full): F1=0.8510 | Levenshtein: 0.1176 | ROUGE-1: 0.7640 | BLEU-4: 0.4915
+
+  LLM SauerkrautLM [few-shot +verify]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9535 | BERTScore (full): F1=0.8510 | Levenshtein: 0.1176 | ROUGE-1: 0.7640 | BLEU-4: 0.4915
+
+  LLM Llama-3 [fine-tuned]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=1.0000 | BERTScore (full): F1=0.8243 | Levenshtein: 0.0000 | ROUGE-1: 0.7333 | BLEU-4: 0.4862
+
+  LLM Llama-3 [prompt zero-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8444 | BERTScore (full): F1=0.8081 | Levenshtein: 0.3688 | ROUGE-1: 0.5517 | BLEU-4: 0.3010
+
+  LLM Llama-3 [prompt few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8762 | BERTScore (full): F1=0.8422 | Levenshtein: 0.3063 | ROUGE-1: 0.6364 | BLEU-4: 0.3738
+
+  LLM Qwen2.5 [prompt zero-shot]:
+    Anonymized: Anonyme Institution mit dem Geschäftsführer einer Stiftung. Wir besprachen die Wiederanlage eines fälligen Festgeldes in Höhe von einer beträchtlichen Summe. Der Stiftungsrat wird an seiner Sitzung kürzlich darüber entscheiden. Der Geschäftsführer bat um eine Offerte für eine dreijährige Laufzeit.
+    BERTScore (masked): F1=0.8700 | BERTScore (full): F1=0.8327 | Levenshtein: 0.3255 | ROUGE-1: 0.6517 | BLEU-4: 0.4270
+
+  LLM Qwen2.5 [prompt few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8705 | BERTScore (full): F1=0.8700 | Levenshtein: 0.2664 | ROUGE-1: 0.6222 | BLEU-4: 0.3710
+
+  LLM SauerkrautLM [prompt zero-shot]:
+    Anonymized: Wir haben uns mit einem Kunden getroffen, der Mitglied des Stiftungsrats der Helvetia Futura Stiftung ist. Wir besprachen die Wiederanlage eines fälligen Festgeldes in einer bestimmten Höhe. Der Stiftungsrat wird an einer Sitzung an einem Datum im Mai 2024 darüber entscheiden. Der Kunde bat um eine Offerte für eine dreijährige Laufzeit. Er kann unter [Telefon] erreicht werden.
+    BERTScore (masked): F1=0.8375 | BERTScore (full): F1=0.8379 | Levenshtein: 0.4298 | ROUGE-1: 0.5421 | BLEU-4: 0.3423
+
+  LLM SauerkrautLM [prompt few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8678 | BERTScore (full): F1=0.8405 | Levenshtein: 0.3217 | ROUGE-1: 0.6136 | BLEU-4: 0.3529
+
+  Datenwertschöpfung API:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.7759 | BERTScore (full): F1=0.7751 | Levenshtein: 0.4732 | ROUGE-1: 0.7551 | BLEU-4: 0.5575
+
+
+──────────────────────────────────────────────────────────────────────────────
+  Document ID: 6263 | Complexity: Medium
+──────────────────────────────────────────────────────────────────────────────
+  ORIGINAL (307 chars, 7 PII entities):
+    Der neue CFO der Creative Design GmbH, Herr Luigi Rossi, braucht dringend ein zusätzliches Konto in EUR für Zahlungen von italienischen Kunden. Eröffnung wurde veranlasst, die neue IBAN lautet CH57 0070 0111 1234 5678 9. Er erwartet eine erste Zahlung von ca. EUR 75'000. Kontakt: l.rossi@creativedesign.ch.
+
+  GOLD STANDARD ANONYMIZATION:
+    Der neue [JOB] der [ORG], Herr [PER], braucht dringend ein zusätzliches Konto in EUR für Zahlungen von [NATION] Kunden. Eröffnung wurde veranlasst, die neue IBAN lautet [IBAN]. Er erwartet eine erste Zahlung von ca. [MONEY]. Kontakt: [EMAIL].
+
+  spaCy + Regex:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9455 | BERTScore (full): F1=0.8033 | Levenshtein: 0.0922 | ROUGE-1: 0.7470 | BLEU-4: 0.5068
+
+  BERT (pretrained) + Regex:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9533 | BERTScore (full): F1=0.7572 | Levenshtein: 0.0388 | ROUGE-1: 0.6747 | BLEU-4: 0.3651
+
+  BERT Fine-Tuned:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=1.0000 | BERTScore (full): F1=0.7862 | Levenshtein: 0.0000 | ROUGE-1: 0.7229 | BLEU-4: 0.4729
+
+  Presidio:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9809 | BERTScore (full): F1=0.7780 | Levenshtein: 0.0049 | ROUGE-1: 0.7229 | BLEU-4: 0.4729
+
+  LLM Llama-3 [zero-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8880 | BERTScore (full): F1=0.9029 | Levenshtein: 0.2975 | ROUGE-1: 0.9348 | BLEU-4: 0.8684
+
+  LLM Llama-3 [few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9864 | BERTScore (full): F1=0.7719 | Levenshtein: 0.0146 | ROUGE-1: 0.6988 | BLEU-4: 0.4086
+
+  LLM Llama-3 [few-shot +verify]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9864 | BERTScore (full): F1=0.7719 | Levenshtein: 0.0146 | ROUGE-1: 0.6988 | BLEU-4: 0.4086
+
+  LLM Qwen2.5 [zero-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8900 | BERTScore (full): F1=0.8851 | Levenshtein: 0.2528 | ROUGE-1: 0.8409 | BLEU-4: 0.6661
+
+  LLM Qwen2.5 [few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9779 | BERTScore (full): F1=0.7878 | Levenshtein: 0.0741 | ROUGE-1: 0.7229 | BLEU-4: 0.4729
+
+  LLM Qwen2.5 [few-shot +verify]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9779 | BERTScore (full): F1=0.7878 | Levenshtein: 0.0741 | ROUGE-1: 0.7229 | BLEU-4: 0.4729
+
+  LLM SauerkrautLM [zero-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9864 | BERTScore (full): F1=0.7719 | Levenshtein: 0.0146 | ROUGE-1: 0.6988 | BLEU-4: 0.4086
+
+  LLM SauerkrautLM [few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9864 | BERTScore (full): F1=0.7719 | Levenshtein: 0.0146 | ROUGE-1: 0.6988 | BLEU-4: 0.4086
+
+  LLM SauerkrautLM [few-shot +verify]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9864 | BERTScore (full): F1=0.7719 | Levenshtein: 0.0146 | ROUGE-1: 0.6988 | BLEU-4: 0.4086
+
+  LLM Llama-3 [fine-tuned]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=1.0000 | BERTScore (full): F1=0.7862 | Levenshtein: 0.0000 | ROUGE-1: 0.7229 | BLEU-4: 0.4729
+
+  LLM Llama-3 [prompt zero-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8725 | BERTScore (full): F1=0.8075 | Levenshtein: 0.2784 | ROUGE-1: 0.6506 | BLEU-4: 0.4235
+
+  LLM Llama-3 [prompt few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8775 | BERTScore (full): F1=0.8145 | Levenshtein: 0.2927 | ROUGE-1: 0.6829 | BLEU-4: 0.3786
+
+  LLM Qwen2.5 [prompt zero-shot]:
+    Anonymized: Der neue CFO eines Unternehmens, ein Mann, benötigt dringend ein zusätzliches Konto in EUR für Zahlungen von Kunden aus einem anderen Land. Die Eröffnung wurde veranlasst, und die neue IBAN lautet [Konto]. Er erwartet eine erste Zahlung von einer Summe in der Größenordnung von euren hunderttausend Euro. Kontakt: [E-Mail].
+    BERTScore (masked): F1=0.8497 | BERTScore (full): F1=0.7956 | Levenshtein: 0.4206 | ROUGE-1: 0.5684 | BLEU-4: 0.3553
+
+  LLM Qwen2.5 [prompt few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8722 | BERTScore (full): F1=0.8006 | Levenshtein: 0.3477 | ROUGE-1: 0.5783 | BLEU-4: 0.3217
+
+  LLM SauerkrautLM [prompt zero-shot]:
+    Anonymized: Der neue CFO einer Firma, Herr ein Mitarbeiter, benötigt dringend ein zusätzliches Konto in EUR für Zahlungen von Kunden in Italien. Die Eröffnung wurde veranlasst, die neue IBAN lautet [Konto]. Er erwartet eine erste Zahlung von ca. EUR eine Summe. Kontakt: [E-Mail].
+    BERTScore (masked): F1=0.8921 | BERTScore (full): F1=0.8292 | Levenshtein: 0.2820 | ROUGE-1: 0.6591 | BLEU-4: 0.4689
+
+  LLM SauerkrautLM [prompt few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8833 | BERTScore (full): F1=0.8629 | Levenshtein: 0.3097 | ROUGE-1: 0.7356 | BLEU-4: 0.6006
+
+  Datenwertschöpfung API:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8233 | BERTScore (full): F1=0.7889 | Levenshtein: 0.4212 | ROUGE-1: 0.8132 | BLEU-4: 0.7093
+
+
+──────────────────────────────────────────────────────────────────────────────
+  Document ID: 6431 | Complexity: Medium
+──────────────────────────────────────────────────────────────────────────────
+  ORIGINAL (404 chars, 8 PII entities):
+    E-Mail von Claudia Weber, Buchhalterin bei IT-Consulting Frischknecht GmbH. Sie meldet, dass der E-Banking-Vertrag für den neuen Partner Reto Arnold noch ausstehend ist. Er benötigt dringend Leserechte für alle Konten. Des Weiteren fragt sie an, ob eine Kontosaldierung des nicht mehr benötigten EUR-Kontos möglich ist. Restsaldo beträgt EUR 1'245.50. Ihre Telefonnummer für Rückfragen ist 071 555 44 33.
+
+  GOLD STANDARD ANONYMIZATION:
+    E-Mail von [PER], [JOB] bei [ORG]. Sie meldet, dass der E-Banking-Vertrag für den neuen [JOB] [PER] noch ausstehend ist. Er benötigt dringend Leserechte für alle Konten. Des Weiteren fragt sie an, ob eine Kontosaldierung des nicht mehr benötigten [MONEY]-Kontos möglich ist. Restsaldo beträgt [MONEY]. Ihre Telefonnummer für Rückfragen ist [PHONE].
+
+  spaCy + Regex:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9133 | BERTScore (full): F1=0.8356 | Levenshtein: 0.1965 | ROUGE-1: 0.8364 | BLEU-4: 0.6687
+
+  BERT (pretrained) + Regex:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9673 | BERTScore (full): F1=0.8262 | Levenshtein: 0.0614 | ROUGE-1: 0.8148 | BLEU-4: 0.6149
+
+  BERT Fine-Tuned:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9907 | BERTScore (full): F1=0.8144 | Levenshtein: 0.0096 | ROUGE-1: 0.7963 | BLEU-4: 0.6367
+
+  Presidio:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9244 | BERTScore (full): F1=0.8188 | Levenshtein: 0.1667 | ROUGE-1: 0.8182 | BLEU-4: 0.6509
+
+  LLM Llama-3 [zero-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9715 | BERTScore (full): F1=0.8002 | Levenshtein: 0.0645 | ROUGE-1: 0.7778 | BLEU-4: 0.5589
+
+  LLM Llama-3 [few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9914 | BERTScore (full): F1=0.8129 | Levenshtein: 0.0222 | ROUGE-1: 0.7963 | BLEU-4: 0.6073
+
+  LLM Llama-3 [few-shot +verify]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9914 | BERTScore (full): F1=0.8129 | Levenshtein: 0.0222 | ROUGE-1: 0.7963 | BLEU-4: 0.6073
+
+  LLM Qwen2.5 [zero-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9727 | BERTScore (full): F1=0.8246 | Levenshtein: 0.0492 | ROUGE-1: 0.8073 | BLEU-4: 0.6265
+
+  LLM Qwen2.5 [few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9701 | BERTScore (full): F1=0.8359 | Levenshtein: 0.0640 | ROUGE-1: 0.8440 | BLEU-4: 0.7198
+
+  LLM Qwen2.5 [few-shot +verify]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9701 | BERTScore (full): F1=0.8359 | Levenshtein: 0.0640 | ROUGE-1: 0.8440 | BLEU-4: 0.7198
+
+  LLM SauerkrautLM [zero-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9651 | BERTScore (full): F1=0.8245 | Levenshtein: 0.0525 | ROUGE-1: 0.8073 | BLEU-4: 0.6265
+
+  LLM SauerkrautLM [few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9914 | BERTScore (full): F1=0.8129 | Levenshtein: 0.0222 | ROUGE-1: 0.7963 | BLEU-4: 0.6073
+
+  LLM SauerkrautLM [few-shot +verify]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9914 | BERTScore (full): F1=0.8129 | Levenshtein: 0.0222 | ROUGE-1: 0.7963 | BLEU-4: 0.6073
+
+  LLM Llama-3 [fine-tuned]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9821 | BERTScore (full): F1=0.8241 | Levenshtein: 0.0314 | ROUGE-1: 0.8148 | BLEU-4: 0.6544
+
+  LLM Llama-3 [prompt zero-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9398 | BERTScore (full): F1=0.8915 | Levenshtein: 0.1709 | ROUGE-1: 0.7818 | BLEU-4: 0.5744
+
+  LLM Llama-3 [prompt few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9246 | BERTScore (full): F1=0.8830 | Levenshtein: 0.2333 | ROUGE-1: 0.7091 | BLEU-4: 0.4075
+
+  LLM Qwen2.5 [prompt zero-shot]:
+    Anonymized: E-Mail von einer Buchhalterin bei einer Firma. Sie meldet, dass der E-Banking-Vertrag für einen neuen Partner noch ausstehend ist. Er benötigt dringend Leserechte für alle Konten. Des Weiteren fragt sie an, ob eine Kontosaldierung eines nicht mehr benötigten Kontos möglich ist. Der Restsaldo beträgt eine Summe. Ihre Telefonnummer für Rückfragen ist [Telefon].
+    BERTScore (masked): F1=0.9384 | BERTScore (full): F1=0.8921 | Levenshtein: 0.1424 | ROUGE-1: 0.7636 | BLEU-4: 0.5040
+
+  LLM Qwen2.5 [prompt few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9142 | BERTScore (full): F1=0.8864 | Levenshtein: 0.2279 | ROUGE-1: 0.7273 | BLEU-4: 0.4902
+
+  LLM SauerkrautLM [prompt zero-shot]:
+    Anonymized: E-Mail von einer Buchhalterin bei einer Firma. Sie meldet, dass der E-Banking-Vertrag für einen neuen Partner noch ausstehend ist. Er benötigt dringend Leserechte für alle Konten. Des Weiteren fragt sie an, ob eine Kontosaldierung des nicht mehr benötigten EUR-Kontos möglich ist. Restsaldo beträgt einen Betrag. Ihre Telefonnummer für Rückfragen ist [Telefon].
+    BERTScore (masked): F1=0.9483 | BERTScore (full): F1=0.9013 | Levenshtein: 0.1228 | ROUGE-1: 0.8073 | BLEU-4: 0.6217
+
+  LLM SauerkrautLM [prompt few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9101 | BERTScore (full): F1=0.8761 | Levenshtein: 0.2665 | ROUGE-1: 0.7091 | BLEU-4: 0.4871
+
+  Datenwertschöpfung API:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8660 | BERTScore (full): F1=0.8566 | Levenshtein: 0.3086 | ROUGE-1: 0.8596 | BLEU-4: 0.7624
+
+
+──────────────────────────────────────────────────────────────────────────────
+  Document ID: 6509 | Complexity: Medium
+──────────────────────────────────────────────────────────────────────────────
+  ORIGINAL (309 chars, 6 PII entities):
+    Governance-Meeting mit der Helvetica Invest AG. Für den neuen Verwaltungsrat, Herrn John Baker, fehlen noch die KYC-Dokumente. Er ist britischer Staatsbürger und lebt in London. Die Compliance-Abteilung benötigt dringend eine Passkopie. Habe die Assistentin von Herrn Baker unter +44 20 7123 4567 kontaktiert.
+
+  GOLD STANDARD ANONYMIZATION:
+    Governance-Meeting mit der [ORG]. Für den neuen Verwaltungsrat, Herrn [PER], fehlen noch die KYC-Dokumente. Er ist [NATION] Staatsbürger und lebt in [LOC]. Die Compliance-Abteilung benötigt dringend eine Passkopie. Habe die Assistentin von Herrn [PER] unter [PHONE] kontaktiert.
+
+  spaCy + Regex:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8984 | BERTScore (full): F1=0.8766 | Levenshtein: 0.2731 | ROUGE-1: 0.8049 | BLEU-4: 0.5868
+
+  BERT (pretrained) + Regex:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9524 | BERTScore (full): F1=0.8882 | Levenshtein: 0.0725 | ROUGE-1: 0.8193 | BLEU-4: 0.5428
+
+  BERT Fine-Tuned:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9873 | BERTScore (full): F1=0.8356 | Levenshtein: 0.0602 | ROUGE-1: 0.7500 | BLEU-4: 0.4590
+
+  Presidio:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9119 | BERTScore (full): F1=0.7759 | Levenshtein: 0.2771 | ROUGE-1: 0.6582 | BLEU-4: 0.3194
+
+  LLM Llama-3 [zero-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9928 | BERTScore (full): F1=0.8672 | Levenshtein: 0.0198 | ROUGE-1: 0.8000 | BLEU-4: 0.5510
+
+  LLM Llama-3 [few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9928 | BERTScore (full): F1=0.8672 | Levenshtein: 0.0198 | ROUGE-1: 0.8000 | BLEU-4: 0.5510
+
+  LLM Llama-3 [few-shot +verify]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9928 | BERTScore (full): F1=0.8672 | Levenshtein: 0.0198 | ROUGE-1: 0.8000 | BLEU-4: 0.5510
+
+  LLM Qwen2.5 [zero-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9343 | BERTScore (full): F1=0.9509 | Levenshtein: 0.1312 | ROUGE-1: 0.9157 | BLEU-4: 0.8035
+
+  LLM Qwen2.5 [few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9714 | BERTScore (full): F1=0.9070 | Levenshtein: 0.0787 | ROUGE-1: 0.8500 | BLEU-4: 0.6833
+
+  LLM Qwen2.5 [few-shot +verify]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9714 | BERTScore (full): F1=0.9070 | Levenshtein: 0.0787 | ROUGE-1: 0.8500 | BLEU-4: 0.6833
+
+  LLM SauerkrautLM [zero-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9928 | BERTScore (full): F1=0.8672 | Levenshtein: 0.0198 | ROUGE-1: 0.8000 | BLEU-4: 0.5510
+
+  LLM SauerkrautLM [few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9928 | BERTScore (full): F1=0.8672 | Levenshtein: 0.0198 | ROUGE-1: 0.8000 | BLEU-4: 0.5510
+
+  LLM SauerkrautLM [few-shot +verify]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9928 | BERTScore (full): F1=0.8672 | Levenshtein: 0.0198 | ROUGE-1: 0.8000 | BLEU-4: 0.5510
+
+  LLM Llama-3 [fine-tuned]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9674 | BERTScore (full): F1=0.8189 | Levenshtein: 0.1004 | ROUGE-1: 0.7250 | BLEU-4: 0.3940
+
+  LLM Llama-3 [prompt zero-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8789 | BERTScore (full): F1=0.8413 | Levenshtein: 0.3039 | ROUGE-1: 0.5714 | BLEU-4: 0.2675
+
+  LLM Llama-3 [prompt few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8824 | BERTScore (full): F1=0.8575 | Levenshtein: 0.4012 | ROUGE-1: 0.5432 | BLEU-4: 0.2532
+
+  LLM Qwen2.5 [prompt zero-shot]:
+    Anonymized: Governance-Meeting mit einer Firma. Für den neuen Verwaltungsrat, ein Kunde, fehlen noch die KYC-Dokumente. Sie hat einen Hochschulabschluss und lebt in einer Stadt. Die Compliance-Abteilung benötigt dringend eine Passkopie. Habe die Assistentin des Kunden kontaktiert.
+    BERTScore (masked): F1=0.8930 | BERTScore (full): F1=0.8571 | Levenshtein: 0.2491 | ROUGE-1: 0.5897 | BLEU-4: 0.3308
+
+  LLM Qwen2.5 [prompt few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8829 | BERTScore (full): F1=0.8616 | Levenshtein: 0.3534 | ROUGE-1: 0.5672 | BLEU-4: 0.2355
+
+  LLM SauerkrautLM [prompt zero-shot]:
+    Anonymized: Ein Governance-Meeting fand mit einer Firma statt. Für den neuen Verwaltungsrat, ein Kunde, fehlen noch die KYC-Dokumente. Er ist ein Bürger eines europäischen Landes und lebt in einer Stadt in der EU. Die Compliance-Abteilung benötigt dringend eine Kopie eines Personalausweises. Ich habe die Assistentin von Herrn Baker unter [Telefon] kontaktiert.
+    BERTScore (masked): F1=0.8624 | BERTScore (full): F1=0.8438 | Levenshtein: 0.3555 | ROUGE-1: 0.6237 | BLEU-4: 0.3542
+
+  LLM SauerkrautLM [prompt few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8872 | BERTScore (full): F1=0.8628 | Levenshtein: 0.3312 | ROUGE-1: 0.5926 | BLEU-4: 0.2829
+
+  Datenwertschöpfung API:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8781 | BERTScore (full): F1=0.8691 | Levenshtein: 0.2679 | ROUGE-1: 0.8471 | BLEU-4: 0.7565
+
+
+──────────────────────────────────────────────────────────────────────────────
+  Document ID: 6522 | Complexity: Medium
+──────────────────────────────────────────────────────────────────────────────
+  ORIGINAL (342 chars, 7 PII entities):
+    Betriebsbesichtigung bei der ImmoVision AG in Baar am 16.05.2024. Herr Urs Kaufmann (68-jährig) präsentierte das neue Bauprojekt "Wohnen am See". Finanzierungsbedarf für den Landkauf beträgt CHF 4.2 Mio. via Hypothek. Er wird die Mittel auf das Baukonto CH88 0023 3233 4455 6677 A überweisen lassen, sobald unser Kreditkomitee zugestimmt hat.
+
+  GOLD STANDARD ANONYMIZATION:
+    Betriebsbesichtigung bei der [ORG] in [LOC] am [DATE]. Herr [PER] ([AGE]) präsentierte das neue Bauprojekt "Wohnen am See". Finanzierungsbedarf für den Landkauf beträgt [MONEY] via Hypothek. Er wird die Mittel auf das Baukonto [IBAN] überweisen lassen, sobald unser Kreditkomitee zugestimmt hat.
+
+  spaCy + Regex:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9176 | BERTScore (full): F1=0.8768 | Levenshtein: 0.1769 | ROUGE-1: 0.7872 | BLEU-4: 0.5432
+
+  BERT (pretrained) + Regex:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9342 | BERTScore (full): F1=0.8941 | Levenshtein: 0.1293 | ROUGE-1: 0.8333 | BLEU-4: 0.6445
+
+  BERT Fine-Tuned:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=1.0000 | BERTScore (full): F1=0.8459 | Levenshtein: 0.0000 | ROUGE-1: 0.7473 | BLEU-4: 0.5118
+
+  Presidio:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9713 | BERTScore (full): F1=0.8163 | Levenshtein: 0.0798 | ROUGE-1: 0.6742 | BLEU-4: 0.3854
+
+  LLM Llama-3 [zero-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9779 | BERTScore (full): F1=0.8303 | Levenshtein: 0.0570 | ROUGE-1: 0.7391 | BLEU-4: 0.4839
+
+  LLM Llama-3 [few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=1.0000 | BERTScore (full): F1=0.8459 | Levenshtein: 0.0000 | ROUGE-1: 0.7473 | BLEU-4: 0.5118
+
+  LLM Llama-3 [few-shot +verify]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=1.0000 | BERTScore (full): F1=0.8459 | Levenshtein: 0.0000 | ROUGE-1: 0.7473 | BLEU-4: 0.5118
+
+  LLM Qwen2.5 [zero-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9392 | BERTScore (full): F1=0.9122 | Levenshtein: 0.0909 | ROUGE-1: 0.8387 | BLEU-4: 0.6697
+
+  LLM Qwen2.5 [few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=1.0000 | BERTScore (full): F1=0.8459 | Levenshtein: 0.0000 | ROUGE-1: 0.7473 | BLEU-4: 0.5118
+
+  LLM Qwen2.5 [few-shot +verify]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=1.0000 | BERTScore (full): F1=0.8459 | Levenshtein: 0.0000 | ROUGE-1: 0.7473 | BLEU-4: 0.5118
+
+  LLM SauerkrautLM [zero-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9943 | BERTScore (full): F1=0.8481 | Levenshtein: 0.0075 | ROUGE-1: 0.7609 | BLEU-4: 0.5347
+
+  LLM SauerkrautLM [few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9943 | BERTScore (full): F1=0.8481 | Levenshtein: 0.0075 | ROUGE-1: 0.7609 | BLEU-4: 0.5347
+
+  LLM SauerkrautLM [few-shot +verify]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9943 | BERTScore (full): F1=0.8481 | Levenshtein: 0.0075 | ROUGE-1: 0.7609 | BLEU-4: 0.5347
+
+  LLM Llama-3 [fine-tuned]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=1.0000 | BERTScore (full): F1=0.8459 | Levenshtein: 0.0000 | ROUGE-1: 0.7473 | BLEU-4: 0.5118
+
+  LLM Llama-3 [prompt zero-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8412 | BERTScore (full): F1=0.7976 | Levenshtein: 0.4217 | ROUGE-1: 0.4632 | BLEU-4: 0.1373
+
+  LLM Llama-3 [prompt few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8735 | BERTScore (full): F1=0.8287 | Levenshtein: 0.3728 | ROUGE-1: 0.5319 | BLEU-4: 0.3149
+
+  LLM Qwen2.5 [prompt zero-shot]:
+    Anonymized: Betriebsbesichtigung bei einem Unternehmen in Baar kürzlich. Die Geschäftsführerin präsentierte das neue Bauprojekt "Wohnen am See". Finanzierungsbedarf für den Landkauf beträgt eine Summe von mehreren Millionen Franken via Hypothek. Sie wird die Mittel auf ein Konto überweisen lassen, sobald unser Kreditkomitee zugestimmt hat.
+    BERTScore (masked): F1=0.9118 | BERTScore (full): F1=0.8643 | Levenshtein: 0.2945 | ROUGE-1: 0.6237 | BLEU-4: 0.4089
+
+  LLM Qwen2.5 [prompt few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8737 | BERTScore (full): F1=0.8368 | Levenshtein: 0.3797 | ROUGE-1: 0.5625 | BLEU-4: 0.3373
+
+  LLM SauerkrautLM [prompt zero-shot]:
+    Anonymized: Betriebsbesichtigung bei einer Firma in einer Stadt in der Schweiz an einem Datum. Ein Geschäftsführer präsentierte das neue Bauprojekt "Wohnen am See". Finanzierungsbedarf für den Landkauf beträgt einen Betrag. Die Mittel werden auf ein Baukonto überwiesen, sobald unser Kreditkomitee zugestimmt hat. Die Überweisung erfolgt auf ein Konto mit der Nummer [Konto].
+    BERTScore (masked): F1=0.8561 | BERTScore (full): F1=0.8113 | Levenshtein: 0.4490 | ROUGE-1: 0.4950 | BLEU-4: 0.3173
+
+  LLM SauerkrautLM [prompt few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8682 | BERTScore (full): F1=0.8288 | Levenshtein: 0.4142 | ROUGE-1: 0.5155 | BLEU-4: 0.3162
+
+  Datenwertschöpfung API:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.7927 | BERTScore (full): F1=0.7838 | Levenshtein: 0.4654 | ROUGE-1: 0.7879 | BLEU-4: 0.6054
+
+
+──────────────────────────────────────────────────────────────────────────────
+  Document ID: 6558 | Complexity: Medium
+──────────────────────────────────────────────────────────────────────────────
+  ORIGINAL (305 chars, 6 PII entities):
+    Betriebsbesichtigung bei der Logistik Express GmbH in Dietikon am 13.05.2024. Der CEO, Herr Stefan Meier, präsentierte das neue, automatisierte Lager. Im Anschluss besprachen wir eine Leasing-Finanzierung für 5 neue LKW im Wert von ca. CHF 1.2 Mio. Leasing-Offerte wird durch unsere Spezialisten erstellt.
+
+  GOLD STANDARD ANONYMIZATION:
+    Betriebsbesichtigung bei der [ORG] in [LOC] am [DATE]. Der [JOB], Herr [PER], präsentierte das neue, automatisierte Lager. Im Anschluss besprachen wir eine Leasing-Finanzierung für 5 neue LKW im Wert von ca. [MONEY] Leasing-Offerte wird durch unsere Spezialisten erstellt.
+
+  spaCy + Regex:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9880 | BERTScore (full): F1=0.8727 | Levenshtein: 0.0121 | ROUGE-1: 0.8148 | BLEU-4: 0.6003
+
+  BERT (pretrained) + Regex:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9859 | BERTScore (full): F1=0.8629 | Levenshtein: 0.0201 | ROUGE-1: 0.8049 | BLEU-4: 0.6015
+
+  BERT Fine-Tuned:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=1.0000 | BERTScore (full): F1=0.8547 | Levenshtein: 0.0000 | ROUGE-1: 0.7901 | BLEU-4: 0.5779
+
+  Presidio:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=1.0000 | BERTScore (full): F1=0.8547 | Levenshtein: 0.0000 | ROUGE-1: 0.7901 | BLEU-4: 0.5779
+
+  LLM Llama-3 [zero-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9846 | BERTScore (full): F1=0.8370 | Levenshtein: 0.0490 | ROUGE-1: 0.7654 | BLEU-4: 0.5332
+
+  LLM Llama-3 [few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=1.0000 | BERTScore (full): F1=0.8547 | Levenshtein: 0.0000 | ROUGE-1: 0.7901 | BLEU-4: 0.5779
+
+  LLM Llama-3 [few-shot +verify]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=1.0000 | BERTScore (full): F1=0.8547 | Levenshtein: 0.0000 | ROUGE-1: 0.7901 | BLEU-4: 0.5779
+
+  LLM Qwen2.5 [zero-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=1.0000 | BERTScore (full): F1=0.8547 | Levenshtein: 0.0000 | ROUGE-1: 0.7901 | BLEU-4: 0.5779
+
+  LLM Qwen2.5 [few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=1.0000 | BERTScore (full): F1=0.8547 | Levenshtein: 0.0000 | ROUGE-1: 0.7901 | BLEU-4: 0.5779
+
+  LLM Qwen2.5 [few-shot +verify]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=1.0000 | BERTScore (full): F1=0.8547 | Levenshtein: 0.0000 | ROUGE-1: 0.7901 | BLEU-4: 0.5779
+
+  LLM SauerkrautLM [zero-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9846 | BERTScore (full): F1=0.8370 | Levenshtein: 0.0490 | ROUGE-1: 0.7654 | BLEU-4: 0.5332
+
+  LLM SauerkrautLM [few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=1.0000 | BERTScore (full): F1=0.8547 | Levenshtein: 0.0000 | ROUGE-1: 0.7901 | BLEU-4: 0.5779
+
+  LLM SauerkrautLM [few-shot +verify]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=1.0000 | BERTScore (full): F1=0.8547 | Levenshtein: 0.0000 | ROUGE-1: 0.7901 | BLEU-4: 0.5779
+
+  LLM Llama-3 [fine-tuned]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=1.0000 | BERTScore (full): F1=0.8547 | Levenshtein: 0.0000 | ROUGE-1: 0.7901 | BLEU-4: 0.5779
+
+  LLM Llama-3 [prompt zero-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8759 | BERTScore (full): F1=0.8525 | Levenshtein: 0.2981 | ROUGE-1: 0.6429 | BLEU-4: 0.4623
+
+  LLM Llama-3 [prompt few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8464 | BERTScore (full): F1=0.8364 | Levenshtein: 0.3547 | ROUGE-1: 0.5814 | BLEU-4: 0.3997
+
+  LLM Qwen2.5 [prompt zero-shot]:
+    Anonymized: Betriebsbesichtigung bei einem Logistikunternehmen in einer Stadt in der Schweiz kürzlich. Die Geschäftsführerin präsentierte das neue, automatisierte Lager. Im Anschluss besprachen wir eine Leasing-Finanzierung für 5 neue LKW im Wert von einer Summe. Die Leasing-Offerte wird durch unsere Spezialisten erstellt.
+    BERTScore (masked): F1=0.8804 | BERTScore (full): F1=0.8708 | Levenshtein: 0.2724 | ROUGE-1: 0.6747 | BLEU-4: 0.5290
+
+  LLM Qwen2.5 [prompt few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8863 | BERTScore (full): F1=0.8658 | Levenshtein: 0.3207 | ROUGE-1: 0.6437 | BLEU-4: 0.4402
+
+  LLM SauerkrautLM [prompt zero-shot]:
+    Anonymized: Betriebsbesichtigung bei einer Firma in einer Stadt in der Schweiz an einem Datum. Die Geschäftsführerin, ein Mitarbeiter, präsentierte das neue, automatisierte Lager. Im Anschluss besprachen wir eine Leasing-Finanzierung für 5 neue LKW im Wert von ca. CHF 1 Mio. Leasing-Offerte wird durch unsere Spezialisten erstellt.
+    BERTScore (masked): F1=0.8999 | BERTScore (full): F1=0.9013 | Levenshtein: 0.2719 | ROUGE-1: 0.7045 | BLEU-4: 0.5744
+
+  LLM SauerkrautLM [prompt few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8534 | BERTScore (full): F1=0.8465 | Levenshtein: 0.3583 | ROUGE-1: 0.6190 | BLEU-4: 0.4399
+
+  Datenwertschöpfung API:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.7865 | BERTScore (full): F1=0.7722 | Levenshtein: 0.3780 | ROUGE-1: 0.8471 | BLEU-4: 0.6097
+
+
+──────────────────────────────────────────────────────────────────────────────
+  Document ID: 6581 | Complexity: Medium
+──────────────────────────────────────────────────────────────────────────────
+  ORIGINAL (282 chars, 7 PII entities):
+    Jahresgespräch mit Herrn Urs Meier, CFO der Logistik Transport AG in Dietikon. Der Umsatz 2023 lag bei CHF 35 Mio. mit einem soliden EBITDA. Er hat den Kauf einer neuen Liegenschaft in Spreitenbach für CHF 4.5 Mio. angekündigt und wird eine Offerte für eine neue Hypothek anfordern.
+
+  GOLD STANDARD ANONYMIZATION:
+    Jahresgespräch mit Herrn [PER], [JOB] der [ORG] in [LOC]. Der Umsatz 2023 lag bei [MONEY] mit einem soliden EBITDA. Er hat den Kauf einer neuen Liegenschaft in [LOC] für [MONEY] angekündigt und wird eine Offerte für eine neue Hypothek anfordern.
+
+  spaCy + Regex:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9404 | BERTScore (full): F1=0.8608 | Levenshtein: 0.1207 | ROUGE-1: 0.8090 | BLEU-4: 0.5699
+
+  BERT (pretrained) + Regex:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9710 | BERTScore (full): F1=0.8214 | Levenshtein: 0.0329 | ROUGE-1: 0.7586 | BLEU-4: 0.4881
+
+  BERT Fine-Tuned:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9781 | BERTScore (full): F1=0.8028 | Levenshtein: 0.0188 | ROUGE-1: 0.7356 | BLEU-4: 0.4795
+
+  Presidio:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9534 | BERTScore (full): F1=0.8412 | Levenshtein: 0.1087 | ROUGE-1: 0.7865 | BLEU-4: 0.5473
+
+  LLM Llama-3 [zero-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8945 | BERTScore (full): F1=0.7263 | Levenshtein: 0.1737 | ROUGE-1: 0.6512 | BLEU-4: 0.3177
+
+  LLM Llama-3 [few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=1.0000 | BERTScore (full): F1=0.8261 | Levenshtein: 0.0000 | ROUGE-1: 0.7586 | BLEU-4: 0.5266
+
+  LLM Llama-3 [few-shot +verify]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=1.0000 | BERTScore (full): F1=0.8261 | Levenshtein: 0.0000 | ROUGE-1: 0.7586 | BLEU-4: 0.5266
+
+  LLM Qwen2.5 [zero-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9658 | BERTScore (full): F1=0.8682 | Levenshtein: 0.0866 | ROUGE-1: 0.8046 | BLEU-4: 0.6072
+
+  LLM Qwen2.5 [few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=1.0000 | BERTScore (full): F1=0.8261 | Levenshtein: 0.0000 | ROUGE-1: 0.7586 | BLEU-4: 0.5266
+
+  LLM Qwen2.5 [few-shot +verify]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=1.0000 | BERTScore (full): F1=0.8261 | Levenshtein: 0.0000 | ROUGE-1: 0.7586 | BLEU-4: 0.5266
+
+  LLM SauerkrautLM [zero-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9345 | BERTScore (full): F1=0.7607 | Levenshtein: 0.1221 | ROUGE-1: 0.6897 | BLEU-4: 0.3778
+
+  LLM SauerkrautLM [few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=1.0000 | BERTScore (full): F1=0.8261 | Levenshtein: 0.0000 | ROUGE-1: 0.7586 | BLEU-4: 0.5266
+
+  LLM SauerkrautLM [few-shot +verify]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=1.0000 | BERTScore (full): F1=0.8261 | Levenshtein: 0.0000 | ROUGE-1: 0.7586 | BLEU-4: 0.5266
+
+  LLM Llama-3 [fine-tuned]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9781 | BERTScore (full): F1=0.8028 | Levenshtein: 0.0188 | ROUGE-1: 0.7356 | BLEU-4: 0.4795
+
+  LLM Llama-3 [prompt zero-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8834 | BERTScore (full): F1=0.8534 | Levenshtein: 0.3311 | ROUGE-1: 0.6957 | BLEU-4: 0.4972
+
+  LLM Llama-3 [prompt few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8017 | BERTScore (full): F1=0.7933 | Levenshtein: 0.4881 | ROUGE-1: 0.5745 | BLEU-4: 0.3070
+
+  LLM Qwen2.5 [prompt zero-shot]:
+    Anonymized: Jahresgespräch mit dem CFO eines Unternehmens in einer Stadt in der Schweiz. Der Umsatz 2023 lag bei einer Summe mit einem soliden EBITDA. Er hat den Kauf einer neuen Liegenschaft in einer Stadt in der Schweiz für einen Betrag angekündigt und wird eine Offerte für eine neue Hypothek anfordern.
+    BERTScore (masked): F1=0.8977 | BERTScore (full): F1=0.8573 | Levenshtein: 0.3116 | ROUGE-1: 0.6875 | BLEU-4: 0.4976
+
+  LLM Qwen2.5 [prompt few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8782 | BERTScore (full): F1=0.8628 | Levenshtein: 0.3689 | ROUGE-1: 0.6809 | BLEU-4: 0.4642
+
+  LLM SauerkrautLM [prompt zero-shot]:
+    Anonymized: Jahresgespräch mit einer Führungskraft einer Firma in der Schweiz. Der Umsatz 2023 lag bei einer Summe von CHF 35 Mio. mit einem soliden EBITDA. Er hat den Kauf einer neuen Liegenschaft in einer Stadt in der Schweiz für CHF 4,5 Mio. angekündigt und wird eine Offerte für eine neue Hypothek anfordern.
+    BERTScore (masked): F1=0.8799 | BERTScore (full): F1=0.9107 | Levenshtein: 0.3034 | ROUGE-1: 0.7551 | BLEU-4: 0.5648
+
+  LLM SauerkrautLM [prompt few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8764 | BERTScore (full): F1=0.8628 | Levenshtein: 0.3569 | ROUGE-1: 0.6818 | BLEU-4: 0.4867
+
+  Datenwertschöpfung API:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8152 | BERTScore (full): F1=0.8211 | Levenshtein: 0.3761 | ROUGE-1: 0.8602 | BLEU-4: 0.6409
+
+
+──────────────────────────────────────────────────────────────────────────────
+  Document ID: 6666 | Complexity: Medium
+──────────────────────────────────────────────────────────────────────────────
+  ORIGINAL (355 chars, 11 PII entities):
+    Meeting mit dem Immobilienverantwortlichen der Retail Invest Holding AG, Herr Thomas Graf. Es geht um den Kauf einer Liegenschaft an der Bahnhofstrasse in Zürich für CHF 12.5 Mio.. Zur Finanzierung wird eine Hypothek über CHF 8 Mio. benötigt. Die restlichen CHF 4.5 Mio. sind Eigenmittel. Herr Graf ist deutscher Staatsbürger und seit 2018 in der Schweiz.
+
+  GOLD STANDARD ANONYMIZATION:
+    Meeting mit dem [JOB] der [ORG], Herr [PER]. Es geht um den Kauf einer Liegenschaft an der Bahnhofstrasse in [LOC] für [MONEY]. Zur Finanzierung wird eine Hypothek über [MONEY] benötigt. Die restlichen [MONEY] sind Eigenmittel. Herr [PER] ist [NATION] Staatsbürger und seit [DATE] in der [LOC].
+
+  spaCy + Regex:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8989 | BERTScore (full): F1=0.8249 | Levenshtein: 0.2692 | ROUGE-1: 0.7810 | BLEU-4: 0.5466
+
+  BERT (pretrained) + Regex:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9646 | BERTScore (full): F1=0.7902 | Levenshtein: 0.0981 | ROUGE-1: 0.7059 | BLEU-4: 0.3966
+
+  BERT Fine-Tuned:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=1.0000 | BERTScore (full): F1=0.7540 | Levenshtein: 0.0000 | ROUGE-1: 0.6863 | BLEU-4: 0.3601
+
+  Presidio:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9101 | BERTScore (full): F1=0.8050 | Levenshtein: 0.2446 | ROUGE-1: 0.7619 | BLEU-4: 0.4939
+
+  LLM Llama-3 [zero-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9013 | BERTScore (full): F1=0.7345 | Levenshtein: 0.2339 | ROUGE-1: 0.6863 | BLEU-4: 0.3601
+
+  LLM Llama-3 [few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9563 | BERTScore (full): F1=0.7640 | Levenshtein: 0.1042 | ROUGE-1: 0.7059 | BLEU-4: 0.3716
+
+  LLM Llama-3 [few-shot +verify]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9563 | BERTScore (full): F1=0.7640 | Levenshtein: 0.1042 | ROUGE-1: 0.7059 | BLEU-4: 0.3716
+
+  LLM Qwen2.5 [zero-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8404 | BERTScore (full): F1=0.8906 | Levenshtein: 0.3262 | ROUGE-1: 0.9009 | BLEU-4: 0.7425
+
+  LLM Qwen2.5 [few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9198 | BERTScore (full): F1=0.8521 | Levenshtein: 0.1667 | ROUGE-1: 0.7843 | BLEU-4: 0.5320
+
+  LLM Qwen2.5 [few-shot +verify]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9198 | BERTScore (full): F1=0.8521 | Levenshtein: 0.1667 | ROUGE-1: 0.7843 | BLEU-4: 0.5320
+
+  LLM SauerkrautLM [zero-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9001 | BERTScore (full): F1=0.8640 | Levenshtein: 0.2219 | ROUGE-1: 0.8190 | BLEU-4: 0.5755
+
+  LLM SauerkrautLM [few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9563 | BERTScore (full): F1=0.7640 | Levenshtein: 0.1042 | ROUGE-1: 0.7059 | BLEU-4: 0.3716
+
+  LLM SauerkrautLM [few-shot +verify]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9274 | BERTScore (full): F1=0.7978 | Levenshtein: 0.1954 | ROUGE-1: 0.7255 | BLEU-4: 0.4083
+
+  LLM Llama-3 [fine-tuned]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=1.0000 | BERTScore (full): F1=0.7540 | Levenshtein: 0.0000 | ROUGE-1: 0.6863 | BLEU-4: 0.3601
+
+  LLM Llama-3 [prompt zero-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8405 | BERTScore (full): F1=0.7992 | Levenshtein: 0.4496 | ROUGE-1: 0.5357 | BLEU-4: 0.2715
+
+  LLM Llama-3 [prompt few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8488 | BERTScore (full): F1=0.8090 | Levenshtein: 0.3723 | ROUGE-1: 0.5361 | BLEU-4: 0.2386
+
+  LLM Qwen2.5 [prompt zero-shot]:
+    Anonymized: Meeting mit dem Immobilienverantwortlichen eines Unternehmens. Es geht um den Kauf einer Liegenschaft an einer Straße in einer Stadt für einen Betrag. Zur Finanzierung wird eine Hypothek über einen Betrag benötigt. Die restlichen Mittel sind Eigenmittel. Der Immobilienverantwortliche ist ein Staatsbürger und seit einigen Jahren in der Schweiz.
+    BERTScore (masked): F1=0.8607 | BERTScore (full): F1=0.8217 | Levenshtein: 0.3439 | ROUGE-1: 0.6346 | BLEU-4: 0.3222
+
+  LLM Qwen2.5 [prompt few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8682 | BERTScore (full): F1=0.8377 | Levenshtein: 0.3460 | ROUGE-1: 0.6476 | BLEU-4: 0.3291
+
+  LLM SauerkrautLM [prompt zero-shot]:
+    Anonymized: Ein Meeting fand statt mit dem Immobilienverantwortlichen einer Firma, Herrn Graf. Es ging um den Kauf einer Liegenschaft in einer Stadt in der Schweiz für einen Betrag von CHF 12.5 Mio.. Zur Finanzierung wird eine Hypothek über CHF 8 Mio. benötigt. Die restlichen CHF 4.5 Mio. sind Eigenmittel. Herr Graf ist seit 2018 in der Schweiz und hat einen Hochschulabschluss.
+    BERTScore (masked): F1=0.8900 | BERTScore (full): F1=0.9068 | Levenshtein: 0.3345 | ROUGE-1: 0.7241 | BLEU-4: 0.5168
+
+  LLM SauerkrautLM [prompt few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8396 | BERTScore (full): F1=0.7913 | Levenshtein: 0.4367 | ROUGE-1: 0.5607 | BLEU-4: 0.2579
+
+  Datenwertschöpfung API:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.7895 | BERTScore (full): F1=0.8099 | Levenshtein: 0.4228 | ROUGE-1: 0.8468 | BLEU-4: 0.6117
+
+
+──────────────────────────────────────────────────────────────────────────────
+  Document ID: 6672 | Complexity: Medium
+──────────────────────────────────────────────────────────────────────────────
+  ORIGINAL (373 chars, 9 PII entities):
+    Anruf von Markus Weber (079 345 67 89), Leiter Finanzen der Global Trade GmbH. Es wird dringend ein Akkreditiv (L/C) für einen Export nach Südkorea im Wert von USD 850'000 benötigt. Die Dokumente sind unvollständig. Ich habe ihn gebeten, die fehlenden Unterlagen bis heute Abend an trade.finance@bank.ch zu senden. Kontosaldo auf CH45 0023 3788 1234 5678 A ist ausreichend.
+
+  GOLD STANDARD ANONYMIZATION:
+    Anruf von [PER] ([PHONE]), [JOB] der [ORG]. Es wird dringend ein Akkreditiv (L/C) für einen Export nach [LOC] im Wert von [MONEY] benötigt. Die Dokumente sind unvollständig. Ich habe ihn gebeten, die fehlenden Unterlagen bis [DATE] an [EMAIL] zu senden. Kontosaldo auf [IBAN] ist ausreichend.
+
+  spaCy + Regex:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9099 | BERTScore (full): F1=0.8061 | Levenshtein: 0.1937 | ROUGE-1: 0.7748 | BLEU-4: 0.5112
+
+  BERT (pretrained) + Regex:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9199 | BERTScore (full): F1=0.8778 | Levenshtein: 0.1751 | ROUGE-1: 0.8288 | BLEU-4: 0.6354
+
+  BERT Fine-Tuned:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9880 | BERTScore (full): F1=0.8177 | Levenshtein: 0.0426 | ROUGE-1: 0.7238 | BLEU-4: 0.4752
+
+  Presidio:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9568 | BERTScore (full): F1=0.7635 | Levenshtein: 0.0927 | ROUGE-1: 0.6857 | BLEU-4: 0.4002
+
+  LLM Llama-3 [zero-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9938 | BERTScore (full): F1=0.7716 | Levenshtein: 0.0080 | ROUGE-1: 0.7048 | BLEU-4: 0.4375
+
+  LLM Llama-3 [few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9823 | BERTScore (full): F1=0.8196 | Levenshtein: 0.0500 | ROUGE-1: 0.7358 | BLEU-4: 0.4893
+
+  LLM Llama-3 [few-shot +verify]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9823 | BERTScore (full): F1=0.8196 | Levenshtein: 0.0500 | ROUGE-1: 0.7358 | BLEU-4: 0.4893
+
+  LLM Qwen2.5 [zero-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8709 | BERTScore (full): F1=0.9316 | Levenshtein: 0.2946 | ROUGE-1: 0.9043 | BLEU-4: 0.7731
+
+  LLM Qwen2.5 [few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9264 | BERTScore (full): F1=0.8931 | Levenshtein: 0.1785 | ROUGE-1: 0.8148 | BLEU-4: 0.6159
+
+  LLM Qwen2.5 [few-shot +verify]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9264 | BERTScore (full): F1=0.8931 | Levenshtein: 0.1785 | ROUGE-1: 0.8148 | BLEU-4: 0.6159
+
+  LLM SauerkrautLM [zero-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9823 | BERTScore (full): F1=0.8196 | Levenshtein: 0.0500 | ROUGE-1: 0.7358 | BLEU-4: 0.4893
+
+  LLM SauerkrautLM [few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9823 | BERTScore (full): F1=0.8196 | Levenshtein: 0.0500 | ROUGE-1: 0.7358 | BLEU-4: 0.4893
+
+  LLM SauerkrautLM [few-shot +verify]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9823 | BERTScore (full): F1=0.8196 | Levenshtein: 0.0500 | ROUGE-1: 0.7358 | BLEU-4: 0.4893
+
+  LLM Llama-3 [fine-tuned]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=1.0000 | BERTScore (full): F1=0.8037 | Levenshtein: 0.0000 | ROUGE-1: 0.6923 | BLEU-4: 0.4235
+
+  LLM Llama-3 [prompt zero-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8715 | BERTScore (full): F1=0.8188 | Levenshtein: 0.2968 | ROUGE-1: 0.6095 | BLEU-4: 0.3820
+
+  LLM Llama-3 [prompt few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8938 | BERTScore (full): F1=0.8466 | Levenshtein: 0.3013 | ROUGE-1: 0.6538 | BLEU-4: 0.4145
+
+  LLM Qwen2.5 [prompt zero-shot]:
+    Anonymized: Anruf von einem Mitarbeiter (079 345 67 89), eine Führungskraft der Firma. Es wird dringend ein Akkreditiv (L/C) für einen Export an einen Standort in Südkorea im Wert von einer Summe benötigt. Die Dokumente sind unvollständig. Ich habe ihn gebeten, die fehlenden Unterlagen kürzlich an [E-Mail] zu senden. Kontosaldo auf [Konto] ist ausreichend.
+    BERTScore (masked): F1=0.8995 | BERTScore (full): F1=0.8654 | Levenshtein: 0.2813 | ROUGE-1: 0.6964 | BLEU-4: 0.4575
+
+  LLM Qwen2.5 [prompt few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8866 | BERTScore (full): F1=0.8430 | Levenshtein: 0.3484 | ROUGE-1: 0.6605 | BLEU-4: 0.4338
+
+  LLM SauerkrautLM [prompt zero-shot]:
+    Anonymized: Anruf von einem Mitarbeiter der Firma. Es wird dringend ein Akkreditiv (L/C) für einen Export in ein anderes Land benötigt. Der Wert beträgt einen Betrag in Höhe von USD 850'000. Die Dokumente sind unvollständig. Ich habe ihn gebeten, die fehlenden Unterlagen bis heute Abend an [E-Mail] zu senden. Der Kontosaldo auf [Konto] ist ausreichend.
+    BERTScore (masked): F1=0.8963 | BERTScore (full): F1=0.8486 | Levenshtein: 0.3012 | ROUGE-1: 0.6549 | BLEU-4: 0.4253
+
+  LLM SauerkrautLM [prompt few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8859 | BERTScore (full): F1=0.8629 | Levenshtein: 0.3432 | ROUGE-1: 0.6275 | BLEU-4: 0.3896
+
+  Datenwertschöpfung API:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8145 | BERTScore (full): F1=0.7940 | Levenshtein: 0.4465 | ROUGE-1: 0.8034 | BLEU-4: 0.6856
+
+
+──────────────────────────────────────────────────────────────────────────────
+  Document ID: 6943 | Complexity: High
+──────────────────────────────────────────────────────────────────────────────
+  ORIGINAL (322 chars, 11 PII entities):
+    - Tel mit Urs Meier, Leiter Finanzen von Präzisionsmechanik AG.
+- Braucht dringned FX Spot für EUR 500'000 gegen CHF. Zahlung an deutschen Lieferanten.
+- Ausserdem Kreditkartenlimite für den CEO Herr Peter Keller erhöhen auf CHF 25k. Reise nach Asien.
+- E-Mail von Keller ist p.keller@pmag.ch. Pendenzenliste aktualisiert.
+
+  GOLD STANDARD ANONYMIZATION:
+    - Tel mit [PER], [JOB] von [ORG].
+- Braucht dringned FX Spot für [MONEY] gegen CHF. Zahlung an [NATION] Lieferanten.
+- Ausserdem Kreditkartenlimite für den [JOB] Herr [PER] erhöhen auf [MONEY]. Reise nach [LOC].
+- E-Mail von [PER] ist [EMAIL]. Pendenzenliste aktualisiert.
+
+  spaCy + Regex:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8660 | BERTScore (full): F1=0.7574 | Levenshtein: 0.3333 | ROUGE-1: 0.7033 | BLEU-4: 0.3661
+
+  BERT (pretrained) + Regex:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9186 | BERTScore (full): F1=0.7352 | Levenshtein: 0.1532 | ROUGE-1: 0.6813 | BLEU-4: 0.2701
+
+  BERT Fine-Tuned:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=1.0000 | BERTScore (full): F1=0.7419 | Levenshtein: 0.0000 | ROUGE-1: 0.6889 | BLEU-4: 0.3235
+
+  Presidio:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9367 | BERTScore (full): F1=0.7167 | Levenshtein: 0.1872 | ROUGE-1: 0.6444 | BLEU-4: 0.2808
+
+  LLM Llama-3 [zero-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9857 | BERTScore (full): F1=0.7742 | Levenshtein: 0.0502 | ROUGE-1: 0.6966 | BLEU-4: 0.3656
+
+  LLM Llama-3 [few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9846 | BERTScore (full): F1=0.7412 | Levenshtein: 0.0405 | ROUGE-1: 0.6889 | BLEU-4: 0.3345
+
+  LLM Llama-3 [few-shot +verify]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9846 | BERTScore (full): F1=0.7412 | Levenshtein: 0.0405 | ROUGE-1: 0.6889 | BLEU-4: 0.3345
+
+  LLM Qwen2.5 [zero-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9927 | BERTScore (full): F1=0.7773 | Levenshtein: 0.0268 | ROUGE-1: 0.7111 | BLEU-4: 0.3695
+
+  LLM Qwen2.5 [few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9779 | BERTScore (full): F1=0.7363 | Levenshtein: 0.0639 | ROUGE-1: 0.6742 | BLEU-4: 0.3308
+
+  LLM Qwen2.5 [few-shot +verify]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9698 | BERTScore (full): F1=0.7783 | Levenshtein: 0.1022 | ROUGE-1: 0.6966 | BLEU-4: 0.3911
+
+  LLM SauerkrautLM [zero-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8957 | BERTScore (full): F1=0.6966 | Levenshtein: 0.1735 | ROUGE-1: 0.6136 | BLEU-4: 0.2307
+
+  LLM SauerkrautLM [few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9544 | BERTScore (full): F1=0.7340 | Levenshtein: 0.1187 | ROUGE-1: 0.6591 | BLEU-4: 0.3226
+
+  LLM SauerkrautLM [few-shot +verify]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9549 | BERTScore (full): F1=0.8102 | Levenshtein: 0.1429 | ROUGE-1: 0.7692 | BLEU-4: 0.5094
+
+  LLM Llama-3 [fine-tuned]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=1.0000 | BERTScore (full): F1=0.7419 | Levenshtein: 0.0000 | ROUGE-1: 0.6889 | BLEU-4: 0.3235
+
+  LLM Llama-3 [prompt zero-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8381 | BERTScore (full): F1=0.7935 | Levenshtein: 0.4755 | ROUGE-1: 0.5102 | BLEU-4: 0.1660
+
+  LLM Llama-3 [prompt few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.7876 | BERTScore (full): F1=0.7616 | Levenshtein: 0.5813 | ROUGE-1: 0.3846 | BLEU-4: 0.0000
+
+  LLM Qwen2.5 [prompt zero-shot]:
+    Anonymized: - Tel mit dem Leiter Finanzen eines Unternehmens.
+- Braucht dringend FX Spot für eine Summe von eintausend Euro gegen Schweizer Franken. Zahlung an Lieferanten in Deutschland.
+- Ausserdem Kreditkartenlimite für die Führungskraft erhöhen auf fünftausend Schweizer Franken. Reise nach einem Ausland.
+- E-Mail von der Führungskraft ist [E-Mail]. Pendenzenliste aktualisiert.
+    BERTScore (masked): F1=0.8386 | BERTScore (full): F1=0.8134 | Levenshtein: 0.4622 | ROUGE-1: 0.5657 | BLEU-4: 0.1368
+
+  LLM Qwen2.5 [prompt few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8336 | BERTScore (full): F1=0.8062 | Levenshtein: 0.4708 | ROUGE-1: 0.5102 | BLEU-4: 0.1726
+
+  LLM SauerkrautLM [prompt zero-shot]:
+    Anonymized: - Tel mit einem Mitarbeiter von ein Unternehmen.
+- Braucht dringend FX Spot für einen Betrag gegen CHF. Zahlung an einen Lieferanten in Deutschland.
+- Ausserdem Kreditkartenlimite für eine Führungskraft erhöhen auf CHF 25k. Reise nach Asien.
+- E-Mail von der Führungskraft ist [E-Mail]. Pendenzenliste aktualisiert.
+    BERTScore (masked): F1=0.8839 | BERTScore (full): F1=0.8275 | Levenshtein: 0.3443 | ROUGE-1: 0.6383 | BLEU-4: 0.3613
+
+  LLM SauerkrautLM [prompt few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.7672 | BERTScore (full): F1=0.7437 | Levenshtein: 0.6284 | ROUGE-1: 0.3063 | BLEU-4: 0.0000
+
+  Datenwertschöpfung API:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8740 | BERTScore (full): F1=0.8061 | Levenshtein: 0.2937 | ROUGE-1: 0.8723 | BLEU-4: 0.7001
+
+
+──────────────────────────────────────────────────────────────────────────────
+  Document ID: 6996 | Complexity: High
+──────────────────────────────────────────────────────────────────────────────
+  ORIGINAL (307 chars, 10 PII entities):
+    - Anruf von Frau Sabine Keller, Leiterin Finanzen der Global Food Trading GmbH.
+- Kreditkartenlimite für neuen Sales Director Peter Fuchs muss dringendd erhöht werden.
+- Neue Limite: 25k CHF für Geschäftsreise nach Asien.
+- Kontakt Fuchs: p.fuchs@gft.ch.
+- To-Do: Formular für Unterschrift an Keller senden.
+
+  GOLD STANDARD ANONYMIZATION:
+    - Anruf von Frau [PER], [JOB] der [ORG].
+- Kreditkartenlimite für neuen [JOB] [PER] muss dringendd erhöht werden.
+- Neue Limite: [MONEY] für Geschäftsreise nach [LOC].
+- Kontakt [PER]: [EMAIL].
+- To-Do: Formular für Unterschrift an [PER] senden.
+
+  spaCy + Regex:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9297 | BERTScore (full): F1=0.8332 | Levenshtein: 0.1875 | ROUGE-1: 0.7816 | BLEU-4: 0.4955
+
+  BERT (pretrained) + Regex:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9521 | BERTScore (full): F1=0.8134 | Levenshtein: 0.1422 | ROUGE-1: 0.7356 | BLEU-4: 0.4364
+
+  BERT Fine-Tuned:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=1.0000 | BERTScore (full): F1=0.7691 | Levenshtein: 0.0000 | ROUGE-1: 0.6667 | BLEU-4: 0.3619
+
+  Presidio:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9327 | BERTScore (full): F1=0.8361 | Levenshtein: 0.1447 | ROUGE-1: 0.7907 | BLEU-4: 0.5604
+
+  LLM Llama-3 [zero-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9315 | BERTScore (full): F1=0.8371 | Levenshtein: 0.1278 | ROUGE-1: 0.7529 | BLEU-4: 0.5127
+
+  LLM Llama-3 [few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9849 | BERTScore (full): F1=0.7884 | Levenshtein: 0.0524 | ROUGE-1: 0.7143 | BLEU-4: 0.4209
+
+  LLM Llama-3 [few-shot +verify]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9849 | BERTScore (full): F1=0.7884 | Levenshtein: 0.0524 | ROUGE-1: 0.7143 | BLEU-4: 0.4209
+
+  LLM Qwen2.5 [zero-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8911 | BERTScore (full): F1=0.8912 | Levenshtein: 0.2227 | ROUGE-1: 0.8235 | BLEU-4: 0.6582
+
+  LLM Qwen2.5 [few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9497 | BERTScore (full): F1=0.8192 | Levenshtein: 0.1161 | ROUGE-1: 0.7674 | BLEU-4: 0.5182
+
+  LLM Qwen2.5 [few-shot +verify]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9497 | BERTScore (full): F1=0.8192 | Levenshtein: 0.1161 | ROUGE-1: 0.7674 | BLEU-4: 0.5182
+
+  LLM SauerkrautLM [zero-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9121 | BERTScore (full): F1=0.8318 | Levenshtein: 0.1378 | ROUGE-1: 0.7529 | BLEU-4: 0.5127
+
+  LLM SauerkrautLM [few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9849 | BERTScore (full): F1=0.7884 | Levenshtein: 0.0524 | ROUGE-1: 0.7143 | BLEU-4: 0.4209
+
+  LLM SauerkrautLM [few-shot +verify]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9849 | BERTScore (full): F1=0.7884 | Levenshtein: 0.0524 | ROUGE-1: 0.7143 | BLEU-4: 0.4209
+
+  LLM Llama-3 [fine-tuned]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=1.0000 | BERTScore (full): F1=0.7691 | Levenshtein: 0.0000 | ROUGE-1: 0.6667 | BLEU-4: 0.3619
+
+  LLM Llama-3 [prompt zero-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8712 | BERTScore (full): F1=0.8421 | Levenshtein: 0.3587 | ROUGE-1: 0.6118 | BLEU-4: 0.3296
+
+  LLM Llama-3 [prompt few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8090 | BERTScore (full): F1=0.8059 | Levenshtein: 0.4387 | ROUGE-1: 0.4941 | BLEU-4: 0.2114
+
+  LLM Qwen2.5 [prompt zero-shot]:
+    Anonymized: - Anruf von der Geschäftsführerin ein Kreditservice.
+- Kreditkartenlimite für neuen Führungskraft muss dringend erhöht werden.
+- Neue Limite: eine Summe für Geschäftsreise nach einem Ausland.
+- Kontakt: [E-Mail].
+- To-Do: Formular für Unterschrift an die Geschäftsführerin senden.
+    BERTScore (masked): F1=0.8454 | BERTScore (full): F1=0.8199 | Levenshtein: 0.3571 | ROUGE-1: 0.5952 | BLEU-4: 0.2831
+
+  LLM Qwen2.5 [prompt few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8910 | BERTScore (full): F1=0.8489 | Levenshtein: 0.2446 | ROUGE-1: 0.6591 | BLEU-4: 0.3578
+
+  LLM SauerkrautLM [prompt zero-shot]:
+    Anonymized: - Anruf von der Leiterin Finanzen einer Firma.
+- Kreditkartenlimite für einen neuen Sales Director muss dringend erhöht werden.
+- Neue Limite: 25k CHF für eine Geschäftsreise nach Asien.
+- Kontakt: [Telefon]
+- To-Do: Formular für Unterschrift an die Leiterin Finanzen senden.
+    BERTScore (masked): F1=0.9225 | BERTScore (full): F1=0.8599 | Levenshtein: 0.1864 | ROUGE-1: 0.7273 | BLEU-4: 0.3943
+
+  LLM SauerkrautLM [prompt few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.7594 | BERTScore (full): F1=0.7729 | Levenshtein: 0.5696 | ROUGE-1: 0.4286 | BLEU-4: 0.0000
+
+  Datenwertschöpfung API:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8448 | BERTScore (full): F1=0.8433 | Levenshtein: 0.3158 | ROUGE-1: 0.8444 | BLEU-4: 0.6762
+
+
+──────────────────────────────────────────────────────────────────────────────
+  Document ID: 7082 | Complexity: High
+──────────────────────────────────────────────────────────────────────────────
+  ORIGINAL (274 chars, 8 PII entities):
+    Hans Gerber, CFO der Präzisionsmechanik AG, angerufen. Dringender Bedarf für ein Akkreditiv über USD 750'000 für eine Lieferung aus Taiwan. Dokumente sind unvollständig. Sein Assistent, Peter Frei, schickt alles heute noch an trade.finance.ch@bank.com. Deadline ist Freitag.
+
+  GOLD STANDARD ANONYMIZATION:
+    [PER], [JOB] der [ORG], angerufen. Dringender Bedarf für ein Akkreditiv über [MONEY] für eine Lieferung aus [LOC]. Dokumente sind unvollständig. Sein Assistent, [PER], schickt alles heute noch an [EMAIL]. Deadline ist [DATE].
+
+  spaCy + Regex:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9613 | BERTScore (full): F1=0.8206 | Levenshtein: 0.0510 | ROUGE-1: 0.7647 | BLEU-4: 0.4632
+
+  BERT (pretrained) + Regex:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9613 | BERTScore (full): F1=0.8206 | Levenshtein: 0.0510 | ROUGE-1: 0.7647 | BLEU-4: 0.4632
+
+  BERT Fine-Tuned:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9777 | BERTScore (full): F1=0.7630 | Levenshtein: 0.0479 | ROUGE-1: 0.6765 | BLEU-4: 0.4030
+
+  Presidio:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9613 | BERTScore (full): F1=0.7799 | Levenshtein: 0.0851 | ROUGE-1: 0.7059 | BLEU-4: 0.4215
+
+  LLM Llama-3 [zero-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9605 | BERTScore (full): F1=0.7754 | Levenshtein: 0.0681 | ROUGE-1: 0.7143 | BLEU-4: 0.4126
+
+  LLM Llama-3 [few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9815 | BERTScore (full): F1=0.7914 | Levenshtein: 0.0259 | ROUGE-1: 0.7246 | BLEU-4: 0.4394
+
+  LLM Llama-3 [few-shot +verify]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9815 | BERTScore (full): F1=0.7914 | Levenshtein: 0.0259 | ROUGE-1: 0.7246 | BLEU-4: 0.4394
+
+  LLM Qwen2.5 [zero-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9023 | BERTScore (full): F1=0.8831 | Levenshtein: 0.1682 | ROUGE-1: 0.8857 | BLEU-4: 0.7139
+
+  LLM Qwen2.5 [few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9180 | BERTScore (full): F1=0.8693 | Levenshtein: 0.1560 | ROUGE-1: 0.8571 | BLEU-4: 0.6698
+
+  LLM Qwen2.5 [few-shot +verify]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9180 | BERTScore (full): F1=0.8693 | Levenshtein: 0.1560 | ROUGE-1: 0.8571 | BLEU-4: 0.6698
+
+  LLM SauerkrautLM [zero-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9539 | BERTScore (full): F1=0.8125 | Levenshtein: 0.0697 | ROUGE-1: 0.7714 | BLEU-4: 0.4813
+
+  LLM SauerkrautLM [few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9815 | BERTScore (full): F1=0.7914 | Levenshtein: 0.0259 | ROUGE-1: 0.7246 | BLEU-4: 0.4394
+
+  LLM SauerkrautLM [few-shot +verify]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9815 | BERTScore (full): F1=0.7914 | Levenshtein: 0.0259 | ROUGE-1: 0.7246 | BLEU-4: 0.4394
+
+  LLM Llama-3 [fine-tuned]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=1.0000 | BERTScore (full): F1=0.7872 | Levenshtein: 0.0000 | ROUGE-1: 0.7059 | BLEU-4: 0.4341
+
+  LLM Llama-3 [prompt zero-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.7761 | BERTScore (full): F1=0.7616 | Levenshtein: 0.5552 | ROUGE-1: 0.4235 | BLEU-4: 0.1920
+
+  LLM Llama-3 [prompt few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.7771 | BERTScore (full): F1=0.7557 | Levenshtein: 0.5572 | ROUGE-1: 0.4198 | BLEU-4: 0.1710
+
+  LLM Qwen2.5 [prompt zero-shot]:
+    Anonymized: ein Geschäftsführer einer Firma, CFO, angerufen. Dringender Bedarf für ein Akkreditiv über einen Betrag von mehr als eintausendsiebenhunderttausend Franken für eine Lieferung aus einer Stadt. Dokumente sind unvollständig. Sein Assistent, ein Mitarbeiter, schickt alles heute noch an [E-Mail]. Der Deadline ist kürzlich.
+    BERTScore (masked): F1=0.8429 | BERTScore (full): F1=0.8177 | Levenshtein: 0.4353 | ROUGE-1: 0.6154 | BLEU-4: 0.3704
+
+  LLM Qwen2.5 [prompt few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8308 | BERTScore (full): F1=0.8179 | Levenshtein: 0.4416 | ROUGE-1: 0.6000 | BLEU-4: 0.3311
+
+  LLM SauerkrautLM [prompt zero-shot]:
+    Anonymized: Ein Mitarbeiter der Präzisionsmechanik AG, der als CFO fungiert, hat sich bei uns gemeldet. Es besteht ein dringender Bedarf für ein Akkreditiv über einen Betrag von USD 750'000 für eine Lieferung aus einer asiatischen Region. Die erforderlichen Dokumente sind unvollständig. Sein Assistent wird sie heute noch an [E-Mail] schicken. Die Frist ist für den nächsten Freitag angesetzt.
+    BERTScore (masked): F1=0.8059 | BERTScore (full): F1=0.8063 | Levenshtein: 0.5581 | ROUGE-1: 0.5161 | BLEU-4: 0.2452
+
+  LLM SauerkrautLM [prompt few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.7960 | BERTScore (full): F1=0.8103 | Levenshtein: 0.4939 | ROUGE-1: 0.5679 | BLEU-4: 0.2936
+
+  Datenwertschöpfung API:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8590 | BERTScore (full): F1=0.8407 | Levenshtein: 0.2923 | ROUGE-1: 0.8571 | BLEU-4: 0.6843
+
+
+──────────────────────────────────────────────────────────────────────────────
+  Document ID: 7136 | Complexity: High
+──────────────────────────────────────────────────────────────────────────────
+  ORIGINAL (311 chars, 7 PII entities):
+    - Martin Graf, Projektleiter von Tech Innovate AG, braucht ein neues Konto für ein Spin-off, die Future Robotics GmbH. Kontoeröffnungsunterlagen vorbereiten. Das Kapital von CHF 100'000 soll auf das Kapitaleinzahlungskonto CH44 0023 3233 4567 8901 A überwiesen werden. Sitz der neuen Firma wird Winterthur sein.
+
+  GOLD STANDARD ANONYMIZATION:
+    - [PER], [JOB] von [ORG], braucht ein neues Konto für ein Spin-off, die [ORG]. Kontoeröffnungsunterlagen vorbereiten. Das Kapital von [MONEY] soll auf das Kapitaleinzahlungskonto [IBAN] überwiesen werden. Sitz der neuen Firma wird [LOC] sein.
+
+  spaCy + Regex:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8656 | BERTScore (full): F1=0.8224 | Levenshtein: 0.3033 | ROUGE-1: 0.7561 | BLEU-4: 0.4872
+
+  BERT (pretrained) + Regex:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9314 | BERTScore (full): F1=0.8856 | Levenshtein: 0.1573 | ROUGE-1: 0.8095 | BLEU-4: 0.6020
+
+  BERT Fine-Tuned:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=1.0000 | BERTScore (full): F1=0.8131 | Levenshtein: 0.0000 | ROUGE-1: 0.6835 | BLEU-4: 0.3998
+
+  Presidio:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8836 | BERTScore (full): F1=0.7996 | Levenshtein: 0.2417 | ROUGE-1: 0.7317 | BLEU-4: 0.4781
+
+  LLM Llama-3 [zero-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9720 | BERTScore (full): F1=0.8356 | Levenshtein: 0.0541 | ROUGE-1: 0.7250 | BLEU-4: 0.4687
+
+  LLM Llama-3 [few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=1.0000 | BERTScore (full): F1=0.8131 | Levenshtein: 0.0000 | ROUGE-1: 0.6835 | BLEU-4: 0.3998
+
+  LLM Llama-3 [few-shot +verify]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=1.0000 | BERTScore (full): F1=0.8131 | Levenshtein: 0.0000 | ROUGE-1: 0.6835 | BLEU-4: 0.3998
+
+  LLM Qwen2.5 [zero-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8194 | BERTScore (full): F1=0.9712 | Levenshtein: 0.3920 | ROUGE-1: 0.9778 | BLEU-4: 0.9414
+
+  LLM Qwen2.5 [few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9634 | BERTScore (full): F1=0.8583 | Levenshtein: 0.0913 | ROUGE-1: 0.7500 | BLEU-4: 0.4695
+
+  LLM Qwen2.5 [few-shot +verify]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9634 | BERTScore (full): F1=0.8583 | Levenshtein: 0.0913 | ROUGE-1: 0.7500 | BLEU-4: 0.4695
+
+  LLM SauerkrautLM [zero-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9747 | BERTScore (full): F1=0.8249 | Levenshtein: 0.0409 | ROUGE-1: 0.7160 | BLEU-4: 0.4377
+
+  LLM SauerkrautLM [few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9842 | BERTScore (full): F1=0.8208 | Levenshtein: 0.0321 | ROUGE-1: 0.7000 | BLEU-4: 0.4114
+
+  LLM SauerkrautLM [few-shot +verify]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9842 | BERTScore (full): F1=0.8208 | Levenshtein: 0.0321 | ROUGE-1: 0.7000 | BLEU-4: 0.4114
+
+  LLM Llama-3 [fine-tuned]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=1.0000 | BERTScore (full): F1=0.8131 | Levenshtein: 0.0000 | ROUGE-1: 0.6835 | BLEU-4: 0.3998
+
+  LLM Llama-3 [prompt zero-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8600 | BERTScore (full): F1=0.8311 | Levenshtein: 0.4167 | ROUGE-1: 0.5000 | BLEU-4: 0.1974
+
+  LLM Llama-3 [prompt few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8448 | BERTScore (full): F1=0.7979 | Levenshtein: 0.4022 | ROUGE-1: 0.4390 | BLEU-4: 0.1841
+
+  LLM Qwen2.5 [prompt zero-shot]:
+    Anonymized: - ein Projektleiter von einem Unternehmen, braucht ein neues Konto für ein Spin-off, eine neue Firma. Kontoeröffnungsunterlagen vorbereiten. Das Kapital in Höhe einer Summe soll auf ein Konto überwiesen werden. Sitz der neuen Firma wird eine Stadt in der Schweiz sein.
+    BERTScore (masked): F1=0.8569 | BERTScore (full): F1=0.8173 | Levenshtein: 0.3594 | ROUGE-1: 0.5581 | BLEU-4: 0.3328
+
+  LLM Qwen2.5 [prompt few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8856 | BERTScore (full): F1=0.8566 | Levenshtein: 0.3431 | ROUGE-1: 0.5977 | BLEU-4: 0.3006
+
+  LLM SauerkrautLM [prompt zero-shot]:
+    Anonymized: - Ein Mitarbeiter von Tech Innovate AG, Projektleiter, benötigt ein neues Konto für ein Spin-off, die Future Robotics GmbH. Kontoeröffnungsunterlagen vorbereiten. Das Kapital von einer Summe soll auf das Kapitaleinzahlungskonto CH44 0023 3233 4567 8901 A überwiesen werden. Sitz der neuen Firma wird eine Stadt in der Schweiz sein.
+    BERTScore (masked): F1=0.9335 | BERTScore (full): F1=0.9405 | Levenshtein: 0.2269 | ROUGE-1: 0.8085 | BLEU-4: 0.6685
+
+  LLM SauerkrautLM [prompt few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8762 | BERTScore (full): F1=0.8421 | Levenshtein: 0.3609 | ROUGE-1: 0.5238 | BLEU-4: 0.2164
+
+  Datenwertschöpfung API:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.7714 | BERTScore (full): F1=0.7710 | Levenshtein: 0.4205 | ROUGE-1: 0.8090 | BLEU-4: 0.6451
+
+
+──────────────────────────────────────────────────────────────────────────────
+  Document ID: 7433 | Complexity: High
+──────────────────────────────────────────────────────────────────────────────
+  ORIGINAL (371 chars, 6 PII entities):
+    - Spontaner Besuch von Herr Gerhard Hofer, Inhaber der Hofer Bau GmbH.
+- Will Liegenschaft an der Bahnhofstrasse in Aarau für CHF 3.2 Mio. kaufen.
+- Benötigt Hypothek über CHF 2.5 Mio.. Eigenmittel sind vorhanden.
+- Sein fianzieller Zustand ist gut, aber die letzte Bilanz fehlt noch.
+- Habe ihm die notwendigen Unterlagen aufgelistet. Er will sich bis Ende Woche melden.
+
+  GOLD STANDARD ANONYMIZATION:
+    - Spontaner Besuch von Herr [PER], Inhaber der [ORG].
+- Will Liegenschaft an der Bahnhofstrasse in [LOC] für [MONEY] kaufen.
+- Benötigt Hypothek über [MONEY]. Eigenmittel sind vorhanden.
+- Sein fianzieller Zustand ist gut, aber die letzte Bilanz fehlt noch.
+- Habe ihm die notwendigen Unterlagen aufgelistet. Er will sich bis [DATE] melden.
+
+  spaCy + Regex:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9707 | BERTScore (full): F1=0.8829 | Levenshtein: 0.0577 | ROUGE-1: 0.8319 | BLEU-4: 0.6430
+
+  BERT (pretrained) + Regex:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9893 | BERTScore (full): F1=0.8958 | Levenshtein: 0.0312 | ROUGE-1: 0.8522 | BLEU-4: 0.6798
+
+  BERT Fine-Tuned:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9835 | BERTScore (full): F1=0.8235 | Levenshtein: 0.0225 | ROUGE-1: 0.8070 | BLEU-4: 0.6238
+
+  Presidio:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9730 | BERTScore (full): F1=0.8169 | Levenshtein: 0.0482 | ROUGE-1: 0.7857 | BLEU-4: 0.5868
+
+  LLM Llama-3 [zero-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9532 | BERTScore (full): F1=0.7987 | Levenshtein: 0.0965 | ROUGE-1: 0.7719 | BLEU-4: 0.5068
+
+  LLM Llama-3 [few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9827 | BERTScore (full): F1=0.8616 | Levenshtein: 0.0450 | ROUGE-1: 0.8070 | BLEU-4: 0.6006
+
+  LLM Llama-3 [few-shot +verify]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9827 | BERTScore (full): F1=0.8616 | Levenshtein: 0.0450 | ROUGE-1: 0.8070 | BLEU-4: 0.6006
+
+  LLM Qwen2.5 [zero-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9084 | BERTScore (full): F1=0.9206 | Levenshtein: 0.2111 | ROUGE-1: 0.9500 | BLEU-4: 0.8810
+
+  LLM Qwen2.5 [few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=1.0000 | BERTScore (full): F1=0.8387 | Levenshtein: 0.0000 | ROUGE-1: 0.8246 | BLEU-4: 0.6312
+
+  LLM Qwen2.5 [few-shot +verify]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9893 | BERTScore (full): F1=0.8958 | Levenshtein: 0.0312 | ROUGE-1: 0.8522 | BLEU-4: 0.6798
+
+  LLM SauerkrautLM [zero-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9312 | BERTScore (full): F1=0.9199 | Levenshtein: 0.1066 | ROUGE-1: 0.8814 | BLEU-4: 0.7475
+
+  LLM SauerkrautLM [few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9827 | BERTScore (full): F1=0.8616 | Levenshtein: 0.0450 | ROUGE-1: 0.8070 | BLEU-4: 0.6006
+
+  LLM SauerkrautLM [few-shot +verify]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9827 | BERTScore (full): F1=0.8616 | Levenshtein: 0.0450 | ROUGE-1: 0.8070 | BLEU-4: 0.6006
+
+  LLM Llama-3 [fine-tuned]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=1.0000 | BERTScore (full): F1=0.8387 | Levenshtein: 0.0000 | ROUGE-1: 0.8246 | BLEU-4: 0.6312
+
+  LLM Llama-3 [prompt zero-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8713 | BERTScore (full): F1=0.8617 | Levenshtein: 0.3199 | ROUGE-1: 0.6829 | BLEU-4: 0.4245
+
+  LLM Llama-3 [prompt few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8772 | BERTScore (full): F1=0.8553 | Levenshtein: 0.2976 | ROUGE-1: 0.6667 | BLEU-4: 0.4398
+
+  LLM Qwen2.5 [prompt zero-shot]:
+    Anonymized: - Spontaner Besuch von einem Geschäftsführer einer Firma.
+- Wollt eine Immobilie an einer Bahnhofstraße in einer Stadt für einen Betrag von mehreren Millionen Franken kaufen.
+- Bedarf einer Hypothek über einen Betrag von mehreren Millionen Franken. Eigenmittel sind vorhanden.
+- Sein finanzieller Zustand ist gut, aber die letzte Bilanz fehlt noch.
+- Hab ihm die notwendigen Unterlagen aufgelistet. Er will sich bis Ende der Woche melden.
+    BERTScore (masked): F1=0.8644 | BERTScore (full): F1=0.8700 | Levenshtein: 0.3813 | ROUGE-1: 0.6250 | BLEU-4: 0.3840
+
+  LLM Qwen2.5 [prompt few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8783 | BERTScore (full): F1=0.8613 | Levenshtein: 0.2687 | ROUGE-1: 0.6885 | BLEU-4: 0.5025
+
+  LLM SauerkrautLM [prompt zero-shot]:
+    Anonymized: - Ein Geschäftsmann besuchte uns spontan.
+- Er möchte eine Liegenschaft an einer Bahnhofstrasse in einer Stadt in der Schweiz für einen Betrag von CHF 3.2 Mio. kaufen.
+- Er benötigt eine Hypothek über CHF 2.5 Mio.. Eigenmittel sind vorhanden.
+- Sein finanzieller Zustand ist gut, aber die letzte Bilanz fehlt noch.
+- Ich habe ihm die notwendigen Unterlagen aufgelistet. Er will sich bis Ende Woche melden.
+    BERTScore (masked): F1=0.8827 | BERTScore (full): F1=0.8522 | Levenshtein: 0.2807 | ROUGE-1: 0.7500 | BLEU-4: 0.5203
+
+  LLM SauerkrautLM [prompt few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8531 | BERTScore (full): F1=0.8453 | Levenshtein: 0.3548 | ROUGE-1: 0.6349 | BLEU-4: 0.4083
+
+  Datenwertschöpfung API:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8478 | BERTScore (full): F1=0.8544 | Levenshtein: 0.2758 | ROUGE-1: 0.9091 | BLEU-4: 0.7847
+
+
+──────────────────────────────────────────────────────────────────────────────
+  Document ID: 7566 | Complexity: High
+──────────────────────────────────────────────────────────────────────────────
+  ORIGINAL (283 chars, 9 PII entities):
+    - Tel mit Urs Meier, Leiter Finanzen Präzisionsmechanik AG. Brauchen dringend neue zugriffsberechtigunge für die neue Buchhalterin Frau Eva Hess. Ausserdem muss Kreditkartenlimite für seine Reise nach Asien erhöht werden. Von CHF 5'000 auf CHF 20'000. Seine Mail: urs.meier@pm-ag.ch.
+
+  GOLD STANDARD ANONYMIZATION:
+    - Tel mit [PER], [JOB] [ORG]. Brauchen dringend neue zugriffsberechtigunge für die neue [JOB] Frau [PER]. Ausserdem muss Kreditkartenlimite für seine Reise nach [LOC] erhöht werden. Von [MONEY] auf [MONEY]. Seine Mail: [EMAIL].
+
+  spaCy + Regex:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8749 | BERTScore (full): F1=0.7987 | Levenshtein: 0.3333 | ROUGE-1: 0.7297 | BLEU-4: 0.4467
+
+  BERT (pretrained) + Regex:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9375 | BERTScore (full): F1=0.7968 | Levenshtein: 0.1498 | ROUGE-1: 0.7123 | BLEU-4: 0.4174
+
+  BERT Fine-Tuned:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=1.0000 | BERTScore (full): F1=0.7630 | Levenshtein: 0.0000 | ROUGE-1: 0.6667 | BLEU-4: 0.3726
+
+  Presidio:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9121 | BERTScore (full): F1=0.7514 | Levenshtein: 0.2324 | ROUGE-1: 0.6575 | BLEU-4: 0.3349
+
+  LLM Llama-3 [zero-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9829 | BERTScore (full): F1=0.7792 | Levenshtein: 0.0576 | ROUGE-1: 0.6761 | BLEU-4: 0.3953
+
+  LLM Llama-3 [few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=1.0000 | BERTScore (full): F1=0.7630 | Levenshtein: 0.0000 | ROUGE-1: 0.6667 | BLEU-4: 0.3726
+
+  LLM Llama-3 [few-shot +verify]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=1.0000 | BERTScore (full): F1=0.7630 | Levenshtein: 0.0000 | ROUGE-1: 0.6667 | BLEU-4: 0.3726
+
+  LLM Qwen2.5 [zero-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8925 | BERTScore (full): F1=0.8800 | Levenshtein: 0.2414 | ROUGE-1: 0.8378 | BLEU-4: 0.7003
+
+  LLM Qwen2.5 [few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9327 | BERTScore (full): F1=0.8325 | Levenshtein: 0.1727 | ROUGE-1: 0.7671 | BLEU-4: 0.5590
+
+  LLM Qwen2.5 [few-shot +verify]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9327 | BERTScore (full): F1=0.8325 | Levenshtein: 0.1727 | ROUGE-1: 0.7671 | BLEU-4: 0.5590
+
+  LLM SauerkrautLM [zero-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8948 | BERTScore (full): F1=0.8826 | Levenshtein: 0.2405 | ROUGE-1: 0.8533 | BLEU-4: 0.7282
+
+  LLM SauerkrautLM [few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=1.0000 | BERTScore (full): F1=0.7630 | Levenshtein: 0.0000 | ROUGE-1: 0.6667 | BLEU-4: 0.3726
+
+  LLM SauerkrautLM [few-shot +verify]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=1.0000 | BERTScore (full): F1=0.7630 | Levenshtein: 0.0000 | ROUGE-1: 0.6667 | BLEU-4: 0.3726
+
+  LLM Llama-3 [fine-tuned]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=1.0000 | BERTScore (full): F1=0.7630 | Levenshtein: 0.0000 | ROUGE-1: 0.6667 | BLEU-4: 0.3726
+
+  LLM Llama-3 [prompt zero-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8119 | BERTScore (full): F1=0.7730 | Levenshtein: 0.4386 | ROUGE-1: 0.5063 | BLEU-4: 0.2215
+
+  LLM Llama-3 [prompt few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8078 | BERTScore (full): F1=0.7708 | Levenshtein: 0.4452 | ROUGE-1: 0.4800 | BLEU-4: 0.0000
+
+  LLM Qwen2.5 [prompt zero-shot]:
+    Anonymized: - Tel mit dem Leiter Finanzen eines Unternehmens. Es wird dringend eine neue Zugriffsberechtigung für die neue Buchhalterin benötigt. Zudem muss die Kreditkartenlimite für seine Reise erhöht werden. Von CHF 5'000 auf CHF 20'000. Seine E-Mail: [E-Mail].
+    BERTScore (masked): F1=0.8427 | BERTScore (full): F1=0.8233 | Levenshtein: 0.3190 | ROUGE-1: 0.6579 | BLEU-4: 0.3795
+
+  LLM Qwen2.5 [prompt few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8181 | BERTScore (full): F1=0.8056 | Levenshtein: 0.4504 | ROUGE-1: 0.5000 | BLEU-4: 0.2360
+
+  LLM SauerkrautLM [prompt zero-shot]:
+    Anonymized: - Tel mit einem Mitarbeiter von ein Unternehmen. Es ist dringend notwendig, neue Zugriffsberechtigungen für die neue Buchhalterin zu erstellen. Darüber hinaus muss die Kreditkartenlimite für eine Reise nach Asien erhöht werden. Von einer bestimmten Summe auf eine höhere Summe. Seine E-Mail lautet: [E-Mail].
+    BERTScore (masked): F1=0.7985 | BERTScore (full): F1=0.7620 | Levenshtein: 0.4642 | ROUGE-1: 0.4819 | BLEU-4: 0.2085
+
+  LLM SauerkrautLM [prompt few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.7207 | BERTScore (full): F1=0.7318 | Levenshtein: 0.6457 | ROUGE-1: 0.3333 | BLEU-4: 0.0000
+
+  Datenwertschöpfung API:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8259 | BERTScore (full): F1=0.8236 | Levenshtein: 0.3814 | ROUGE-1: 0.8421 | BLEU-4: 0.6545
+
+
+──────────────────────────────────────────────────────────────────────────────
+  Document ID: 7617 | Complexity: High
+──────────────────────────────────────────────────────────────────────────────
+  ORIGINAL (313 chars, 6 PII entities):
+    Markus Steiner von Global Trade GmbH hat angerufen, braucht dringend FX Spot Deal. EUR 250'000 gegen CHF. Ist für eine dringende Liferantenzahlung in Deutschland. Habe ihm eine Quote gegeben, er hat bestätigt. Abwicklung über Konto mit CH56 0023 3233 4455 6677 A. Er war etwas gestresst am Telefon, 079 888 77 66.
+
+  GOLD STANDARD ANONYMIZATION:
+    [PER] von [ORG] hat angerufen, braucht dringend FX Spot Deal. [MONEY] gegen CHF. Ist für eine dringende Liferantenzahlung in [LOC]. Habe ihm eine Quote gegeben, er hat bestätigt. Abwicklung über Konto mit [IBAN]. Er war etwas gestresst am Telefon, [PHONE].
+
+  spaCy + Regex:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9388 | BERTScore (full): F1=0.8475 | Levenshtein: 0.1057 | ROUGE-1: 0.7835 | BLEU-4: 0.5918
+
+  BERT (pretrained) + Regex:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9236 | BERTScore (full): F1=0.8453 | Levenshtein: 0.1290 | ROUGE-1: 0.7835 | BLEU-4: 0.5979
+
+  BERT Fine-Tuned:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=1.0000 | BERTScore (full): F1=0.8200 | Levenshtein: 0.0000 | ROUGE-1: 0.7391 | BLEU-4: 0.5163
+
+  Presidio:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=1.0000 | BERTScore (full): F1=0.8200 | Levenshtein: 0.0000 | ROUGE-1: 0.7391 | BLEU-4: 0.5163
+
+  LLM Llama-3 [zero-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9602 | BERTScore (full): F1=0.8307 | Levenshtein: 0.0810 | ROUGE-1: 0.7917 | BLEU-4: 0.5785
+
+  LLM Llama-3 [few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9716 | BERTScore (full): F1=0.8116 | Levenshtein: 0.0513 | ROUGE-1: 0.7447 | BLEU-4: 0.5098
+
+  LLM Llama-3 [few-shot +verify]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9716 | BERTScore (full): F1=0.8116 | Levenshtein: 0.0513 | ROUGE-1: 0.7447 | BLEU-4: 0.5098
+
+  LLM Qwen2.5 [zero-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9711 | BERTScore (full): F1=0.8429 | Levenshtein: 0.0738 | ROUGE-1: 0.7742 | BLEU-4: 0.5758
+
+  LLM Qwen2.5 [few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9782 | BERTScore (full): F1=0.8086 | Levenshtein: 0.0431 | ROUGE-1: 0.7312 | BLEU-4: 0.4874
+
+  LLM Qwen2.5 [few-shot +verify]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9782 | BERTScore (full): F1=0.8086 | Levenshtein: 0.0431 | ROUGE-1: 0.7312 | BLEU-4: 0.4874
+
+  LLM SauerkrautLM [zero-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9705 | BERTScore (full): F1=0.8259 | Levenshtein: 0.0542 | ROUGE-1: 0.7789 | BLEU-4: 0.5680
+
+  LLM SauerkrautLM [few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9647 | BERTScore (full): F1=0.8291 | Levenshtein: 0.0792 | ROUGE-1: 0.7660 | BLEU-4: 0.5277
+
+  LLM SauerkrautLM [few-shot +verify]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9647 | BERTScore (full): F1=0.8291 | Levenshtein: 0.0792 | ROUGE-1: 0.7660 | BLEU-4: 0.5277
+
+  LLM Llama-3 [fine-tuned]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=1.0000 | BERTScore (full): F1=0.8200 | Levenshtein: 0.0000 | ROUGE-1: 0.7391 | BLEU-4: 0.5163
+
+  LLM Llama-3 [prompt zero-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8011 | BERTScore (full): F1=0.7561 | Levenshtein: 0.4960 | ROUGE-1: 0.5091 | BLEU-4: 0.1686
+
+  LLM Llama-3 [prompt few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.7928 | BERTScore (full): F1=0.7675 | Levenshtein: 0.4738 | ROUGE-1: 0.4615 | BLEU-4: 0.1877
+
+  LLM Qwen2.5 [prompt zero-shot]:
+    Anonymized: ein Kunde von einem Unternehmen hat angerufen, braucht dringend einen FX Spot Deal. Ein Betrag von eintausend Euro gegen Schweizer Franken. Es handelt sich um eine dringende Zahlung an einen Lieferanten in Deutschland. Ich habe ihm eine Quote gegeben, er hat bestätigt. Die Abwicklung erfolgt über ein Konto. Er war etwas gestresst am Telefon.
+    BERTScore (masked): F1=0.8180 | BERTScore (full): F1=0.7806 | Levenshtein: 0.4354 | ROUGE-1: 0.5283 | BLEU-4: 0.2826
+
+  LLM Qwen2.5 [prompt few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8478 | BERTScore (full): F1=0.8114 | Levenshtein: 0.3074 | ROUGE-1: 0.6275 | BLEU-4: 0.3842
+
+  LLM SauerkrautLM [prompt zero-shot]:
+    Anonymized: Ein Kunde von einer Firma hat angerufen, braucht dringend einen FX Spot Deal. EUR 250'000 gegen CHF. Ist für eine dringende Zahlung in Deutschland. Habe ihm eine Quote gegeben, er hat bestätigt. Abwicklung über ein Konto in der Schweiz. Er war etwas gestresst am Telefon, [Telefon].
+    BERTScore (masked): F1=0.9063 | BERTScore (full): F1=0.8606 | Levenshtein: 0.2405 | ROUGE-1: 0.7143 | BLEU-4: 0.5331
+
+  LLM SauerkrautLM [prompt few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8834 | BERTScore (full): F1=0.8492 | Levenshtein: 0.3025 | ROUGE-1: 0.6531 | BLEU-4: 0.4393
+
+  Datenwertschöpfung API:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.7988 | BERTScore (full): F1=0.7827 | Levenshtein: 0.4480 | ROUGE-1: 0.7961 | BLEU-4: 0.7202
+
+
+──────────────────────────────────────────────────────────────────────────────
+  Document ID: 7670 | Complexity: High
+──────────────────────────────────────────────────────────────────────────────
+  ORIGINAL (325 chars, 8 PII entities):
+    Nachfogle bei Holzdesign Meier & Söhne besprochen. Der 67-jährige Hans Meier (Inhaber) tritt zurück. Sohn Thomas Meier (ETH-Ingenieur) übernimmt. Es wird eine Finanzierung für den Buyout der Geschwister benötigt, ca. CHF 800k. Ein neues Kapitaleinzahlungskonto muss eröffnet werden, IBAN wird CH56 0023 3233 4567 8901 A sein.
+
+  GOLD STANDARD ANONYMIZATION:
+    Nachfogle bei [ORG] besprochen. Der [AGE] [PER] ([JOB]) tritt zurück. Sohn [PER] ([EDU]) übernimmt. Es wird eine Finanzierung für den Buyout der Geschwister benötigt, ca. [MONEY]. Ein neues Kapitaleinzahlungskonto muss eröffnet werden, IBAN wird [IBAN] sein.
+
+  spaCy + Regex:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8543 | BERTScore (full): F1=0.8556 | Levenshtein: 0.3725 | ROUGE-1: 0.8000 | BLEU-4: 0.5818
+
+  BERT (pretrained) + Regex:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8822 | BERTScore (full): F1=0.9181 | Levenshtein: 0.2386 | ROUGE-1: 0.8539 | BLEU-4: 0.6574
+
+  BERT Fine-Tuned:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=1.0000 | BERTScore (full): F1=0.8097 | Levenshtein: 0.0000 | ROUGE-1: 0.6747 | BLEU-4: 0.4181
+
+  Presidio:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9171 | BERTScore (full): F1=0.7855 | Levenshtein: 0.2332 | ROUGE-1: 0.6824 | BLEU-4: 0.4456
+
+  LLM Llama-3 [zero-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9422 | BERTScore (full): F1=0.8741 | Levenshtein: 0.1473 | ROUGE-1: 0.7765 | BLEU-4: 0.5582
+
+  LLM Llama-3 [few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9864 | BERTScore (full): F1=0.8287 | Levenshtein: 0.0306 | ROUGE-1: 0.6988 | BLEU-4: 0.4401
+
+  LLM Llama-3 [few-shot +verify]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9864 | BERTScore (full): F1=0.8287 | Levenshtein: 0.0306 | ROUGE-1: 0.6988 | BLEU-4: 0.4401
+
+  LLM Qwen2.5 [zero-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8756 | BERTScore (full): F1=0.9590 | Levenshtein: 0.2932 | ROUGE-1: 0.9348 | BLEU-4: 0.8436
+
+  LLM Qwen2.5 [few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9135 | BERTScore (full): F1=0.9118 | Levenshtein: 0.2324 | ROUGE-1: 0.8636 | BLEU-4: 0.7120
+
+  LLM Qwen2.5 [few-shot +verify]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9135 | BERTScore (full): F1=0.9118 | Levenshtein: 0.2324 | ROUGE-1: 0.8636 | BLEU-4: 0.7120
+
+  LLM SauerkrautLM [zero-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9207 | BERTScore (full): F1=0.9111 | Levenshtein: 0.1805 | ROUGE-1: 0.8235 | BLEU-4: 0.6448
+
+  LLM SauerkrautLM [few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9864 | BERTScore (full): F1=0.8287 | Levenshtein: 0.0306 | ROUGE-1: 0.6988 | BLEU-4: 0.4401
+
+  LLM SauerkrautLM [few-shot +verify]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9864 | BERTScore (full): F1=0.8287 | Levenshtein: 0.0306 | ROUGE-1: 0.6988 | BLEU-4: 0.4401
+
+  LLM Llama-3 [fine-tuned]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=1.0000 | BERTScore (full): F1=0.8097 | Levenshtein: 0.0000 | ROUGE-1: 0.6747 | BLEU-4: 0.4181
+
+  LLM Llama-3 [prompt zero-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8114 | BERTScore (full): F1=0.7885 | Levenshtein: 0.4854 | ROUGE-1: 0.4792 | BLEU-4: 0.2460
+
+  LLM Llama-3 [prompt few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8584 | BERTScore (full): F1=0.8139 | Levenshtein: 0.3475 | ROUGE-1: 0.5412 | BLEU-4: 0.2788
+
+  LLM Qwen2.5 [prompt zero-shot]:
+    Anonymized: Nachfogle bei einem Unternehmen besprochen. Der 67-jährige Inhaber tritt zurück. Sein Sohn übernimmt. Es wird eine Finanzierung für den Buyout der Geschwister benötigt, ca. eine Summe von eintausend Euro. Ein neues Kapitaleinzahlungskonto muss eröffnet werden, die IBAN lautet [Konto].
+    BERTScore (masked): F1=0.8868 | BERTScore (full): F1=0.8444 | Levenshtein: 0.2741 | ROUGE-1: 0.6279 | BLEU-4: 0.3837
+
+  LLM Qwen2.5 [prompt few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8724 | BERTScore (full): F1=0.8160 | Levenshtein: 0.2863 | ROUGE-1: 0.6341 | BLEU-4: 0.2932
+
+  LLM SauerkrautLM [prompt zero-shot]:
+    Anonymized: Nachfologne bei Holzdesign Meier & Söhne wurde besprochen. Der Inhaber einer Firma im Holzdesignbereich tritt zurück. Sein Sohn, ein Ingenieur mit einem Hochschulabschluss, übernimmt die Geschäfte. Es wird eine Finanzierung für den Buyout der Geschwister benötigt, ein Betrag in der Größenordnung von CHF 800k. Ein neues Kapitaleinzahlungskonto muss eröffnet werden, die IBAN-Nummer des Kontos lautet [Konto].
+    BERTScore (masked): F1=0.8288 | BERTScore (full): F1=0.8357 | Levenshtein: 0.4477 | ROUGE-1: 0.5243 | BLEU-4: 0.3559
+
+  LLM SauerkrautLM [prompt few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8632 | BERTScore (full): F1=0.8581 | Levenshtein: 0.3629 | ROUGE-1: 0.6118 | BLEU-4: 0.3443
+
+  Datenwertschöpfung API:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8205 | BERTScore (full): F1=0.8226 | Levenshtein: 0.4430 | ROUGE-1: 0.7826 | BLEU-4: 0.6218
+
+
+──────────────────────────────────────────────────────────────────────────────
+  Document ID: 7685 | Complexity: High
+──────────────────────────────────────────────────────────────────────────────
+  ORIGINAL (287 chars, 6 PII entities):
+    Telko mit Urs Steiner, CFO von Importa AG. Brauhct dringend einen besseren FX-Kurs für eine USD 1.5 Mio. Zahlung. Habne ihm eine Indikation gegeben, muss mit Treasury sprechen. Ausserdem braucht der neue Controller, Beat Fankhauser, vollen E-Banking Zugriff. Pendenzenliste aktualisiert.
+
+  GOLD STANDARD ANONYMIZATION:
+    Telko mit [PER], [JOB] von [ORG]. Brauhct dringend einen besseren FX-Kurs für eine [MONEY] Zahlung. Habne ihm eine Indikation gegeben, muss mit Treasury sprechen. Ausserdem braucht der neue [JOB], [PER], vollen E-Banking Zugriff. Pendenzenliste aktualisiert.
+
+  spaCy + Regex:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8757 | BERTScore (full): F1=0.7919 | Levenshtein: 0.2198 | ROUGE-1: 0.6933 | BLEU-4: 0.4066
+
+  BERT (pretrained) + Regex:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9357 | BERTScore (full): F1=0.8451 | Levenshtein: 0.1422 | ROUGE-1: 0.7467 | BLEU-4: 0.4973
+
+  BERT Fine-Tuned:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=1.0000 | BERTScore (full): F1=0.8555 | Levenshtein: 0.0000 | ROUGE-1: 0.7733 | BLEU-4: 0.5711
+
+  Presidio:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8793 | BERTScore (full): F1=0.7769 | Levenshtein: 0.2069 | ROUGE-1: 0.6667 | BLEU-4: 0.3970
+
+  LLM Llama-3 [zero-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9616 | BERTScore (full): F1=0.8710 | Levenshtein: 0.0847 | ROUGE-1: 0.8052 | BLEU-4: 0.6261
+
+  LLM Llama-3 [few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9905 | BERTScore (full): F1=0.8380 | Levenshtein: 0.0345 | ROUGE-1: 0.7467 | BLEU-4: 0.4973
+
+  LLM Llama-3 [few-shot +verify]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9905 | BERTScore (full): F1=0.8380 | Levenshtein: 0.0345 | ROUGE-1: 0.7467 | BLEU-4: 0.4973
+
+  LLM Qwen2.5 [zero-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9815 | BERTScore (full): F1=0.8779 | Levenshtein: 0.0415 | ROUGE-1: 0.8000 | BLEU-4: 0.5974
+
+  LLM Qwen2.5 [few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9504 | BERTScore (full): F1=0.9050 | Levenshtein: 0.0980 | ROUGE-1: 0.8421 | BLEU-4: 0.6953
+
+  LLM Qwen2.5 [few-shot +verify]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9504 | BERTScore (full): F1=0.9050 | Levenshtein: 0.0980 | ROUGE-1: 0.8421 | BLEU-4: 0.6953
+
+  LLM SauerkrautLM [zero-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9905 | BERTScore (full): F1=0.8392 | Levenshtein: 0.0345 | ROUGE-1: 0.7467 | BLEU-4: 0.4973
+
+  LLM SauerkrautLM [few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.9905 | BERTScore (full): F1=0.8380 | Levenshtein: 0.0345 | ROUGE-1: 0.7467 | BLEU-4: 0.4973
+
+  LLM SauerkrautLM [few-shot +verify]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=1.0000 | BERTScore (full): F1=0.8555 | Levenshtein: 0.0000 | ROUGE-1: 0.7733 | BLEU-4: 0.5711
+
+  LLM Llama-3 [fine-tuned]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=1.0000 | BERTScore (full): F1=0.8555 | Levenshtein: 0.0000 | ROUGE-1: 0.7733 | BLEU-4: 0.5711
+
+  LLM Llama-3 [prompt zero-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8070 | BERTScore (full): F1=0.8010 | Levenshtein: 0.4839 | ROUGE-1: 0.4222 | BLEU-4: 0.1695
+
+  LLM Llama-3 [prompt few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8312 | BERTScore (full): F1=0.8238 | Levenshtein: 0.3886 | ROUGE-1: 0.5250 | BLEU-4: 0.2725
+
+  LLM Qwen2.5 [prompt zero-shot]:
+    Anonymized: Telko mit einem CFO von einem Unternehmen. Der benötigt dringend einen besseren FX-Kurs für eine Zahlung im Umfang einer Summe. Ich habe ihm eine Indikation gegeben und muss mit Treasury sprechen. Zudem benötigt der neue Controller vollen E-Banking-Zugriff. Pendenzenliste aktualisiert.
+    BERTScore (masked): F1=0.8712 | BERTScore (full): F1=0.8380 | Levenshtein: 0.2982 | ROUGE-1: 0.5500 | BLEU-4: 0.2504
+
+  LLM Qwen2.5 [prompt few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8166 | BERTScore (full): F1=0.8002 | Levenshtein: 0.4522 | ROUGE-1: 0.3810 | BLEU-4: 0.0000
+
+  LLM SauerkrautLM [prompt zero-shot]:
+    Anonymized: Ein Mitarbeiter von Importa AG traf sich mit einem Vertreter von Telko. Ein Geschäftsführer von Importa AG dringend einen besseren FX-Kurs für eine Zahlung in Höhe von einer Million benötigt. Ein Mitarbeiter von Telko hat ihm eine Indikation gegeben, muss mit der Finanzabteilung sprechen. Ausserdem benötigt der neue Controller von Importa AG vollen E-Banking-Zugriff. Die Pendenzenliste wurde aktualisiert.
+    BERTScore (masked): F1=0.8401 | BERTScore (full): F1=0.8277 | Levenshtein: 0.4597 | ROUGE-1: 0.4694 | BLEU-4: 0.1938
+
+  LLM SauerkrautLM [prompt few-shot]:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8481 | BERTScore (full): F1=0.8310 | Levenshtein: 0.4018 | ROUGE-1: 0.5301 | BLEU-4: 0.2493
+
+  Datenwertschöpfung API:
+    Anonymized: (text not available — loaded from cached results)
+    BERTScore (masked): F1=0.8650 | BERTScore (full): F1=0.8543 | Levenshtein: 0.2508 | ROUGE-1: 0.8718 | BLEU-4: 0.6904

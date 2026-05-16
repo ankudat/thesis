@@ -1,10 +1,10 @@
 LLM Tag-and-Replace Evaluation Report
-Generated: 2026-03-06 03:13:06
+Generated: 2026-03-13 19:08:09
 Model: meta-llama/Meta-Llama-3-8B-Instruct
 Strategy: few-shot
 Self-verification: False
 Test records: 638
-Inference time: 2432.9s (3.81s/doc, 0.3 docs/sec)
+Inference time: 4401.9s (6.9s/doc, 0.1 docs/sec)
 Parse stats: {'marked': 638}
 Parse fail rate: 0.0%
 

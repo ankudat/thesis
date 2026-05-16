@@ -1,0 +1,443 @@
+==============================================================================
+  LLM-AS-JUDGE EVALUATION REPORT (Gemini Flash)
+  Generated: 2026-04-29 17:39:15
+  Judge Model: gemini-2.5-flash
+  Utility: Staab et al. (ICLR 2025)
+  Privacy: Schiezaro et al. (Frontiers in Public Health 2026)
+==============================================================================
+
+##############################################################################
+  SUMMARY: Utility & Privacy Scores
+##############################################################################
+
+  Pipeline                                 Read   Mean  Halluc  AnonQ   ReID     n
+                                          (avg)  (avg)    rate  (avg)  (avg)
+  -------------------------------------------------------------------------------
+  spaCy + Regex                            7.16   7.63    2.8%   7.32   6.65   638
+  BERT (pretrained) + Regex                7.95   8.35    2.2%   7.87   7.58   638
+  BERT Fine-Tuned                          8.68   9.31    0.2%   9.90   9.66   638
+  Presidio                                 6.85   7.41    2.0%   8.18   7.75   638
+  LLM Llama-3 [few-shot +verify]           7.86   8.67    0.2%   8.40   7.40   638
+  LLM Qwen2.5 [few-shot +verify]           8.10   9.11    0.0%   6.47   4.92   638
+  LLM SauerkrautLM [few-shot +verify]      8.10   8.89    0.0%   8.23   7.09   638
+  LLM Llama-3 [fine-tuned]                 8.78   9.40    0.0%   9.91   9.62   638
+  LLM Llama-3 [prompt few-shot]            8.72   5.91    4.1%   9.74   9.62   638
+  LLM Qwen2.5 [prompt few-shot]            8.59   6.36   12.2%   8.89   8.19   638
+  LLM SauerkrautLM [prompt few-shot]       9.02   6.18    6.0%   9.62   9.30   638
+  Datenwertschöpfung API                   6.89   8.24   10.8%   4.54   2.31   638
+  -------------------------------------------------------------------------------
+  Read/Mean/AnonQ/ReID: 1-10 (higher = better)
+  Hallucination rate: % of texts with invented information (lower = better)
+
+  >>> Low Complexity <<<
+  Pipeline                                 Read   Mean  AnonQ   ReID     n
+  ---------------------------------------------------------------------
+  spaCy + Regex                            7.32   7.92   7.39   6.48   218
+  BERT (pretrained) + Regex                8.24   8.53   7.86   7.58   218
+  BERT Fine-Tuned                          8.67   9.26   9.92   9.63   218
+  Presidio                                 6.98   7.50   8.17   7.56   218
+  LLM Llama-3 [few-shot +verify]           7.16   8.43   7.32   5.70   218
+  LLM Qwen2.5 [few-shot +verify]           7.75   8.96   6.39   4.58   218
+  LLM SauerkrautLM [few-shot +verify]      7.53   8.58   7.11   5.38   218
+  LLM Llama-3 [fine-tuned]                 8.77   9.47   9.94   9.55   218
+  LLM Llama-3 [prompt few-shot]            8.10   5.72   9.67   9.51   218
+  LLM Qwen2.5 [prompt few-shot]            7.77   6.09   8.72   7.89   218
+  LLM SauerkrautLM [prompt few-shot]       8.56   6.04   9.74   9.49   218
+  Datenwertschöpfung API                   6.50   8.23   4.37   2.06   218
+
+  >>> Medium Complexity <<<
+  Pipeline                                 Read   Mean  AnonQ   ReID     n
+  ---------------------------------------------------------------------
+  spaCy + Regex                            7.57   7.86   7.35   6.71   215
+  BERT (pretrained) + Regex                8.01   8.32   7.79   7.47   215
+  BERT Fine-Tuned                          8.72   9.36   9.81   9.56   215
+  Presidio                                 7.14   7.63   8.42   8.01   215
+  LLM Llama-3 [few-shot +verify]           8.16   8.72   8.97   8.27   215
+  LLM Qwen2.5 [few-shot +verify]           8.31   9.27   7.18   5.90   215
+  LLM SauerkrautLM [few-shot +verify]      8.39   8.99   8.79   7.94   215
+  LLM Llama-3 [fine-tuned]                 8.81   9.33   9.86   9.62   215
+  LLM Llama-3 [prompt few-shot]            8.98   5.72   9.73   9.60   215
+  LLM Qwen2.5 [prompt few-shot]            8.96   6.27   9.14   8.48   215
+  LLM SauerkrautLM [prompt few-shot]       9.16   6.03   9.53   9.13   215
+  Datenwertschöpfung API                   7.18   8.35   4.62   2.42   215
+
+  >>> High Complexity <<<
+  Pipeline                                 Read   Mean  AnonQ   ReID     n
+  ---------------------------------------------------------------------
+  spaCy + Regex                            6.58   7.07   7.20   6.77   205
+  BERT (pretrained) + Regex                7.56   8.21   7.97   7.70   205
+  BERT Fine-Tuned                          8.64   9.31   9.96   9.79   205
+  Presidio                                 6.40   7.08   7.94   7.68   205
+  LLM Llama-3 [few-shot +verify]           8.31   8.87   8.96   8.31   205
+  LLM Qwen2.5 [few-shot +verify]           8.24   9.11   5.82   4.26   205
+  LLM SauerkrautLM [few-shot +verify]      8.39   9.12   8.84   8.01   205
+  LLM Llama-3 [fine-tuned]                 8.75   9.40   9.94   9.69   205
+  LLM Llama-3 [prompt few-shot]            9.10   6.32   9.81   9.75   205
+  LLM Qwen2.5 [prompt few-shot]            9.07   6.76   8.80   8.19   205
+  LLM SauerkrautLM [prompt few-shot]       9.35   6.48   9.58   9.26   205
+  Datenwertschöpfung API                   7.00   8.14   4.63   2.48   205
+
+
+##############################################################################
+  DETAILED PER-PIPELINE STATISTICS
+##############################################################################
+
+  ======================================================================
+  Pipeline: spaCy + Regex
+  ======================================================================
+  Documents: 638 | Parse failures: 0
+
+  Readability: 7.16 ± 2.32 (median: 7.0)
+  Meaning:     7.63 ± 2.39 (median: 9.0)
+  Hallucination rate: 2.8%
+
+  Anonymization Quality: 7.32 ± 2.57 (median: 7.0)
+  Re-identification Risk: 6.65 ± 3.50 (median: 8.0)
+
+  Low (n=218):
+    Readability: 7.32 ± 2.26 (median: 7.0)
+    Meaning:     7.92 ± 2.32 (median: 9.0)
+    Anon Quality: 7.39 ± 2.55
+    Re-ID Risk:   6.48 ± 3.63
+
+  Medium (n=215):
+    Readability: 7.57 ± 2.05 (median: 8.0)
+    Meaning:     7.86 ± 2.26 (median: 9.0)
+    Anon Quality: 7.35 ± 2.54
+    Re-ID Risk:   6.71 ± 3.39
+
+  High (n=205):
+    Readability: 6.58 ± 2.54 (median: 7.0)
+    Meaning:     7.07 ± 2.51 (median: 7.0)
+    Anon Quality: 7.20 ± 2.62
+    Re-ID Risk:   6.77 ± 3.47
+
+  ======================================================================
+  Pipeline: BERT (pretrained) + Regex
+  ======================================================================
+  Documents: 638 | Parse failures: 0
+
+  Readability: 7.95 ± 1.86 (median: 9.0)
+  Meaning:     8.35 ± 1.96 (median: 9.0)
+  Hallucination rate: 2.2%
+
+  Anonymization Quality: 7.87 ± 2.34 (median: 9.0)
+  Re-identification Risk: 7.58 ± 2.96 (median: 9.0)
+
+  Low (n=218):
+    Readability: 8.24 ± 1.67 (median: 9.0)
+    Meaning:     8.53 ± 1.76 (median: 9.0)
+    Anon Quality: 7.86 ± 2.23
+    Re-ID Risk:   7.58 ± 2.74
+
+  Medium (n=215):
+    Readability: 8.01 ± 1.82 (median: 9.0)
+    Meaning:     8.32 ± 1.99 (median: 9.0)
+    Anon Quality: 7.79 ± 2.46
+    Re-ID Risk:   7.47 ± 3.15
+
+  High (n=205):
+    Readability: 7.56 ± 2.02 (median: 8.0)
+    Meaning:     8.21 ± 2.12 (median: 9.0)
+    Anon Quality: 7.97 ± 2.33
+    Re-ID Risk:   7.70 ± 2.98
+
+  ======================================================================
+  Pipeline: BERT Fine-Tuned
+  ======================================================================
+  Documents: 638 | Parse failures: 0
+
+  Readability: 8.68 ± 1.12 (median: 9.0)
+  Meaning:     9.31 ± 1.09 (median: 10.0)
+  Hallucination rate: 0.2%
+
+  Anonymization Quality: 9.90 ± 0.58 (median: 10.0)
+  Re-identification Risk: 9.66 ± 1.09 (median: 10.0)
+
+  Low (n=218):
+    Readability: 8.67 ± 1.01 (median: 9.0)
+    Meaning:     9.26 ± 1.10 (median: 10.0)
+    Anon Quality: 9.92 ± 0.54
+    Re-ID Risk:   9.63 ± 1.06
+
+  Medium (n=215):
+    Readability: 8.72 ± 1.17 (median: 9.0)
+    Meaning:     9.36 ± 1.06 (median: 10.0)
+    Anon Quality: 9.81 ± 0.76
+    Re-ID Risk:   9.56 ± 1.32
+
+  High (n=205):
+    Readability: 8.64 ± 1.19 (median: 9.0)
+    Meaning:     9.31 ± 1.11 (median: 10.0)
+    Anon Quality: 9.96 ± 0.32
+    Re-ID Risk:   9.79 ± 0.81
+
+  ======================================================================
+  Pipeline: Presidio
+  ======================================================================
+  Documents: 638 | Parse failures: 0
+
+  Readability: 6.85 ± 2.19 (median: 7.0)
+  Meaning:     7.41 ± 2.38 (median: 8.0)
+  Hallucination rate: 2.0%
+
+  Anonymization Quality: 8.18 ± 2.41 (median: 10.0)
+  Re-identification Risk: 7.75 ± 3.26 (median: 10.0)
+
+  Low (n=218):
+    Readability: 6.98 ± 2.05 (median: 7.0)
+    Meaning:     7.50 ± 2.28 (median: 8.0)
+    Anon Quality: 8.17 ± 2.53
+    Re-ID Risk:   7.56 ± 3.50
+
+  Medium (n=215):
+    Readability: 7.14 ± 2.06 (median: 7.0)
+    Meaning:     7.63 ± 2.31 (median: 9.0)
+    Anon Quality: 8.42 ± 2.22
+    Re-ID Risk:   8.01 ± 2.98
+
+  High (n=205):
+    Readability: 6.40 ± 2.41 (median: 7.0)
+    Meaning:     7.08 ± 2.52 (median: 7.0)
+    Anon Quality: 7.94 ± 2.45
+    Re-ID Risk:   7.68 ± 3.27
+
+  ======================================================================
+  Pipeline: LLM Llama-3 [few-shot +verify]
+  ======================================================================
+  Documents: 638 | Parse failures: 0
+
+  Readability: 7.86 ± 1.57 (median: 8.0)
+  Meaning:     8.67 ± 1.65 (median: 9.0)
+  Hallucination rate: 0.2%
+
+  Anonymization Quality: 8.40 ± 2.53 (median: 10.0)
+  Re-identification Risk: 7.40 ± 3.78 (median: 10.0)
+
+  Low (n=218):
+    Readability: 7.16 ± 1.57 (median: 7.0)
+    Meaning:     8.43 ± 1.67 (median: 9.0)
+    Anon Quality: 7.32 ± 2.88
+    Re-ID Risk:   5.70 ± 4.22
+
+  Medium (n=215):
+    Readability: 8.16 ± 1.49 (median: 9.0)
+    Meaning:     8.72 ± 1.66 (median: 9.0)
+    Anon Quality: 8.97 ± 2.16
+    Re-ID Risk:   8.27 ± 3.21
+
+  High (n=205):
+    Readability: 8.31 ± 1.40 (median: 9.0)
+    Meaning:     8.87 ± 1.59 (median: 10.0)
+    Anon Quality: 8.96 ± 2.09
+    Re-ID Risk:   8.31 ± 3.17
+
+  ======================================================================
+  Pipeline: LLM Qwen2.5 [few-shot +verify]
+  ======================================================================
+  Documents: 638 | Parse failures: 0
+
+  Readability: 8.10 ± 1.44 (median: 8.0)
+  Meaning:     9.11 ± 1.25 (median: 10.0)
+  Hallucination rate: 0.0%
+
+  Anonymization Quality: 6.47 ± 2.96 (median: 5.0)
+  Re-identification Risk: 4.92 ± 3.98 (median: 3.0)
+
+  Low (n=218):
+    Readability: 7.75 ± 1.54 (median: 8.0)
+    Meaning:     8.96 ± 1.34 (median: 10.0)
+    Anon Quality: 6.39 ± 2.87
+    Re-ID Risk:   4.58 ± 3.97
+
+  Medium (n=215):
+    Readability: 8.31 ± 1.42 (median: 9.0)
+    Meaning:     9.27 ± 1.18 (median: 10.0)
+    Anon Quality: 7.18 ± 2.87
+    Re-ID Risk:   5.90 ± 3.93
+
+  High (n=205):
+    Readability: 8.24 ± 1.27 (median: 9.0)
+    Meaning:     9.11 ± 1.19 (median: 10.0)
+    Anon Quality: 5.82 ± 3.01
+    Re-ID Risk:   4.26 ± 3.85
+
+  ======================================================================
+  Pipeline: LLM SauerkrautLM [few-shot +verify]
+  ======================================================================
+  Documents: 638 | Parse failures: 0
+
+  Readability: 8.10 ± 1.45 (median: 8.0)
+  Meaning:     8.89 ± 1.46 (median: 10.0)
+  Hallucination rate: 0.0%
+
+  Anonymization Quality: 8.23 ± 2.61 (median: 10.0)
+  Re-identification Risk: 7.09 ± 3.90 (median: 10.0)
+
+  Low (n=218):
+    Readability: 7.53 ± 1.54 (median: 7.0)
+    Meaning:     8.58 ± 1.59 (median: 9.0)
+    Anon Quality: 7.11 ± 2.85
+    Re-ID Risk:   5.38 ± 4.25
+
+  Medium (n=215):
+    Readability: 8.39 ± 1.39 (median: 9.0)
+    Meaning:     8.99 ± 1.36 (median: 10.0)
+    Anon Quality: 8.79 ± 2.38
+    Re-ID Risk:   7.94 ± 3.47
+
+  High (n=205):
+    Readability: 8.39 ± 1.23 (median: 9.0)
+    Meaning:     9.12 ± 1.36 (median: 10.0)
+    Anon Quality: 8.84 ± 2.16
+    Re-ID Risk:   8.01 ± 3.31
+
+  ======================================================================
+  Pipeline: LLM Llama-3 [fine-tuned]
+  ======================================================================
+  Documents: 638 | Parse failures: 0
+
+  Readability: 8.78 ± 1.03 (median: 9.0)
+  Meaning:     9.40 ± 1.02 (median: 10.0)
+  Hallucination rate: 0.0%
+
+  Anonymization Quality: 9.91 ± 0.54 (median: 10.0)
+  Re-identification Risk: 9.62 ± 1.19 (median: 10.0)
+
+  Low (n=218):
+    Readability: 8.77 ± 0.99 (median: 9.0)
+    Meaning:     9.47 ± 0.92 (median: 10.0)
+    Anon Quality: 9.94 ± 0.45
+    Re-ID Risk:   9.55 ± 1.33
+
+  Medium (n=215):
+    Readability: 8.81 ± 1.09 (median: 9.0)
+    Meaning:     9.33 ± 1.08 (median: 10.0)
+    Anon Quality: 9.86 ± 0.67
+    Re-ID Risk:   9.62 ± 1.15
+
+  High (n=205):
+    Readability: 8.75 ± 1.00 (median: 9.0)
+    Meaning:     9.40 ± 1.04 (median: 10.0)
+    Anon Quality: 9.94 ± 0.46
+    Re-ID Risk:   9.69 ± 1.08
+
+  ======================================================================
+  Pipeline: LLM Llama-3 [prompt few-shot]
+  ======================================================================
+  Documents: 638 | Parse failures: 0
+
+  Readability: 8.72 ± 1.32 (median: 9.0)
+  Meaning:     5.91 ± 1.21 (median: 5.0)
+  Hallucination rate: 4.1%
+
+  Anonymization Quality: 9.74 ± 0.99 (median: 10.0)
+  Re-identification Risk: 9.62 ± 1.35 (median: 10.0)
+
+  Low (n=218):
+    Readability: 8.10 ± 1.40 (median: 8.0)
+    Meaning:     5.72 ± 1.01 (median: 5.0)
+    Anon Quality: 9.67 ± 1.09
+    Re-ID Risk:   9.51 ± 1.45
+
+  Medium (n=215):
+    Readability: 8.98 ± 1.24 (median: 9.0)
+    Meaning:     5.72 ± 1.18 (median: 5.0)
+    Anon Quality: 9.73 ± 1.03
+    Re-ID Risk:   9.60 ± 1.44
+
+  High (n=205):
+    Readability: 9.10 ± 1.07 (median: 9.0)
+    Meaning:     6.32 ± 1.34 (median: 6.0)
+    Anon Quality: 9.81 ± 0.83
+    Re-ID Risk:   9.75 ± 1.12
+
+  ======================================================================
+  Pipeline: LLM Qwen2.5 [prompt few-shot]
+  ======================================================================
+  Documents: 638 | Parse failures: 0
+
+  Readability: 8.59 ± 1.36 (median: 9.0)
+  Meaning:     6.36 ± 1.37 (median: 6.0)
+  Hallucination rate: 12.2%
+
+  Anonymization Quality: 8.89 ± 1.92 (median: 10.0)
+  Re-identification Risk: 8.19 ± 2.72 (median: 10.0)
+
+  Low (n=218):
+    Readability: 7.77 ± 1.47 (median: 8.0)
+    Meaning:     6.09 ± 1.24 (median: 6.0)
+    Anon Quality: 8.72 ± 1.99
+    Re-ID Risk:   7.89 ± 2.78
+
+  Medium (n=215):
+    Readability: 8.96 ± 1.11 (median: 9.0)
+    Meaning:     6.27 ± 1.34 (median: 6.0)
+    Anon Quality: 9.14 ± 1.66
+    Re-ID Risk:   8.48 ± 2.50
+
+  High (n=205):
+    Readability: 9.07 ± 1.06 (median: 9.0)
+    Meaning:     6.76 ± 1.44 (median: 7.0)
+    Anon Quality: 8.80 ± 2.07
+    Re-ID Risk:   8.19 ± 2.85
+
+  ======================================================================
+  Pipeline: LLM SauerkrautLM [prompt few-shot]
+  ======================================================================
+  Documents: 638 | Parse failures: 0
+
+  Readability: 9.02 ± 1.04 (median: 9.0)
+  Meaning:     6.18 ± 1.28 (median: 6.0)
+  Hallucination rate: 6.0%
+
+  Anonymization Quality: 9.62 ± 1.25 (median: 10.0)
+  Re-identification Risk: 9.30 ± 1.88 (median: 10.0)
+
+  Low (n=218):
+    Readability: 8.56 ± 1.06 (median: 9.0)
+    Meaning:     6.04 ± 1.15 (median: 6.0)
+    Anon Quality: 9.74 ± 0.92
+    Re-ID Risk:   9.49 ± 1.43
+
+  Medium (n=215):
+    Readability: 9.16 ± 1.02 (median: 9.0)
+    Meaning:     6.03 ± 1.32 (median: 6.0)
+    Anon Quality: 9.53 ± 1.46
+    Re-ID Risk:   9.13 ± 2.13
+
+  High (n=205):
+    Readability: 9.35 ± 0.87 (median: 10.0)
+    Meaning:     6.48 ± 1.34 (median: 6.0)
+    Anon Quality: 9.58 ± 1.32
+    Re-ID Risk:   9.26 ± 2.01
+
+  ======================================================================
+  Pipeline: Datenwertschöpfung API
+  ======================================================================
+  Documents: 638 | Parse failures: 0
+
+  Readability: 6.89 ± 2.01 (median: 7.0)
+  Meaning:     8.24 ± 2.01 (median: 9.0)
+  Hallucination rate: 10.8%
+
+  Anonymization Quality: 4.54 ± 1.54 (median: 5.0)
+  Re-identification Risk: 2.31 ± 1.58 (median: 3.0)
+
+  Low (n=218):
+    Readability: 6.50 ± 1.75 (median: 7.0)
+    Meaning:     8.23 ± 1.99 (median: 9.0)
+    Anon Quality: 4.37 ± 1.40
+    Re-ID Risk:   2.06 ± 1.44
+
+  Medium (n=215):
+    Readability: 7.18 ± 1.94 (median: 7.0)
+    Meaning:     8.35 ± 1.98 (median: 9.0)
+    Anon Quality: 4.62 ± 1.63
+    Re-ID Risk:   2.42 ± 1.62
+
+  High (n=205):
+    Readability: 7.00 ± 2.28 (median: 7.0)
+    Meaning:     8.14 ± 2.06 (median: 9.0)
+    Anon Quality: 4.63 ± 1.57
+    Re-ID Risk:   2.48 ± 1.66

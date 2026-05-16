@@ -1,0 +1,863 @@
+==============================================================================
+  ADVERSARIAL INFERENCE ATTACK REPORT (Staab et al., ICLR 2025)
+  Generated: 2026-04-29 17:39:15
+  Adversary / Judge Model: gemini-2.5-flash
+  Attributes attacked: person, age, location, occupation, education, nationality, organization
+==============================================================================
+
+  Lower is better. success_rate = MATCH / (MATCH + NO_MATCH).
+  evaluable = MATCH + NO_MATCH; SKIP (GT null in original) excluded from denominator.
+  any_leak = at least one attribute successfully inferred from the anonymized text.
+
+  Attribute groupings (mirroring the schema tiers in evaluation_utils.py):
+    Tier 1 (direct identifiers):  person, location, organization
+                                  defendable by token-level masking
+    Tier 3 (quasi-identifiers):   age, occupation, education, nationality
+                                  leak through surrounding context, not single tokens
+    Tier 2 structured identifiers (IBAN/EMAIL/PHONE/DATE/MONEY) are excluded
+    from the attack since they are not inference targets.
+    Tier1 / Tier3 columns are unweighted means of the per-attribute success rates
+    in the corresponding tier.
+
+##############################################################################
+  SUMMARY: Attack Success Rate by Pipeline
+##############################################################################
+
+  Pipeline                                AnyLk  AvgLk  Tier1  Tier3  perso    age  locat  occup  educa  natio  organ     n
+  -------------------------------------------------------------------------------------------------------------------------
+  spaCy + Regex                           92.6%  59.3%  17.5%  90.6%  26.0% 100.0%  14.3%  95.3%  82.0%  85.0%  12.3%   611
+  BERT (pretrained) + Regex               88.7%  51.4%  13.9%  79.6%  18.2% 100.0%  19.8%  92.3%  86.0%  40.0%   3.8%   611
+  BERT Fine-Tuned                         77.1%  43.2%   9.5%  68.5%  17.3%  95.8%  10.3%  70.5%  72.2%  35.4%   0.8%   611
+  Presidio                                81.8%  47.3%  15.2%  71.4%  22.9%  95.8%  12.7%  75.3%  75.4%  39.1%  10.0%   611
+  LLM Llama-3 [few-shot +verify]          79.5%  46.9%  16.9%  69.4%  36.3%  95.8%  11.1%  70.4%  56.2%  55.2%   3.3%   611
+  LLM Qwen2.5 [few-shot +verify]          88.2%  55.7%  30.6%  74.5%  51.6%  94.7%  22.0%  78.9%  70.2%  54.4%  18.2%   611
+  LLM SauerkrautLM [few-shot +verify]     82.0%  48.4%  17.4%  71.6%  38.6%  98.6%  10.3%  74.1%  68.4%  45.2%   3.3%   611
+  LLM Llama-3 [fine-tuned]                75.9%  42.9%   9.1%  68.2%  17.7%  94.4%   8.5%  70.0%  74.8%  33.8%   1.1%   611
+  LLM Llama-3 [prompt few-shot]           83.5%  45.2%  19.0%  64.9%  18.0%  87.3%  35.1%  81.1%  57.4%  33.8%   3.8%   611
+  LLM Qwen2.5 [prompt few-shot]           92.5%  52.8%  24.6%  73.8%  22.1%  84.7%  45.6%  94.6%  61.1%  55.0%   6.2%   611
+  LLM SauerkrautLM [prompt few-shot]      87.6%  51.2%  22.7%  72.6%  18.0%  85.9%  43.4%  86.8%  64.9%  52.6%   6.7%   611
+  Datenwertschöpfung API                  99.8%  73.9%  56.9%  86.6%  30.0%  91.7%  43.8%  96.6%  74.6%  83.6%  96.9%   611
+
+  >>> Low Complexity <<<
+  Pipeline                                AnyLk  AvgLk  Tier1  Tier3  perso    age  locat  occup  educa  natio  organ     n
+  -------------------------------------------------------------------------------------------------------------------------
+  spaCy + Regex                           94.1%  61.4%  20.7%  91.9%  38.2% 100.0%  13.1%  95.1%  82.9%  89.5%  10.8%   204
+  BERT (pretrained) + Regex               92.2%  55.4%  14.4%  86.1%  23.5% 100.0%  17.6%  94.6%  88.1%  61.9%   2.0%   204
+  BERT Fine-Tuned                         83.8%  48.7%  10.6%  77.2%  24.5% 100.0%   7.2%  75.7%  81.0%  52.2%   0.0%   204
+  Presidio                                90.2%  53.7%  18.4%  80.2%  36.3%  94.1%  12.4%  81.6%  85.0%  60.0%   6.4%   204
+  LLM Llama-3 [few-shot +verify]          88.7%  54.9%  24.2%  77.9%  60.8% 100.0%   9.8%  76.8%  61.0%  73.7%   2.0%   204
+  LLM Qwen2.5 [few-shot +verify]          91.7%  59.6%  29.7%  82.0%  62.7%  94.4%  15.7%  82.7%  82.9%  68.2%  10.8%   204
+  LLM SauerkrautLM [few-shot +verify]     90.2%  56.1%  24.7%  79.6%  62.3% 100.0%   9.8%  77.8%  80.5%  60.0%   2.0%   204
+  LLM Llama-3 [fine-tuned]                81.9%  48.1%  10.0%  76.6%  23.5% 100.0%   6.5%  75.1%  81.4%  50.0%   0.0%   204
+  LLM Llama-3 [prompt few-shot]           89.7%  52.5%  22.6%  74.9%  23.5% 100.0%  41.8%  87.6%  61.9%  50.0%   2.5%   204
+  LLM Qwen2.5 [prompt few-shot]           94.6%  55.9%  28.1%  76.8%  27.0%  88.2%  52.9%  95.7%  63.4%  60.0%   4.4%   204
+  LLM SauerkrautLM [prompt few-shot]      89.7%  54.3%  24.3%  76.7%  21.1%  87.5%  46.4%  90.8%  70.7%  57.9%   5.4%   204
+  Datenwertschöpfung API                 100.0%  74.8%  58.3%  87.2%  30.9%  94.1%  48.4%  97.8%  67.4%  89.5%  95.6%   204
+
+  >>> Medium Complexity <<<
+  Pipeline                                AnyLk  AvgLk  Tier1  Tier3  perso    age  locat  occup  educa  natio  organ     n
+  -------------------------------------------------------------------------------------------------------------------------
+  spaCy + Regex                           92.7%  59.3%  15.1%  92.4%  17.0% 100.0%  17.6%  97.3%  85.4%  87.0%  10.7%   206
+  BERT (pretrained) + Regex               88.3%  52.2%  12.8%  81.8%  12.1% 100.0%  23.3%  94.5%  92.9%  40.0%   2.9%   206
+  BERT Fine-Tuned                         73.3%  43.2%   9.3%  68.6%  11.7%  96.2%  15.1%  67.8%  75.6%  34.8%   1.0%   206
+  Presidio                                76.7%  45.9%  12.4%  71.0%  13.1%  92.3%  13.4%  72.7%  78.0%  40.9%  10.7%   206
+  LLM Llama-3 [few-shot +verify]          71.4%  42.6%  13.3%  64.5%  22.8%  92.3%  14.3%  64.8%  46.5%  54.5%   2.9%   206
+  LLM Qwen2.5 [few-shot +verify]          83.0%  53.4%  23.7%  75.6%  35.0%  96.2%  24.4%  77.2%  66.7%  62.5%  11.7%   206
+  LLM SauerkrautLM [few-shot +verify]     78.6%  47.2%  15.0%  71.4%  25.7% 100.0%  14.3%  72.1%  63.6%  50.0%   4.9%   206
+  LLM Llama-3 [fine-tuned]                71.8%  42.3%   8.6%  67.7%  12.1%  92.3%  12.6%  65.6%  78.0%  34.8%   1.0%   206
+  LLM Llama-3 [prompt few-shot]           81.1%  44.4%  17.5%  64.5%  13.1%  88.5%  34.2%  76.5%  54.8%  38.1%   5.3%   206
+  LLM Qwen2.5 [prompt few-shot]           92.2%  53.2%  22.3%  76.4%  17.0%  92.3%  44.5%  94.6%  59.5%  59.1%   5.3%   206
+  LLM SauerkrautLM [prompt few-shot]      85.0%  49.9%  20.5%  72.0%  13.1%  84.6%  42.0%  83.5%  58.1%  61.9%   6.3%   206
+  Datenwertschöpfung API                 100.0%  74.5%  53.9%  89.9%  22.8%  92.3%  41.2%  98.9%  77.3%  91.3%  97.6%   206
+
+  >>> High Complexity <<<
+  Pipeline                                AnyLk  AvgLk  Tier1  Tier3  perso    age  locat  occup  educa  natio  organ     n
+  -------------------------------------------------------------------------------------------------------------------------
+  spaCy + Regex                           91.0%  56.8%  16.9%  86.8%  22.9% 100.0%  12.3%  93.3%  75.9%  77.8%  15.4%   201
+  BERT (pretrained) + Regex               85.6%  45.8%  14.8%  69.1%  18.9% 100.0%  18.9%  87.3%  73.3%  15.8%   6.5%   201
+  BERT Fine-Tuned                         74.1%  37.1%   8.9%  58.2%  15.9%  93.1%   9.4%  67.7%  56.2%  15.8%   1.5%   201
+  Presidio                                78.6%  42.1%  14.9%  62.5%  19.4% 100.0%  12.3%  71.1%  60.6%  18.2%  12.9%   201
+  LLM Llama-3 [few-shot +verify]          78.6%  43.6%  13.3%  66.4%  25.4%  96.6%   9.4%  69.5%  64.3%  35.3%   5.0%   201
+  LLM Qwen2.5 [few-shot +verify]          90.0%  54.1%  39.3%  65.3%  57.2%  93.5%  28.3%  76.5%  59.4%  31.8%  32.3%   201
+  LLM SauerkrautLM [few-shot +verify]     77.1%  41.0%  12.5%  62.4%  27.9%  96.6%   6.6%  72.1%  58.6%  22.2%   3.0%   201
+  LLM Llama-3 [fine-tuned]                74.1%  37.9%   8.8%  59.6%  17.4%  93.1%   6.6%  69.1%  61.3%  15.0%   2.5%   201
+  LLM Llama-3 [prompt few-shot]           79.6%  39.1%  15.8%  56.7%  17.4%  79.3%  26.4%  78.9%  54.8%  13.6%   3.5%   201
+  LLM Qwen2.5 [prompt few-shot]           90.5%  48.8%  22.6%  68.4%  22.4%  75.9%  36.4%  93.3%  60.0%  44.4%   9.0%   201
+  LLM SauerkrautLM [prompt few-shot]      88.1%  49.0%  23.0%  68.5%  19.9%  86.2%  40.6%  85.9%  66.7%  35.3%   8.5%   201
+  Datenwertschöpfung API                  99.5%  72.2%  58.0%  82.9%  36.3%  89.7%  40.2%  92.9%  80.6%  68.4%  97.5%   201
+
+
+##############################################################################
+  TIER-LEVEL BREAKDOWN — pipelines sorted best → worst per tier
+##############################################################################
+
+  Tier-mean is the unweighted mean of the per-attribute success rates
+  for the attributes in that tier.  OVERALL is the pooled match rate
+  across (tier-attributes × pipelines × documents): the single number
+  most directly comparable across tiers.
+
+  >>> Tier 1 — direct identifiers (defendable by token-level masking) <<<
+      Attributes: person, location, organization
+  Pipeline                                Tier mean   match  no_match   skip  evaluable       n
+  ---------------------------------------------------------------------------------------------
+  LLM Llama-3 [fine-tuned]                     9.1%     147     1,453    233      1,600     611
+  BERT Fine-Tuned                              9.5%     150     1,450    233      1,600     611
+  BERT (pretrained) + Regex                   13.9%     209     1,392    232      1,601     611
+  Presidio                                    15.2%     249     1,351    233      1,600     611
+  LLM Llama-3 [few-shot +verify]              16.9%     284     1,316    233      1,600     611
+  LLM SauerkrautLM [few-shot +verify]         17.4%     295     1,305    233      1,600     611
+  spaCy + Regex                               17.5%     288     1,312    233      1,600     611
+  LLM Llama-3 [prompt few-shot]               19.0%     266     1,335    232      1,601     611
+  LLM SauerkrautLM [prompt few-shot]          22.7%     315     1,285    233      1,600     611
+  LLM Qwen2.5 [prompt few-shot]               24.6%     346     1,255    232      1,601     611
+  LLM Qwen2.5 [few-shot +verify]              30.6%     509     1,091    233      1,600     611
+  Datenwertschöpfung API                      56.9%     941       660    232      1,601     611
+  ---------------------------------------------------------------------------------------------
+  OVERALL (all pipelines pooled)              20.8%   3,999    15,205  2,792     19,204   7,332
+
+  >>> Tier 3 — quasi-identifiers (leak through context, not single tokens) <<<
+      Attributes: age, occupation, education, nationality
+  Pipeline                                Tier mean   match  no_match   skip  evaluable       n
+  ---------------------------------------------------------------------------------------------
+  LLM Llama-3 [prompt few-shot]               64.9%     587       203  1,654        790     611
+  LLM Llama-3 [fine-tuned]                    68.2%     548       236  1,660        784     611
+  BERT Fine-Tuned                             68.5%     551       235  1,658        786     611
+  LLM Llama-3 [few-shot +verify]              69.4%     538       235  1,671        773     611
+  Presidio                                    71.4%     582       202  1,660        784     611
+  LLM SauerkrautLM [few-shot +verify]         71.6%     571       209  1,664        780     611
+  LLM SauerkrautLM [prompt few-shot]          72.6%     629       147  1,668        776     611
+  LLM Qwen2.5 [prompt few-shot]               73.8%     669       111  1,664        780     611
+  LLM Qwen2.5 [few-shot +verify]              74.5%     615       184  1,645        799     611
+  BERT (pretrained) + Regex                   79.6%     687        96  1,661        783     611
+  Datenwertschöpfung API                      86.6%     724        64  1,656        788     611
+  spaCy + Regex                               90.6%     721        54  1,669        775     611
+  ---------------------------------------------------------------------------------------------
+  OVERALL (all pipelines pooled)              79.0%   7,422     1,976 19,930      9,398   7,332
+
+
+##############################################################################
+  PER-ATTRIBUTE BREAKDOWN — pipelines sorted best → worst per attribute
+##############################################################################
+
+  For each attribute, lists all pipelines and their attack success rate on that
+  attribute (lower = better anonymization). Useful for spotting which pipelines
+  succeed/fail at suppressing each individual attribute.
+
+  >>> Attribute: person   (Tier 1 — direct identifier) <<<
+  Pipeline                                Success   match  no_match   skip  evaluable       n
+  -------------------------------------------------------------------------------------------
+  BERT Fine-Tuned                           17.3%     106       505      0        611     611
+  LLM Llama-3 [fine-tuned]                  17.7%     108       503      0        611     611
+  LLM Llama-3 [prompt few-shot]             18.0%     110       501      0        611     611
+  LLM SauerkrautLM [prompt few-shot]        18.0%     110       501      0        611     611
+  BERT (pretrained) + Regex                 18.2%     111       500      0        611     611
+  LLM Qwen2.5 [prompt few-shot]             22.1%     135       476      0        611     611
+  Presidio                                  22.9%     140       471      0        611     611
+  spaCy + Regex                             26.0%     159       452      0        611     611
+  Datenwertschöpfung API                    30.0%     183       428      0        611     611
+  LLM Llama-3 [few-shot +verify]            36.3%     222       389      0        611     611
+  LLM SauerkrautLM [few-shot +verify]       38.6%     236       375      0        611     611
+  LLM Qwen2.5 [few-shot +verify]            51.6%     315       296      0        611     611
+  -------------------------------------------------------------------------------------------
+  OVERALL (all pipelines pooled)            26.4%   1,935     5,397      0      7,332   7,332
+
+  >>> Attribute: age   (Tier 3 — quasi-identifier) <<<
+  Pipeline                                Success   match  no_match   skip  evaluable       n
+  -------------------------------------------------------------------------------------------
+  LLM Qwen2.5 [prompt few-shot]             84.7%      61        11    539         72     611
+  LLM SauerkrautLM [prompt few-shot]        85.9%      61        10    540         71     611
+  LLM Llama-3 [prompt few-shot]             87.3%      62         9    540         71     611
+  Datenwertschöpfung API                    91.7%      66         6    539         72     611
+  LLM Llama-3 [fine-tuned]                  94.4%      67         4    540         71     611
+  LLM Qwen2.5 [few-shot +verify]            94.7%      71         4    536         75     611
+  BERT Fine-Tuned                           95.8%      68         3    540         71     611
+  Presidio                                  95.8%      69         3    539         72     611
+  LLM Llama-3 [few-shot +verify]            95.8%      69         3    539         72     611
+  LLM SauerkrautLM [few-shot +verify]       98.6%      70         1    540         71     611
+  spaCy + Regex                            100.0%      71         0    540         71     611
+  BERT (pretrained) + Regex                100.0%      71         0    540         71     611
+  -------------------------------------------------------------------------------------------
+  OVERALL (all pipelines pooled)            93.7%     806        54  6,472        860   7,332
+
+  >>> Attribute: location   (Tier 1 — direct identifier) <<<
+  Pipeline                                Success   match  no_match   skip  evaluable       n
+  -------------------------------------------------------------------------------------------
+  LLM Llama-3 [fine-tuned]                   8.5%      32       346    233        378     611
+  BERT Fine-Tuned                           10.3%      39       339    233        378     611
+  LLM SauerkrautLM [few-shot +verify]       10.3%      39       339    233        378     611
+  LLM Llama-3 [few-shot +verify]            11.1%      42       336    233        378     611
+  Presidio                                  12.7%      48       330    233        378     611
+  spaCy + Regex                             14.3%      54       324    233        378     611
+  BERT (pretrained) + Regex                 19.8%      75       304    232        379     611
+  LLM Qwen2.5 [few-shot +verify]            22.0%      83       295    233        378     611
+  LLM Llama-3 [prompt few-shot]             35.1%     133       246    232        379     611
+  LLM SauerkrautLM [prompt few-shot]        43.4%     164       214    233        378     611
+  Datenwertschöpfung API                    43.8%     166       213    232        379     611
+  LLM Qwen2.5 [prompt few-shot]             45.6%     173       206    232        379     611
+  -------------------------------------------------------------------------------------------
+  OVERALL (all pipelines pooled)            23.1%   1,048     3,492  2,792      4,540   7,332
+
+  >>> Attribute: occupation   (Tier 3 — quasi-identifier) <<<
+  Pipeline                                Success   match  no_match   skip  evaluable       n
+  -------------------------------------------------------------------------------------------
+  LLM Llama-3 [fine-tuned]                  70.0%     373       160     78        533     611
+  LLM Llama-3 [few-shot +verify]            70.4%     374       157     80        531     611
+  BERT Fine-Tuned                           70.5%     377       158     76        535     611
+  LLM SauerkrautLM [few-shot +verify]       74.1%     395       138     78        533     611
+  Presidio                                  75.3%     402       132     77        534     611
+  LLM Qwen2.5 [few-shot +verify]            78.9%     422       113     76        535     611
+  LLM Llama-3 [prompt few-shot]             81.1%     437       102     72        539     611
+  LLM SauerkrautLM [prompt few-shot]        86.8%     466        71     74        537     611
+  BERT (pretrained) + Regex                 92.3%     492        41     78        533     611
+  LLM Qwen2.5 [prompt few-shot]             94.6%     506        29     76        535     611
+  spaCy + Regex                             95.3%     508        25     78        533     611
+  Datenwertschöpfung API                    96.6%     519        18     74        537     611
+  -------------------------------------------------------------------------------------------
+  OVERALL (all pipelines pooled)            82.2%   5,271     1,144    917      6,415   7,332
+
+  >>> Attribute: education   (Tier 3 — quasi-identifier) <<<
+  Pipeline                                Success   match  no_match   skip  evaluable       n
+  -------------------------------------------------------------------------------------------
+  LLM Llama-3 [few-shot +verify]            56.2%      63        49    499        112     611
+  LLM Llama-3 [prompt few-shot]             57.4%      66        49    496        115     611
+  LLM Qwen2.5 [prompt few-shot]             61.1%      69        44    498        113     611
+  LLM SauerkrautLM [prompt few-shot]        64.9%      72        39    500        111     611
+  LLM SauerkrautLM [few-shot +verify]       68.4%      78        36    497        114     611
+  LLM Qwen2.5 [few-shot +verify]            70.2%      85        36    490        121     611
+  BERT Fine-Tuned                           72.2%      83        32    496        115     611
+  Datenwertschöpfung API                    74.6%      88        30    493        118     611
+  LLM Llama-3 [fine-tuned]                  74.8%      86        29    496        115     611
+  Presidio                                  75.4%      86        28    497        114     611
+  spaCy + Regex                             82.0%      91        20    500        111     611
+  BERT (pretrained) + Regex                 86.0%      98        16    497        114     611
+  -------------------------------------------------------------------------------------------
+  OVERALL (all pipelines pooled)            70.3%     965       408  5,959      1,373   7,332
+
+  >>> Attribute: nationality   (Tier 3 — quasi-identifier) <<<
+  Pipeline                                Success   match  no_match   skip  evaluable       n
+  -------------------------------------------------------------------------------------------
+  LLM Llama-3 [fine-tuned]                  33.8%      22        43    546         65     611
+  LLM Llama-3 [prompt few-shot]             33.8%      22        43    546         65     611
+  BERT Fine-Tuned                           35.4%      23        42    546         65     611
+  Presidio                                  39.1%      25        39    547         64     611
+  BERT (pretrained) + Regex                 40.0%      26        39    546         65     611
+  LLM SauerkrautLM [few-shot +verify]       45.2%      28        34    549         62     611
+  LLM SauerkrautLM [prompt few-shot]        52.6%      30        27    554         57     611
+  LLM Qwen2.5 [few-shot +verify]            54.4%      37        31    543         68     611
+  LLM Qwen2.5 [prompt few-shot]             55.0%      33        27    551         60     611
+  LLM Llama-3 [few-shot +verify]            55.2%      32        26    553         58     611
+  Datenwertschöpfung API                    83.6%      51        10    550         61     611
+  spaCy + Regex                             85.0%      51         9    551         60     611
+  -------------------------------------------------------------------------------------------
+  OVERALL (all pipelines pooled)            50.7%     380       370  6,582        750   7,332
+
+  >>> Attribute: organization   (Tier 1 — direct identifier) <<<
+  Pipeline                                Success   match  no_match   skip  evaluable       n
+  -------------------------------------------------------------------------------------------
+  BERT Fine-Tuned                            0.8%       5       606      0        611     611
+  LLM Llama-3 [fine-tuned]                   1.1%       7       604      0        611     611
+  LLM Llama-3 [few-shot +verify]             3.3%      20       591      0        611     611
+  LLM SauerkrautLM [few-shot +verify]        3.3%      20       591      0        611     611
+  BERT (pretrained) + Regex                  3.8%      23       588      0        611     611
+  LLM Llama-3 [prompt few-shot]              3.8%      23       588      0        611     611
+  LLM Qwen2.5 [prompt few-shot]              6.2%      38       573      0        611     611
+  LLM SauerkrautLM [prompt few-shot]         6.7%      41       570      0        611     611
+  Presidio                                  10.0%      61       550      0        611     611
+  spaCy + Regex                             12.3%      75       536      0        611     611
+  LLM Qwen2.5 [few-shot +verify]            18.2%     111       500      0        611     611
+  Datenwertschöpfung API                    96.9%     592        19      0        611     611
+  -------------------------------------------------------------------------------------------
+  OVERALL (all pipelines pooled)            13.9%   1,016     6,316      0      7,332   7,332
+
+
+##############################################################################
+  DETAILED PER-PIPELINE STATISTICS
+##############################################################################
+
+  ======================================================================
+  Pipeline: spaCy + Regex
+  ======================================================================
+  Documents: 611 | Match-judge parse failures: 0
+  Any-attribute leak rate: 92.6%
+  Mean per-attribute leak rate: 59.3%
+
+  Per attribute (success_rate = MATCH / evaluable; evaluable = MATCH + NO_MATCH):
+    person        success= 26.0%  (match=159, no_match=452, skip=0)
+    age           success=100.0%  (match=71, no_match=0, skip=540)
+    location      success= 14.3%  (match=54, no_match=324, skip=233)
+    occupation    success= 95.3%  (match=508, no_match=25, skip=78)
+    education     success= 82.0%  (match=91, no_match=20, skip=500)
+    nationality   success= 85.0%  (match=51, no_match=9, skip=551)
+    organization  success= 12.3%  (match=75, no_match=536, skip=0)
+
+  Low (n=204):
+    Any-attribute leak: 94.1%
+    Mean per-attribute leak: 61.4%
+      person        success= 38.2%  (match=78, no_match=126, skip=0)
+      age           success=100.0%  (match=16, no_match=0, skip=188)
+      location      success= 13.1%  (match=20, no_match=133, skip=51)
+      occupation    success= 95.1%  (match=176, no_match=9, skip=19)
+      education     success= 82.9%  (match=34, no_match=7, skip=163)
+      nationality   success= 89.5%  (match=17, no_match=2, skip=185)
+      organization  success= 10.8%  (match=22, no_match=182, skip=0)
+
+  Medium (n=206):
+    Any-attribute leak: 92.7%
+    Mean per-attribute leak: 59.3%
+      person        success= 17.0%  (match=35, no_match=171, skip=0)
+      age           success=100.0%  (match=26, no_match=0, skip=180)
+      location      success= 17.6%  (match=21, no_match=98, skip=87)
+      occupation    success= 97.3%  (match=178, no_match=5, skip=23)
+      education     success= 85.4%  (match=35, no_match=6, skip=165)
+      nationality   success= 87.0%  (match=20, no_match=3, skip=183)
+      organization  success= 10.7%  (match=22, no_match=184, skip=0)
+
+  High (n=201):
+    Any-attribute leak: 91.0%
+    Mean per-attribute leak: 56.8%
+      person        success= 22.9%  (match=46, no_match=155, skip=0)
+      age           success=100.0%  (match=29, no_match=0, skip=172)
+      location      success= 12.3%  (match=13, no_match=93, skip=95)
+      occupation    success= 93.3%  (match=154, no_match=11, skip=36)
+      education     success= 75.9%  (match=22, no_match=7, skip=172)
+      nationality   success= 77.8%  (match=14, no_match=4, skip=183)
+      organization  success= 15.4%  (match=31, no_match=170, skip=0)
+
+  ======================================================================
+  Pipeline: BERT (pretrained) + Regex
+  ======================================================================
+  Documents: 611 | Match-judge parse failures: 0
+  Any-attribute leak rate: 88.7%
+  Mean per-attribute leak rate: 51.4%
+
+  Per attribute (success_rate = MATCH / evaluable; evaluable = MATCH + NO_MATCH):
+    person        success= 18.2%  (match=111, no_match=500, skip=0)
+    age           success=100.0%  (match=71, no_match=0, skip=540)
+    location      success= 19.8%  (match=75, no_match=304, skip=232)
+    occupation    success= 92.3%  (match=492, no_match=41, skip=78)
+    education     success= 86.0%  (match=98, no_match=16, skip=497)
+    nationality   success= 40.0%  (match=26, no_match=39, skip=546)
+    organization  success=  3.8%  (match=23, no_match=588, skip=0)
+
+  Low (n=204):
+    Any-attribute leak: 92.2%
+    Mean per-attribute leak: 55.4%
+      person        success= 23.5%  (match=48, no_match=156, skip=0)
+      age           success=100.0%  (match=16, no_match=0, skip=188)
+      location      success= 17.6%  (match=27, no_match=126, skip=51)
+      occupation    success= 94.6%  (match=175, no_match=10, skip=19)
+      education     success= 88.1%  (match=37, no_match=5, skip=162)
+      nationality   success= 61.9%  (match=13, no_match=8, skip=183)
+      organization  success=  2.0%  (match=4, no_match=200, skip=0)
+
+  Medium (n=206):
+    Any-attribute leak: 88.3%
+    Mean per-attribute leak: 52.2%
+      person        success= 12.1%  (match=25, no_match=181, skip=0)
+      age           success=100.0%  (match=26, no_match=0, skip=180)
+      location      success= 23.3%  (match=28, no_match=92, skip=86)
+      occupation    success= 94.5%  (match=173, no_match=10, skip=23)
+      education     success= 92.9%  (match=39, no_match=3, skip=164)
+      nationality   success= 40.0%  (match=10, no_match=15, skip=181)
+      organization  success=  2.9%  (match=6, no_match=200, skip=0)
+
+  High (n=201):
+    Any-attribute leak: 85.6%
+    Mean per-attribute leak: 45.8%
+      person        success= 18.9%  (match=38, no_match=163, skip=0)
+      age           success=100.0%  (match=29, no_match=0, skip=172)
+      location      success= 18.9%  (match=20, no_match=86, skip=95)
+      occupation    success= 87.3%  (match=144, no_match=21, skip=36)
+      education     success= 73.3%  (match=22, no_match=8, skip=171)
+      nationality   success= 15.8%  (match=3, no_match=16, skip=182)
+      organization  success=  6.5%  (match=13, no_match=188, skip=0)
+
+  ======================================================================
+  Pipeline: BERT Fine-Tuned
+  ======================================================================
+  Documents: 611 | Match-judge parse failures: 0
+  Any-attribute leak rate: 77.1%
+  Mean per-attribute leak rate: 43.2%
+
+  Per attribute (success_rate = MATCH / evaluable; evaluable = MATCH + NO_MATCH):
+    person        success= 17.3%  (match=106, no_match=505, skip=0)
+    age           success= 95.8%  (match=68, no_match=3, skip=540)
+    location      success= 10.3%  (match=39, no_match=339, skip=233)
+    occupation    success= 70.5%  (match=377, no_match=158, skip=76)
+    education     success= 72.2%  (match=83, no_match=32, skip=496)
+    nationality   success= 35.4%  (match=23, no_match=42, skip=546)
+    organization  success=  0.8%  (match=5, no_match=606, skip=0)
+
+  Low (n=204):
+    Any-attribute leak: 83.8%
+    Mean per-attribute leak: 48.7%
+      person        success= 24.5%  (match=50, no_match=154, skip=0)
+      age           success=100.0%  (match=16, no_match=0, skip=188)
+      location      success=  7.2%  (match=11, no_match=142, skip=51)
+      occupation    success= 75.7%  (match=140, no_match=45, skip=19)
+      education     success= 81.0%  (match=34, no_match=8, skip=162)
+      nationality   success= 52.2%  (match=12, no_match=11, skip=181)
+      organization  success=  0.0%  (match=0, no_match=204, skip=0)
+
+  Medium (n=206):
+    Any-attribute leak: 73.3%
+    Mean per-attribute leak: 43.2%
+      person        success= 11.7%  (match=24, no_match=182, skip=0)
+      age           success= 96.2%  (match=25, no_match=1, skip=180)
+      location      success= 15.1%  (match=18, no_match=101, skip=87)
+      occupation    success= 67.8%  (match=124, no_match=59, skip=23)
+      education     success= 75.6%  (match=31, no_match=10, skip=165)
+      nationality   success= 34.8%  (match=8, no_match=15, skip=183)
+      organization  success=  1.0%  (match=2, no_match=204, skip=0)
+
+  High (n=201):
+    Any-attribute leak: 74.1%
+    Mean per-attribute leak: 37.1%
+      person        success= 15.9%  (match=32, no_match=169, skip=0)
+      age           success= 93.1%  (match=27, no_match=2, skip=172)
+      location      success=  9.4%  (match=10, no_match=96, skip=95)
+      occupation    success= 67.7%  (match=113, no_match=54, skip=34)
+      education     success= 56.2%  (match=18, no_match=14, skip=169)
+      nationality   success= 15.8%  (match=3, no_match=16, skip=182)
+      organization  success=  1.5%  (match=3, no_match=198, skip=0)
+
+  ======================================================================
+  Pipeline: Presidio
+  ======================================================================
+  Documents: 611 | Match-judge parse failures: 0
+  Any-attribute leak rate: 81.8%
+  Mean per-attribute leak rate: 47.3%
+
+  Per attribute (success_rate = MATCH / evaluable; evaluable = MATCH + NO_MATCH):
+    person        success= 22.9%  (match=140, no_match=471, skip=0)
+    age           success= 95.8%  (match=69, no_match=3, skip=539)
+    location      success= 12.7%  (match=48, no_match=330, skip=233)
+    occupation    success= 75.3%  (match=402, no_match=132, skip=77)
+    education     success= 75.4%  (match=86, no_match=28, skip=497)
+    nationality   success= 39.1%  (match=25, no_match=39, skip=547)
+    organization  success= 10.0%  (match=61, no_match=550, skip=0)
+
+  Low (n=204):
+    Any-attribute leak: 90.2%
+    Mean per-attribute leak: 53.7%
+      person        success= 36.3%  (match=74, no_match=130, skip=0)
+      age           success= 94.1%  (match=16, no_match=1, skip=187)
+      location      success= 12.4%  (match=19, no_match=134, skip=51)
+      occupation    success= 81.6%  (match=151, no_match=34, skip=19)
+      education     success= 85.0%  (match=34, no_match=6, skip=164)
+      nationality   success= 60.0%  (match=12, no_match=8, skip=184)
+      organization  success=  6.4%  (match=13, no_match=191, skip=0)
+
+  Medium (n=206):
+    Any-attribute leak: 76.7%
+    Mean per-attribute leak: 45.9%
+      person        success= 13.1%  (match=27, no_match=179, skip=0)
+      age           success= 92.3%  (match=24, no_match=2, skip=180)
+      location      success= 13.4%  (match=16, no_match=103, skip=87)
+      occupation    success= 72.7%  (match=133, no_match=50, skip=23)
+      education     success= 78.0%  (match=32, no_match=9, skip=165)
+      nationality   success= 40.9%  (match=9, no_match=13, skip=184)
+      organization  success= 10.7%  (match=22, no_match=184, skip=0)
+
+  High (n=201):
+    Any-attribute leak: 78.6%
+    Mean per-attribute leak: 42.1%
+      person        success= 19.4%  (match=39, no_match=162, skip=0)
+      age           success=100.0%  (match=29, no_match=0, skip=172)
+      location      success= 12.3%  (match=13, no_match=93, skip=95)
+      occupation    success= 71.1%  (match=118, no_match=48, skip=35)
+      education     success= 60.6%  (match=20, no_match=13, skip=168)
+      nationality   success= 18.2%  (match=4, no_match=18, skip=179)
+      organization  success= 12.9%  (match=26, no_match=175, skip=0)
+
+  ======================================================================
+  Pipeline: LLM Llama-3 [few-shot +verify]
+  ======================================================================
+  Documents: 611 | Match-judge parse failures: 0
+  Any-attribute leak rate: 79.5%
+  Mean per-attribute leak rate: 46.9%
+
+  Per attribute (success_rate = MATCH / evaluable; evaluable = MATCH + NO_MATCH):
+    person        success= 36.3%  (match=222, no_match=389, skip=0)
+    age           success= 95.8%  (match=69, no_match=3, skip=539)
+    location      success= 11.1%  (match=42, no_match=336, skip=233)
+    occupation    success= 70.4%  (match=374, no_match=157, skip=80)
+    education     success= 56.2%  (match=63, no_match=49, skip=499)
+    nationality   success= 55.2%  (match=32, no_match=26, skip=553)
+    organization  success=  3.3%  (match=20, no_match=591, skip=0)
+
+  Low (n=204):
+    Any-attribute leak: 88.7%
+    Mean per-attribute leak: 54.9%
+      person        success= 60.8%  (match=124, no_match=80, skip=0)
+      age           success=100.0%  (match=17, no_match=0, skip=187)
+      location      success=  9.8%  (match=15, no_match=138, skip=51)
+      occupation    success= 76.8%  (match=142, no_match=43, skip=19)
+      education     success= 61.0%  (match=25, no_match=16, skip=163)
+      nationality   success= 73.7%  (match=14, no_match=5, skip=185)
+      organization  success=  2.0%  (match=4, no_match=200, skip=0)
+
+  Medium (n=206):
+    Any-attribute leak: 71.4%
+    Mean per-attribute leak: 42.6%
+      person        success= 22.8%  (match=47, no_match=159, skip=0)
+      age           success= 92.3%  (match=24, no_match=2, skip=180)
+      location      success= 14.3%  (match=17, no_match=102, skip=87)
+      occupation    success= 64.8%  (match=118, no_match=64, skip=24)
+      education     success= 46.5%  (match=20, no_match=23, skip=163)
+      nationality   success= 54.5%  (match=12, no_match=10, skip=184)
+      organization  success=  2.9%  (match=6, no_match=200, skip=0)
+
+  High (n=201):
+    Any-attribute leak: 78.6%
+    Mean per-attribute leak: 43.6%
+      person        success= 25.4%  (match=51, no_match=150, skip=0)
+      age           success= 96.6%  (match=28, no_match=1, skip=172)
+      location      success=  9.4%  (match=10, no_match=96, skip=95)
+      occupation    success= 69.5%  (match=114, no_match=50, skip=37)
+      education     success= 64.3%  (match=18, no_match=10, skip=173)
+      nationality   success= 35.3%  (match=6, no_match=11, skip=184)
+      organization  success=  5.0%  (match=10, no_match=191, skip=0)
+
+  ======================================================================
+  Pipeline: LLM Qwen2.5 [few-shot +verify]
+  ======================================================================
+  Documents: 611 | Match-judge parse failures: 0
+  Any-attribute leak rate: 88.2%
+  Mean per-attribute leak rate: 55.7%
+
+  Per attribute (success_rate = MATCH / evaluable; evaluable = MATCH + NO_MATCH):
+    person        success= 51.6%  (match=315, no_match=296, skip=0)
+    age           success= 94.7%  (match=71, no_match=4, skip=536)
+    location      success= 22.0%  (match=83, no_match=295, skip=233)
+    occupation    success= 78.9%  (match=422, no_match=113, skip=76)
+    education     success= 70.2%  (match=85, no_match=36, skip=490)
+    nationality   success= 54.4%  (match=37, no_match=31, skip=543)
+    organization  success= 18.2%  (match=111, no_match=500, skip=0)
+
+  Low (n=204):
+    Any-attribute leak: 91.7%
+    Mean per-attribute leak: 59.6%
+      person        success= 62.7%  (match=128, no_match=76, skip=0)
+      age           success= 94.4%  (match=17, no_match=1, skip=186)
+      location      success= 15.7%  (match=24, no_match=129, skip=51)
+      occupation    success= 82.7%  (match=153, no_match=32, skip=19)
+      education     success= 82.9%  (match=34, no_match=7, skip=163)
+      nationality   success= 68.2%  (match=15, no_match=7, skip=182)
+      organization  success= 10.8%  (match=22, no_match=182, skip=0)
+
+  Medium (n=206):
+    Any-attribute leak: 83.0%
+    Mean per-attribute leak: 53.4%
+      person        success= 35.0%  (match=72, no_match=134, skip=0)
+      age           success= 96.2%  (match=25, no_match=1, skip=180)
+      location      success= 24.4%  (match=29, no_match=90, skip=87)
+      occupation    success= 77.2%  (match=142, no_match=42, skip=22)
+      education     success= 66.7%  (match=32, no_match=16, skip=158)
+      nationality   success= 62.5%  (match=15, no_match=9, skip=182)
+      organization  success= 11.7%  (match=24, no_match=182, skip=0)
+
+  High (n=201):
+    Any-attribute leak: 90.0%
+    Mean per-attribute leak: 54.1%
+      person        success= 57.2%  (match=115, no_match=86, skip=0)
+      age           success= 93.5%  (match=29, no_match=2, skip=170)
+      location      success= 28.3%  (match=30, no_match=76, skip=95)
+      occupation    success= 76.5%  (match=127, no_match=39, skip=35)
+      education     success= 59.4%  (match=19, no_match=13, skip=169)
+      nationality   success= 31.8%  (match=7, no_match=15, skip=179)
+      organization  success= 32.3%  (match=65, no_match=136, skip=0)
+
+  ======================================================================
+  Pipeline: LLM SauerkrautLM [few-shot +verify]
+  ======================================================================
+  Documents: 611 | Match-judge parse failures: 0
+  Any-attribute leak rate: 82.0%
+  Mean per-attribute leak rate: 48.4%
+
+  Per attribute (success_rate = MATCH / evaluable; evaluable = MATCH + NO_MATCH):
+    person        success= 38.6%  (match=236, no_match=375, skip=0)
+    age           success= 98.6%  (match=70, no_match=1, skip=540)
+    location      success= 10.3%  (match=39, no_match=339, skip=233)
+    occupation    success= 74.1%  (match=395, no_match=138, skip=78)
+    education     success= 68.4%  (match=78, no_match=36, skip=497)
+    nationality   success= 45.2%  (match=28, no_match=34, skip=549)
+    organization  success=  3.3%  (match=20, no_match=591, skip=0)
+
+  Low (n=204):
+    Any-attribute leak: 90.2%
+    Mean per-attribute leak: 56.1%
+      person        success= 62.3%  (match=127, no_match=77, skip=0)
+      age           success=100.0%  (match=16, no_match=0, skip=188)
+      location      success=  9.8%  (match=15, no_match=138, skip=51)
+      occupation    success= 77.8%  (match=144, no_match=41, skip=19)
+      education     success= 80.5%  (match=33, no_match=8, skip=163)
+      nationality   success= 60.0%  (match=12, no_match=8, skip=184)
+      organization  success=  2.0%  (match=4, no_match=200, skip=0)
+
+  Medium (n=206):
+    Any-attribute leak: 78.6%
+    Mean per-attribute leak: 47.2%
+      person        success= 25.7%  (match=53, no_match=153, skip=0)
+      age           success=100.0%  (match=26, no_match=0, skip=180)
+      location      success= 14.3%  (match=17, no_match=102, skip=87)
+      occupation    success= 72.1%  (match=132, no_match=51, skip=23)
+      education     success= 63.6%  (match=28, no_match=16, skip=162)
+      nationality   success= 50.0%  (match=12, no_match=12, skip=182)
+      organization  success=  4.9%  (match=10, no_match=196, skip=0)
+
+  High (n=201):
+    Any-attribute leak: 77.1%
+    Mean per-attribute leak: 41.0%
+      person        success= 27.9%  (match=56, no_match=145, skip=0)
+      age           success= 96.6%  (match=28, no_match=1, skip=172)
+      location      success=  6.6%  (match=7, no_match=99, skip=95)
+      occupation    success= 72.1%  (match=119, no_match=46, skip=36)
+      education     success= 58.6%  (match=17, no_match=12, skip=172)
+      nationality   success= 22.2%  (match=4, no_match=14, skip=183)
+      organization  success=  3.0%  (match=6, no_match=195, skip=0)
+
+  ======================================================================
+  Pipeline: LLM Llama-3 [fine-tuned]
+  ======================================================================
+  Documents: 611 | Match-judge parse failures: 0
+  Any-attribute leak rate: 75.9%
+  Mean per-attribute leak rate: 42.9%
+
+  Per attribute (success_rate = MATCH / evaluable; evaluable = MATCH + NO_MATCH):
+    person        success= 17.7%  (match=108, no_match=503, skip=0)
+    age           success= 94.4%  (match=67, no_match=4, skip=540)
+    location      success=  8.5%  (match=32, no_match=346, skip=233)
+    occupation    success= 70.0%  (match=373, no_match=160, skip=78)
+    education     success= 74.8%  (match=86, no_match=29, skip=496)
+    nationality   success= 33.8%  (match=22, no_match=43, skip=546)
+    organization  success=  1.1%  (match=7, no_match=604, skip=0)
+
+  Low (n=204):
+    Any-attribute leak: 81.9%
+    Mean per-attribute leak: 48.1%
+      person        success= 23.5%  (match=48, no_match=156, skip=0)
+      age           success=100.0%  (match=16, no_match=0, skip=188)
+      location      success=  6.5%  (match=10, no_match=143, skip=51)
+      occupation    success= 75.1%  (match=139, no_match=46, skip=19)
+      education     success= 81.4%  (match=35, no_match=8, skip=161)
+      nationality   success= 50.0%  (match=11, no_match=11, skip=182)
+      organization  success=  0.0%  (match=0, no_match=204, skip=0)
+
+  Medium (n=206):
+    Any-attribute leak: 71.8%
+    Mean per-attribute leak: 42.3%
+      person        success= 12.1%  (match=25, no_match=181, skip=0)
+      age           success= 92.3%  (match=24, no_match=2, skip=180)
+      location      success= 12.6%  (match=15, no_match=104, skip=87)
+      occupation    success= 65.6%  (match=120, no_match=63, skip=23)
+      education     success= 78.0%  (match=32, no_match=9, skip=165)
+      nationality   success= 34.8%  (match=8, no_match=15, skip=183)
+      organization  success=  1.0%  (match=2, no_match=204, skip=0)
+
+  High (n=201):
+    Any-attribute leak: 74.1%
+    Mean per-attribute leak: 37.9%
+      person        success= 17.4%  (match=35, no_match=166, skip=0)
+      age           success= 93.1%  (match=27, no_match=2, skip=172)
+      location      success=  6.6%  (match=7, no_match=99, skip=95)
+      occupation    success= 69.1%  (match=114, no_match=51, skip=36)
+      education     success= 61.3%  (match=19, no_match=12, skip=170)
+      nationality   success= 15.0%  (match=3, no_match=17, skip=181)
+      organization  success=  2.5%  (match=5, no_match=196, skip=0)
+
+  ======================================================================
+  Pipeline: LLM Llama-3 [prompt few-shot]
+  ======================================================================
+  Documents: 611 | Match-judge parse failures: 0
+  Any-attribute leak rate: 83.5%
+  Mean per-attribute leak rate: 45.2%
+
+  Per attribute (success_rate = MATCH / evaluable; evaluable = MATCH + NO_MATCH):
+    person        success= 18.0%  (match=110, no_match=501, skip=0)
+    age           success= 87.3%  (match=62, no_match=9, skip=540)
+    location      success= 35.1%  (match=133, no_match=246, skip=232)
+    occupation    success= 81.1%  (match=437, no_match=102, skip=72)
+    education     success= 57.4%  (match=66, no_match=49, skip=496)
+    nationality   success= 33.8%  (match=22, no_match=43, skip=546)
+    organization  success=  3.8%  (match=23, no_match=588, skip=0)
+
+  Low (n=204):
+    Any-attribute leak: 89.7%
+    Mean per-attribute leak: 52.5%
+      person        success= 23.5%  (match=48, no_match=156, skip=0)
+      age           success=100.0%  (match=16, no_match=0, skip=188)
+      location      success= 41.8%  (match=64, no_match=89, skip=51)
+      occupation    success= 87.6%  (match=162, no_match=23, skip=19)
+      education     success= 61.9%  (match=26, no_match=16, skip=162)
+      nationality   success= 50.0%  (match=11, no_match=11, skip=182)
+      organization  success=  2.5%  (match=5, no_match=199, skip=0)
+
+  Medium (n=206):
+    Any-attribute leak: 81.1%
+    Mean per-attribute leak: 44.4%
+      person        success= 13.1%  (match=27, no_match=179, skip=0)
+      age           success= 88.5%  (match=23, no_match=3, skip=180)
+      location      success= 34.2%  (match=41, no_match=79, skip=86)
+      occupation    success= 76.5%  (match=140, no_match=43, skip=23)
+      education     success= 54.8%  (match=23, no_match=19, skip=164)
+      nationality   success= 38.1%  (match=8, no_match=13, skip=185)
+      organization  success=  5.3%  (match=11, no_match=195, skip=0)
+
+  High (n=201):
+    Any-attribute leak: 79.6%
+    Mean per-attribute leak: 39.1%
+      person        success= 17.4%  (match=35, no_match=166, skip=0)
+      age           success= 79.3%  (match=23, no_match=6, skip=172)
+      location      success= 26.4%  (match=28, no_match=78, skip=95)
+      occupation    success= 78.9%  (match=135, no_match=36, skip=30)
+      education     success= 54.8%  (match=17, no_match=14, skip=170)
+      nationality   success= 13.6%  (match=3, no_match=19, skip=179)
+      organization  success=  3.5%  (match=7, no_match=194, skip=0)
+
+  ======================================================================
+  Pipeline: LLM Qwen2.5 [prompt few-shot]
+  ======================================================================
+  Documents: 611 | Match-judge parse failures: 0
+  Any-attribute leak rate: 92.5%
+  Mean per-attribute leak rate: 52.8%
+
+  Per attribute (success_rate = MATCH / evaluable; evaluable = MATCH + NO_MATCH):
+    person        success= 22.1%  (match=135, no_match=476, skip=0)
+    age           success= 84.7%  (match=61, no_match=11, skip=539)
+    location      success= 45.6%  (match=173, no_match=206, skip=232)
+    occupation    success= 94.6%  (match=506, no_match=29, skip=76)
+    education     success= 61.1%  (match=69, no_match=44, skip=498)
+    nationality   success= 55.0%  (match=33, no_match=27, skip=551)
+    organization  success=  6.2%  (match=38, no_match=573, skip=0)
+
+  Low (n=204):
+    Any-attribute leak: 94.6%
+    Mean per-attribute leak: 55.9%
+      person        success= 27.0%  (match=55, no_match=149, skip=0)
+      age           success= 88.2%  (match=15, no_match=2, skip=187)
+      location      success= 52.9%  (match=81, no_match=72, skip=51)
+      occupation    success= 95.7%  (match=177, no_match=8, skip=19)
+      education     success= 63.4%  (match=26, no_match=15, skip=163)
+      nationality   success= 60.0%  (match=12, no_match=8, skip=184)
+      organization  success=  4.4%  (match=9, no_match=195, skip=0)
+
+  Medium (n=206):
+    Any-attribute leak: 92.2%
+    Mean per-attribute leak: 53.2%
+      person        success= 17.0%  (match=35, no_match=171, skip=0)
+      age           success= 92.3%  (match=24, no_match=2, skip=180)
+      location      success= 44.5%  (match=53, no_match=66, skip=87)
+      occupation    success= 94.6%  (match=175, no_match=10, skip=21)
+      education     success= 59.5%  (match=25, no_match=17, skip=164)
+      nationality   success= 59.1%  (match=13, no_match=9, skip=184)
+      organization  success=  5.3%  (match=11, no_match=195, skip=0)
+
+  High (n=201):
+    Any-attribute leak: 90.5%
+    Mean per-attribute leak: 48.8%
+      person        success= 22.4%  (match=45, no_match=156, skip=0)
+      age           success= 75.9%  (match=22, no_match=7, skip=172)
+      location      success= 36.4%  (match=39, no_match=68, skip=94)
+      occupation    success= 93.3%  (match=154, no_match=11, skip=36)
+      education     success= 60.0%  (match=18, no_match=12, skip=171)
+      nationality   success= 44.4%  (match=8, no_match=10, skip=183)
+      organization  success=  9.0%  (match=18, no_match=183, skip=0)
+
+  ======================================================================
+  Pipeline: LLM SauerkrautLM [prompt few-shot]
+  ======================================================================
+  Documents: 611 | Match-judge parse failures: 0
+  Any-attribute leak rate: 87.6%
+  Mean per-attribute leak rate: 51.2%
+
+  Per attribute (success_rate = MATCH / evaluable; evaluable = MATCH + NO_MATCH):
+    person        success= 18.0%  (match=110, no_match=501, skip=0)
+    age           success= 85.9%  (match=61, no_match=10, skip=540)
+    location      success= 43.4%  (match=164, no_match=214, skip=233)
+    occupation    success= 86.8%  (match=466, no_match=71, skip=74)
+    education     success= 64.9%  (match=72, no_match=39, skip=500)
+    nationality   success= 52.6%  (match=30, no_match=27, skip=554)
+    organization  success=  6.7%  (match=41, no_match=570, skip=0)
+
+  Low (n=204):
+    Any-attribute leak: 89.7%
+    Mean per-attribute leak: 54.3%
+      person        success= 21.1%  (match=43, no_match=161, skip=0)
+      age           success= 87.5%  (match=14, no_match=2, skip=188)
+      location      success= 46.4%  (match=71, no_match=82, skip=51)
+      occupation    success= 90.8%  (match=168, no_match=17, skip=19)
+      education     success= 70.7%  (match=29, no_match=12, skip=163)
+      nationality   success= 57.9%  (match=11, no_match=8, skip=185)
+      organization  success=  5.4%  (match=11, no_match=193, skip=0)
+
+  Medium (n=206):
+    Any-attribute leak: 85.0%
+    Mean per-attribute leak: 49.9%
+      person        success= 13.1%  (match=27, no_match=179, skip=0)
+      age           success= 84.6%  (match=22, no_match=4, skip=180)
+      location      success= 42.0%  (match=50, no_match=69, skip=87)
+      occupation    success= 83.5%  (match=152, no_match=30, skip=24)
+      education     success= 58.1%  (match=25, no_match=18, skip=163)
+      nationality   success= 61.9%  (match=13, no_match=8, skip=185)
+      organization  success=  6.3%  (match=13, no_match=193, skip=0)
+
+  High (n=201):
+    Any-attribute leak: 88.1%
+    Mean per-attribute leak: 49.0%
+      person        success= 19.9%  (match=40, no_match=161, skip=0)
+      age           success= 86.2%  (match=25, no_match=4, skip=172)
+      location      success= 40.6%  (match=43, no_match=63, skip=95)
+      occupation    success= 85.9%  (match=146, no_match=24, skip=31)
+      education     success= 66.7%  (match=18, no_match=9, skip=174)
+      nationality   success= 35.3%  (match=6, no_match=11, skip=184)
+      organization  success=  8.5%  (match=17, no_match=184, skip=0)
+
+  ======================================================================
+  Pipeline: Datenwertschöpfung API
+  ======================================================================
+  Documents: 611 | Match-judge parse failures: 0
+  Any-attribute leak rate: 99.8%
+  Mean per-attribute leak rate: 73.9%
+
+  Per attribute (success_rate = MATCH / evaluable; evaluable = MATCH + NO_MATCH):
+    person        success= 30.0%  (match=183, no_match=428, skip=0)
+    age           success= 91.7%  (match=66, no_match=6, skip=539)
+    location      success= 43.8%  (match=166, no_match=213, skip=232)
+    occupation    success= 96.6%  (match=519, no_match=18, skip=74)
+    education     success= 74.6%  (match=88, no_match=30, skip=493)
+    nationality   success= 83.6%  (match=51, no_match=10, skip=550)
+    organization  success= 96.9%  (match=592, no_match=19, skip=0)
+
+  Low (n=204):
+    Any-attribute leak: 100.0%
+    Mean per-attribute leak: 74.8%
+      person        success= 30.9%  (match=63, no_match=141, skip=0)
+      age           success= 94.1%  (match=16, no_match=1, skip=187)
+      location      success= 48.4%  (match=74, no_match=79, skip=51)
+      occupation    success= 97.8%  (match=181, no_match=4, skip=19)
+      education     success= 67.4%  (match=29, no_match=14, skip=161)
+      nationality   success= 89.5%  (match=17, no_match=2, skip=185)
+      organization  success= 95.6%  (match=195, no_match=9, skip=0)
+
+  Medium (n=206):
+    Any-attribute leak: 100.0%
+    Mean per-attribute leak: 74.5%
+      person        success= 22.8%  (match=47, no_match=159, skip=0)
+      age           success= 92.3%  (match=24, no_match=2, skip=180)
+      location      success= 41.2%  (match=49, no_match=70, skip=87)
+      occupation    success= 98.9%  (match=181, no_match=2, skip=23)
+      education     success= 77.3%  (match=34, no_match=10, skip=162)
+      nationality   success= 91.3%  (match=21, no_match=2, skip=183)
+      organization  success= 97.6%  (match=201, no_match=5, skip=0)
+
+  High (n=201):
+    Any-attribute leak: 99.5%
+    Mean per-attribute leak: 72.2%
+      person        success= 36.3%  (match=73, no_match=128, skip=0)
+      age           success= 89.7%  (match=26, no_match=3, skip=172)
+      location      success= 40.2%  (match=43, no_match=64, skip=94)
+      occupation    success= 92.9%  (match=157, no_match=12, skip=32)
+      education     success= 80.6%  (match=25, no_match=6, skip=170)
+      nationality   success= 68.4%  (match=13, no_match=6, skip=182)
+      organization  success= 97.5%  (match=196, no_match=5, skip=0)

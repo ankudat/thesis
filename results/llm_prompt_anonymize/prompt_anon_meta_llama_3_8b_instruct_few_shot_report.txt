@@ -1,0 +1,127 @@
+==============================================================================
+  LLM PROMPT-BASED ANONYMIZATION REPORT
+  Generated: 2026-04-12 20:06:35
+  Model: meta-llama/Meta-Llama-3-8B-Instruct
+  Strategy: few-shot
+==============================================================================
+
+  Documents: 638
+  Total time: 2863.1s (4.49s/doc)
+  Avg length ratio: 0.97
+
+##############################################################################
+  PII LEAKAGE ANALYSIS
+##############################################################################
+
+  Overall: 268/5137 leaked (5.2%)
+
+  Category        Total   Leaked       Rate
+  ------------------------------------------
+  AGE                81        3       3.7%
+  DATE              508       59      11.6%
+  EDU                48        0       0.0%
+  EMAIL             165        0       0.0%
+  IBAN              107        0       0.0%
+  JOB               802      145      18.1%
+  LOC               632       42       6.6%
+  MONEY             759        2       0.3%
+  NATION             91        9       9.9%
+  ORG               740        8       1.1%
+  PER              1091        0       0.0%
+  PHONE             113        0       0.0%
+
+##############################################################################
+  LEAKAGE BY COMPLEXITY
+##############################################################################
+
+  Low: 218 docs | Leakage: 85/1974 (4.3%)
+
+  Medium: 215 docs | Leakage: 86/1647 (5.2%)
+
+  High: 205 docs | Leakage: 97/1516 (6.4%)
+
+##############################################################################
+  SAMPLE LEAKED PII (first 20)
+##############################################################################
+  [JOB     ] "Geschäftsführer"  →  ...Am einem Datum traf ich einen Geschäftsführer eines Unternehmens. Gegenstan...
+  [JOB     ] "Verwaltungsratspräsidenten"  →  ...ner Schweizer Stadt mit einem Verwaltungsratspräsidenten eines Unternehmens wurde die ...
+  [AGE     ] "35-jähriger"  →  ...olgeregelung finalisiert. Ein 35-jähriger Absolvent einer Hochschule wi...
+  [DATE    ] "2023"  →  ... Der geprüfte Jahresabschluss 2023, welcher einen Gewinn ausweis...
+  [JOB     ] "Inhaberin"  →  ...e Strategiegespräch mit einer Inhaberin eines Modeunternehmens fand a...
+  [LOC     ] "Bern"  →  ...ehmens fand an einem Datum in Bern statt. Die Umsatzprognose für...
+  [JOB     ] "Head of Export"  →  ...Der Head of Export eines Unternehmens kontaktier...
+  [JOB     ] "Leiter Finanzen"  →  ...rin einer Pharmafirma und dem Leiter Finanzen an einem Standort in der Schw...
+  [JOB     ] "Geschäftsführer"  →  ...ting an einem Datum mit einem Geschäftsführer eines Immobilienunternehmens....
+  [LOC     ] "Zürich"  →  ...gskraft eines Unternehmens in Zürich. Als Vorbereitung auf die näc...
+  [JOB     ] "Projektleiterin"  →  ...um fand ein Treffen mit einer Projektleiterin eines Unternehmens statt. Im ...
+  [JOB     ] "Inhaber"  →  ...an einem Datum im Sommer. Ein Inhaber und Geschäftsführer führte du...
+  [JOB     ] "Geschäftsführer"  →  ...um im Sommer. Ein Inhaber und Geschäftsführer führte durch die Produktionsh...
+  [JOB     ] "Logistikleiter"  →  ...r Wunsch geäussert, den neuen Logistikleiter für das E-Banking mit Leserec...
+  [JOB     ] "Liquidatorin"  →  ...gesellschaft veranlasst. Eine Liquidatorin hat die rechtsverbindlichen U...
+  [JOB     ] "Leiter Finanzen & Controlling"  →  ... erheblichen Betrag. Der neue Leiter Finanzen & Controlling wird die detaillierten Unterl...
+  [JOB     ] "Geschäftsführerin"  →  ...Besuch von einer Geschäftsführerin eines Unternehmens in der Sch...
+  [JOB     ] "Leiterin Finanzen"  →  ... an einem Datum bei der neuen Leiterin Finanzen eines Medizintechnik-Unterneh...
+  [JOB     ] "Verwaltungsratspräsident"  →  ...zer Stadt. Anwesend waren der Verwaltungsratspräsident und die Finanzchefin. Es wurd...
+  [JOB     ] "Finanzchefin"  →  ...waltungsratspräsident und die Finanzchefin. Es wurde die Erhöhung der Fi...
+
+##############################################################################
+  QUALITATIVE SAMPLES (10 examples)
+##############################################################################
+
+  ────────────────────────────────────────────────────────────────────────
+  Doc 7190 | High | Leakage: 4/8
+  ORIGINAL:  - Herr Klaus Berger, bisheriger Geschäftsführer der Gastro World GmbH, geht in Pension. Sein Konto CH44 0070 0111 5555 6666 7 muss per Ende Monat saldiert werden. Die neue Geschäftsführerin Isabelle Rochat aus der Romandie benötigt ab sofort alle Vollmachten. Neue Unterschriftenkarten vorbereiten.
+  REWRITTEN: - Ein ehemaliger Geschäftsführer eines Lebensmittelunternehmens geht in Pension. Sein Konto muss per Ende Monat saldiert werden. Die neue Geschäftsführerin einer Firma in der Romandie benötigt ab sofort alle Vollmachten. Neue Unterschriftenkarten vorbereiten.
+
+  ────────────────────────────────────────────────────────────────────────
+  Doc 5937 | Low | Leakage: 4/9
+  ORIGINAL:  Am 24.05.2024 hat uns Herr Andreas Baumann, CFO der PharmaCorp AG aus Basel, den geprüften Jahresabschluss 2023 persönlich überreicht. Das EBITDA konnte um 12% auf CHF 45 Mio. gesteigert werden. Wir haben die Zahlen kurz besprochen und einen Termin für das jährliche Governance Meeting mit dem Verwal...
+  REWRITTEN: Am einem Datum hat ein CFO eines Unternehmens aus Basel den geprüften Jahresabschluss 2023 persönlich überreicht. Das EBITDA konnte um einen erheblichen Prozentsatz gesteigert werden. Wir haben die Zahlen kurz besprochen und einen Termin für das jährliche Governance Meeting mit der Geschäftsleitung ...
+
+  ────────────────────────────────────────────────────────────────────────
+  Doc 6225 | Medium | Leakage: 3/7
+  ORIGINAL:  Anruf von Herrn Luigi Bernasconi, Geschäftsführer der Ticino Logistic SA. Er benötigt für einen neuen Mitarbeiter im Aussendienst, Herrn Marco Galli, eine neue Firmenkreditkarte mit einer Limite von CHF 5'000. Zudem muss für die neue Buchhalterin ein E-Banking-Vertrag mit Leserechten ausgestellt wer...
+  REWRITTEN: Anruf von einem Geschäftsführer eines Logistikunternehmens. Er benötigt für einen neuen Mitarbeiter im Aussendienst eine neue Firmenkreditkarte mit einer bestimmten Limite. Zudem muss für die neue Buchhalterin ein E-Banking-Vertrag mit Leserechten ausgestellt werden. Fehlende Dokumente für das letzt...
+
+  ────────────────────────────────────────────────────────────────────────
+  Doc 7691 | High | Leakage: 2/5
+  ORIGINAL:  Jahresabschluss 2023 der Modehaus Schneider AG erhalten. Kurzes Telefonat mit dem CFO Patrick Dubois. Umsatz ist leicht rückläufig, aber EBITDA dank Kostensenkungen stabil. Fianziell gesund. Er vershprach, die detaillierte Bilanz bis Freitag zu senden.
+  REWRITTEN: Jahresabschluss 2023 eines Modemarktes erhalten. Ein Telefonat mit einem Führungskraft fand statt. Der Umsatz ist leicht rückläufig, aber das EBITDA dank Kostensenkungen stabil. Fianziell gesund. Der Verantwortliche versprach, die detaillierte Bilanz bis Freitag zu senden.
+
+  ────────────────────────────────────────────────────────────────────────
+  Doc 5728 | Low | Leakage: 2/6
+  ORIGINAL:  Die Global Retail Group AG plant die Eröffnung eines neuen Kontos für ihr E-Commerce-Geschäft in der EU. Das Konto soll auf EUR lauten. Der Leiter Finanzen, Herr Stefan Baumann, hat die Kontoeröffnungsunterlagen angefordert. Er möchte zudem die Limite seiner Firmenkreditkarte temporär auf EUR 20'000...
+  REWRITTEN: Die Global Retail Group AG plant die Eröffnung eines neuen Kontos für ihr E-Commerce-Geschäft in der EU. Das Konto soll auf EUR lauten. Ein Mitarbeiter der Finanzabteilung hat die Kontoeröffnungsunterlagen angefordert. Er möchte zudem die Limite seiner Firmenkreditkarte temporär auf einen bestimmten...
+
+  ────────────────────────────────────────────────────────────────────────
+  Doc 7279 | High | Leakage: 0/5
+  ORIGINAL:  - E-Mail von Giovanni Bellini von Moda Ticino SA.
+- Braucht ein Akkreditiv (Letter of Credit) für eine Lieferung aus China. Wert USD 80'000.
+- Dringend, Ware muss nächste Woche verschifft werden.
+- Habe ihn auf unsere TEF-Abteilung verwiesen.
+- Er hat auch gefragt, ob wir sein Festgeld über EUR 200'...
+  REWRITTEN: - E-Mail von einem Kunden.
+- Braucht ein Akkreditiv (Letter of Credit) für eine Lieferung aus dem Ausland. Wert ein erheblicher Betrag.
+- Es handelt sich um eine dringende Angelegenheit, die Ware muss bald verschifft werden.
+- Ich habe ihn auf unsere Trade & Export Finance-Abteilung verwiesen.
+- Er ...
+
+  ────────────────────────────────────────────────────────────────────────
+  Doc 5756 | Low | Leakage: 0/10
+  ORIGINAL:  Am 17. Mai 2024 besuchte ich Herrn Walter Brunner, den 68-jährigen Gründer der Brunner Bau AG, an seinem Sitz in Thun. Wir erörterten die anstehende Nachfolgeregelung. Sein Sohn, Thomas Brunner, ein ETH-Ingenieur, wird die Geschäftsführung übernehmen. Im Zuge der Umstrukturierung soll eine neue Hold...
+  REWRITTEN: Am einem Datum besuchte ich einen Gründer eines Bauunternehmens an seinem Standort in der Schweiz. Wir erörterten die anstehende Nachfolgeregelung. Ein Sohn des Unternehmers wird die Geschäftsführung übernehmen. Im Zuge der Umstrukturierung soll eine neue Holdinggesellschaft gegründet werden, für di...
+
+  ────────────────────────────────────────────────────────────────────────
+  Doc 6238 | Medium | Leakage: 0/7
+  ORIGINAL:  Anfrage zur Kontosaldierung für die Projektgesellschaft Windpark GmbH. Der verbleibende Saldo von CHF 78'540.25 soll auf das Hauptkonto der Energie Holding AG mit der CH31 0012 3456 7891 0111 2 überwiesen werden. Ansprechperson ist der Projektleiter Stefan Eberhard (s.eberhard@energieholding.ch).
+  REWRITTEN: Anfrage zur Kontosaldierung für eine Projektgesellschaft. Der verbleibende Saldo soll auf das Hauptkonto einer Energiefirma überwiesen werden. Die Kontaktdaten der Ansprechperson liegen vor.
+
+  ────────────────────────────────────────────────────────────────────────
+  Doc 7629 | High | Leakage: 0/5
+  ORIGINAL:  - E-Banking Admin für IT-Consulting Meyer & Partner. Der Projektleiter Stefan Egger hat die Firma verlassen. Seine Zugriffe müssen per sofort gesperrt werden. Die neue Mitarbeiterin, Frau Anna Berset (a.berset@itcmp.ch), benötigt Lesezugriff auf alle Konten.
+  REWRITTEN: - E-Banking Admin für ein IT-Unternehmen. Ein Mitarbeiter hat die Firma verlassen. Seine Zugriffe müssen per sofort gesperrt werden. Die neue Mitarbeiterin benötigt Lesezugriff auf alle Konten.
+
+  ────────────────────────────────────────────────────────────────────────
+  Doc 6292 | Medium | Leakage: 0/9
+  ORIGINAL:  Der CFO der IT Consulting GmbH, Herr Stefan Egger, meldet den Kauf von neuen Büroräumlichkeiten im Kanton Zug. Eine Anzahlung von CHF 750'000 muss bis Ende Monat vom Konto CH66 0070 0111 9999 8888 0 geleistet werden. Er wird uns die aktualisierte Liste der Zeichnungsberechtigten zukommen lassen, da ...
+  REWRITTEN: Der Geschäftsführer einer IT-Firma meldet den Kauf von neuen Büroräumlichkeiten an einem Standort in der Schweiz. Eine Anzahlung muss bis Ende Monat von einem Konto geleistet werden. Er wird uns die aktualisierte Liste der Zeichnungsberechtigten zukommen lassen, da eine Führungskraft neu Einzelunter...

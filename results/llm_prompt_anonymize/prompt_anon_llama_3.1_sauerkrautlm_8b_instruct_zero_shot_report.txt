@@ -1,0 +1,121 @@
+==============================================================================
+  LLM PROMPT-BASED ANONYMIZATION REPORT
+  Generated: 2026-04-12 22:35:58
+  Model: VAGOsolutions/Llama-3.1-SauerkrautLM-8b-Instruct
+  Strategy: zero-shot
+==============================================================================
+
+  Documents: 638
+  Total time: 3470.7s (5.44s/doc)
+  Avg length ratio: 1.09
+
+##############################################################################
+  PII LEAKAGE ANALYSIS
+##############################################################################
+
+  Overall: 790/5137 leaked (15.4%)
+
+  Category        Total   Leaked       Rate
+  ------------------------------------------
+  AGE                81        4       4.9%
+  DATE              508      113      22.2%
+  EDU                48        2       4.2%
+  EMAIL             165        2       1.2%
+  IBAN              107       19      17.8%
+  JOB               802      281      35.0%
+  LOC               632      134      21.2%
+  MONEY             759      123      16.2%
+  NATION             91       28      30.8%
+  ORG               740       58       7.8%
+  PER              1091       12       1.1%
+  PHONE             113       14      12.4%
+
+##############################################################################
+  LEAKAGE BY COMPLEXITY
+##############################################################################
+
+  Low: 218 docs | Leakage: 254/1974 (12.9%)
+
+  Medium: 215 docs | Leakage: 256/1647 (15.5%)
+
+  High: 205 docs | Leakage: 280/1516 (18.5%)
+
+##############################################################################
+  SAMPLE LEAKED PII (first 20)
+##############################################################################
+  [JOB     ] "Geschäftsführer"  →  ...ierung über einen Betrag. Der Geschäftsführer, ein Mitarbeiter, benötigt di...
+  [JOB     ] "Export Managerin"  →  ... einer Geschäftsführerin, die Export Managerin bei einer Firma in einer Stad...
+  [LOC     ] "Südkorea"  →  ...icherung einer Lieferung nach Südkorea. Der Auftragswert beläuft sic...
+  [JOB     ] "Geschäftsführer"  →  ...An einem Datum traf ich einen Geschäftsführer einer Firma. Gegenstand des G...
+  [JOB     ] "Leiterin Einkauf"  →  ...Besprechung mit der Leiterin Einkauf einer Firma in der Schweiz. F...
+  [MONEY   ] "CHF 500'000"  →  ...il des Festgeldes in Höhe von CHF 500'000 verpfändet. Die Leiterin Eink...
+  [JOB     ] "Geschäftsführers"  →  ...he Unterschrift eines zweiten Geschäftsführers. Ich habe die Assistentin des...
+  [JOB     ] "CEO"  →  ...um im Sommer die Position des CEO übernehmen. Der geprüfte Jahr...
+  [DATE    ] "2023"  →  ... Der geprüfte Jahresabschluss 2023, der einen Betrag ausweist, w...
+  [NATION  ] "österreichischen"  →  ...xpansion in den deutschen und österreichischen Markt und benötigt hierfür In...
+  [NATION  ] "deutschen"  →  ...aluiert eine Expansion in den deutschen und österreichischen Markt un...
+  [JOB     ] "Head of Export"  →  ...Der Head of Export einer Firma, Herr ein Mitarbe...
+  [LOC     ] "Südkorea"  →  ...ch eines Exportgeschäfts nach Südkorea. Für die Transaktion wird ein...
+  [PER     ] "Thomas Vogel"  →  ...in der Schweiz gesendet. Herr Thomas Vogel ist unter [Telefon] erreichba...
+  [PER     ] "Thomas Vogel"  →  ...in der Schweiz gesendet. Herr Thomas Vogel ist unter [Telefon] erreichba...
+  [ORG     ] "Global Trade Solutions SA"  →  ... mich ein Geschäftsführer von Global Trade Solutions SA in unserem Büro in der Schwei...
+  [DATE    ] "2023"  →  ...den geprüften Jahresabschluss 2023 ein. Hauptanliegen war die Ab...
+  [JOB     ] "Trade Finance Specialist"  →  ...ierte mich ein Kunde, der als Trade Finance Specialist bei einer Firma in der Schwei...
+  [MONEY   ] "EUR 750'000"  →  ...editivs über einen Betrag von EUR 750'000 von einem Kunden aus Asien. F...
+  [DATE    ] "morgen"  →  ...ersprochen, die Dokumente bis morgen nachzureichen....
+
+##############################################################################
+  QUALITATIVE SAMPLES (10 examples)
+##############################################################################
+
+  ────────────────────────────────────────────────────────────────────────
+  Doc 7091 | High | Leakage: 5/5
+  ORIGINAL:  - Anruf von Peter Frei, Inhaber der Frei Transporte GmbH. Will seine LKW-Flotte erneuern. Leasing-Offerte für 5 neue Fahrzeuge über CHF 800'000 besprochen. Er reicht die nötigen Unterlagen per Mail an cic.desk@bank.ch ein. Wirkt fianziell etwas angespannt. Erwähnte einen Liquiditätsengpass wegen ein...
+  REWRITTEN: - Anruf von einem Kunden. Wünscht die Erneuerung seiner LKW-Flotte. Leasing-Offerte für 5 neue Fahrzeuge über einen Betrag von über CHF 800'000 wurde besprochen. Die notwendigen Unterlagen werden per E-Mail an [E-Mail] eingereicht. Der Kunde wirkt finanziell angespannt. Er erwähnte einen Liquiditäts...
+
+  ────────────────────────────────────────────────────────────────────────
+  Doc 6265 | Medium | Leakage: 3/5
+  ORIGINAL:  Kurzes Telefonat mit Stefan Gasser von der Gasser Transport AG (044 123 45 67). Mahnung betreffend ausstehendem Jahresabschluss 2023. Er hat versprochen, die Unterlagen bis spätestens Ende nächster Woche nachzureichen. Pendenz bei mir gesetzt.
+  REWRITTEN: Kurzes Telefonat mit einem Mitarbeiter von einer Firma (044 123 45 67). Mahnung betreffend ausstehendem Jahresabschluss 2023. Er hat versprochen, die Unterlagen bis spätestens Ende nächster Woche nachzureichen. Pendenz bei mir gesetzt.
+
+  ────────────────────────────────────────────────────────────────────────
+  Doc 7519 | High | Leakage: 3/5
+  ORIGINAL:  - Anruf von Sven Meier, Projektleiter bei der Bau AG Zürich. Die Firmenkreditkarte wurde gesperrt. Braucht dringned eine Limite von 50k CHF für eine Materialbestellung aus Italien. Habe die Limite temporär erhöht, er muss aber noch das Formular rechtsverbindlich unterzeichnen.
+  REWRITTEN: Anruf von einem Kunden, Projektleiter bei einer Firma in der Schweiz. Die Firmenkreditkarte wurde gesperrt. Braucht dringend eine Limite von 50k CHF für eine Materialbestellung aus Italien. Habe die Limite temporär erhöht, er muss aber noch das Formular rechtsverbindlich unterzeichnen.
+
+  ────────────────────────────────────────────────────────────────────────
+  Doc 7136 | High | Leakage: 4/7
+  ORIGINAL:  - Martin Graf, Projektleiter von Tech Innovate AG, braucht ein neues Konto für ein Spin-off, die Future Robotics GmbH. Kontoeröffnungsunterlagen vorbereiten. Das Kapital von CHF 100'000 soll auf das Kapitaleinzahlungskonto CH44 0023 3233 4567 8901 A überwiesen werden. Sitz der neuen Firma wird Winte...
+  REWRITTEN: - Ein Mitarbeiter von Tech Innovate AG, Projektleiter, benötigt ein neues Konto für ein Spin-off, die Future Robotics GmbH. Kontoeröffnungsunterlagen vorbereiten. Das Kapital von einer Summe soll auf das Kapitaleinzahlungskonto CH44 0023 3233 4567 8901 A überwiesen werden. Sitz der neuen Firma wird ...
+
+  ────────────────────────────────────────────────────────────────────────
+  Doc 5916 | Low | Leakage: 5/9
+  ORIGINAL:  Besprechung mit Frau Isabelle Dubois, Leiterin Finanzen der Global Imports SA in Genf, bezüglich ihrer Devisenstrategie. Für Importe aus den USA wird eine Erhöhung der FX-Handelslinie auf USD 5 Mio. beantragt. Des Weiteren wurde Interesse an einer Cash-Pooling-Lösung für die Tochtergesellschaften in...
+  REWRITTEN: Besprechung mit der Leiterin Finanzen einer Firma in Genf bezüglich ihrer Devisenstrategie. Für Importe aus den USA wird eine Erhöhung der FX-Handelslinie auf einen Betrag beantragt. Des Weiteren wurde Interesse an einer Cash-Pooling-Lösung für die Tochtergesellschaften in Deutschland und Frankreich...
+
+  ────────────────────────────────────────────────────────────────────────
+  Doc 5694 | Low | Leakage: 0/10
+  ORIGINAL:  Am 12.06.2024 fand ein Treffen mit dem CEO, Herrn Marco Bianchi, und dem CFO, Herrn Jean-Pierre Richard, der Logistik Express SA in Basel statt. Das Unternehmen plant die Erneuerung der Fahrzeugflotte und benötigt ein Leasing für 15 neue LKW mit einem Gesamtvolumen von ca. CHF 2.8 Mio.. Herr Richard...
+  REWRITTEN: An einem Datum im Juni 2024 fand ein Treffen mit der Geschäftsführerin einer Firma in einer Stadt in der Schweiz statt. Die Firma plant die Erneuerung ihrer Fahrzeugflotte und benötigt ein Leasing für 15 neue LKW mit einem Gesamtbetrag von ca. CHF 2,8 Mio.. Eine Führungskraft der Firma, die in Frank...
+
+  ────────────────────────────────────────────────────────────────────────
+  Doc 5314 | Low | Leakage: 0/10
+  ORIGINAL:  Am 15.05.2024 fand eine Betriebsbesichtigung bei der Präzisionsmechanik AG in Thun statt. Herr Markus Steiner, der amtierende CEO, erläuterte das Geschäftsmodell und die aktuelle Marktlage. Im Rahmen der Nachfolgeregelung wird Frau Anna Keller, eine ETH-Ingenieurin, per 01.01.2025 die Geschäftsführu...
+  REWRITTEN: Am einem Datum fand eine Betriebsbesichtigung bei einer Firma in einer Stadt in der Schweiz statt. Herr ein Geschäftsführer erläuterte das Geschäftsmodell und die aktuelle Marktlage. Im Rahmen der Nachfolgeregelung wird Frau eine Führungskraft, die über einen Hochschulabschluss verfügt, per einem Da...
+
+  ────────────────────────────────────────────────────────────────────────
+  Doc 6986 | High | Leakage: 0/6
+  ORIGINAL:  - Tel mit Urs Meier, Head of Treasury bei ChocoSwiss AG. Dringendd FX-Hedging für EUR 5 Mio. besprechn, fällig in 3 Monaten.
+- Will auch Festgeld-Optionen für CHF 10 Mio. Liquidität prüfen. Sende ihm morgen früh unsere aktuellen Sätze.
+  REWRITTEN: - Tel mit einer Führungskraft bei einer Firma. Dringende Absprache über FX-Hedging für einen Betrag von 5 Mio. Euro, fällig in Kürze.
+- Wir werden auch Festgeld-Optionen für eine Summe von CHF 10 Mio. Liquidität prüfen. Sende ihm morgen früh unsere aktuellen Sätze.
+
+  ────────────────────────────────────────────────────────────────────────
+  Doc 5388 | Low | Leakage: 0/7
+  ORIGINAL:  Besuch in Genf am 11. September 2023 bei der Precision Watches Holding SA. Nach der Fusion mit einem Konkurrenten soll das Konto mit der IBAN CH88 0076 5432 1098 7654 3 saldiert werden. Der Finanzchef, Herr Alain Bernard, möchte die verbleibenden USD 4.5 Mio. auf dem Hauptkonto deponieren. Es müssen...
+  REWRITTEN: Ein Besuch in einer Stadt in der Schweiz fand kürzlich statt. Dabei wurde ein Unternehmen aufgesucht, das nach einer Fusion mit einem Konkurrenten vorgeht. Das Konto mit der IBAN [Konto] soll saldiert werden. Die Führungskraft, die Geschäftsführerin, möchte einen Betrag auf dem Hauptkonto deponieren...
+
+  ────────────────────────────────────────────────────────────────────────
+  Doc 5803 | Low | Leakage: 0/7
+  ORIGINAL:  Telefonat mit Frau Isabelle Richard, Leiterin Finanzen der Digital Ventures AG, am 29. April 2024. Das Unternehmen verfügt über eine hohe Liquidität von über CHF 10 Mio. und möchte diese optimieren. Wir haben die aktuellen Konditionen für Festgeldanlagen besprochen. Sie wird einen Betrag von CHF 5 M...
+  REWRITTEN: Telefonat mit einer Führungskraft von einer Firma, am einem Datum im April 2024. Das Unternehmen verfügt über eine hohe Liquidität von über CHF 10 Mio. und möchte diese optimieren. Wir haben die aktuellen Konditionen für Festgeldanlagen besprochen. Sie wird einen Betrag von CHF 5 Mio. für 6 Monate u...

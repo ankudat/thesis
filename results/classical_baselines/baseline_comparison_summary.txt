@@ -1,0 +1,47 @@
+
+============================================================
+  BASELINE COMPARISON (Strict Matching)
+============================================================
+
+  >>> SUBSET: OVERALL <<<
+  Metric                      spaCy + Regex    BERT + Regex
+  ---------------------------------------------------------
+  Tier 1 – Direct NER                0.7922          0.8341
+  Tier 2 – Structured (Regex)          0.8693          0.8704
+  Tier 3 – Quasi-Identifiers          0.0000          0.0000
+  All Categories                     0.7348          0.7596
+
+  Category (Overall)       spaCy P/R/F1        BERT P/R/F1
+  ---------------------------------------------------------
+  PER                    0.81/0.90/0.85     0.92/0.98/0.95
+  LOC                    0.81/0.97/0.88     0.80/0.91/0.85
+  ORG                    0.57/0.72/0.64     0.56/0.86/0.68
+
+  >>> SUBSET: LOW <<<
+  Metric                      spaCy + Regex    BERT + Regex
+  ---------------------------------------------------------
+  Tier 1 – Direct NER                0.8030          0.8672
+  Tier 2 – Structured (Regex)          0.9175          0.9161
+  Tier 3 – Quasi-Identifiers          0.0000          0.0000
+  All Categories                     0.7657          0.8013
+
+  >>> SUBSET: MEDIUM <<<
+  Metric                      spaCy + Regex    BERT + Regex
+  ---------------------------------------------------------
+  Tier 1 – Direct NER                0.7976          0.8254
+  Tier 2 – Structured (Regex)          0.8780          0.8821
+  Tier 3 – Quasi-Identifiers          0.0000          0.0000
+  All Categories                     0.7392          0.7570
+
+  >>> SUBSET: HIGH <<<
+  Metric                      spaCy + Regex    BERT + Regex
+  ---------------------------------------------------------
+  Tier 1 – Direct NER                0.7739          0.8021
+  Tier 2 – Structured (Regex)          0.7818          0.7828
+  Tier 3 – Quasi-Identifiers          0.0000          0.0000
+  All Categories                     0.6896          0.7070
+
+============================================================
+  Tier 3 (Quasi-ID) F1 = 0.0 for both — as expected.
+  Results saved to: c:\thesis\results\classical_baselines
+============================================================

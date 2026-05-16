@@ -1,0 +1,132 @@
+==============================================================================
+  LLM PROMPT-BASED ANONYMIZATION REPORT
+  Generated: 2026-04-12 19:18:51
+  Model: meta-llama/Meta-Llama-3-8B-Instruct
+  Strategy: zero-shot
+==============================================================================
+
+  Documents: 638
+  Total time: 1933.5s (3.03s/doc)
+  Avg length ratio: 1.04
+
+##############################################################################
+  PII LEAKAGE ANALYSIS
+##############################################################################
+
+  Overall: 408/5137 leaked (7.9%)
+
+  Category        Total   Leaked       Rate
+  ------------------------------------------
+  AGE                81       10      12.3%
+  DATE              508       63      12.4%
+  EDU                48        3       6.2%
+  EMAIL             165        2       1.2%
+  IBAN              107        1       0.9%
+  JOB               802      170      21.2%
+  LOC               632       99      15.7%
+  MONEY             759       16       2.1%
+  NATION             91       22      24.2%
+  ORG               740        8       1.1%
+  PER              1091       10       0.9%
+  PHONE             113        4       3.5%
+
+##############################################################################
+  LEAKAGE BY COMPLEXITY
+##############################################################################
+
+  Low: 218 docs | Leakage: 129/1974 (6.5%)
+
+  Medium: 215 docs | Leakage: 140/1647 (8.5%)
+
+  High: 205 docs | Leakage: 139/1516 (9.2%)
+
+##############################################################################
+  SAMPLE LEAKED PII (first 20)
+##############################################################################
+  [LOC     ] "Südkorea"  →  ...icherung einer Lieferung nach Südkorea. Der Auftragswert beläuft sic...
+  [JOB     ] "CEO"  →  ...immten Datum die Position des CEO übernehmen. Der geprüfte Jahr...
+  [DATE    ] "2023"  →  ... Der geprüfte Jahresabschluss 2023, welcher einen bestimmten Bet...
+  [NATION  ] "österreichischen"  →  ...aluiert eine Expansion in den österreichischen und deutschen Markt und benöt...
+  [NATION  ] "deutschen"  →  ...n in den österreichischen und deutschen Markt und benötigt hierfür In...
+  [JOB     ] "Head of Export"  →  ...Der Head of Export eines Unternehmens kontaktier...
+  [LOC     ] "Südkorea"  →  ...ch eines Exportgeschäfts nach Südkorea. Für die Transaktion wird ein...
+  [JOB     ] "Leiter Finanzen"  →  ...sführerin einer Firma und dem Leiter Finanzen in einer Stadt in der Schweiz...
+  [DATE    ] "2022"  →  ... Der geprüfte Jahresabschluss 2022 wurde präsentiert und zeigt e...
+  [ORG     ] "Future Mobility Solutions GmbH"  →  ...e Gesellschaft gegründet, die Future Mobility Solutions GmbH mit Sitz in einer Stadt in de...
+  [JOB     ] "ETH-Ingenieurin"  →  ...r Nachfolgeregelung wird eine ETH-Ingenieurin per einem bestimmten Datum di...
+  [LOC     ] "Deutschland"  →  ...ing-System für ihre Konten in Deutschland und Frankreich besprochen....
+  [LOC     ] "Frankreich"  →  ...hre Konten in Deutschland und Frankreich besprochen....
+  [JOB     ] "Logistikleiter"  →  ...r Wunsch geäussert, den neuen Logistikleiter für das E-Banking mit Leserec...
+  [JOB     ] "Liquidatorin"  →  ... Unternehmens veranlasst. Die Liquidatorin, eine Führungskraft, hat die ...
+  [LOC     ] "Brasilien"  →  ...denzbank an einem Standort in Brasilien erfolgen. Der Kunde ist ein S...
+  [LOC     ] "Asien"  →  ... für eine Geschäftsreise nach Asien. Zudem wurde ein Leasingvertr...
+  [DATE    ] "2023"  →  ...achen wir den Jahresabschluss 2023 eines Unternehmens mit der Ge...
+  [JOB     ] "Leiter Finanzen & Controlling"  →  ...n bestimmten Betrag. Der neue Leiter Finanzen & Controlling wird die detaillierten Unterl...
+  [JOB     ] "Geschäftsführerin"  →  ...Besuch von einer Geschäftsführerin eines Unternehmens in einer S...
+
+##############################################################################
+  QUALITATIVE SAMPLES (10 examples)
+##############################################################################
+
+  ────────────────────────────────────────────────────────────────────────
+  Doc 7674 | High | Leakage: 7/8
+  ORIGINAL:  War am Governance Meeting der MedTech Innovators AG. Die neue Verwaltungsrätin Claudia Rossi (HSG-Absolventin) wurde vorgestellt. Hauptthema war der Spin-off der Diagnostik-Sparte. Für die neue Geselschaft werden diverse Konten in CHF und EUR benötigt. Der CFO, Martin Frei, sendet die Anträge per fr...
+  REWRITTEN: Am Governance-Meeting eines Unternehmens wurde eine neue Verwaltungsrätin vorgestellt. Hauptthema war der Spin-off der Diagnostik-Sparte. Für die neue Gesellschaft werden diverse Konten in verschiedenen Währungen benötigt. Der CFO sendet die Anträge per [E-Mail].
+
+Note: I replaced the following PII:...
+
+  ────────────────────────────────────────────────────────────────────────
+  Doc 7581 | High | Leakage: 6/9
+  ORIGINAL:  - Luigi Bernasconi, Verwaltungsrat der Immo Invest Partner AG, will eine neue Liegenschaft in Lugano kaufen.
+- Kaufpreis CHF 3.2 Mio., braucht eine Hypothek über 2.5 Mio.
+- Habe ihm ein Term Sheet geschickt. Er bespricht die Fianzierugn intern.
+- Sein Assistent Marco Bianchi (091 123 45 67) koordini...
+  REWRITTEN: - Ein Vertreter des Verwaltungsrats einer Firma will eine neue Liegenschaft in einer Stadt in der Schweiz kaufen.
+- Der Kaufpreis beträgt einen bestimmten Betrag in Millionensumme, der eine Hypothek über einen bestimmten Teil davon erfordert.
+- Ich habe ein Term Sheet an ihn geschickt. Er bespricht ...
+
+  ────────────────────────────────────────────────────────────────────────
+  Doc 6223 | Medium | Leakage: 8/14
+  ORIGINAL:  Treffen mit Herrn Klaus Tanner, CFO der Helvetia Maschinenbau AG, am 15.05.2024 in Zürich. Thema war die Erhöhung der bestehenden Kreditlimite von CHF 5 Mio. auf CHF 7.5 Mio. für die Akquisition eines Konkurrenten in Deutschland. Der Jahresabschluss 2023 mit einem EBITDA von CHF 12 Mio. wurde einger...
+  REWRITTEN: Treffen mit einer Führungskraft eines Unternehmens, am kürzlichem Datum in einer Stadt in der Schweiz. Das Thema war die Erhöhung der bestehenden Kreditlimite von einem bestimmten Betrag auf einen höheren Betrag für die Akquisition eines Konkurrenten in Deutschland. Der Jahresabschluss 2023 mit eine...
+
+  ────────────────────────────────────────────────────────────────────────
+  Doc 6452 | Medium | Leakage: 5/9
+  ORIGINAL:  Kurzes Telefonat mit Beat Gasser, Inhaber der Gasser Bau AG. Er benötigt dringend eine temporäre Limitenüberschreitung von CHF 180'000 auf seinem Hauptkonto CH61 0090 0123 4567 8901 2. Grund ist eine verspätete Zahlung eines Grosskunden, der Immobilien AG Zürich, über CHF 250'000. Habe die Überziehu...
+  REWRITTEN: Kurzes Telefonat mit einer Führungskraft eines Unternehmens. Sie benötigt dringend eine temporäre Limitenüberschreitung von einem bestimmten Betrag auf ihrem Hauptkonto. Grund ist eine verspätete Zahlung eines Grosskunden, einer Firma in einer Stadt in der Schweiz, über einen bestimmten Betrag. Habe...
+
+  ────────────────────────────────────────────────────────────────────────
+  Doc 6833 | Medium | Leakage: 5/9
+  ORIGINAL:  Die Immobilien Invest AG plant den Kauf einer Liegenschaft in Luzern für CHF 8.7 Mio.. Herr Dr. Beat Ammann (VR-Präsident) hat eine Hypothek über CHF 6 Mio. angefragt. Die notwendigen Unterlagen (Grundbuchauszug, Jahresabschlüsse) sind noch ausstehend. Ich habe ihm eine Frist bis 15.06.2024 gesetzt....
+  REWRITTEN: Die Firma plant den Kauf einer Liegenschaft in einer Stadt in der Schweiz für einen bestimmten Betrag. Die Geschäftsführerin hat eine Hypothek über einen bestimmten Teil des Kaufpreises angefragt. Die notwendigen Unterlagen sind noch ausstehend. Ich habe ihr eine Frist bis kürzlich gesetzt. Ihr Treu...
+
+  ────────────────────────────────────────────────────────────────────────
+  Doc 6147 | Medium | Leakage: 0/10
+  ORIGINAL:  Am 28. Mai 2024 Treffen mit Herrn Urs Baumann, CFO der Präzisionsmechanik AG in Grenchen. Traktanden: Erhöhung der Betriebskreditlimite um CHF 1.5 Mio. zur Finanzierung des Lageraufbaus. Herr Baumann hat den unterzeichneten Antrag mitgebracht. Ausserdem wurde die Nachfolgeregelung thematisiert; sein...
+  REWRITTEN: Am kürzlichem Datum trafen wir uns mit einer Führungskraft eines Unternehmens in einer Stadt in der Schweiz. Die Traktanden betrafen die Erhöhung der Betriebskreditlimite um einen bestimmten Betrag zur Finanzierung eines Lageraufbaus. Die Führungskraft hatte den unterzeichneten Antrag mitgebracht. A...
+
+  ────────────────────────────────────────────────────────────────────────
+  Doc 7380 | High | Leakage: 0/8
+  ORIGINAL:  Dr. Markus Fischer, CEO der Immoinvest AG, will eine Liegnschaft in Zürich kaufen.
+*   Kaufpreis: CHF 12.5 Mio. Benötigt Hypothek über CHF 8 Mio..
+*   Hat schon Angebot von der Credit Suisse aber will unsere Konditionen sehen.
+*   Unterlagen sollen bis morgen bei ihm sein.
+  REWRITTEN: Die Geschäftsführerin eines Unternehmens will eine Liegenschaft in einer Stadt in der Schweiz kaufen.
+*   Kaufpreis: ein Betrag in Millionenhöhe. Benötigt Hypothek über einen Teilbetrag.
+*   Hat bereits ein Angebot von einem Kreditinstitut, aber will unsere Konditionen prüfen.
+*   Die Unterlagen sol...
+
+  ────────────────────────────────────────────────────────────────────────
+  Doc 6672 | Medium | Leakage: 0/9
+  ORIGINAL:  Anruf von Markus Weber (079 345 67 89), Leiter Finanzen der Global Trade GmbH. Es wird dringend ein Akkreditiv (L/C) für einen Export nach Südkorea im Wert von USD 850'000 benötigt. Die Dokumente sind unvollständig. Ich habe ihn gebeten, die fehlenden Unterlagen bis heute Abend an trade.finance@bank...
+  REWRITTEN: Anruf von einer Führungskraft (Telefon). Es wird dringend ein Akkreditiv (L/C) für einen Export nach Asien im Wert eines bestimmten Betrags benötigt. Die Dokumente sind unvollständig. Ich habe ihn gebeten, die fehlenden Unterlagen bis an einem Datum an [E-Mail] zu senden. Ein bestimmtes Konto ist au...
+
+  ────────────────────────────────────────────────────────────────────────
+  Doc 5609 | Low | Leakage: 0/10
+  ORIGINAL:  Besprechung am 15. Mai 2024 mit Herrn Markus Steiner, CFO der Präzisionsmechanik AG in Grenchen. Haupttraktandum war die Finanzierung einer geplanten Akquisition in Deutschland. Das Unternehmen beantragt eine Erhöhung der bestehenden Kreditlimite um CHF 15 Mio. Herr Steiner informierte zudem, dass F...
+  REWRITTEN: Besprechung an einem Datum in Kürze mit einer Führungskraft von einem Unternehmen in einer Stadt in der Schweiz. Haupttraktandum war die Finanzierung einer geplanten Akquisition in einem anderen Land. Das Unternehmen beantragt eine Erhöhung der bestehenden Kreditlimite um einen bestimmten Betrag. Di...
+
+  ────────────────────────────────────────────────────────────────────────
+  Doc 5786 | Low | Leakage: 0/6
+  ORIGINAL:  Die Logistik Express GmbH hat am 23. Mai 2024 die Saldierung ihres nicht mehr genutzten Kontos mit der CH57 0900 0000 8000 1234 5 beantragt. Das Restguthaben von CHF 150'000 soll auf das Hauptbetriebskonto transferiert werden. Der Auftrag wurde von der einzelzeichnungsberechtigten Geschäftsführerin,...
+  REWRITTEN: Die Logistikfirma hat kürzlich die Saldierung ihres nicht mehr genutzten Kontos mit einem Konto beantragt. Das Restguthaben von einem bestimmten Betrag soll auf das Hauptbetriebskonto transferiert werden. Der Auftrag wurde von einer einzelzeichnungsberechtigten Führungskraft rechtsverbindlich unterz...

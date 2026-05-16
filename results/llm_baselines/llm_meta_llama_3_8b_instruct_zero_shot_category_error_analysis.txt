@@ -165,8 +165,8 @@
          2x : 'E-Banking-Vertrag'
          1x : 'globaltradesol.ch'
          1x : 'E-Banking-System'
-         1x : 'E-Bankings'
          1x : 'E-Mail'
+         1x : 'E-Bankings'
          1x : 'Kontakt-E-Mail'
          1x : 'pharmasolutions.ch'
          1x : 'praezision.ch'
@@ -287,9 +287,9 @@
          2x : 'Business Plan'
          2x : 'Spin-off'
          1x : 'Verwaltungsratspräsident'
-         1x : 'Geschäftsentwicklung'
-         1x : 'Expansion'
          1x : 'Leasingfinanzierung'
+         1x : 'Expansion'
+         1x : 'Geschäftsentwicklung'
 
 --------------------------------------------------------------------------------
 
@@ -403,8 +403,8 @@
          4x : 'CHF 3.2 Mio'
          3x : 'Akkreditiv (Letter of Credit)'
          3x : 'Konten'
-         3x : 'Festhypothek'
          3x : 'Eigenmittel'
+         3x : 'Festhypothek'
          3x : 'CHF 3.5 Mio'
 
 --------------------------------------------------------------------------------
@@ -471,8 +471,8 @@
          1x : 'Swiss MedTech GmbH'
          1x : 'Gfeller Bau AG'
          1x : 'Handelsfirma Zuber & Co. AG'
-         1x : 'Schweiz Tech GmbH'
          1x : 'Berlin Tech AG'
+         1x : 'Schweiz Tech GmbH'
          1x : 'Swiss Digital Solutions Holding AG'
          1x : 'Tech Invest Holding AG'
          1x : 'Immoinvest Holding AG'

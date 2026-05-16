@@ -1,0 +1,8604 @@
+{
+  "5193": {
+    "person": [
+      "Pierre Dubois"
+    ],
+    "age": null,
+    "location": "Zug",
+    "occupation": "Geschäftsführer",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "ImmoInvest SA"
+    ]
+  },
+  "5203": {
+    "person": [
+      "Isabelle Dubois"
+    ],
+    "age": null,
+    "location": "Lausanne",
+    "occupation": "Export Managerin",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Swiss Machinery Export SA"
+    ]
+  },
+  "5205": {
+    "person": [
+      "Dr. Elena Schmidt"
+    ],
+    "age": null,
+    "location": "Basel",
+    "occupation": "CFO",
+    "education": "Doktorat",
+    "nationality": "Deutschland",
+    "organization": [
+      "BioSynth Pharma AG"
+    ]
+  },
+  "5208": {
+    "person": [
+      "Thomas Keller",
+      "Isabelle Rochat"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": null,
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Precision Mechanics AG"
+    ]
+  },
+  "5212": {
+    "person": [
+      "Markus Graf"
+    ],
+    "age": null,
+    "location": "Winterthur",
+    "occupation": "Geschäftsführer",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Immoinvest AG"
+    ]
+  },
+  "5217": {
+    "person": [
+      "Thomas Fischer",
+      "Laura Brandt"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": null,
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Precision Mechanics AG"
+    ]
+  },
+  "5224": {
+    "person": [
+      "Christian Moser"
+    ],
+    "age": null,
+    "location": "Chur",
+    "occupation": "Leiter Finanzen",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Alpenbau AG"
+    ]
+  },
+  "5231": {
+    "person": [
+      "Martina Gasser",
+      "Herrn Chen"
+    ],
+    "age": null,
+    "location": "Zug",
+    "occupation": "Leiterin Einkauf",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Global Trade GmbH"
+    ]
+  },
+  "5232": {
+    "person": [
+      "Robert Kaufmann"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "Geschäftsführer",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Innovatec Solutions GmbH"
+    ]
+  },
+  "5237": {
+    "person": [
+      "Dr. Hans Meier",
+      "Herr Thomas Meier"
+    ],
+    "age": 35,
+    "location": "Luzern",
+    "occupation": "CEO",
+    "education": "HSG-Absolvent",
+    "nationality": null,
+    "organization": [
+      "Meier AG"
+    ]
+  },
+  "5243": {
+    "person": [
+      "Verena Schneider"
+    ],
+    "age": null,
+    "location": "Bern",
+    "occupation": "Inhaberin",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Modehaus Schneider GmbH"
+    ]
+  },
+  "5245": {
+    "person": [
+      "Isabelle Dubois",
+      "Jonas Frei"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "Leiterin Treasury",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Romandie Pharma SA"
+    ]
+  },
+  "5246": {
+    "person": [
+      "Thomas Bachmann"
+    ],
+    "age": 58,
+    "location": "Rotkreuz",
+    "occupation": "Geschäftsführer",
+    "education": "ETH-Ingenieur",
+    "nationality": null,
+    "organization": [
+      "Zuger Logistik GmbH",
+      "ETH"
+    ]
+  },
+  "5252": {
+    "person": [
+      "Christoph Meier"
+    ],
+    "age": null,
+    "location": "Basel",
+    "occupation": "CEO",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Urban Living AG"
+    ]
+  },
+  "5257": {
+    "person": [
+      "Peter Schmid"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "Head of Export",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Swiss Export Machinery AG",
+      "Seoul Heavy Industries Ltd."
+    ]
+  },
+  "5263": {
+    "person": [
+      "Hans-Peter Vogel",
+      "Thomas Vogel"
+    ],
+    "age": 65,
+    "location": "Winterthur",
+    "occupation": "Gründer",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Vogel Transport GmbH"
+    ]
+  },
+  "5264": {
+    "person": [
+      "Jonas Frei"
+    ],
+    "age": null,
+    "location": "Genf",
+    "occupation": "Head of Treasury",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Global Trade Solutions SA"
+    ]
+  },
+  "5266": {
+    "person": [
+      "Herr Li Wei"
+    ],
+    "age": null,
+    "location": "Zug",
+    "occupation": "Trade Finance Specialist",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "East-West Trading Ltd."
+    ]
+  },
+  "5267": {
+    "person": [
+      "Dr. Andreas Meyer"
+    ],
+    "age": null,
+    "location": "Zürich",
+    "occupation": "Head of Corporate Development",
+    "education": "Doktorat",
+    "nationality": null,
+    "organization": [
+      "Helvetia Tech Group AG",
+      "Innovate Software AG"
+    ]
+  },
+  "5273": {
+    "person": [
+      "Dr. Luc Dubois",
+      "Simon Keller"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": null,
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Innovatech Solutions GmbH"
+    ]
+  },
+  "5274": {
+    "person": [
+      "Isabelle Maurer"
+    ],
+    "age": null,
+    "location": "Basel",
+    "occupation": "Leiterin Finanzen",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "LogiTrans AG"
+    ]
+  },
+  "5278": {
+    "person": [
+      "Dr. Elena Fischer"
+    ],
+    "age": null,
+    "location": "Zug",
+    "occupation": "CFO",
+    "education": "Doktorat",
+    "nationality": null,
+    "organization": [
+      "PharmaCorp International AG"
+    ]
+  },
+  "5284": {
+    "person": [
+      "Dr. Anna Wyss",
+      "Paul Schmid"
+    ],
+    "age": null,
+    "location": "Basel",
+    "occupation": null,
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Wyss Pharma AG"
+    ]
+  },
+  "5286": {
+    "person": [
+      "Sandra Egger",
+      "Thomas Lutz"
+    ],
+    "age": null,
+    "location": "Dietikon",
+    "occupation": "CFO",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Logistik Express AG"
+    ]
+  },
+  "5292": {
+    "person": [
+      "Stefan Meier"
+    ],
+    "age": null,
+    "location": "Dietikon",
+    "occupation": "Flottenmanager",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Logistik Express AG"
+    ]
+  },
+  "5293": {
+    "person": [
+      "Thomas Fischer"
+    ],
+    "age": null,
+    "location": "Zürich",
+    "occupation": "CFO",
+    "education": "Studium",
+    "nationality": "Deutschland",
+    "organization": [
+      "Swiss Retail Group AG",
+      "Kaufhaus AG",
+      "Universität St. Gallen (HSG)"
+    ]
+  },
+  "5296": {
+    "person": [
+      "Markus Keller",
+      "Anna Schmid"
+    ],
+    "age": null,
+    "location": "Biel",
+    "occupation": null,
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Präzisionsmechanik AG"
+    ]
+  },
+  "5298": {
+    "person": [
+      "Pierre Dubois"
+    ],
+    "age": null,
+    "location": "Genf",
+    "occupation": "Head of Treasury",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Global Trade Solutions SA"
+    ]
+  },
+  "5307": {
+    "person": null,
+    "age": null,
+    "location": null,
+    "occupation": null,
+    "education": null,
+    "nationality": null,
+    "organization": null
+  },
+  "5308": {
+    "person": [
+      "Robert Moretti"
+    ],
+    "age": null,
+    "location": "Zürich",
+    "occupation": "Geschäftsführer",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "ImmoInvest Zürich AG"
+    ]
+  },
+  "5312": {
+    "person": [
+      "Dr. Christoph Aebischer"
+    ],
+    "age": null,
+    "location": "Zürich",
+    "occupation": "Verwaltungsratspräsident",
+    "education": "Doktorat",
+    "nationality": null,
+    "organization": [
+      "Alpine Blue Chips AG"
+    ]
+  },
+  "5313": {
+    "person": [
+      "Martina Egger",
+      "David Roth"
+    ],
+    "age": null,
+    "location": "Biel",
+    "occupation": "Projektleiterin",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Helvetica Industries AG",
+      "Future Mobility Solutions GmbH"
+    ]
+  },
+  "5314": {
+    "person": [
+      "Markus Steiner",
+      "Anna Keller"
+    ],
+    "age": null,
+    "location": "Thun",
+    "occupation": "Ingenieurin",
+    "education": "ETH-Ingenieurin",
+    "nationality": null,
+    "organization": [
+      "Präzisionsmechanik AG",
+      "ETH"
+    ]
+  },
+  "5318": {
+    "person": [
+      "Dr. Claudia Wyss",
+      "Herrn Martin Fischer"
+    ],
+    "age": null,
+    "location": "Basel",
+    "occupation": "Verwaltungsratspräsidentin",
+    "education": "Doktorat",
+    "nationality": null,
+    "organization": [
+      "Pharma Solutions AG"
+    ]
+  },
+  "5320": {
+    "person": [
+      "Sophie Girard",
+      "Alain Meyer"
+    ],
+    "age": null,
+    "location": "Genf",
+    "occupation": null,
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Montres Précises SA"
+    ]
+  },
+  "5336": {
+    "person": [
+      "Verena Moser",
+      "Peter Feldmann"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "Managing Partner",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Feldmann Consulting AG"
+    ]
+  },
+  "5343": {
+    "person": [
+      "Robert Fischer"
+    ],
+    "age": 62,
+    "location": "Grenchen",
+    "occupation": "Inhaber und Geschäftsführer",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Präzisionsmechanik Fischer AG",
+      "ETH"
+    ]
+  },
+  "5346": {
+    "person": [
+      "Christian Vogel"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "Head of Trade Finance",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Swiss Textile Trading AG"
+    ]
+  },
+  "5351": {
+    "person": [
+      "Isabelle Dubois"
+    ],
+    "age": null,
+    "location": "Genf",
+    "occupation": "Head of Treasury",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Global Trade GmbH"
+    ]
+  },
+  "5355": {
+    "person": [
+      "Dr. Elena Petrova",
+      "Paul Schmidt"
+    ],
+    "age": null,
+    "location": "Zug",
+    "occupation": "CEO",
+    "education": "Doktorat",
+    "nationality": null,
+    "organization": [
+      "Innovatech Spinoff GmbH",
+      "Tech Holding AG"
+    ]
+  },
+  "5360": {
+    "person": [
+      "Sabine Herzog"
+    ],
+    "age": null,
+    "location": "Zürich",
+    "occupation": "Head of Treasury",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Global Trade Solutions GmbH"
+    ]
+  },
+  "5368": {
+    "person": [
+      "Markus Steiner",
+      "Anna Keller",
+      "Urs Bachmann"
+    ],
+    "age": null,
+    "location": "Grenchen",
+    "occupation": "CFO",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Präzisionsmechanik AG"
+    ]
+  },
+  "5370": {
+    "person": [
+      "Christian Frei",
+      "Peter Schmid"
+    ],
+    "age": null,
+    "location": "Winterthur",
+    "occupation": "Inhaber",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Frei Logistik GmbH"
+    ]
+  },
+  "5374": {
+    "person": null,
+    "age": null,
+    "location": null,
+    "occupation": null,
+    "education": null,
+    "nationality": null,
+    "organization": null
+  },
+  "5376": {
+    "person": [
+      "Jonas Frey",
+      "Martina Bachmann"
+    ],
+    "age": null,
+    "location": "Grenchen",
+    "occupation": "CEO",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Präzisionsmechanik AG"
+    ]
+  },
+  "5379": {
+    "person": [
+      "Herrn Marco Bianchi"
+    ],
+    "age": null,
+    "location": "Winterthur",
+    "occupation": "Export Manager",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Swiss Machinery Export AG"
+    ]
+  },
+  "5380": {
+    "person": [
+      "Dr. Isabelle Renaud"
+    ],
+    "age": null,
+    "location": "Chur",
+    "occupation": "CFO",
+    "education": "Doktorat",
+    "nationality": null,
+    "organization": [
+      "Alpine Holding AG"
+    ]
+  },
+  "5387": {
+    "person": [
+      "Pierre Fournier"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "CFO",
+    "education": null,
+    "nationality": "französischer",
+    "organization": [
+      "Logistik Express SA"
+    ]
+  },
+  "5388": {
+    "person": [
+      "Alain Bernard"
+    ],
+    "age": null,
+    "location": "Genf",
+    "occupation": "Finanzchef",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Precision Watches Holding SA"
+    ]
+  },
+  "5389": {
+    "person": [
+      "Dr. Eva Meier",
+      "Sven Jansson"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": null,
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Swiss Medical Devices AG"
+    ]
+  },
+  "5393": {
+    "person": [
+      "Thomas Fischer"
+    ],
+    "age": null,
+    "location": "Genf",
+    "occupation": "Head of Treasury",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Global Trade Solutions SA"
+    ]
+  },
+  "5403": {
+    "person": [
+      "Walter Baumann",
+      "Anna Baumann"
+    ],
+    "age": 68,
+    "location": "Luzern",
+    "occupation": "Gründer",
+    "education": "dipl. Architektin ETH",
+    "nationality": null,
+    "organization": [
+      "Helvetia Bau AG"
+    ]
+  },
+  "5407": {
+    "person": [
+      "Martina Keller"
+    ],
+    "age": null,
+    "location": "Zug",
+    "occupation": "Geschäftsführerin",
+    "education": "HSG-Absolventin",
+    "nationality": null,
+    "organization": [
+      "Digital Solutions GmbH"
+    ]
+  },
+  "5412": {
+    "person": [
+      "Jean-Pierre Dubois"
+    ],
+    "age": null,
+    "location": "Genf",
+    "occupation": "Inhaber",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Logistik Solutions SA"
+    ]
+  },
+  "5417": {
+    "person": [
+      "Dr. Isabelle Schmidt"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "Leiterin Finanzen",
+    "education": "HSG-Absolventin",
+    "nationality": null,
+    "organization": [
+      "MedTech Innovations AG"
+    ]
+  },
+  "5421": {
+    "person": [
+      "Luigi Moretti"
+    ],
+    "age": null,
+    "location": "Lugano",
+    "occupation": "CFO",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Moda Italiana AG"
+    ]
+  },
+  "5422": {
+    "person": [
+      "Dr. Klaus Berger",
+      "Frau Susanne Meier"
+    ],
+    "age": null,
+    "location": "Basel",
+    "occupation": null,
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Pharma Solutions Holding AG"
+    ]
+  },
+  "5423": {
+    "person": [
+      "Oliver Bachmann"
+    ],
+    "age": null,
+    "location": "Winterthur",
+    "occupation": "CFO",
+    "education": null,
+    "nationality": "Deutschland",
+    "organization": [
+      "Maschinenbau Schmid AG"
+    ]
+  },
+  "5425": {
+    "person": [
+      "Daniel Vogel"
+    ],
+    "age": null,
+    "location": "Luzern",
+    "occupation": "Group Treasurer",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Helvetia Food AG"
+    ]
+  },
+  "5427": {
+    "person": [
+      "Thomas Fischer",
+      "Isabelle Wyss"
+    ],
+    "age": null,
+    "location": "Grenchen",
+    "occupation": null,
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Precision Mechanics AG"
+    ]
+  },
+  "5428": {
+    "person": [
+      "Dr. Elena Schmidt"
+    ],
+    "age": null,
+    "location": "Genf",
+    "occupation": "Head of Treasury",
+    "education": "Doktorat",
+    "nationality": null,
+    "organization": [
+      "Global Trade Solutions SA"
+    ]
+  },
+  "5430": {
+    "person": [
+      "Stefan Keller"
+    ],
+    "age": null,
+    "location": "Basel",
+    "occupation": "Leiter Rechnungswesen",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "PharmaCorp International AG"
+    ]
+  },
+  "5436": {
+    "person": [
+      "Thomas Graf"
+    ],
+    "age": null,
+    "location": "Winterthur",
+    "occupation": "CFO",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Helvetia Mechanik AG"
+    ]
+  },
+  "5437": {
+    "person": [
+      "Hans Moser",
+      "Daniel Moser",
+      "Peter Schmidt"
+    ],
+    "age": 64,
+    "location": null,
+    "occupation": "Gründer und Geschäftsführer",
+    "education": "HSG-Absolvent",
+    "nationality": null,
+    "organization": [
+      "Moser Baupartner GmbH",
+      "treuhand-bern.ch"
+    ]
+  },
+  "5440": {
+    "person": [
+      "Dr. Michael Lehmann",
+      "Mr. John Davis"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "Geschäftsführer",
+    "education": "Doktorat",
+    "nationality": "amerikanisch",
+    "organization": [
+      "Pharma Spin-Off AG",
+      "ETH Zürich"
+    ]
+  },
+  "5445": {
+    "person": [
+      "Claudia Wyss"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "Head of Treasury",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Global Pharma Services GmbH"
+    ]
+  },
+  "5447": {
+    "person": [
+      "Walter Brunner",
+      "Thomas Brunner"
+    ],
+    "age": 68,
+    "location": "St. Gallen",
+    "occupation": "Gründer",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Brunner Textil AG"
+    ]
+  },
+  "5448": {
+    "person": [
+      "David Chen",
+      "Marco Bianchi"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "Head of Sales",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Suisse Commodity Traders SA"
+    ]
+  },
+  "5449": {
+    "person": [
+      "Sophie Dubois"
+    ],
+    "age": null,
+    "location": "Genf",
+    "occupation": "Legal Counsel",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "International Holdings SA"
+    ]
+  },
+  "5461": {
+    "person": [
+      "Julia Chen"
+    ],
+    "age": null,
+    "location": "Zug",
+    "occupation": "Head of Finance",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Commodity Trading Partners AG"
+    ]
+  },
+  "5463": {
+    "person": [
+      "Isabelle Dubois",
+      "Paul Meyer"
+    ],
+    "age": null,
+    "location": "Genf",
+    "occupation": "Head of Treasury",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Global Trade Solutions SA"
+    ]
+  },
+  "5466": {
+    "person": [
+      "Herrn David Meier"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "Head of Sales",
+    "education": null,
+    "nationality": "amerikanisch",
+    "organization": [
+      "Urban Mobility Solutions AG"
+    ]
+  },
+  "5468": {
+    "person": [
+      "Sophie Baumann"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "Leiterin Treasury",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Retail Invest AG"
+    ]
+  },
+  "5469": {
+    "person": [
+      "Robert Keller"
+    ],
+    "age": 68,
+    "location": "Lausanne",
+    "occupation": "ehemaliger Inhaber",
+    "education": "Hotelfachschule",
+    "nationality": null,
+    "organization": [
+      "Keller Gastro GmbH",
+      "Hotelfachschule Lausanne"
+    ]
+  },
+  "5471": {
+    "person": [
+      "Thomas Fischer",
+      "Anna Schmid"
+    ],
+    "age": null,
+    "location": "Luzern",
+    "occupation": "CFO",
+    "education": "ETH-Abschluss",
+    "nationality": "deutsch",
+    "organization": [
+      "Metallbau Solutions AG",
+      "ETH"
+    ]
+  },
+  "5474": {
+    "person": [
+      "Sandra Egger",
+      "Peter Muster"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "Sales Director",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Creative Design GmbH"
+    ]
+  },
+  "5475": {
+    "person": [
+      "Jean-Luc Richard"
+    ],
+    "age": null,
+    "location": "Genf",
+    "occupation": "CEO",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Innovatec SA"
+    ]
+  },
+  "5480": {
+    "person": [
+      "Markus Steiner",
+      "Anna Keller"
+    ],
+    "age": null,
+    "location": "Biel",
+    "occupation": "CEO",
+    "education": "MBA",
+    "nationality": "Deutschland",
+    "organization": [
+      "Helvetia Precision AG",
+      "INSEAD"
+    ]
+  },
+  "5482": {
+    "person": [
+      "Peter Kaufmann"
+    ],
+    "age": null,
+    "location": "Emmen, Luzern",
+    "occupation": "Inhaber",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Kaufmann Logistik AG"
+    ]
+  },
+  "5486": {
+    "person": [
+      "Martin Fischer",
+      "Paul Meier"
+    ],
+    "age": null,
+    "location": "Zug",
+    "occupation": "Geschäftsführer",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Fischer IT Services GmbH"
+    ]
+  },
+  "5489": {
+    "person": [
+      "Daniela Graf"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "Buchhalterin",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Graf & Partner Treuhand AG",
+      "Neubau West AG"
+    ]
+  },
+  "5490": {
+    "person": [
+      "Jonas Baumann",
+      "Anna Frei"
+    ],
+    "age": null,
+    "location": "Thun",
+    "occupation": "CEO",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Präzisionsmechanik AG"
+    ]
+  },
+  "5492": {
+    "person": null,
+    "age": null,
+    "location": null,
+    "occupation": null,
+    "education": null,
+    "nationality": null,
+    "organization": null
+  },
+  "5494": {
+    "person": [
+      "Urs Ziegler",
+      "Petra Wyss"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "Leiter Finanzen",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Ziegler Transport AG"
+    ]
+  },
+  "5495": {
+    "person": [
+      "Luigi Bernasconi",
+      "Marco Bernasconi"
+    ],
+    "age": 62,
+    "location": "Lugano",
+    "occupation": "Inhaber",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Ticino Vini SA"
+    ]
+  },
+  "5500": {
+    "person": [
+      "Herrn Martin Frei"
+    ],
+    "age": null,
+    "location": "Winterthur",
+    "occupation": "Exportleiter",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Swiss Machinery Export GmbH"
+    ]
+  },
+  "5502": {
+    "person": [
+      "Sandra Berger",
+      "Paul Schmid"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "CTO",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Digital Ventures GmbH"
+    ]
+  },
+  "5503": {
+    "person": [
+      "Christoph Meier"
+    ],
+    "age": null,
+    "location": "Basel",
+    "occupation": "Projektleiter",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "PharmaCorp AG",
+      "BioGenTec AG"
+    ]
+  },
+  "5504": {
+    "person": [
+      "Urs Ziegler"
+    ],
+    "age": null,
+    "location": "Dietikon",
+    "occupation": "CFO",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Logistik Transport AG"
+    ]
+  },
+  "5505": {
+    "person": [
+      "Beat Aeschlimann",
+      "Peter Graf"
+    ],
+    "age": null,
+    "location": "Bern",
+    "occupation": "Geschäftsführer",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Hoch- und Tiefbau Meier AG"
+    ]
+  },
+  "5514": {
+    "person": [
+      "Andreas Graf",
+      "Martin Bieri"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "Senior Partner",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Strategy Consulting Partners AG"
+    ]
+  },
+  "5519": {
+    "person": [
+      "Chantal Favre",
+      "Urs Baumann"
+    ],
+    "age": null,
+    "location": "Biel",
+    "occupation": "Export Managerin",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Swiss Export Dynamics AG"
+    ]
+  },
+  "5521": {
+    "person": [
+      "Dr. Elena Fischer",
+      "Paul Meyer"
+    ],
+    "age": null,
+    "location": "Basel",
+    "occupation": "CFO",
+    "education": "Doktorat",
+    "nationality": null,
+    "organization": [
+      "Pharma Solutions AG"
+    ]
+  },
+  "5529": {
+    "person": [
+      "Claudia Wyss",
+      "Dr. Martin Fischer"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "Assistentin der Geschäftsleitung",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Helvetia Consulting SA"
+    ]
+  },
+  "5532": {
+    "person": [
+      "Dr. Elena Vogel",
+      "Peter Graf"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "Leiterin Treasury",
+    "education": "Doktorat",
+    "nationality": null,
+    "organization": [
+      "Pharma Solutions GmbH"
+    ]
+  },
+  "5539": {
+    "person": [
+      "Isabelle Dubois"
+    ],
+    "age": null,
+    "location": "La Chaux-de-Fonds",
+    "occupation": "CFO",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Montres Précision SA"
+    ]
+  },
+  "5543": {
+    "person": [
+      "Dr. Urs Meier"
+    ],
+    "age": null,
+    "location": "Zürich-Altstetten",
+    "occupation": "CEO",
+    "education": "Doktorat",
+    "nationality": null,
+    "organization": [
+      "Immo Invest AG"
+    ]
+  },
+  "5547": {
+    "person": [
+      "Daniel Vogel"
+    ],
+    "age": null,
+    "location": "Genf",
+    "occupation": "Liquidator",
+    "education": null,
+    "nationality": "amerikanisch",
+    "organization": [
+      "Digital Ventures GmbH",
+      "Credit Suisse",
+      "liquidationspartner.ch"
+    ]
+  },
+  "5551": {
+    "person": [
+      "Christian Baumann"
+    ],
+    "age": null,
+    "location": "Zürich",
+    "occupation": "Inhaber",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Baumann Logistik AG"
+    ]
+  },
+  "5560": {
+    "person": [
+      "Stefan Meier",
+      "Luigi Bianchi"
+    ],
+    "age": null,
+    "location": "Shanghai",
+    "occupation": "Head of Treasury",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Import Export Solutions AG"
+    ]
+  },
+  "5568": {
+    "person": [
+      "Chen Li",
+      "Oliver Schmidt"
+    ],
+    "age": null,
+    "location": "Zug",
+    "occupation": "CFO",
+    "education": null,
+    "nationality": "österreichisch",
+    "organization": [
+      "Swiss Commodity Traders Ltd."
+    ]
+  },
+  "5580": {
+    "person": [
+      "Thomas Graf"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "Treasurer",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Tech Invest Holding AG"
+    ]
+  },
+  "5601": {
+    "person": [
+      "Urs Baumann"
+    ],
+    "age": null,
+    "location": "Winterthur",
+    "occupation": "CFO",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Präzisionsmechanik AG"
+    ]
+  },
+  "5603": {
+    "person": [
+      "Dr. Markus Steiner"
+    ],
+    "age": null,
+    "location": "Zürich",
+    "occupation": "CEO",
+    "education": "Doktorat",
+    "nationality": null,
+    "organization": [
+      "ImmoInvest AG"
+    ]
+  },
+  "5605": {
+    "person": [
+      "Laura Bianchi",
+      "Klaus Schmidt"
+    ],
+    "age": null,
+    "location": "Zug",
+    "occupation": "CEO",
+    "education": null,
+    "nationality": "Deutschland",
+    "organization": [
+      "Swiss Engineering Group Holding AG",
+      "RoboSwiss AG"
+    ]
+  },
+  "5609": {
+    "person": [
+      "Markus Steiner",
+      "Isabelle Rochat"
+    ],
+    "age": null,
+    "location": "Grenchen",
+    "occupation": "CFO",
+    "education": "HSG-Absolventin",
+    "nationality": null,
+    "organization": [
+      "Präzisionsmechanik AG"
+    ]
+  },
+  "5617": {
+    "person": [
+      "Peter Vogel"
+    ],
+    "age": null,
+    "location": "Zürich",
+    "occupation": "Eigentümer",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Vogel Holding AG",
+      "Vogel Robotics GmbH"
+    ]
+  },
+  "5626": {
+    "person": [
+      "Hans-Peter Moser",
+      "Kevin Schmidt"
+    ],
+    "age": null,
+    "location": "Bern",
+    "occupation": "IT-Leiter",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Digital Solutions AG"
+    ]
+  },
+  "5630": {
+    "person": [
+      "Thomas Meier",
+      "Stefan Keller"
+    ],
+    "age": null,
+    "location": "Zürich",
+    "occupation": null,
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Consulting Partner GmbH"
+    ]
+  },
+  "5633": {
+    "person": [
+      "Susanne Egger"
+    ],
+    "age": null,
+    "location": "Basel",
+    "occupation": "Projektleiterin Finanzen",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "PharmaCorp AG",
+      "BioVenture Labs GmbH"
+    ]
+  },
+  "5637": {
+    "person": null,
+    "age": null,
+    "location": null,
+    "occupation": null,
+    "education": null,
+    "nationality": null,
+    "organization": null
+  },
+  "5639": {
+    "person": [
+      "Hans-Peter Meier"
+    ],
+    "age": null,
+    "location": "St. Gallen",
+    "occupation": "Inhaber und Geschäftsführer",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Logistik & Transport Meier AG"
+    ]
+  },
+  "5640": {
+    "person": [
+      "Reto Bieri"
+    ],
+    "age": null,
+    "location": "Zug",
+    "occupation": "CFO",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "TechSolutions Holding AG",
+      "Dataflow GmbH"
+    ]
+  },
+  "5642": {
+    "person": null,
+    "age": null,
+    "location": null,
+    "occupation": null,
+    "education": null,
+    "nationality": null,
+    "organization": null
+  },
+  "5643": {
+    "person": null,
+    "age": null,
+    "location": null,
+    "occupation": null,
+    "education": null,
+    "nationality": null,
+    "organization": null
+  },
+  "5644": {
+    "person": [
+      "Martin Keller"
+    ],
+    "age": null,
+    "location": "Genf",
+    "occupation": "Head of Treasury",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Global Trade Holding SA"
+    ]
+  },
+  "5649": {
+    "person": [
+      "Sandra König",
+      "Anna Meier"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "Sales Director",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Swiss Medical Devices AG"
+    ]
+  },
+  "5652": {
+    "person": null,
+    "age": null,
+    "location": null,
+    "occupation": null,
+    "education": null,
+    "nationality": null,
+    "organization": null
+  },
+  "5655": {
+    "person": [
+      "Martin Berger",
+      "Urs Ziegler"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "Buchhalterin",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Swiss Logistics Solutions AG"
+    ]
+  },
+  "5670": {
+    "person": [
+      "Jonas Frischknecht"
+    ],
+    "age": null,
+    "location": "Uster",
+    "occupation": "CFO",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Helvetia Maschinenbau AG"
+    ]
+  },
+  "5671": {
+    "person": [
+      "Dr. Valérie Dubois"
+    ],
+    "age": null,
+    "location": "Genf",
+    "occupation": "Leiterin Treasury",
+    "education": "Doktorat",
+    "nationality": null,
+    "organization": [
+      "Global Commodities SA"
+    ]
+  },
+  "5672": {
+    "person": [
+      "Markus Aebischer"
+    ],
+    "age": 48,
+    "location": "Bern",
+    "occupation": "Geschäftsführer",
+    "education": "ETH Zürich",
+    "nationality": null,
+    "organization": [
+      "Biofood Produzenten GmbH",
+      "ETH Zürich"
+    ]
+  },
+  "5675": {
+    "person": [
+      "Sophie Renaud"
+    ],
+    "age": null,
+    "location": "La Chaux-de-Fonds",
+    "occupation": "Leiterin Finanzen",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Précision Horlogère SA"
+    ]
+  },
+  "5678": {
+    "person": [
+      "Jonas Frei",
+      "Anna Keller"
+    ],
+    "age": null,
+    "location": "Grenchen",
+    "occupation": "CFO",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Präzisionsmechanik AG"
+    ]
+  },
+  "5680": {
+    "person": [
+      "Isabelle Dubois",
+      "Luc Meier"
+    ],
+    "age": null,
+    "location": "Genf",
+    "occupation": "Head of Treasury",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Global Trade Solutions SA"
+    ]
+  },
+  "5681": {
+    "person": [
+      "Dr. Elena Bianchi",
+      "Robert Lang"
+    ],
+    "age": null,
+    "location": "Zürich",
+    "occupation": "CEO",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Pharma Invest AG",
+      "BioVenture Labs GmbH"
+    ]
+  },
+  "5686": {
+    "person": [
+      "David Meier",
+      "Eva Schmid"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "CFO",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Digital Solutions GmbH"
+    ]
+  },
+  "5691": {
+    "person": [
+      "Peter Vogel",
+      "Klaus Schmidt"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": null,
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Helvetia Maschinenbau AG"
+    ]
+  },
+  "5693": {
+    "person": [
+      "Walter Brunner",
+      "Thomas Brunner"
+    ],
+    "age": null,
+    "location": "Luzern",
+    "occupation": "designierter CEO",
+    "education": "dipl. Bauingenieur ETH",
+    "nationality": null,
+    "organization": [
+      "Brunner Holzbau AG",
+      "ETH"
+    ]
+  },
+  "5694": {
+    "person": [
+      "Marco Bianchi",
+      "Jean-Pierre Richard"
+    ],
+    "age": null,
+    "location": "Basel",
+    "occupation": "CFO",
+    "education": null,
+    "nationality": "französischer Staatsbürger",
+    "organization": [
+      "Logistik Express SA"
+    ]
+  },
+  "5696": {
+    "person": [
+      "Jonas Frey",
+      "Sandra Keller"
+    ],
+    "age": null,
+    "location": "Winterthur",
+    "occupation": "CFO",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Helvetia Mechanik AG"
+    ]
+  },
+  "5703": {
+    "person": null,
+    "age": null,
+    "location": null,
+    "occupation": null,
+    "education": null,
+    "nationality": null,
+    "organization": null
+  },
+  "5722": {
+    "person": [
+      "Lukas Frei"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "Leiter Treasury",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Swiss Metalworks GmbH"
+    ]
+  },
+  "5726": {
+    "person": [
+      "Markus Egger",
+      "Hans-Peter Moser"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "Buchhalter",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Logistik Services GmbH"
+    ]
+  },
+  "5728": {
+    "person": [
+      "Stefan Baumann"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "Leiter Finanzen",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Global Retail Group AG"
+    ]
+  },
+  "5734": {
+    "person": [
+      "Thomas Fischer",
+      "Eva Meier"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "Geschäftsführer",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "CleanEnergy Solutions AG"
+    ]
+  },
+  "5737": {
+    "person": [
+      "Jürg Frei",
+      "Peter Schmidt"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "Verkaufsleiter für Europa",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Swiss Precision Parts AG"
+    ]
+  },
+  "5739": {
+    "person": null,
+    "age": null,
+    "location": null,
+    "occupation": null,
+    "education": null,
+    "nationality": null,
+    "organization": null
+  },
+  "5743": {
+    "person": [
+      "Jürgen Schmidt"
+    ],
+    "age": null,
+    "location": "St. Gallen",
+    "occupation": "Head of Export",
+    "education": null,
+    "nationality": "Deutschland",
+    "organization": [
+      "Swiss Machinery AG",
+      "SERV"
+    ]
+  },
+  "5748": {
+    "person": [
+      "Lukas Fischer"
+    ],
+    "age": null,
+    "location": "Thun",
+    "occupation": "Geschäftsführer",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Metallbau Fischer & Söhne GmbH"
+    ]
+  },
+  "5754": {
+    "person": [
+      "Jonas Baumann",
+      "Markus Egger"
+    ],
+    "age": null,
+    "location": "Winterthur",
+    "occupation": "CEO",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Präzisionsmechanik AG"
+    ]
+  },
+  "5756": {
+    "person": [
+      "Walter Brunner",
+      "Thomas Brunner"
+    ],
+    "age": 68,
+    "location": "Thun",
+    "occupation": "Gründer",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Brunner Bau AG",
+      "ETH"
+    ]
+  },
+  "5757": {
+    "person": [
+      "Stefan Meier",
+      "Sandra Keller"
+    ],
+    "age": null,
+    "location": "Dietikon",
+    "occupation": "Geschäftsführer",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Logistik & Transport GmbH"
+    ]
+  },
+  "5759": {
+    "person": [
+      "Dr. Christoph Ammann",
+      "Eva Linder"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": null,
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Pharma Invest AG"
+    ]
+  },
+  "5762": {
+    "person": [
+      "Oliver Bachmann",
+      "Simon Keller"
+    ],
+    "age": null,
+    "location": "Zug",
+    "occupation": "Managing Partner",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Helvetia Consulting AG"
+    ]
+  },
+  "5767": {
+    "person": null,
+    "age": null,
+    "location": null,
+    "occupation": null,
+    "education": null,
+    "nationality": null,
+    "organization": null
+  },
+  "5773": {
+    "person": [
+      "Isabelle Dubois"
+    ],
+    "age": null,
+    "location": "Genf",
+    "occupation": "Head of Treasury",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Global Trade SA"
+    ]
+  },
+  "5778": {
+    "person": [
+      "Christian Frei"
+    ],
+    "age": null,
+    "location": "Zug",
+    "occupation": "CFO",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Innovatec Solutions GmbH",
+      "DataCore GmbH"
+    ]
+  },
+  "5780": {
+    "person": [
+      "Walter Brunner"
+    ],
+    "age": 62,
+    "location": "Thun",
+    "occupation": "Inhaber",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Brunner Holzbau AG"
+    ]
+  },
+  "5781": {
+    "person": [
+      "Markus Steiner",
+      "Dr. Ulrich Frisch"
+    ],
+    "age": null,
+    "location": "Biel",
+    "occupation": "CFO",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Präzisionsmechanik AG"
+    ]
+  },
+  "5786": {
+    "person": [
+      "Sonja Meier"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "Geschäftsführerin",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Logistik Express GmbH"
+    ]
+  },
+  "5790": {
+    "person": [
+      "Urs Baumann",
+      "Klaus Fischer"
+    ],
+    "age": null,
+    "location": "Grenchen",
+    "occupation": null,
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Präzisionsmechanik AG"
+    ]
+  },
+  "5792": {
+    "person": [
+      "Peter Schmidt"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "Treasurer",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Global Impex AG"
+    ]
+  },
+  "5793": {
+    "person": [
+      "Markus Frei"
+    ],
+    "age": null,
+    "location": "Schlieren",
+    "occupation": "Inhaber",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Frei Immobilien AG"
+    ]
+  },
+  "5794": {
+    "person": [
+      "Stefan Keller",
+      "Sandra Meier",
+      "Tomislav Petrović"
+    ],
+    "age": null,
+    "location": "Zug",
+    "occupation": "IT-Leiter",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Pharma Services GmbH"
+    ]
+  },
+  "5799": {
+    "person": [
+      "Martina Bachmann"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "Leiterin Treasury",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Swiss MedTech GmbH"
+    ]
+  },
+  "5800": {
+    "person": [
+      "Urs Baumann"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": null,
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Alpinholz AG"
+    ]
+  },
+  "5801": {
+    "person": [
+      "Hans Gfeller",
+      "Corina Gfeller",
+      "Dr. Peter Hug"
+    ],
+    "age": null,
+    "location": "Luzern",
+    "occupation": "Geschäftsführung",
+    "education": "HSG-Absolventin",
+    "nationality": null,
+    "organization": [
+      "Gfeller Bau AG"
+    ]
+  },
+  "5802": {
+    "person": [
+      "Stefan Tanner"
+    ],
+    "age": null,
+    "location": "Genf",
+    "occupation": "Head of Export",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Precision Motors SA",
+      "Seoul Bank Corp."
+    ]
+  },
+  "5803": {
+    "person": [
+      "Isabelle Richard"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "Leiterin Finanzen",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Digital Ventures AG"
+    ]
+  },
+  "5809": {
+    "person": [
+      "Hans Meier",
+      "Thomas Meier"
+    ],
+    "age": null,
+    "location": "Aarau",
+    "occupation": null,
+    "education": "HSG-Absolvent",
+    "nationality": null,
+    "organization": [
+      "Meier & Söhne AG"
+    ]
+  },
+  "5811": {
+    "person": [
+      "Dr. Eva Lang"
+    ],
+    "age": null,
+    "location": "Basel",
+    "occupation": "CEO",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Pharma Innovations AG",
+      "BioGenTech GmbH"
+    ]
+  },
+  "5815": {
+    "person": [
+      "Roberto Bianchi"
+    ],
+    "age": null,
+    "location": "Lugano",
+    "occupation": "Inhaber",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "TechComponents Import AG"
+    ]
+  },
+  "5824": {
+    "person": [
+      "Pascal Fournier"
+    ],
+    "age": null,
+    "location": "Genf",
+    "occupation": "Treasurer",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Helvetia Holding SA"
+    ]
+  },
+  "5826": {
+    "person": [
+      "Markus Keller",
+      "Anna Schmid"
+    ],
+    "age": null,
+    "location": "Biel",
+    "occupation": "CFO",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Präzisionsmechanik AG"
+    ]
+  },
+  "5831": {
+    "person": null,
+    "age": null,
+    "location": null,
+    "occupation": null,
+    "education": null,
+    "nationality": null,
+    "organization": null
+  },
+  "5835": {
+    "person": [
+      "Jonas Frischknecht",
+      "Corina Wenger"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": null,
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Präzisionsmechanik AG"
+    ]
+  },
+  "5841": {
+    "person": [
+      "Dr. Martin Keller"
+    ],
+    "age": null,
+    "location": "Bern",
+    "occupation": "CFO",
+    "education": "Doktorat",
+    "nationality": null,
+    "organization": [
+      "Consulting Partner AG"
+    ]
+  },
+  "5844": {
+    "person": null,
+    "age": null,
+    "location": null,
+    "occupation": null,
+    "education": null,
+    "nationality": null,
+    "organization": null
+  },
+  "5852": {
+    "person": [
+      "Walter Meier"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "Liquidator",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Constructa Bau AG"
+    ]
+  },
+  "5854": {
+    "person": [
+      "Klaus Zuber",
+      "Anna Zuber"
+    ],
+    "age": 68,
+    "location": "Baar",
+    "occupation": "Gründer",
+    "education": "HSG-Absolventin",
+    "nationality": null,
+    "organization": [
+      "Zuber & Co. AG"
+    ]
+  },
+  "5859": {
+    "person": [
+      "Susanne Egger"
+    ],
+    "age": null,
+    "location": "Basel",
+    "occupation": "CFO",
+    "education": null,
+    "nationality": "schweizerisch-deutsche",
+    "organization": [
+      "Pharma Holding AG"
+    ]
+  },
+  "5867": {
+    "person": [
+      "Dr. Klaus Richter",
+      "Dr. Anna Keller"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "CEO",
+    "education": "Doktorat",
+    "nationality": null,
+    "organization": [
+      "Quantum Spin AG",
+      "ETH Zürich"
+    ]
+  },
+  "5868": {
+    "person": [
+      "Peter Frei"
+    ],
+    "age": null,
+    "location": "Basel",
+    "occupation": "CFO",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "PharmaLogistics AG"
+    ]
+  },
+  "5870": {
+    "person": [
+      "Thomas Berger"
+    ],
+    "age": 62,
+    "location": "Zug",
+    "occupation": "Managing Partner",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Innovate Consulting AG"
+    ]
+  },
+  "5893": {
+    "person": [
+      "Nathalie Rochat"
+    ],
+    "age": null,
+    "location": "Genf",
+    "occupation": "Leiterin Exportfinanzierung",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Swiss Exports SA",
+      "SERV"
+    ]
+  },
+  "5894": {
+    "person": [
+      "Dr. Eveline Fischer",
+      "Jonas Baumann"
+    ],
+    "age": null,
+    "location": "Basel",
+    "occupation": "CFO",
+    "education": "Doktorat",
+    "nationality": null,
+    "organization": [
+      "Pharma Solutions AG",
+      "Dublin Pharma Research Ltd."
+    ]
+  },
+  "5896": {
+    "person": [
+      "David Chen",
+      "Martin Schmid"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "CEO",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Tech Innovators Holding AG",
+      "CodeCrafters GmbH"
+    ]
+  },
+  "5897": {
+    "person": [
+      "Markus Keller"
+    ],
+    "age": null,
+    "location": "Grenchen",
+    "occupation": "CFO",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Präzisionsmechanik AG"
+    ]
+  },
+  "5898": {
+    "person": [
+      "Isabelle Dubois"
+    ],
+    "age": null,
+    "location": "Genf",
+    "occupation": "Head of Treasury",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Global Trade Solutions SA"
+    ]
+  },
+  "5899": {
+    "person": [
+      "Elena Ricci"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "Finance Managerin",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Pharma Consulting GmbH"
+    ]
+  },
+  "5903": {
+    "person": [
+      "Jürgen Schmidt"
+    ],
+    "age": null,
+    "location": "Zürich",
+    "occupation": "Geschäftsführer",
+    "education": null,
+    "nationality": "Deutschland",
+    "organization": [
+      "Schweiz Tech GmbH",
+      "Berlin Tech AG"
+    ]
+  },
+  "5905": {
+    "person": [
+      "Markus Keller",
+      "Anna Schmidt",
+      "Peter Frei"
+    ],
+    "age": null,
+    "location": "Biel",
+    "occupation": "CFO",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Helvetia Precision AG"
+    ]
+  },
+  "5910": {
+    "person": [
+      "Stefan Gerber"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "Leiter Finanzen & Administration",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Digital Minds AG"
+    ]
+  },
+  "5913": {
+    "person": [
+      "Patrick Fischer"
+    ],
+    "age": null,
+    "location": "Rotkreuz",
+    "occupation": "COO",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "LogiCore Transport AG"
+    ]
+  },
+  "5916": {
+    "person": [
+      "Isabelle Dubois",
+      "Martin Keller"
+    ],
+    "age": null,
+    "location": "Genf",
+    "occupation": "Leiterin Finanzen",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Global Imports SA"
+    ]
+  },
+  "5917": {
+    "person": [
+      "Dr. Elena Bianchi"
+    ],
+    "age": null,
+    "location": "Lugano",
+    "occupation": "CFO",
+    "education": "Doktorat",
+    "nationality": null,
+    "organization": [
+      "Swiss Textile Exports AG"
+    ]
+  },
+  "5919": {
+    "person": [
+      "Jean-Luc Picard",
+      "Anna Schmidt"
+    ],
+    "age": null,
+    "location": "Lausanne",
+    "occupation": null,
+    "education": null,
+    "nationality": "Deutschland",
+    "organization": [
+      "Pharma Invest Holding SA"
+    ]
+  },
+  "5921": {
+    "person": [
+      "Oliver Bachmann"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "Managing Partner",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Consulting Partners AG"
+    ]
+  },
+  "5928": {
+    "person": [
+      "Nathalie Rochat"
+    ],
+    "age": null,
+    "location": "Lausanne",
+    "occupation": "CFO",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Innovatec Robotics SA"
+    ]
+  },
+  "5929": {
+    "person": [
+      "Oliver Graf"
+    ],
+    "age": null,
+    "location": "Zug",
+    "occupation": "Treasurer",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "CashRich Holding AG"
+    ]
+  },
+  "5931": {
+    "person": [
+      "Jonas Frey"
+    ],
+    "age": null,
+    "location": "Winterthur",
+    "occupation": "CFO",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Helvetia Maschinenbau AG"
+    ]
+  },
+  "5932": {
+    "person": [
+      "Walter Gasser",
+      "Michael Gasser"
+    ],
+    "age": 68,
+    "location": "Luzern",
+    "occupation": "Gründer",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Gasser Transport GmbH"
+    ]
+  },
+  "5933": {
+    "person": [
+      "Isabelle Dubois"
+    ],
+    "age": null,
+    "location": "Genf",
+    "occupation": "Head of Treasury",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Global Trade Solutions SA"
+    ]
+  },
+  "5937": {
+    "person": [
+      "Andreas Baumann",
+      "Frau Schneider"
+    ],
+    "age": null,
+    "location": "Basel",
+    "occupation": "CFO",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "PharmaCorp AG"
+    ]
+  },
+  "5939": {
+    "person": [
+      "Eva Wyss",
+      "Robert Moretti"
+    ],
+    "age": null,
+    "location": "Bern",
+    "occupation": "Office Managerin",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Consulting Partners AG"
+    ]
+  },
+  "5945": {
+    "person": null,
+    "age": null,
+    "location": null,
+    "occupation": null,
+    "education": null,
+    "nationality": null,
+    "organization": null
+  },
+  "5947": {
+    "person": [
+      "Dr. Martin Keller",
+      "Herr Keller"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "Geschäftsführer",
+    "education": "Doktorat",
+    "nationality": null,
+    "organization": [
+      "SensorTech Solutions GmbH",
+      "Techno Holding AG"
+    ]
+  },
+  "5951": {
+    "person": [
+      "Daniel Schmid"
+    ],
+    "age": null,
+    "location": "Genf",
+    "occupation": "Head of Treasury",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Global Trade Solutions SA"
+    ]
+  },
+  "5954": {
+    "person": [
+      "Christoph Aebischer"
+    ],
+    "age": null,
+    "location": "Bern",
+    "occupation": "Geschäftsführer",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Immoinvest Bern AG"
+    ]
+  },
+  "5957": {
+    "person": [
+      "Urs Baumann",
+      "Lena Vogel"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": null,
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Precision Mechanics AG"
+    ]
+  },
+  "5959": {
+    "person": [
+      "Isabelle Dubois"
+    ],
+    "age": null,
+    "location": "Genf",
+    "occupation": "Head of Treasury",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Global Trade Solutions GmbH"
+    ]
+  },
+  "5961": {
+    "person": [
+      "Dr. Anna Schmid",
+      "Paul Martin"
+    ],
+    "age": null,
+    "location": "Lausanne",
+    "occupation": "COO",
+    "education": "Doktorat",
+    "nationality": null,
+    "organization": [
+      "Innovatech Startup AG"
+    ]
+  },
+  "5964": {
+    "person": [
+      "Martina Frei",
+      "Hanspeter Zürcher"
+    ],
+    "age": null,
+    "location": "Rotkreuz",
+    "occupation": "Treasurer",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Food Ingredients AG"
+    ]
+  },
+  "5966": {
+    "person": [
+      "Markus Steiner",
+      "Isabelle Rochat"
+    ],
+    "age": null,
+    "location": "Thun",
+    "occupation": "CFO",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Präzisionsmechanik AG"
+    ]
+  },
+  "5967": {
+    "person": [
+      "Claudia Wyss"
+    ],
+    "age": null,
+    "location": "Genf",
+    "occupation": "Head of Treasury",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Global Exports SA"
+    ]
+  },
+  "5969": {
+    "person": [
+      "Walter Brunner",
+      "Daniel Brunner"
+    ],
+    "age": null,
+    "location": "Waadt",
+    "occupation": "Gründer",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Brunner Weine AG",
+      "HSG"
+    ]
+  },
+  "5971": {
+    "person": [
+      "Martin Keller",
+      "Fatima Al-Jamil"
+    ],
+    "age": null,
+    "location": "Zürich",
+    "occupation": "CFO",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Swiss Engineering Group AG"
+    ]
+  },
+  "5992": {
+    "person": [
+      "Urs Baumann"
+    ],
+    "age": null,
+    "location": "Winterthur",
+    "occupation": "Inhaber und Geschäftsführer",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Baumann Mechanik AG"
+    ]
+  },
+  "6002": {
+    "person": [
+      "Hans Müller",
+      "Peter Müller"
+    ],
+    "age": 64,
+    "location": "Luzern",
+    "occupation": "Gründer",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Müller Bau AG"
+    ]
+  },
+  "6003": {
+    "person": [
+      "Corina Bachmann",
+      "Urs Meier",
+      "Luc Besson"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "Leiterin Rechnungswesen",
+    "education": null,
+    "nationality": "französisch",
+    "organization": [
+      "Pharma Logistics AG"
+    ]
+  },
+  "6007": {
+    "person": [
+      "Dr. Simon Tanner"
+    ],
+    "age": null,
+    "location": "Zug",
+    "occupation": "CEO",
+    "education": "ETH-Ingenieur",
+    "nationality": null,
+    "organization": [
+      "Tech Innovate Holding AG",
+      "Digital Forward AG"
+    ]
+  },
+  "6028": {
+    "person": [
+      "Peter Vogel",
+      "Klaus Schmidt"
+    ],
+    "age": null,
+    "location": "St. Gallen",
+    "occupation": "CFO",
+    "education": null,
+    "nationality": "Deutschland",
+    "organization": [
+      "ExportMaschinen AG"
+    ]
+  },
+  "6029": {
+    "person": null,
+    "age": null,
+    "location": null,
+    "occupation": null,
+    "education": null,
+    "nationality": null,
+    "organization": null
+  },
+  "6034": {
+    "person": [
+      "Markus Gasser",
+      "Reto Zürcher"
+    ],
+    "age": null,
+    "location": "Chur",
+    "occupation": "Leiter Finanzen",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Holzbau Gasser AG",
+      "Graubündner Kantonalbank"
+    ]
+  },
+  "6037": {
+    "person": [
+      "Dr. Elena Fischer",
+      "Samuel Graf"
+    ],
+    "age": null,
+    "location": "Zug",
+    "occupation": null,
+    "education": "ETH-Absolventin",
+    "nationality": null,
+    "organization": [
+      "MedTech Innovations GmbH",
+      "ETH"
+    ]
+  },
+  "6042": {
+    "person": [
+      "Dr. Léa Favre",
+      "Dr. Simon Wenger"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": null,
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "BioSynth Dynamics GmbH",
+      "EPFL"
+    ]
+  },
+  "6052": {
+    "person": [
+      "Nina Graf",
+      "Robert Lang"
+    ],
+    "age": null,
+    "location": "Bern",
+    "occupation": "Head of Operations",
+    "education": "HSG-Absolventin",
+    "nationality": null,
+    "organization": [
+      "Consulting Partners AG"
+    ]
+  },
+  "6079": {
+    "person": [
+      "Isabelle Rochat",
+      "Marc Dubois"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "Leiterin Treasury",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Global Trade Solutions SA"
+    ]
+  },
+  "6099": {
+    "person": [
+      "Isabelle Maurer",
+      "Stefan Egger"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": null,
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Swiss Digital Solutions Holding AG"
+    ]
+  },
+  "6101": {
+    "person": [
+      "Franco Bianchi"
+    ],
+    "age": null,
+    "location": "Bellinzona",
+    "occupation": "Inhaber",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Ticino Edilizia SA"
+    ]
+  },
+  "6103": {
+    "person": [
+      "Jonas Frischknecht"
+    ],
+    "age": null,
+    "location": "Zürich",
+    "occupation": "CFO",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Helvetia Logistik AG"
+    ]
+  },
+  "6105": {
+    "person": [
+      "Marco Bianchi",
+      "Urs Meier"
+    ],
+    "age": 45,
+    "location": "Chur",
+    "occupation": "Geschäftsführer",
+    "education": "HSG-Absolvent",
+    "nationality": null,
+    "organization": [
+      "Alpin Food AG"
+    ]
+  },
+  "6114": {
+    "person": [
+      "Markus Fischer"
+    ],
+    "age": 58,
+    "location": "Appenzell",
+    "occupation": "Inhaber",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Holzbau Fischer GmbH"
+    ]
+  },
+  "6118": {
+    "person": [
+      "Dr. Christoph Keller",
+      "Marco Jenni"
+    ],
+    "age": null,
+    "location": "Baar",
+    "occupation": "VR-Präsident",
+    "education": "Doktorat",
+    "nationality": null,
+    "organization": [
+      "Tech Invest Holding AG"
+    ]
+  },
+  "6119": {
+    "person": [
+      "Stefan Müller"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "Geschäftsführer",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "IT-Services Müller GmbH"
+    ]
+  },
+  "6124": {
+    "person": [
+      "Anna Keller",
+      "Peter Graf"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "CEO",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Swiss IT Solutions GmbH"
+    ]
+  },
+  "6128": {
+    "person": [
+      "Reto Schmid"
+    ],
+    "age": null,
+    "location": "Chur",
+    "occupation": "CFO",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "AlpenEnergie AG"
+    ]
+  },
+  "6130": {
+    "person": [
+      "Markus Fischer"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "Leiter Treasury",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Global Trade GmbH"
+    ]
+  },
+  "6136": {
+    "person": [
+      "Dr. Claudia Fontana"
+    ],
+    "age": null,
+    "location": "Genf",
+    "occupation": "Verwaltungsrätin",
+    "education": "Doktorat",
+    "nationality": null,
+    "organization": [
+      "Immoinvest Holding AG"
+    ]
+  },
+  "6138": {
+    "person": null,
+    "age": null,
+    "location": null,
+    "occupation": null,
+    "education": null,
+    "nationality": null,
+    "organization": null
+  },
+  "6139": {
+    "person": [
+      "Markus Keller"
+    ],
+    "age": null,
+    "location": "Genf",
+    "occupation": "Leiter Treasury",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Global Trade GmbH"
+    ]
+  },
+  "6140": {
+    "person": [
+      "Laura Bianchi"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "CEO",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Innovatech Solutions AG"
+    ]
+  },
+  "6144": {
+    "person": null,
+    "age": null,
+    "location": null,
+    "occupation": null,
+    "education": null,
+    "nationality": null,
+    "organization": null
+  },
+  "6146": {
+    "person": [
+      "Urs Ziegler"
+    ],
+    "age": null,
+    "location": "Zug",
+    "occupation": "CEO",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Codex Software GmbH"
+    ]
+  },
+  "6147": {
+    "person": [
+      "Urs Baumann"
+    ],
+    "age": null,
+    "location": "Grenchen",
+    "occupation": "CFO",
+    "education": "ETH-Ingenieur",
+    "nationality": null,
+    "organization": [
+      "Präzisionsmechanik AG",
+      "ETH"
+    ]
+  },
+  "6153": {
+    "person": [
+      "Beat Pfister"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "Geschäftsführer",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Immo-Portfolio West AG"
+    ]
+  },
+  "6156": {
+    "person": [
+      "Dr. Eliane Girard",
+      "Philippe Girard"
+    ],
+    "age": 38,
+    "location": "Genf",
+    "occupation": "Geschäftsführung",
+    "education": "HSG-Abschluss",
+    "nationality": null,
+    "organization": [
+      "Pharma Invest SA"
+    ]
+  },
+  "6157": {
+    "person": [
+      "Hanspeter Gfeller"
+    ],
+    "age": null,
+    "location": "Basel",
+    "occupation": "Leiter Treasury",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Global Trade GmbH"
+    ]
+  },
+  "6164": {
+    "person": [
+      "Dr. Elena Rossi",
+      "Marco Bianchi"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "Geschäftsführerin",
+    "education": "Doktorat",
+    "nationality": null,
+    "organization": [
+      "MedPharma Solutions GmbH"
+    ]
+  },
+  "6166": {
+    "person": [
+      "Konrad Ammann"
+    ],
+    "age": null,
+    "location": "Zürich",
+    "occupation": "Verwaltungsratspräsident",
+    "education": null,
+    "nationality": "Deutschland",
+    "organization": [
+      "Immo Invest Holding AG",
+      "Berlin Mode GmbH"
+    ]
+  },
+  "6188": {
+    "person": null,
+    "age": null,
+    "location": null,
+    "occupation": null,
+    "education": null,
+    "nationality": null,
+    "organization": null
+  },
+  "6191": {
+    "person": [
+      "Luca Moretti"
+    ],
+    "age": null,
+    "location": "Zürich",
+    "occupation": "CFO",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "ImmoStar Holding AG"
+    ]
+  },
+  "6193": {
+    "person": [
+      "Klaus Schmidt"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "Liquidator",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Digital Solutions GmbH",
+      "Zürcher Kantonalbank"
+    ]
+  },
+  "6195": {
+    "person": [
+      "Dr. Elena Rossi"
+    ],
+    "age": null,
+    "location": "Lugano",
+    "occupation": "CEO",
+    "education": "Doktorat",
+    "nationality": null,
+    "organization": [
+      "MedTech Devices SA"
+    ]
+  },
+  "6201": {
+    "person": [
+      "Dr. Isabelle Rochat",
+      "Herr Antoine Dubois"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "Managing Director",
+    "education": null,
+    "nationality": "französisch",
+    "organization": [
+      "Pharma Spin-Off AG",
+      "Novartis"
+    ]
+  },
+  "6202": {
+    "person": [
+      "Dr. Urs Tanner",
+      "Herr Tanner"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "Stiftungsratspräsident",
+    "education": "Doktorat",
+    "nationality": null,
+    "organization": [
+      "Helvetia Futura Stiftung"
+    ]
+  },
+  "6205": {
+    "person": [
+      "Urs Baumann",
+      "Peter Keller"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "CEO",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Helvetia Maschinenbau AG"
+    ]
+  },
+  "6211": {
+    "person": [
+      "Luigi Moretti"
+    ],
+    "age": 58,
+    "location": null,
+    "occupation": null,
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Ticino Costruzioni SA"
+    ]
+  },
+  "6214": {
+    "person": [
+      "Markus Keller"
+    ],
+    "age": null,
+    "location": "Biel",
+    "occupation": "CFO",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Schweizer Präzisionstechnik AG"
+    ]
+  },
+  "6215": {
+    "person": [
+      "Hans Huber",
+      "Anna Huber"
+    ],
+    "age": null,
+    "location": "Luzern",
+    "occupation": "Inhaber",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Huber GmbH",
+      "HSG"
+    ]
+  },
+  "6217": {
+    "person": [
+      "Sophie Baumann"
+    ],
+    "age": null,
+    "location": "Deutschland",
+    "occupation": "Buchhalterin",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "CleanTech Solutions AG"
+    ]
+  },
+  "6218": {
+    "person": [
+      "Giovanni Rossi"
+    ],
+    "age": null,
+    "location": "Lugano",
+    "occupation": "CFO",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Ticino Moda SA"
+    ]
+  },
+  "6219": {
+    "person": [
+      "Dr. Ulrich Schmid",
+      "Herr Schmid"
+    ],
+    "age": null,
+    "location": "Bern",
+    "occupation": "Verwaltungsratspräsident",
+    "education": "Doktorat",
+    "nationality": null,
+    "organization": [
+      "Alpin Invest Holding AG"
+    ]
+  },
+  "6223": {
+    "person": [
+      "Klaus Tanner",
+      "Markus Steiner",
+      "Frau Meier"
+    ],
+    "age": null,
+    "location": "Zürich",
+    "occupation": "CFO",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Helvetia Maschinenbau AG"
+    ]
+  },
+  "6225": {
+    "person": [
+      "Luigi Bernasconi",
+      "Marco Galli"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "Aussendienstmitarbeiter",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Ticino Logistic SA"
+    ]
+  },
+  "6226": {
+    "person": [
+      "Urs Baumann"
+    ],
+    "age": null,
+    "location": "Uster",
+    "occupation": null,
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Baumann Bau AG"
+    ]
+  },
+  "6227": {
+    "person": [
+      "Reto Ziegler",
+      "Carla Rossi"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "CFO",
+    "education": null,
+    "nationality": "Italien",
+    "organization": [
+      "Swiss Food Trading AG"
+    ]
+  },
+  "6230": {
+    "person": [
+      "Dr. Andreas Gasser",
+      "Sonja Frischknecht"
+    ],
+    "age": null,
+    "location": "Chur",
+    "occupation": "CEO",
+    "education": "Doktorat",
+    "nationality": null,
+    "organization": [
+      "Alpintech AG"
+    ]
+  },
+  "6237": {
+    "person": [
+      "Claudia Wyss"
+    ],
+    "age": null,
+    "location": "Zürich-Altstetten",
+    "occupation": "Buchhalterin",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Transport AG"
+    ]
+  },
+  "6238": {
+    "person": null,
+    "age": null,
+    "location": null,
+    "occupation": null,
+    "education": null,
+    "nationality": null,
+    "organization": null
+  },
+  "6242": {
+    "person": [
+      "Hans Baumann",
+      "Michael Baumann"
+    ],
+    "age": 65,
+    "location": null,
+    "occupation": "Gründer und Inhaber",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Baumann Transport GmbH"
+    ]
+  },
+  "6245": {
+    "person": [
+      "Christian Wyss"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "CEO",
+    "education": "Ingenieur",
+    "nationality": null,
+    "organization": [
+      "Energie Werke Luzern AG",
+      "ETH"
+    ]
+  },
+  "6246": {
+    "person": [
+      "David Lee"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "CFO",
+    "education": null,
+    "nationality": "britischer",
+    "organization": [
+      "Global Trading Company AG",
+      "Universität St. Gallen (HSG)"
+    ]
+  },
+  "6253": {
+    "person": [
+      "Sven Meier"
+    ],
+    "age": null,
+    "location": "Zug",
+    "occupation": null,
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Import Export Trading Ltd.",
+      "Bank of China"
+    ]
+  },
+  "6257": {
+    "person": [
+      "Urs Baumann",
+      "Anna Keller"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "CFO",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Helvetia Maschinenbau AG"
+    ]
+  },
+  "6259": {
+    "person": [
+      "Claudia Fankhauser"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": null,
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Logistik Solutions AG"
+    ]
+  },
+  "6263": {
+    "person": [
+      "Luigi Rossi"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "CFO",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Creative Design GmbH"
+    ]
+  },
+  "6265": {
+    "person": [
+      "Stefan Gasser"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": null,
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Gasser Transport AG"
+    ]
+  },
+  "6280": {
+    "person": [
+      "Claudia Weber"
+    ],
+    "age": null,
+    "location": "Zürich",
+    "occupation": "Controller",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Immoinvest Zürich AG"
+    ]
+  },
+  "6292": {
+    "person": [
+      "Stefan Egger",
+      "Sabine Hofer"
+    ],
+    "age": null,
+    "location": "Zug",
+    "occupation": "CFO",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "IT Consulting GmbH"
+    ]
+  },
+  "6300": {
+    "person": [
+      "Hans-Peter Moser",
+      "Dr. Fischer"
+    ],
+    "age": 58,
+    "location": "Bern",
+    "occupation": "Alleininhaber",
+    "education": null,
+    "nationality": "Schweizer",
+    "organization": [
+      "Moser Transport GmbH"
+    ]
+  },
+  "6304": {
+    "person": [
+      "Giovanni Rossi",
+      "Anna Schmid"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": null,
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "SwissTextil AG",
+      "Milano Meccanica S.p.A.",
+      "TEF-Abteilung"
+    ]
+  },
+  "6305": {
+    "person": [
+      "Peter Fischer"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "Verwaltungsrat",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Immo Generalbau AG"
+    ]
+  },
+  "6314": {
+    "person": [
+      "Claudia Wyss"
+    ],
+    "age": null,
+    "location": "Luzern",
+    "occupation": "Leiterin Finanzen",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "ImmoVision AG"
+    ]
+  },
+  "6317": {
+    "person": [
+      "Dr. Christoph Vogel"
+    ],
+    "age": null,
+    "location": "St. Moritz",
+    "occupation": "VR-Präsident",
+    "education": "Doktorat",
+    "nationality": null,
+    "organization": [
+      "Alpine Resorts Holding AG"
+    ]
+  },
+  "6319": {
+    "person": [
+      "Reto Bachmann"
+    ],
+    "age": null,
+    "location": "Aargau",
+    "occupation": "CFO",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Metallbau Fischer AG"
+    ]
+  },
+  "6323": {
+    "person": [
+      "Sven Berger"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": null,
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Import Export Welt AG",
+      "Lisboa Trading Lda."
+    ]
+  },
+  "6340": {
+    "person": [
+      "Isabelle Dubois",
+      "Frank Leblanc"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "COO",
+    "education": null,
+    "nationality": "Frankreich",
+    "organization": [
+      "Mode Suisse SA"
+    ]
+  },
+  "6342": {
+    "person": [
+      "Susanne Wenger"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "Leiterin Treasury",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Tech Innovate AG"
+    ]
+  },
+  "6349": {
+    "person": [
+      "Robert Meier",
+      "Thomas Meier"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "Inhaber",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Meier Baugruppe GmbH"
+    ]
+  },
+  "6350": {
+    "person": [
+      "Isabelle Dubois"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "Prokuristin",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Pharma Logistics SA"
+    ]
+  },
+  "6351": {
+    "person": [
+      "Stefan Huber"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": null,
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Alpin Invest AG"
+    ]
+  },
+  "6352": {
+    "person": [
+      "Markus Tanner"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "Projektleiter",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Global Chemical Corp.",
+      "Specialty Polymers",
+      "Zürcher Kantonalbank"
+    ]
+  },
+  "6354": {
+    "person": [
+      "Peter Kaufmann"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": null,
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Kaufmann Transport GmbH"
+    ]
+  },
+  "6363": {
+    "person": [
+      "Dr. Eliane Dubois",
+      "Sophie Richard"
+    ],
+    "age": null,
+    "location": "Genf",
+    "occupation": "Geschäftsführerin",
+    "education": "Doktorat",
+    "nationality": null,
+    "organization": [
+      "Pharma Consulting SA"
+    ]
+  },
+  "6371": {
+    "person": [
+      "Markus Sutter",
+      "Thomas Sutter"
+    ],
+    "age": null,
+    "location": "Appenzell",
+    "occupation": "Geschäftsführer",
+    "education": "FH",
+    "nationality": null,
+    "organization": [
+      "Holzbau Sutter GmbH"
+    ]
+  },
+  "6377": {
+    "person": [
+      "Urs Baumann",
+      "Klaus Tanner"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": null,
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Helvetia Präzisionstechnik AG"
+    ]
+  },
+  "6378": {
+    "person": [
+      "Isabelle Dubois",
+      "John Baker"
+    ],
+    "age": null,
+    "location": "Genf",
+    "occupation": "Head of Treasury",
+    "education": null,
+    "nationality": "amerikanisch",
+    "organization": [
+      "Geneva Pharma SA"
+    ]
+  },
+  "6384": {
+    "person": [
+      "Thomas Frei"
+    ],
+    "age": null,
+    "location": "Winterthur",
+    "occupation": "Leiter Finanzen",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Baumann Logistik AG"
+    ]
+  },
+  "6390": {
+    "person": [
+      "Martin Frei"
+    ],
+    "age": null,
+    "location": "Dietikon",
+    "occupation": "COO",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Logistik Express AG"
+    ]
+  },
+  "6391": {
+    "person": [
+      "Sandra Egger",
+      "Markus Roth"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "Partner",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Consulting Partner AG"
+    ]
+  },
+  "6397": {
+    "person": [
+      "Dr. Christoph Berger"
+    ],
+    "age": null,
+    "location": "Thun",
+    "occupation": "Inhaber",
+    "education": "Doktorat",
+    "nationality": null,
+    "organization": [
+      "Berger Tech AG"
+    ]
+  },
+  "6398": {
+    "person": [
+      "Simone Frei"
+    ],
+    "age": null,
+    "location": "Lugano",
+    "occupation": null,
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Immoinvest Holding AG"
+    ]
+  },
+  "6402": {
+    "person": [
+      "Tanja Baumann",
+      "Frank Vogel"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "Verkaufsleiter",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Pharma Distribution AG"
+    ]
+  },
+  "6403": {
+    "person": [
+      "Markus Steiner"
+    ],
+    "age": null,
+    "location": "Stuttgart",
+    "occupation": "CFO",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Präzisionsmechanik AG",
+      "Feinmechanik GmbH"
+    ]
+  },
+  "6405": {
+    "person": [
+      "Sandra Keller",
+      "Jan Kowalski",
+      "Dr. Frank Lehmann"
+    ],
+    "age": null,
+    "location": "San Francisco",
+    "occupation": "Softwareentwickler",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Innovatech Solutions GmbH"
+    ]
+  },
+  "6407": {
+    "person": [
+      "Thomas Frei"
+    ],
+    "age": null,
+    "location": "Dietikon",
+    "occupation": "CEO",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Logistik Express AG"
+    ]
+  },
+  "6410": {
+    "person": null,
+    "age": null,
+    "location": null,
+    "occupation": null,
+    "education": null,
+    "nationality": null,
+    "organization": null
+  },
+  "6412": {
+    "person": [
+      "Claudia Moretti"
+    ],
+    "age": null,
+    "location": "Lugano",
+    "occupation": "Geschäftsführerin",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Immo-Portfolio Ticino SA"
+    ]
+  },
+  "6419": {
+    "person": [
+      "Lena Baumann",
+      "Markus Egger"
+    ],
+    "age": null,
+    "location": "Schaffhausen",
+    "occupation": "CFO",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Präzisionsmechanik AG"
+    ]
+  },
+  "6421": {
+    "person": [
+      "Peter Keller",
+      "Herr Schmidt"
+    ],
+    "age": null,
+    "location": "Dietikon",
+    "occupation": "Inhaber",
+    "education": null,
+    "nationality": "deutsch",
+    "organization": [
+      "Keller Bauservice AG"
+    ]
+  },
+  "6431": {
+    "person": [
+      "Claudia Weber",
+      "Reto Arnold"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "Buchhalterin",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "IT-Consulting Frischknecht GmbH"
+    ]
+  },
+  "6432": {
+    "person": [
+      "Dr. Pascal Fournier"
+    ],
+    "age": null,
+    "location": "Lausanne",
+    "occupation": "VR-Präsident",
+    "education": "Doktorat",
+    "nationality": null,
+    "organization": [
+      "Innovation Holding SA",
+      "FutureTech Labs AG"
+    ]
+  },
+  "6433": {
+    "person": [
+      "Robert Huber"
+    ],
+    "age": null,
+    "location": "Zürich",
+    "occupation": "CEO",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Bau AG Zürich"
+    ]
+  },
+  "6434": {
+    "person": [
+      "Isabelle Rochat"
+    ],
+    "age": null,
+    "location": "Genf",
+    "occupation": "CFO",
+    "education": null,
+    "nationality": "französisch",
+    "organization": [
+      "Modehaus Genf SA"
+    ]
+  },
+  "6437": {
+    "person": [
+      "Hans-Peter Moser"
+    ],
+    "age": null,
+    "location": "Zürich",
+    "occupation": "Inhaber",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Moser Transport & Logistik AG"
+    ]
+  },
+  "6438": {
+    "person": [
+      "Jean-Luc Martin",
+      "Didier Rey"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": null,
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Swiss Food Solutions SA"
+    ]
+  },
+  "6441": {
+    "person": [
+      "Dr. Klaus Berger",
+      "Anna Meier"
+    ],
+    "age": 45,
+    "location": null,
+    "occupation": "CEO",
+    "education": "HSG-Absolventin",
+    "nationality": null,
+    "organization": [
+      "Alpin Chemie Holding AG"
+    ]
+  },
+  "6442": {
+    "person": [
+      "Peter Graf"
+    ],
+    "age": null,
+    "location": "Bern",
+    "occupation": "Geschäftsführer",
+    "education": null,
+    "nationality": "amerikanisch",
+    "organization": [
+      "Digital Solutions AG"
+    ]
+  },
+  "6446": {
+    "person": [
+      "Leo Fischer"
+    ],
+    "age": null,
+    "location": "Luzern",
+    "occupation": "Geschäftsführer",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Immo Visionär AG"
+    ]
+  },
+  "6452": {
+    "person": [
+      "Beat Gasser",
+      "Peter Frei"
+    ],
+    "age": null,
+    "location": "Zürich",
+    "occupation": "Inhaber",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Gasser Bau AG",
+      "Immobilien AG Zürich"
+    ]
+  },
+  "6454": {
+    "person": [
+      "Markus Gasser"
+    ],
+    "age": null,
+    "location": "Luzern",
+    "occupation": "Geschäftsführer",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Holzbau Gasser AG"
+    ]
+  },
+  "6456": {
+    "person": null,
+    "age": null,
+    "location": null,
+    "occupation": null,
+    "education": null,
+    "nationality": null,
+    "organization": null
+  },
+  "6457": {
+    "person": [
+      "Max Brunner senior",
+      "Thomas Brunner"
+    ],
+    "age": 65,
+    "location": null,
+    "occupation": "Fleischsommelier",
+    "education": "dipl.",
+    "nationality": null,
+    "organization": [
+      "Metzgerei Brunner & Sohn AG"
+    ]
+  },
+  "6462": {
+    "person": [
+      "Sabine Keller"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "CFO",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Helvetia Maschinenbau GmbH"
+    ]
+  },
+  "6479": {
+    "person": [
+      "Anna Wyss",
+      "Luca Moretti",
+      "Peter Gasser"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "Buchhalterin",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Creative Design GmbH"
+    ]
+  },
+  "6481": {
+    "person": [
+      "Sylvie Dubois"
+    ],
+    "age": null,
+    "location": "Genf",
+    "occupation": "CEO",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Leman Ventures SA"
+    ]
+  },
+  "6489": {
+    "person": [
+      "Martina Egger",
+      "Daniel Schmid"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "Leiterin Export",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Swiss Food Exports AG"
+    ]
+  },
+  "6494": {
+    "person": [
+      "Isabelle Maurer"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "Head of Treasury",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Global Trade Partners GmbH"
+    ]
+  },
+  "6508": {
+    "person": [
+      "Markus Keller"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "CFO",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Bau AG Zürich"
+    ]
+  },
+  "6509": {
+    "person": [
+      "John Baker"
+    ],
+    "age": null,
+    "location": "London",
+    "occupation": "Verwaltungsrat",
+    "education": null,
+    "nationality": "britischer",
+    "organization": [
+      "Helvetica Invest AG",
+      "Compliance-Abteilung"
+    ]
+  },
+  "6510": {
+    "person": [
+      "Sophie Renaud"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "Finanzchefin",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Renaud Vins SA"
+    ]
+  },
+  "6511": {
+    "person": [
+      "Markus Steiner",
+      "Dr. Urs Maurer"
+    ],
+    "age": null,
+    "location": "Grenchen",
+    "occupation": null,
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Helvetia Präzisionstechnik AG"
+    ]
+  },
+  "6512": {
+    "person": [
+      "Sabine Keller"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "Leiterin Treasury",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "PharmaChem Logistics SA"
+    ]
+  },
+  "6513": {
+    "person": [
+      "Walter Baumann",
+      "Claudia Baumann"
+    ],
+    "age": 67,
+    "location": "Zug",
+    "occupation": "Gründer",
+    "education": "Architektin",
+    "nationality": null,
+    "organization": [
+      "Baumann Bau AG",
+      "ETH"
+    ]
+  },
+  "6515": {
+    "person": [
+      "Dr. Anna Leuenberger"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": null,
+    "education": "Doktorat",
+    "nationality": null,
+    "organization": [
+      "MedTech Spin-off AG"
+    ]
+  },
+  "6520": {
+    "person": [
+      "Jonas Frey",
+      "Markus Steiner"
+    ],
+    "age": null,
+    "location": "Winterthur",
+    "occupation": "CFO",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Helvetia Mechanik AG"
+    ]
+  },
+  "6521": {
+    "person": [
+      "Isabelle Rochat"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": null,
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Importa Handel GmbH"
+    ]
+  },
+  "6522": {
+    "person": [
+      "Urs Kaufmann"
+    ],
+    "age": 68,
+    "location": "Baar",
+    "occupation": null,
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "ImmoVision AG"
+    ]
+  },
+  "6523": {
+    "person": [
+      "Dr. Anna Weber"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "Leiterin Treasury",
+    "education": "Doktorat",
+    "nationality": null,
+    "organization": [
+      "PharmaChem International SA"
+    ]
+  },
+  "6533": {
+    "person": [
+      "Christoph Merian",
+      "Stefan Keller"
+    ],
+    "age": null,
+    "location": "Basel",
+    "occupation": null,
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Pharma Generica Holding AG"
+    ]
+  },
+  "6534": {
+    "person": [
+      "Urs Meier"
+    ],
+    "age": null,
+    "location": "St. Gallen",
+    "occupation": null,
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Transport & Logistik Meier GmbH",
+      "PostFinance"
+    ]
+  },
+  "6536": {
+    "person": [
+      "Peter Frei"
+    ],
+    "age": 45,
+    "location": "Aarau",
+    "occupation": "Inhaber",
+    "education": null,
+    "nationality": "Schweizer",
+    "organization": [
+      "Frei Haustechnik AG"
+    ]
+  },
+  "6541": {
+    "person": [
+      "Thomas Frei"
+    ],
+    "age": null,
+    "location": "Zürich",
+    "occupation": "Gründer",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Digital Ventures GmbH",
+      "Cybersec AI AG"
+    ]
+  },
+  "6548": {
+    "person": [
+      "Walter Wyss",
+      "Thomas Wyss"
+    ],
+    "age": 64,
+    "location": "Thun",
+    "occupation": "Inhaber",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Holzbau Wyss AG"
+    ]
+  },
+  "6553": {
+    "person": [
+      "Jürg Steiner",
+      "Markus Keller"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "CFO",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Präzisionsmechanik AG"
+    ]
+  },
+  "6558": {
+    "person": [
+      "Stefan Meier"
+    ],
+    "age": null,
+    "location": "Dietikon",
+    "occupation": "CEO",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Logistik Express GmbH"
+    ]
+  },
+  "6566": {
+    "person": [
+      "Dr. Christoph Berger"
+    ],
+    "age": null,
+    "location": "Zug",
+    "occupation": "VR-Präsident",
+    "education": "Doktorat",
+    "nationality": null,
+    "organization": [
+      "ImmoInvest AG"
+    ]
+  },
+  "6574": {
+    "person": [
+      "Martin Frei"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "Inhaber",
+    "education": "HSG-Absolvent",
+    "nationality": "schweizerisch",
+    "organization": [
+      "Frei Logistik GmbH"
+    ]
+  },
+  "6575": {
+    "person": [
+      "Isabelle Maurer"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "CFO",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Modehaus Schneider AG"
+    ]
+  },
+  "6577": {
+    "person": [
+      "François Lambert"
+    ],
+    "age": null,
+    "location": "Genf",
+    "occupation": "Export Manager",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Swiss Machines SA"
+    ]
+  },
+  "6580": {
+    "person": [
+      "Hans Fischer",
+      "Anna Fischer"
+    ],
+    "age": 68,
+    "location": "Luzern",
+    "occupation": "Bauingenieurin",
+    "education": "ETH-Bauingenieurin",
+    "nationality": null,
+    "organization": [
+      "Bau AG Fischer & Sohn"
+    ]
+  },
+  "6581": {
+    "person": [
+      "Urs Meier"
+    ],
+    "age": null,
+    "location": "Dietikon",
+    "occupation": "CFO",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Logistik Transport AG"
+    ]
+  },
+  "6586": {
+    "person": [
+      "Markus Steiner",
+      "Ulrich Frisch"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "CFO",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Helvetia Maschinenbau AG"
+    ]
+  },
+  "6589": {
+    "person": [
+      "Anna Keller",
+      "Peter Graf"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "Buchhalterin",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Immo Invest Zürich AG"
+    ]
+  },
+  "6596": {
+    "person": [
+      "Dr. Elena Fischer",
+      "Dr. Markus Gisin"
+    ],
+    "age": 62,
+    "location": "Basel",
+    "occupation": "CEO",
+    "education": "Doktorat",
+    "nationality": null,
+    "organization": [
+      "PharmaNova AG"
+    ]
+  },
+  "6597": {
+    "person": [
+      "Thomas Wyss"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "Leiter Einkauf",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Tech-Import GmbH",
+      "Seoul Electronics Inc.",
+      "TEF-Abteilung"
+    ]
+  },
+  "6600": {
+    "person": [
+      "Dr. Simon Keller"
+    ],
+    "age": null,
+    "location": "Bern",
+    "occupation": "Gründer und CEO",
+    "education": "ETH-Absolvent",
+    "nationality": null,
+    "organization": [
+      "Swiss Medtech Spin-off GmbH",
+      "Universität Bern",
+      "ETH"
+    ]
+  },
+  "6601": {
+    "person": [
+      "Robert Graf"
+    ],
+    "age": null,
+    "location": "Luzern",
+    "occupation": "Verwaltungsrat",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Immoinvest Partner AG"
+    ]
+  },
+  "6607": {
+    "person": [
+      "Daniel Wyss"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "Export Manager",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Swiss Precision Tools AG"
+    ]
+  },
+  "6613": {
+    "person": [
+      "Sandra Moser"
+    ],
+    "age": null,
+    "location": "Mailand",
+    "occupation": "Leiterin Rechnungswesen",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Alpen-Food AG"
+    ]
+  },
+  "6628": {
+    "person": [
+      "Markus Keller"
+    ],
+    "age": null,
+    "location": "Genf",
+    "occupation": "CEO",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Helvetia Logistik SA"
+    ]
+  },
+  "6632": {
+    "person": [
+      "Dr. Eva Lindt"
+    ],
+    "age": 45,
+    "location": "Basel",
+    "occupation": "CEO",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Pharma Spin-Off AG",
+      "BioVenture Labs AG"
+    ]
+  },
+  "6633": {
+    "person": [
+      "Marco Bianchi"
+    ],
+    "age": null,
+    "location": "Lugano",
+    "occupation": "Controller",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Bau & Partner AG"
+    ]
+  },
+  "6638": {
+    "person": [
+      "Dr. Simon Tanner"
+    ],
+    "age": null,
+    "location": "Zug",
+    "occupation": "Gründer und CTO",
+    "education": "ETH-Physiker",
+    "nationality": null,
+    "organization": [
+      "Innovatech Solutions GmbH"
+    ]
+  },
+  "6639": {
+    "person": [
+      "Walter Brunner",
+      "Marco Bianchi"
+    ],
+    "age": null,
+    "location": "St. Gallen",
+    "occupation": "Leiter Export",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Maschinenbau Ost AG",
+      "Riyadh Manufacturing Ltd."
+    ]
+  },
+  "6645": {
+    "person": [
+      "Patrick Fournier"
+    ],
+    "age": null,
+    "location": "Genf",
+    "occupation": "Geschäftsführer",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Immoinvest Partner SA"
+    ]
+  },
+  "6646": {
+    "person": [
+      "Laura Schmid",
+      "David Chen"
+    ],
+    "age": 35,
+    "location": "Zug",
+    "occupation": "CEO",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "InnovaTech Solutions AG"
+    ]
+  },
+  "6654": {
+    "person": [
+      "Luigi Bernasconi"
+    ],
+    "age": 58,
+    "location": "Luzern",
+    "occupation": "Geschäftsführer",
+    "education": null,
+    "nationality": "italienisch",
+    "organization": [
+      "Gastro Food Solutions GmbH"
+    ]
+  },
+  "6655": {
+    "person": [
+      "Anna Keller",
+      "Hanspeter Zürcher"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "Leiterin Finanzen",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Swiss Precision Parts AG"
+    ]
+  },
+  "6657": {
+    "person": [
+      "Dr. Eva Lindberg",
+      "Frau Lindberg"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "CEO",
+    "education": null,
+    "nationality": "schwedische Staatsbürgerin",
+    "organization": [
+      "BioSynth Labs AG",
+      "Novartis AG"
+    ]
+  },
+  "6666": {
+    "person": [
+      "Thomas Graf"
+    ],
+    "age": null,
+    "location": "Zürich",
+    "occupation": "Immobilienverantwortlicher",
+    "education": null,
+    "nationality": "Deutschland",
+    "organization": [
+      "Retail Invest Holding AG"
+    ]
+  },
+  "6669": {
+    "person": [
+      "Markus Egger"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "CFO",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Egger Maschinenbau AG"
+    ]
+  },
+  "6670": {
+    "person": [
+      "Urs Steiner",
+      "Sabine Koch"
+    ],
+    "age": null,
+    "location": "Schaffhausen",
+    "occupation": "CFO",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Präzisionsmechanik AG"
+    ]
+  },
+  "6672": {
+    "person": [
+      "Markus Weber"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "Leiter Finanzen",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Global Trade GmbH"
+    ]
+  },
+  "6673": {
+    "person": [
+      "Hans Fischer",
+      "Thomas Fischer"
+    ],
+    "age": 62,
+    "location": "Bern",
+    "occupation": "Inhaber",
+    "education": "dipl. Holzbauingenieur",
+    "nationality": null,
+    "organization": [
+      "Holzbau Fischer AG"
+    ]
+  },
+  "6677": {
+    "person": [
+      "Dr. Andreas Baumann"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "Physiker",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Clean Energy AG",
+      "ETH Zürich"
+    ]
+  },
+  "6678": {
+    "person": [
+      "Beat Gerber"
+    ],
+    "age": null,
+    "location": "Thun",
+    "occupation": "Inhaber",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Gerber Transporte GmbH"
+    ]
+  },
+  "6680": {
+    "person": [
+      "Ursula Meier"
+    ],
+    "age": null,
+    "location": "Winterthur",
+    "occupation": "Geschäftsführerin",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Bau & Partner GmbH"
+    ]
+  },
+  "6685": {
+    "person": [
+      "Sonja Baumann"
+    ],
+    "age": null,
+    "location": "St. Gallen",
+    "occupation": "Flottenmanagerin",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Transport Logistik AG",
+      "Leasing Bank AG"
+    ]
+  },
+  "6686": {
+    "person": [
+      "Dr. Eva Fischer"
+    ],
+    "age": null,
+    "location": "Zug",
+    "occupation": "CEO",
+    "education": "Doktorat",
+    "nationality": null,
+    "organization": [
+      "Innovate Robotics GmbH",
+      "Tech Holding AG",
+      "Notariat"
+    ]
+  },
+  "6690": {
+    "person": null,
+    "age": null,
+    "location": null,
+    "occupation": null,
+    "education": null,
+    "nationality": null,
+    "organization": null
+  },
+  "6693": {
+    "person": [
+      "Christoph Mörgeli"
+    ],
+    "age": null,
+    "location": "Zürich",
+    "occupation": "Verwaltungsratspräsident",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Immoinvest AG"
+    ]
+  },
+  "6700": {
+    "person": [
+      "Markus Egger"
+    ],
+    "age": null,
+    "location": "Chur",
+    "occupation": "Leiter Finanzen",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Alpin Bau AG"
+    ]
+  },
+  "6703": {
+    "person": [
+      "Silvan Schmid"
+    ],
+    "age": null,
+    "location": "Zug",
+    "occupation": null,
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Precision Gears AG"
+    ]
+  },
+  "6704": {
+    "person": [
+      "Beat Zürcher"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "CFO",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Transporter Leasing AG"
+    ]
+  },
+  "6707": {
+    "person": [
+      "Peter Baumann",
+      "Thomas Baumann"
+    ],
+    "age": 68,
+    "location": "St. Gallen",
+    "occupation": "Patron",
+    "education": "ETH-Ingenieur",
+    "nationality": null,
+    "organization": [
+      "Baumann & Söhne AG"
+    ]
+  },
+  "6711": {
+    "person": [
+      "Eva Schneider",
+      "Paul Koch"
+    ],
+    "age": null,
+    "location": "Zug",
+    "occupation": "Geschäftsführerin",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Immoinvest AG",
+      "Credit Suisse"
+    ]
+  },
+  "6719": {
+    "person": [
+      "Claudia Gasser",
+      "Luigi Bianchi"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "Inhaberin",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Modehaus Gasser AG"
+    ]
+  },
+  "6721": {
+    "person": [
+      "Dr. Robert Lang"
+    ],
+    "age": null,
+    "location": "Luzern",
+    "occupation": "CEO",
+    "education": "Doktorat",
+    "nationality": null,
+    "organization": [
+      "Immoinvest AG"
+    ]
+  },
+  "6722": {
+    "person": [
+      "Maria Eichenberger",
+      "Sophie Dubois"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "Gründerin",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Bio-Food Produzenten AG"
+    ]
+  },
+  "6723": {
+    "person": [
+      "Jonas Frey"
+    ],
+    "age": null,
+    "location": "Grenchen",
+    "occupation": "CFO",
+    "education": "ETH-Ingenieur",
+    "nationality": null,
+    "organization": [
+      "Präzisionsmechanik AG",
+      "ETH"
+    ]
+  },
+  "6728": {
+    "person": [
+      "Luigi Bernasconi"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "Treuhänder",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Immoinvest Zürich AG",
+      "Zürcher Kantonalbank",
+      "treuhand-partner.ch"
+    ]
+  },
+  "6732": {
+    "person": [
+      "Klaus Steiner",
+      "Anna Bieri"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "Leiterin Operations",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Präzisionsmechanik AG"
+    ]
+  },
+  "6733": {
+    "person": [
+      "Martin Keller",
+      "Jonas Frei"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "Controller",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Global Trade GmbH"
+    ]
+  },
+  "6737": {
+    "person": [
+      "Peter Zuber"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "CFO",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Logistik-Partner AG"
+    ]
+  },
+  "6738": {
+    "person": [
+      "Robert Graf"
+    ],
+    "age": null,
+    "location": "Lugano",
+    "occupation": "Verwaltungsrat",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Tech Spin-off GmbH"
+    ]
+  },
+  "6739": {
+    "person": [
+      "Markus Egger"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "Treasurer",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Retail Holding AG"
+    ]
+  },
+  "6740": {
+    "person": [
+      "Sandra Wyss"
+    ],
+    "age": null,
+    "location": "Zug",
+    "occupation": "Projektleiterin",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Innovate AG"
+    ]
+  },
+  "6747": {
+    "person": [
+      "Herr David Lee"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "Treasurer",
+    "education": null,
+    "nationality": "britischer",
+    "organization": [
+      "Global Commodities Trading SA"
+    ]
+  },
+  "6755": {
+    "person": [
+      "Peter Graf"
+    ],
+    "age": null,
+    "location": "Zentralschweiz",
+    "occupation": "CFO",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "ServicePro AG"
+    ]
+  },
+  "6756": {
+    "person": [
+      "Martin Fischer"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "CEO",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Fischer Mechanik AG",
+      "Fischer Innovations GmbH"
+    ]
+  },
+  "6758": {
+    "person": [
+      "Jonas Frei",
+      "Michael Frei"
+    ],
+    "age": 32,
+    "location": "Luzern",
+    "occupation": "Ingenieur",
+    "education": "ETH-Ingenieur",
+    "nationality": null,
+    "organization": [
+      "Holzbau Gasser AG"
+    ]
+  },
+  "6762": {
+    "person": [
+      "Christian Graf"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "CEO",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Immo Vision AG",
+      "Bauplan Totalunternehmung AG"
+    ]
+  },
+  "6771": {
+    "person": [
+      "Robert Keller"
+    ],
+    "age": null,
+    "location": "Zürich",
+    "occupation": "Eigentümer",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Immo Invest Bern AG"
+    ]
+  },
+  "6776": {
+    "person": [
+      "Urs Meier",
+      "Anna Keller"
+    ],
+    "age": 45,
+    "location": null,
+    "occupation": "CEO",
+    "education": "HSG-Absolventin",
+    "nationality": null,
+    "organization": [
+      "Präzisionsmechanik AG"
+    ]
+  },
+  "6780": {
+    "person": [
+      "Jonas Berger"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "Treasurer",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Rohstoffhandel International SA"
+    ]
+  },
+  "6782": {
+    "person": [
+      "Sabine Huber",
+      "Isabelle Rochat"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "CEO",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Pharma Exports AG"
+    ]
+  },
+  "6783": {
+    "person": [
+      "Paul Schmidt",
+      "David Chen"
+    ],
+    "age": 35,
+    "location": "Zug",
+    "occupation": "Mitgesellschafter",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Digital Marketing Services AG",
+      "Digital Marketing Holding GmbH"
+    ]
+  },
+  "6785": {
+    "person": [
+      "Markus Fischer"
+    ],
+    "age": null,
+    "location": "Basel",
+    "occupation": "CFO",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Helvetia Pharma AG"
+    ]
+  },
+  "6786": {
+    "person": [
+      "Jürg Schneider"
+    ],
+    "age": null,
+    "location": "Bern",
+    "occupation": "Inhaber",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Schneider Transporte GmbH"
+    ]
+  },
+  "6787": {
+    "person": [
+      "Isabelle Rochat"
+    ],
+    "age": 45,
+    "location": null,
+    "occupation": "CEO",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Geneva Fine Watchmakers SA"
+    ]
+  },
+  "6792": {
+    "person": [
+      "Simon Tanner"
+    ],
+    "age": null,
+    "location": "Chile",
+    "occupation": "CEO",
+    "education": "ETH-Ingenieur",
+    "nationality": null,
+    "organization": [
+      "Clean Energy AG"
+    ]
+  },
+  "6798": {
+    "person": [
+      "Dr. Lena Weber"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "Gründerin",
+    "education": "Doktorat",
+    "nationality": null,
+    "organization": [
+      "Digital Ventures Spin-off GmbH",
+      "Innovate AG"
+    ]
+  },
+  "6802": {
+    "person": [
+      "Jürg Steiner",
+      "Dr. Anna Leuenberger"
+    ],
+    "age": null,
+    "location": "Thun",
+    "occupation": "CFO",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Präzisionsmechanik AG"
+    ]
+  },
+  "6817": {
+    "person": [
+      "Martin Fischer",
+      "Carla Rossi"
+    ],
+    "age": null,
+    "location": "Schweiz",
+    "occupation": "Treasury-Manager",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Retail Shops Switzerland AG"
+    ]
+  },
+  "6820": {
+    "person": [
+      "Jonas Frey",
+      "Urs Baumann",
+      "Eva Meier"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "Leiter Finanzen",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Helvetia Maschinenbau AG"
+    ]
+  },
+  "6833": {
+    "person": null,
+    "age": null,
+    "location": null,
+    "occupation": null,
+    "education": null,
+    "nationality": null,
+    "organization": null
+  },
+  "6834": {
+    "person": [
+      "Sofia Moretti"
+    ],
+    "age": null,
+    "location": "Lugano",
+    "occupation": "Geschäftsführerin",
+    "education": null,
+    "nationality": "italienische",
+    "organization": [
+      "Moda Italiana SA"
+    ]
+  },
+  "6838": {
+    "person": [
+      "Carla Bianchi"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "Leiterin Treasury",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Global Exports SA"
+    ]
+  },
+  "6839": {
+    "person": [
+      "Peter Fischer",
+      "Anna Keller"
+    ],
+    "age": null,
+    "location": "Luzern",
+    "occupation": "Geschäftsführer",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Immo-Invest GmbH"
+    ]
+  },
+  "6841": {
+    "person": [
+      "Dr. Eva Schmidt"
+    ],
+    "age": null,
+    "location": "Biel",
+    "occupation": "COO",
+    "education": "Doktorat",
+    "nationality": "Deutschland",
+    "organization": [
+      "Precision Mechanics AG"
+    ]
+  },
+  "6844": {
+    "person": [
+      "Stefan Frei"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "Leiter Export",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Maschinenbau Keller AG"
+    ]
+  },
+  "6850": {
+    "person": null,
+    "age": null,
+    "location": null,
+    "occupation": null,
+    "education": null,
+    "nationality": null,
+    "organization": null
+  },
+  "6852": {
+    "person": [
+      "Urs Zimmermann"
+    ],
+    "age": null,
+    "location": "Dietikon",
+    "occupation": "Geschäftsführer",
+    "education": null,
+    "nationality": "Deutschland",
+    "organization": [
+      "Zürich Logistik AG"
+    ]
+  },
+  "6855": {
+    "person": [
+      "Dr. Alain Rochat"
+    ],
+    "age": null,
+    "location": "Lausanne",
+    "occupation": "VR-Präsident",
+    "education": "Doktorat",
+    "nationality": null,
+    "organization": [
+      "Swiss Medical Devices SA",
+      "Diagnostica Spin-Off AG"
+    ]
+  },
+  "6858": {
+    "person": [
+      "Dr. Anna Berger",
+      "Marc Dubois"
+    ],
+    "age": null,
+    "location": "Genf",
+    "occupation": "CEO",
+    "education": "Doktorat",
+    "nationality": null,
+    "organization": [
+      "Consulting Partner AG"
+    ]
+  },
+  "6862": {
+    "person": [
+      "Marco Bianchi"
+    ],
+    "age": null,
+    "location": "Dietikon",
+    "occupation": "COO",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Logistik Welt AG"
+    ]
+  },
+  "6871": {
+    "person": [
+      "Alex Weber",
+      "David Chen"
+    ],
+    "age": 45,
+    "location": "Zug",
+    "occupation": "Gründer und CEO",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Digital Marketing Experts GmbH"
+    ]
+  },
+  "6873": {
+    "person": [
+      "Dr. Claudia Fässler"
+    ],
+    "age": null,
+    "location": "Zürich",
+    "occupation": null,
+    "education": "Doktorat",
+    "nationality": null,
+    "organization": [
+      "Immo-Invest Partner AG"
+    ]
+  },
+  "6874": {
+    "person": [
+      "François Lambert"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "Head of Treasury",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Global Trade Solutions SA",
+      "TEF-Abteilung"
+    ]
+  },
+  "6876": {
+    "person": [
+      "Anna Wyss",
+      "Reto Schmid"
+    ],
+    "age": null,
+    "location": "Genf",
+    "occupation": "Senior Consultant",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Helvetia Consulting GmbH"
+    ]
+  },
+  "6881": {
+    "person": [
+      "Jonas Steiner"
+    ],
+    "age": null,
+    "location": "Winterthur",
+    "occupation": "Leiter Finanzen",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Helvetia Maschinenbau AG"
+    ]
+  },
+  "6883": {
+    "person": [
+      "Klaus Fischer",
+      "Thomas Fischer"
+    ],
+    "age": 64,
+    "location": "Grenchen",
+    "occupation": "Geschäftsführer und Inhaber",
+    "education": "ETH-Ingenieur",
+    "nationality": null,
+    "organization": [
+      "Präzisionsmechanik Fischer GmbH",
+      "Fischer Deutschland GmbH"
+    ]
+  },
+  "6885": {
+    "person": [
+      "Urs Baumann",
+      "Patrick Frei"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "CFO",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "AlpenEnergie Holding AG",
+      "Alpen Trading AG"
+    ]
+  },
+  "6888": {
+    "person": [
+      "Isabelle Rochat",
+      "Pierre Dubois"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": null,
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Digital Minds SA"
+    ]
+  },
+  "6892": {
+    "person": [
+      "Hanspeter Moser",
+      "Thomas Moser"
+    ],
+    "age": 68,
+    "location": "Thun",
+    "occupation": "Gründer",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Moser Bau AG",
+      "ETH"
+    ]
+  },
+  "6894": {
+    "person": [
+      "Peter Keller",
+      "Sandra Egger"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "Office Manager",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Consulting Group GmbH"
+    ]
+  },
+  "6897": {
+    "person": [
+      "Dr. Urs Baumann"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": null,
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Meier & Partner Consulting AG",
+      "Handelsregister"
+    ]
+  },
+  "6899": {
+    "person": [
+      "Isabelle Dubois"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "Head of Treasury",
+    "education": null,
+    "nationality": "französische Staatsbürgerin",
+    "organization": [
+      "Global Trade Solutions GmbH"
+    ]
+  },
+  "6908": {
+    "person": [
+      "Markus Keller",
+      "Sabine Hofer"
+    ],
+    "age": null,
+    "location": "Zürich",
+    "occupation": "CFO",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Helvetia Maschinenbau AG"
+    ]
+  },
+  "6910": {
+    "person": [
+      "Sandra Vogel",
+      "Reto Bachmann"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": null,
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Innovatec Solutions AG"
+    ]
+  },
+  "6916": {
+    "person": [
+      "Urs Baumann",
+      "Simon Weber"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "Treasury-Mitarbeiter",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "HelvetiCode AG"
+    ]
+  },
+  "6919": {
+    "person": [
+      "Sandra Frei"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "Leiterin Finanzen",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "ServicePro AG"
+    ]
+  },
+  "6922": {
+    "person": [
+      "Walter Hess"
+    ],
+    "age": 68,
+    "location": null,
+    "occupation": "Inhaber",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Hess Druckerei AG",
+      "MediaPrint Group AG"
+    ]
+  },
+  "6927": {
+    "person": [
+      "Walter Wyss",
+      "Claudia Wyss"
+    ],
+    "age": null,
+    "location": "Lausanne",
+    "occupation": "CEO",
+    "education": "HSG-Absolventin",
+    "nationality": null,
+    "organization": [
+      "Wyss Transport & Logistik AG"
+    ]
+  },
+  "6935": {
+    "person": [
+      "Beat Gerber",
+      "Dr. Fuchs"
+    ],
+    "age": null,
+    "location": "Genf",
+    "occupation": "CEO",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "LogiSwiss GmbH"
+    ]
+  },
+  "6941": {
+    "person": [
+      "Reto Flury"
+    ],
+    "age": null,
+    "location": "Graubünden",
+    "occupation": "Produktionsleiter",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Alpinholz AG"
+    ]
+  },
+  "6943": {
+    "person": [
+      "Urs Meier",
+      "Peter Keller"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "Leiter Finanzen",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Präzisionsmechanik AG"
+    ]
+  },
+  "6946": {
+    "person": [
+      "Reto Schmid",
+      "Eva Brunner"
+    ],
+    "age": null,
+    "location": "Bern",
+    "occupation": "Projektleiter",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "BauTech AG"
+    ]
+  },
+  "6948": {
+    "person": [
+      "Jean-Pierre Dubois"
+    ],
+    "age": null,
+    "location": "Lyon",
+    "occupation": "CFO",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Alpine Watches SA"
+    ]
+  },
+  "6960": {
+    "person": [
+      "Urs Steiner"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "Leiter Finanzen",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Präzisionsmechanik AG"
+    ]
+  },
+  "6962": {
+    "person": [
+      "Hans Fischer",
+      "Thomas Fischer",
+      "Dr. Emil Frey"
+    ],
+    "age": 68,
+    "location": null,
+    "occupation": null,
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Bautechnik Fischer & Sohn AG"
+    ]
+  },
+  "6964": {
+    "person": [
+      "Peter Keller",
+      "Marco Bianchi"
+    ],
+    "age": null,
+    "location": "Dietikon",
+    "occupation": "CFO",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Logistik-Express AG"
+    ]
+  },
+  "6973": {
+    "person": [
+      "Sabine Graf"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": null,
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Meier & Partner Consulting AG"
+    ]
+  },
+  "6975": {
+    "person": [
+      "Patrick Fournier"
+    ],
+    "age": null,
+    "location": "Genf",
+    "occupation": null,
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "ImmoDev SA"
+    ]
+  },
+  "6981": {
+    "person": [
+      "Dr. Urs Fischer",
+      "Carla Bianchi"
+    ],
+    "age": null,
+    "location": "Winterthur",
+    "occupation": "CEO",
+    "education": "Doktorat",
+    "nationality": null,
+    "organization": [
+      "Mechatec AG"
+    ]
+  },
+  "6983": {
+    "person": [
+      "Isabelle Rochat",
+      "Marc Dubois"
+    ],
+    "age": null,
+    "location": "Genf",
+    "occupation": "Leiterin Finanzen",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Swiss Fashion Group AG"
+    ]
+  },
+  "6986": {
+    "person": null,
+    "age": null,
+    "location": null,
+    "occupation": null,
+    "education": null,
+    "nationality": null,
+    "organization": null
+  },
+  "6987": {
+    "person": [
+      "Sabine Keller",
+      "Peter Haas"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "CFO",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Präzisionsmechanik GmbH"
+    ]
+  },
+  "6989": {
+    "person": [
+      "Claudia Berger",
+      "Marc Dubois"
+    ],
+    "age": null,
+    "location": "Genf",
+    "occupation": null,
+    "education": null,
+    "nationality": "französischer",
+    "organization": [
+      "Immo-Invest Partner AG"
+    ]
+  },
+  "6996": {
+    "person": [
+      "Sabine Keller",
+      "Peter Fuchs"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "Sales Director",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Global Food Trading GmbH"
+    ]
+  },
+  "6997": {
+    "person": [
+      "Markus Fischer",
+      "Thomas Fischer"
+    ],
+    "age": null,
+    "location": "Thun",
+    "occupation": "Inhaber",
+    "education": "ETH-Ingenieur",
+    "nationality": null,
+    "organization": [
+      "Holzbau Fischer & Sohn AG"
+    ]
+  },
+  "7003": {
+    "person": [
+      "Hanspeter Müller"
+    ],
+    "age": 65,
+    "location": null,
+    "occupation": "Inhaber",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Print Solutions Müller & Co."
+    ]
+  },
+  "7005": {
+    "person": [
+      "Sandra Keller"
+    ],
+    "age": null,
+    "location": "Zug",
+    "occupation": "Geschäftsführerin",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Gourmet Food Import GmbH"
+    ]
+  },
+  "7009": {
+    "person": [
+      "Christian Ammann",
+      "Susanne Wenger"
+    ],
+    "age": null,
+    "location": "Interlaken",
+    "occupation": "Produktionsleiter",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Alpin Sportswear AG"
+    ]
+  },
+  "7010": {
+    "person": [
+      "Reto Frischknecht"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "Geschäftsführer",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "MedCore Diagnostics AG",
+      "CoreIT Systems GmbH"
+    ]
+  },
+  "7011": {
+    "person": [
+      "Martin Hess"
+    ],
+    "age": null,
+    "location": "Westschweiz",
+    "occupation": "CFO",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Swiss Retail Group AG"
+    ]
+  },
+  "7015": {
+    "person": [
+      "Sabine Graf",
+      "Lukas Baumgartner"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "CFO",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Novatec GmbH"
+    ]
+  },
+  "7019": {
+    "person": [
+      "Hanspeter Guggisberg",
+      "Carlos Ramirez"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "Leiter Export",
+    "education": null,
+    "nationality": "spanischer Staatsbürger",
+    "organization": [
+      "Maschinenbau Guggisberg AG"
+    ]
+  },
+  "7020": {
+    "person": [
+      "Claudia Wyss",
+      "Jörg Schneider"
+    ],
+    "age": null,
+    "location": "Dubai",
+    "occupation": "Partnerin",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Architekturbüro Form & Raum AG"
+    ]
+  },
+  "7024": {
+    "person": [
+      "Hans Müller",
+      "Thomas Müller"
+    ],
+    "age": 65,
+    "location": null,
+    "occupation": null,
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Müller Bäckerei AG",
+      "ETH"
+    ]
+  },
+  "7028": {
+    "person": [
+      "Isabelle Rochat",
+      "Daniel Weber"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": null,
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Helvetia Holding AG",
+      "Helvetia DE GmbH"
+    ]
+  },
+  "7030": {
+    "person": [
+      "Reto Ziegler"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "CEO",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "CySecure AG",
+      "Digital Solutions Holding AG"
+    ]
+  },
+  "7033": {
+    "person": [
+      "Walter Brunner",
+      "Anna Brunner"
+    ],
+    "age": 68,
+    "location": null,
+    "occupation": null,
+    "education": "HSG-Absolventin",
+    "nationality": null,
+    "organization": [
+      "Brunner Spielwaren AG"
+    ]
+  },
+  "7043": {
+    "person": [
+      "Peter Knecht"
+    ],
+    "age": null,
+    "location": "München",
+    "occupation": null,
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Knecht Transport AG"
+    ]
+  },
+  "7044": {
+    "person": [
+      "Marco Rossi"
+    ],
+    "age": null,
+    "location": "Mumbai",
+    "occupation": "Inhaber",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Textilimport Rossi & Co."
+    ]
+  },
+  "7047": {
+    "person": [
+      "Hans-Jörg Walter"
+    ],
+    "age": null,
+    "location": "Uster",
+    "occupation": null,
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Walter Haustechnik GmbH"
+    ]
+  },
+  "7057": {
+    "person": [
+      "Klaus Steiner",
+      "Peter Frei"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "Leiter Treasury",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Helvetia Maschinen AG",
+      "ZKB"
+    ]
+  },
+  "7058": {
+    "person": [
+      "Urs Meier"
+    ],
+    "age": null,
+    "location": "Thun",
+    "occupation": "CEO",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "BauProfi GmbH"
+    ]
+  },
+  "7062": {
+    "person": [
+      "Peter Glaus"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "Leiter Logistik",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "TransLogistik AG"
+    ]
+  },
+  "7072": {
+    "person": [
+      "Isabelle Rochat"
+    ],
+    "age": null,
+    "location": "Sion",
+    "occupation": "CEO",
+    "education": null,
+    "nationality": "Frankreich",
+    "organization": [
+      "Valais Vins SA"
+    ]
+  },
+  "7075": {
+    "person": [
+      "Frau Dubois"
+    ],
+    "age": null,
+    "location": "Genf",
+    "occupation": "Leiterin Treasury",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Global Trade SA"
+    ]
+  },
+  "7077": {
+    "person": [
+      "Beat Amstutz"
+    ],
+    "age": null,
+    "location": "Luzern",
+    "occupation": "Geschäftsführer",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Holzbau Amstutz GmbH"
+    ]
+  },
+  "7079": {
+    "person": [
+      "Markus Graf",
+      "Frau Schmidt"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": null,
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Transport & Logistik AG"
+    ]
+  },
+  "7081": {
+    "person": [
+      "Stefan Huber"
+    ],
+    "age": null,
+    "location": "St. Gallen",
+    "occupation": "Inhaber",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Huber Metallbau AG"
+    ]
+  },
+  "7082": {
+    "person": [
+      "Hans Gerber",
+      "Peter Frei"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "CFO",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Präzisionsmechanik AG"
+    ]
+  },
+  "7083": {
+    "person": [
+      "Isabelle Rochat",
+      "Pierre Dubois"
+    ],
+    "age": null,
+    "location": "Genf",
+    "occupation": "Geschäftsführerin",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Pharma-Logistik SA"
+    ]
+  },
+  "7085": {
+    "person": [
+      "Martin Keller",
+      "Thomas Frei"
+    ],
+    "age": 62,
+    "location": "Zug",
+    "occupation": "Gründer",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Keller IT Solutions AG",
+      "CodeCrafters GmbH"
+    ]
+  },
+  "7091": {
+    "person": [
+      "Peter Frei"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "Inhaber",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Frei Transporte GmbH"
+    ]
+  },
+  "7098": {
+    "person": [
+      "Reto Schmid"
+    ],
+    "age": null,
+    "location": "Zug",
+    "occupation": null,
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "IT Consulting Fischer AG"
+    ]
+  },
+  "7112": {
+    "person": [
+      "Claudia Muster"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": null,
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Meier Import Export AG"
+    ]
+  },
+  "7119": {
+    "person": [
+      "Maria Rossi",
+      "Daniel Gerber"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "Exportleiterin",
+    "education": null,
+    "nationality": "Italien",
+    "organization": [
+      "Global Exports SA"
+    ]
+  },
+  "7130": {
+    "person": [
+      "Dr. Anna Schmid",
+      "Reto Pfister"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "CEO",
+    "education": "ETH-Physikerin",
+    "nationality": null,
+    "organization": [
+      "MedTech Innovators GmbH"
+    ]
+  },
+  "7132": {
+    "person": [
+      "Peter Keller",
+      "Anna Keller"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": null,
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Holzbau Fischer GmbH"
+    ]
+  },
+  "7133": {
+    "person": [
+      "Sandra Berger"
+    ],
+    "age": null,
+    "location": "Luzern",
+    "occupation": "CEO",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "ImmoInvest Partner AG"
+    ]
+  },
+  "7136": {
+    "person": [
+      "Martin Graf"
+    ],
+    "age": null,
+    "location": "Winterthur",
+    "occupation": "Projektleiter",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Tech Innovate AG",
+      "Future Robotics GmbH"
+    ]
+  },
+  "7139": {
+    "person": [
+      "Klaus Berger",
+      "Martin Fuchs"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "Sales Director",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Import Export AG"
+    ]
+  },
+  "7140": {
+    "person": [
+      "Urs Maurer",
+      "Lea Maurer"
+    ],
+    "age": null,
+    "location": "Thun",
+    "occupation": "Inhaber",
+    "education": "ETH-Ingenieurin",
+    "nationality": null,
+    "organization": [
+      "Maurer Metallbau AG",
+      "ETH"
+    ]
+  },
+  "7141": {
+    "person": [
+      "Simone Frei"
+    ],
+    "age": null,
+    "location": "Luzern",
+    "occupation": "CFO",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Immo General AG"
+    ]
+  },
+  "7144": {
+    "person": [
+      "Beatrice Keller"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "CEO",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Global AG"
+    ]
+  },
+  "7149": {
+    "person": null,
+    "age": null,
+    "location": null,
+    "occupation": null,
+    "education": null,
+    "nationality": null,
+    "organization": null
+  },
+  "7150": {
+    "person": [
+      "Ursula Widmer"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "Leiterin Finanzen",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Gastro-Star AG",
+      "Raiffeisen"
+    ]
+  },
+  "7154": {
+    "person": [
+      "Anna Hess"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "Gründerin",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "CleverCode Solutions AG",
+      "Helvetia Tech AG"
+    ]
+  },
+  "7161": {
+    "person": [
+      "Monika Bachmann"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": null,
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Bachmann Consulting"
+    ]
+  },
+  "7162": {
+    "person": [
+      "Frank Lehmann"
+    ],
+    "age": null,
+    "location": "Berlin",
+    "occupation": "CEO",
+    "education": null,
+    "nationality": "Deutscher",
+    "organization": [
+      "Transport & Logistik AG",
+      "Schenker AG"
+    ]
+  },
+  "7166": {
+    "person": [
+      "Sven Meier"
+    ],
+    "age": null,
+    "location": "Österreich",
+    "occupation": "Buchhalter",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Logistik Express GmbH"
+    ]
+  },
+  "7168": {
+    "person": [
+      "Thomas Walter",
+      "Michael Walter"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "Geschäftsführer",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Walter Frei AG"
+    ]
+  },
+  "7173": {
+    "person": [
+      "Jean-Pierre Rochat",
+      "Marie Rochat"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "CEO",
+    "education": "IMD-Absolventin",
+    "nationality": null,
+    "organization": [
+      "Horlogerie Suisse SA",
+      "IMD"
+    ]
+  },
+  "7185": {
+    "person": [
+      "Claudia Berger",
+      "Hans Meier",
+      "Thomas Meier"
+    ],
+    "age": 72,
+    "location": "Zug",
+    "occupation": null,
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Meier AG"
+    ]
+  },
+  "7186": {
+    "person": [
+      "Elias Tanner",
+      "Fritz Gerber"
+    ],
+    "age": null,
+    "location": "München",
+    "occupation": "Buchhalter",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Tanner Logistik AG"
+    ]
+  },
+  "7187": {
+    "person": [
+      "Pierre Dubois",
+      "Alain Richard"
+    ],
+    "age": null,
+    "location": "Lausanne",
+    "occupation": "CEO",
+    "education": "ETH-Absolvent",
+    "nationality": "französischer",
+    "organization": [
+      "Innovatech SA",
+      "NeuroCore SA",
+      "ETH"
+    ]
+  },
+  "7189": {
+    "person": [
+      "Silvia Meier",
+      "Peter Lustig"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "Leiterin Export",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Precision Parts AG"
+    ]
+  },
+  "7190": {
+    "person": [
+      "Klaus Berger",
+      "Isabelle Rochat"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "Geschäftsführer",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Gastro World GmbH"
+    ]
+  },
+  "7192": {
+    "person": [
+      "Giovanni Rossi"
+    ],
+    "age": null,
+    "location": "Lugano",
+    "occupation": "CFO",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Ticino Fashion Group SA"
+    ]
+  },
+  "7197": {
+    "person": [
+      "Simon Kaufmann"
+    ],
+    "age": null,
+    "location": "Luzern",
+    "occupation": "Gründer",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "BioVera AG"
+    ]
+  },
+  "7200": {
+    "person": [
+      "Stefan Keller"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "Inhaber",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Keller Schreinerei AG"
+    ]
+  },
+  "7212": {
+    "person": [
+      "Hans Brunner",
+      "Thomas Brunner"
+    ],
+    "age": 32,
+    "location": null,
+    "occupation": null,
+    "education": "HSG-Absolvent",
+    "nationality": null,
+    "organization": [
+      "Metzgerei Brunner & Sohn AG",
+      "Brunner Holding AG"
+    ]
+  },
+  "7216": {
+    "person": [
+      "Stefan Fischer"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "Geschäftsführer",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Export Plus Handels GmbH"
+    ]
+  },
+  "7221": {
+    "person": [
+      "Walter Fischer",
+      "Martina Fischer"
+    ],
+    "age": 68,
+    "location": "St. Gallen",
+    "occupation": null,
+    "education": "HSG-Absolventin",
+    "nationality": null,
+    "organization": [
+      "Transport Fischer & Co.",
+      "HSG"
+    ]
+  },
+  "7230": {
+    "person": [
+      "Jean-Pierre Dubois"
+    ],
+    "age": null,
+    "location": "Lausanne",
+    "occupation": "CEO",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Swiss Food Solutions SA"
+    ]
+  },
+  "7238": {
+    "person": [
+      "Jacques Reymond"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "Leiter Finanzen",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Logistik Services SA"
+    ]
+  },
+  "7239": {
+    "person": [
+      "Hans-Peter Vogel",
+      "Michael Vogel"
+    ],
+    "age": 65,
+    "location": "St. Gallen",
+    "occupation": null,
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Vogel Mechanik AG"
+    ]
+  },
+  "7247": {
+    "person": [
+      "Hans Muster",
+      "Reto Ernst"
+    ],
+    "age": null,
+    "location": "Zug",
+    "occupation": null,
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Bau AG"
+    ]
+  },
+  "7248": {
+    "person": [
+      "Karin Berger"
+    ],
+    "age": null,
+    "location": "Italien",
+    "occupation": "Geschäftsführerin",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Swiss IT Solutions GmbH"
+    ]
+  },
+  "7260": {
+    "person": [
+      "Jonas Frey",
+      "Martin Keller"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "Sales Director",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Helvetia Maschinen AG"
+    ]
+  },
+  "7264": {
+    "person": [
+      "Dr. Verena Huber",
+      "Maja Zürcher"
+    ],
+    "age": null,
+    "location": "London",
+    "occupation": "CEO",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Consulting Partner AG"
+    ]
+  },
+  "7268": {
+    "person": [
+      "Karin Berger",
+      "Sven Meier"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "Leiterin Finanzen",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Präzisionsmechanik AG"
+    ]
+  },
+  "7279": {
+    "person": [
+      "Giovanni Bellini"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": null,
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Moda Ticino SA"
+    ]
+  },
+  "7283": {
+    "person": [
+      "Beat Pfister"
+    ],
+    "age": null,
+    "location": "Zürich-Altstetten",
+    "occupation": "Leiter Finanzen",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Logistik Express AG"
+    ]
+  },
+  "7286": {
+    "person": [
+      "Isabelle Girard"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "Leiterin Treasury",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "GlobalTech Trading SA",
+      "Credit Suisse"
+    ]
+  },
+  "7287": {
+    "person": [
+      "Dr. Beat Lehmann",
+      "Michael Lehmann"
+    ],
+    "age": 35,
+    "location": "Solothurn",
+    "occupation": null,
+    "education": "HSG",
+    "nationality": null,
+    "organization": [
+      "Lehmann Präzisionsteile GmbH"
+    ]
+  },
+  "7289": {
+    "person": [
+      "Carla Rossi",
+      "Hanspeter Gfeller"
+    ],
+    "age": null,
+    "location": "Zürich",
+    "occupation": null,
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "FoodDelight AG",
+      "TEF-Abteilung"
+    ]
+  },
+  "7295": {
+    "person": [
+      "Hanspeter Schmid"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "Metallbau",
+    "education": "ETH-Ingenieur",
+    "nationality": null,
+    "organization": [
+      "Metallbau Schmid GmbH",
+      "ETH"
+    ]
+  },
+  "7298": {
+    "person": [
+      "David Chen"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "Geschäftsführer",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "TechSolutions Holding AG",
+      "Innovatech Robotics GmbH"
+    ]
+  },
+  "7303": {
+    "person": [
+      "Herr Huber",
+      "Herr Steiner"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "CEO",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Präzisionsmechanik AG"
+    ]
+  },
+  "7304": {
+    "person": [
+      "Jonas Fischer",
+      "Markus Fischer"
+    ],
+    "age": 32,
+    "location": "Thun",
+    "occupation": null,
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Holzbau Fischer & Sohn AG"
+    ]
+  },
+  "7305": {
+    "person": [
+      "Frau Dubois",
+      "Alain Bernard"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "CFO",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Swiss IT Solutions SA",
+      "CyberSecure SA"
+    ]
+  },
+  "7306": {
+    "person": [
+      "Peter Keller"
+    ],
+    "age": null,
+    "location": "Basel",
+    "occupation": "Head of Treasury",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "PharmaLogistics AG",
+      "Credit Suisse AG",
+      "ZKB"
+    ]
+  },
+  "7310": {
+    "person": [
+      "François Dubois"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "Trader",
+    "education": null,
+    "nationality": "Frankreich",
+    "organization": [
+      "Global Commodities Trading SA"
+    ]
+  },
+  "7321": {
+    "person": [
+      "Sabine Keller"
+    ],
+    "age": null,
+    "location": "Zug",
+    "occupation": "CFO",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Innovatec Robotics AG"
+    ]
+  },
+  "7324": {
+    "person": [
+      "Eva Dubois"
+    ],
+    "age": null,
+    "location": "Lausanne",
+    "occupation": "CEO",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "PharmaLogistics SA"
+    ]
+  },
+  "7326": {
+    "person": [
+      "Maria Rossi"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "Head of Trade Finance",
+    "education": null,
+    "nationality": "Italien",
+    "organization": [
+      "Rohstoffhandel AG"
+    ]
+  },
+  "7345": {
+    "person": [
+      "Martin Frei"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": null,
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Frei Gastro AG"
+    ]
+  },
+  "7348": {
+    "person": [
+      "Hans Gerber"
+    ],
+    "age": null,
+    "location": "Winterthur",
+    "occupation": "CEO",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Bau AG Zürich"
+    ]
+  },
+  "7354": {
+    "person": [
+      "Eliane Rochat",
+      "Pierre Dubois"
+    ],
+    "age": null,
+    "location": "Biel",
+    "occupation": "Leiterin Treasury",
+    "education": null,
+    "nationality": "französische",
+    "organization": [
+      "Präzisionsmechanik SA",
+      "BNP Paribas"
+    ]
+  },
+  "7361": {
+    "person": [
+      "Claudia Wyss",
+      "Martin Keller"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "Leiterin Finanzen",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Handelsfirma Zürich AG"
+    ]
+  },
+  "7375": {
+    "person": [
+      "Beat Stauffer"
+    ],
+    "age": null,
+    "location": "Zug",
+    "occupation": "CFO",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "MedTech Solutions AG"
+    ]
+  },
+  "7380": {
+    "person": [
+      "Dr. Markus Fischer"
+    ],
+    "age": null,
+    "location": "Zürich",
+    "occupation": "CEO",
+    "education": "Doktorat",
+    "nationality": null,
+    "organization": [
+      "Immoinvest AG",
+      "Credit Suisse"
+    ]
+  },
+  "7385": {
+    "person": [
+      "Eva Schmidt"
+    ],
+    "age": null,
+    "location": "Genf",
+    "occupation": "Verwaltungsrätin",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Familienholding Schmidt AG",
+      "Metallbau AG"
+    ]
+  },
+  "7386": {
+    "person": [
+      "Reto Baumann"
+    ],
+    "age": 65,
+    "location": null,
+    "occupation": "ehem. Inhaber",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Baustoff-Center Ost GmbH",
+      "KIBAG",
+      "ZKB"
+    ]
+  },
+  "7389": {
+    "person": [
+      "Isabelle Rochat",
+      "François Lambert",
+      "Céline Girard"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "Juristin",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "PharmaConsulting SA"
+    ]
+  },
+  "7395": {
+    "person": [
+      "Markus Gasser"
+    ],
+    "age": null,
+    "location": "Thun",
+    "occupation": null,
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Holzbau Gasser GmbH"
+    ]
+  },
+  "7402": {
+    "person": [
+      "Sandra Berger",
+      "Thomas Fischer"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "CEO",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "IT Consulting Berger GmbH"
+    ]
+  },
+  "7413": {
+    "person": [
+      "Urs Zimmermann",
+      "Thomas Zimmermann"
+    ],
+    "age": 65,
+    "location": "Grenchen",
+    "occupation": "CEO",
+    "education": "ETH-Ingenieur",
+    "nationality": null,
+    "organization": [
+      "Präzisionsmechanik AG"
+    ]
+  },
+  "7416": {
+    "person": [
+      "Lars Weber"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "CEO",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Innovatec Robotics GmbH",
+      "Future Automation AG"
+    ]
+  },
+  "7421": {
+    "person": [
+      "Hansjörg Knecht"
+    ],
+    "age": null,
+    "location": "Dietikon",
+    "occupation": "Inhaber",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Baustoff Handel AG"
+    ]
+  },
+  "7427": {
+    "person": [
+      "Beat Zuber"
+    ],
+    "age": null,
+    "location": "Genf",
+    "occupation": "Flottenmanager",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Transport & Logistik AG"
+    ]
+  },
+  "7428": {
+    "person": [
+      "Sabine Fischer",
+      "Peter Frei"
+    ],
+    "age": null,
+    "location": "Zug",
+    "occupation": "CEO",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "CleanTech Solutions GmbH"
+    ]
+  },
+  "7433": {
+    "person": null,
+    "age": null,
+    "location": null,
+    "occupation": null,
+    "education": null,
+    "nationality": null,
+    "organization": null
+  },
+  "7435": {
+    "person": [
+      "Markus Egger"
+    ],
+    "age": null,
+    "location": "Freiburg",
+    "occupation": "COO",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Foodies AG"
+    ]
+  },
+  "7437": {
+    "person": [
+      "Reto Zuber"
+    ],
+    "age": null,
+    "location": "Zürich",
+    "occupation": "Produktionsleiter",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "PrintMaster AG"
+    ]
+  },
+  "7456": {
+    "person": [
+      "Klaus Steiner",
+      "Sandra Moser"
+    ],
+    "age": null,
+    "location": "München",
+    "occupation": "CFO",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "AlpinBerg AG"
+    ]
+  },
+  "7457": {
+    "person": [
+      "Frau Meier",
+      "Hans Tanner"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "Mitarbeiter",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Digital Future AG"
+    ]
+  },
+  "7459": {
+    "person": [
+      "Didier Rochat"
+    ],
+    "age": null,
+    "location": "Genf",
+    "occupation": "Geschäftsführer",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Global Trade SA"
+    ]
+  },
+  "7461": {
+    "person": [
+      "Elena Rossi"
+    ],
+    "age": null,
+    "location": "Lugano",
+    "occupation": "CFO",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Ticino Fashion Group SA",
+      "Kantonalbank"
+    ]
+  },
+  "7462": {
+    "person": [
+      "Urs Baumann",
+      "Martin Keller"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "CFO",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Helvetia Maschinenbau AG"
+    ]
+  },
+  "7465": {
+    "person": [
+      "Christian Wyss"
+    ],
+    "age": null,
+    "location": "Emmental",
+    "occupation": "Geschäftsführer",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Holzbau Wyss AG"
+    ]
+  },
+  "7467": {
+    "person": [
+      "Claudia Berger"
+    ],
+    "age": null,
+    "location": "Genf",
+    "occupation": "Head of Trade Finance",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Global Commodities SA",
+      "Santos Coffee Ltd"
+    ]
+  },
+  "7468": {
+    "person": [
+      "Beat Huber"
+    ],
+    "age": 59,
+    "location": null,
+    "occupation": null,
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "BH Immobilienverwaltung GmbH"
+    ]
+  },
+  "7474": {
+    "person": [
+      "Stefan Ziegler"
+    ],
+    "age": null,
+    "location": "Thun",
+    "occupation": "Geschäftsführer",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Holzbau Ziegler & Co."
+    ]
+  },
+  "7478": {
+    "person": [
+      "Reto Meier"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "Inhaber",
+    "education": "Ingenieur",
+    "nationality": null,
+    "organization": [
+      "IT Consulting Meier GmbH",
+      "ETH"
+    ]
+  },
+  "7481": {
+    "person": [
+      "Walter Hess",
+      "Thomas Hess"
+    ],
+    "age": 32,
+    "location": null,
+    "occupation": "Geschäftsführung",
+    "education": "HSG-Absolvent",
+    "nationality": null,
+    "organization": [
+      "Hess Druckerei AG"
+    ]
+  },
+  "7482": {
+    "person": [
+      "Luigi Rossi",
+      "Marco Bianchi"
+    ],
+    "age": null,
+    "location": "Lugano",
+    "occupation": "Filialleiter",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Moda Italiana GmbH"
+    ]
+  },
+  "7486": {
+    "person": [
+      "Hanspeter Frey",
+      "Thomas Frey"
+    ],
+    "age": 32,
+    "location": null,
+    "occupation": null,
+    "education": "HSG-Absolvent",
+    "nationality": null,
+    "organization": [
+      "Gastrobedarf AG"
+    ]
+  },
+  "7490": {
+    "person": [
+      "Beat Gerber"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "Leiter Export",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Maschinenbau International GmbH",
+      "Shanghai Machinery Corp."
+    ]
+  },
+  "7496": {
+    "person": [
+      "Michel Favre"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "CEO",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Swiss Precision Parts SA"
+    ]
+  },
+  "7507": {
+    "person": [
+      "Stefan Meier",
+      "Christoph Hess"
+    ],
+    "age": null,
+    "location": "St. Gallen",
+    "occupation": "COO",
+    "education": "ETH",
+    "nationality": null,
+    "organization": [
+      "DigitalPrint Solutions AG"
+    ]
+  },
+  "7513": {
+    "person": [
+      "Dr. Anna Schmid",
+      "Thomas Graf"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "Physiker",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "CleanEnergy Solutions GmbH",
+      "ETH Zürich"
+    ]
+  },
+  "7514": {
+    "person": [
+      "Jürg Bachmann"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "CEO",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Modehaus Schneider AG"
+    ]
+  },
+  "7519": {
+    "person": [
+      "Sven Meier"
+    ],
+    "age": null,
+    "location": "Zürich",
+    "occupation": "Projektleiter",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Bau AG Zürich"
+    ]
+  },
+  "7520": {
+    "person": [
+      "Hans Keller",
+      "Thomas Keller"
+    ],
+    "age": 67,
+    "location": "Aarau",
+    "occupation": null,
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Metzgerei Keller & Sohn"
+    ]
+  },
+  "7526": {
+    "person": [
+      "Anna Berger"
+    ],
+    "age": null,
+    "location": "Basel",
+    "occupation": "Leiterin Finanzen",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "PharmaTec Schweiz GmbH"
+    ]
+  },
+  "7529": {
+    "person": [
+      "Peter Frei",
+      "Jean-Claude Maurer"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": null,
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Consulting Partner AG",
+      "BauTech West SA"
+    ]
+  },
+  "7532": {
+    "person": [
+      "Isabelle Rochat"
+    ],
+    "age": null,
+    "location": "Genf",
+    "occupation": "CFO",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Immo Invest Suisse AG"
+    ]
+  },
+  "7534": {
+    "person": [
+      "Anna Keller"
+    ],
+    "age": null,
+    "location": "Baar",
+    "occupation": "Geschäftsführerin",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "TechSpin GmbH",
+      "Innovate AG"
+    ]
+  },
+  "7539": {
+    "person": [
+      "Beat Gfeller"
+    ],
+    "age": null,
+    "location": "Thun",
+    "occupation": "CEO",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Gfeller Maschinenbau AG"
+    ]
+  },
+  "7549": {
+    "person": [
+      "Toni Amstutz",
+      "Reto"
+    ],
+    "age": 62,
+    "location": "Obwalden",
+    "occupation": "Inhaber",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Holzbau Amstutz AG"
+    ]
+  },
+  "7556": {
+    "person": [
+      "Silvan Schmid"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "CFO",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Schmid Logistics SA",
+      "Credit Suisse (Schweiz) AG"
+    ]
+  },
+  "7558": {
+    "person": [
+      "Isabelle Rochat"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "Leiterin Treasury",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Leman Trading SA"
+    ]
+  },
+  "7559": {
+    "person": [
+      "Hans Meier",
+      "Thomas Meier"
+    ],
+    "age": 68,
+    "location": "Thun",
+    "occupation": null,
+    "education": "ETH-Ingenieur",
+    "nationality": null,
+    "organization": [
+      "Präzisionswerk Meier & Söhne AG"
+    ]
+  },
+  "7563": {
+    "person": [
+      "Peter Vogel"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "Leiter Einkauf",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Import AG",
+      "Saigon Textile Ltd."
+    ]
+  },
+  "7566": {
+    "person": [
+      "Urs Meier",
+      "Eva Hess"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "Leiter Finanzen",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Präzisionsmechanik AG"
+    ]
+  },
+  "7570": {
+    "person": [
+      "Anna Berger",
+      "Paul Weber"
+    ],
+    "age": null,
+    "location": "Zürich",
+    "occupation": "Geschäftsführerin",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "IT-Solutions Berger & Co."
+    ]
+  },
+  "7571": {
+    "person": [
+      "Hans Schneider",
+      "Martin Keller"
+    ],
+    "age": null,
+    "location": "Luzern",
+    "occupation": "Verwaltungsratspräsident",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Modehaus Schneider AG"
+    ]
+  },
+  "7572": {
+    "person": [
+      "Fritz Mettler"
+    ],
+    "age": 55,
+    "location": null,
+    "occupation": null,
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Import Export Mettler GmbH"
+    ]
+  },
+  "7574": {
+    "person": [
+      "Laura Bianchi"
+    ],
+    "age": 38,
+    "location": "Zürich",
+    "occupation": "CFO",
+    "education": "ETH-Absolventin",
+    "nationality": null,
+    "organization": [
+      "TechStart Innovations AG"
+    ]
+  },
+  "7579": {
+    "person": [
+      "Dr. Eva Fischer"
+    ],
+    "age": null,
+    "location": "Zug",
+    "occupation": "Gründerin",
+    "education": "Doktorat",
+    "nationality": null,
+    "organization": [
+      "InnoTech Lab GmbH"
+    ]
+  },
+  "7581": {
+    "person": [
+      "Luigi Bernasconi",
+      "Marco Bianchi"
+    ],
+    "age": null,
+    "location": "Lugano",
+    "occupation": "Verwaltungsrat",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Immo Invest Partner AG"
+    ]
+  },
+  "7587": {
+    "person": [
+      "Hans Wenger",
+      "Thomas Wenger"
+    ],
+    "age": null,
+    "location": "Waadtland",
+    "occupation": "Geschäftsführer",
+    "education": "HSG-Absolvent",
+    "nationality": null,
+    "organization": [
+      "Wenger Weine GmbH",
+      "Wenger Holding AG"
+    ]
+  },
+  "7591": {
+    "person": [
+      "Stefan Huber"
+    ],
+    "age": null,
+    "location": "St. Gallen",
+    "occupation": "Inhaber",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "TransLogistik GmbH",
+      "Cargo Schnell AG"
+    ]
+  },
+  "7593": {
+    "person": [
+      "Klaus Berger",
+      "Urs Meier"
+    ],
+    "age": null,
+    "location": "Biel",
+    "occupation": "CFO",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Helvetica Präzision GmbH"
+    ]
+  },
+  "7602": {
+    "person": [
+      "Urs Meier",
+      "Paul Frei"
+    ],
+    "age": 55,
+    "location": "Zürich",
+    "occupation": "CFO",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "HelvetiMaschinen AG"
+    ]
+  },
+  "7604": {
+    "person": [
+      "Hans Linder"
+    ],
+    "age": 62,
+    "location": "Thun",
+    "occupation": "Inhaber",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Präzisionsmechanik Linder AG"
+    ]
+  },
+  "7608": {
+    "person": [
+      "Jürg Steiner"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "Leiter Finanzen",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Präzisionsmechanik AG"
+    ]
+  },
+  "7609": {
+    "person": [
+      "Isabelle Rochat",
+      "Martin Keller"
+    ],
+    "age": null,
+    "location": "Zürich",
+    "occupation": "CEO",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Helvetia Bau AG"
+    ]
+  },
+  "7612": {
+    "person": [
+      "Peter Meier"
+    ],
+    "age": null,
+    "location": "New York",
+    "occupation": "CFO",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Consulting Partner AG"
+    ]
+  },
+  "7615": {
+    "person": [
+      "Sandra Keller",
+      "Anna Frei"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "Prokuristin",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "IT Solutions GmbH"
+    ]
+  },
+  "7617": {
+    "person": [
+      "Markus Steiner"
+    ],
+    "age": null,
+    "location": "Deutschland",
+    "occupation": null,
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Global Trade GmbH"
+    ]
+  },
+  "7618": {
+    "person": [
+      "Thomas Graf",
+      "Hans Meier"
+    ],
+    "age": 42,
+    "location": "Winterthur",
+    "occupation": "Leiter Finanzen",
+    "education": "Uni St. Gallen Abschluss",
+    "nationality": null,
+    "organization": [
+      "Präzisionswerkstatt Meier AG",
+      "Uni St. Gallen"
+    ]
+  },
+  "7620": {
+    "person": [
+      "Beat Zürcher"
+    ],
+    "age": null,
+    "location": "Thun",
+    "occupation": "Eigentümer",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Zürcher Immobilien & Bau AG"
+    ]
+  },
+  "7629": {
+    "person": [
+      "Stefan Egger",
+      "Anna Berset"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "Projektleiter",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "IT-Consulting Meyer & Partner"
+    ]
+  },
+  "7630": {
+    "person": [
+      "Claudia Wyss"
+    ],
+    "age": null,
+    "location": "Winterthur",
+    "occupation": "Inhaberin",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Wyss Gartenbau GmbH"
+    ]
+  },
+  "7634": {
+    "person": [
+      "Peter Fuchs"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "CEO",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Logistik Schnell GmbH"
+    ]
+  },
+  "7637": {
+    "person": [
+      "Jürg Steiner"
+    ],
+    "age": null,
+    "location": "Genf",
+    "occupation": "Geschäftsführer",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Immo Invest AG",
+      "Immo GE West SA"
+    ]
+  },
+  "7641": {
+    "person": [
+      "Dr. Christoph Ammann",
+      "Laura Bianchi"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "CFO",
+    "education": null,
+    "nationality": "britisch",
+    "organization": [
+      "Alpen Consulting Group AG"
+    ]
+  },
+  "7644": {
+    "person": [
+      "Anna Frei"
+    ],
+    "age": null,
+    "location": "Dietikon",
+    "occupation": "Leiterin Finanzen",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "LogiSwiss AG"
+    ]
+  },
+  "7646": {
+    "person": [
+      "Hans Meier"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": null,
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Gastro Services Meier & Co."
+    ]
+  },
+  "7649": {
+    "person": [
+      "Isabelle Rochat"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "CFO",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Swiss Watches Deluxe AG"
+    ]
+  },
+  "7653": {
+    "person": [
+      "Hanspeter Schmid"
+    ],
+    "age": 62,
+    "location": "Winterthur",
+    "occupation": "Inhaber",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Präzisionsmechanik AG"
+    ]
+  },
+  "7654": {
+    "person": [
+      "Anna Kovac"
+    ],
+    "age": null,
+    "location": "Luzern",
+    "occupation": "Gründerin",
+    "education": null,
+    "nationality": "schweizerisch-kroatische Doppelbürgerin",
+    "organization": [
+      "Food Delights GmbH"
+    ]
+  },
+  "7663": {
+    "person": [
+      "Li Wang"
+    ],
+    "age": null,
+    "location": "Schweiz",
+    "occupation": "Leiter Einkauf",
+    "education": null,
+    "nationality": "chinesischer",
+    "organization": [
+      "Import Export Welt AG"
+    ]
+  },
+  "7668": {
+    "person": [
+      "Urs Baumann"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "Leiter Finanzen",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Präzisionsmechanik AG"
+    ]
+  },
+  "7670": {
+    "person": [
+      "Hans Meier",
+      "Thomas Meier"
+    ],
+    "age": 67,
+    "location": null,
+    "occupation": "Inhaber",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Holzdesign Meier & Söhne",
+      "ETH"
+    ]
+  },
+  "7671": {
+    "person": [
+      "Sophie Dubois"
+    ],
+    "age": null,
+    "location": "Genf",
+    "occupation": "COO",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "PharmaLogistics SA"
+    ]
+  },
+  "7673": {
+    "person": [
+      "Luigi Bernasconi"
+    ],
+    "age": null,
+    "location": "St. Gallen",
+    "occupation": "Inhaber",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Gastro Services Holding"
+    ]
+  },
+  "7674": {
+    "person": [
+      "Claudia Rossi",
+      "Martin Frei"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "Verwaltungsrätin",
+    "education": "HSG-Absolventin",
+    "nationality": null,
+    "organization": [
+      "MedTech Innovators AG"
+    ]
+  },
+  "7675": {
+    "person": [
+      "Sandra Egger"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "Leiterin Treasury",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Retail King Schweiz AG"
+    ]
+  },
+  "7676": {
+    "person": [
+      "Christoph Wyss"
+    ],
+    "age": null,
+    "location": "Thun",
+    "occupation": "CEO",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Maschinenbau Wyss AG"
+    ]
+  },
+  "7685": {
+    "person": [
+      "Urs Steiner",
+      "Beat Fankhauser"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "CFO",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Importa AG"
+    ]
+  },
+  "7691": {
+    "person": [
+      "Patrick Dubois"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "CFO",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Modehaus Schneider AG"
+    ]
+  },
+  "7692": {
+    "person": [
+      "Werner Zürcher",
+      "Frau Gerber"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": null,
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Stiftung Abendrot"
+    ]
+  },
+  "7693": {
+    "person": [
+      "Hanspeter Frey",
+      "Anna Meier"
+    ],
+    "age": null,
+    "location": "Zug",
+    "occupation": "Leiter Finanzen",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Import AG"
+    ]
+  },
+  "7695": {
+    "person": [
+      "Urs Zimmermann",
+      "Markus Egger"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": null,
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Swiss Alpine Goods AG"
+    ]
+  },
+  "7696": {
+    "person": [
+      "Martin Keller",
+      "Herr Schmidt"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": null,
+    "education": null,
+    "nationality": "Deutschland",
+    "organization": [
+      "Global Trade Partners Ltd."
+    ]
+  },
+  "7698": {
+    "person": null,
+    "age": null,
+    "location": null,
+    "occupation": null,
+    "education": null,
+    "nationality": null,
+    "organization": null
+  },
+  "7704": {
+    "person": [
+      "Hanspeter Gfeller",
+      "Michael"
+    ],
+    "age": 64,
+    "location": null,
+    "occupation": null,
+    "education": "HSG-Absolvent",
+    "nationality": null,
+    "organization": [
+      "Gfeller Druck & Design AG"
+    ]
+  },
+  "7707": {
+    "person": [
+      "Herr Moser",
+      "Peter Frei",
+      "Hans Kaufmann"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": null,
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Mechanica AG"
+    ]
+  },
+  "7708": {
+    "person": [
+      "Frau Dubois",
+      "Luc Girard"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": null,
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Gastro-Solutions SA"
+    ]
+  },
+  "7712": {
+    "person": [
+      "Anna Weber",
+      "Thomas Schmid"
+    ],
+    "age": null,
+    "location": "Österreich",
+    "occupation": null,
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "WebWorks GmbH"
+    ]
+  },
+  "7716": {
+    "person": [
+      "Klaus Berger"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "Verkaufsleiter",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Helvetia Logistik AG"
+    ]
+  },
+  "7717": {
+    "person": [
+      "Martina Frei",
+      "Thomas Graf"
+    ],
+    "age": 28,
+    "location": null,
+    "occupation": "Assistent",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Präzisionsmechanik GmbH",
+      "CS"
+    ]
+  },
+  "7720": {
+    "person": [
+      "Reto Baumann"
+    ],
+    "age": null,
+    "location": "St. Gallen",
+    "occupation": "Geschäftsführer",
+    "education": "HSG-Absolvent",
+    "nationality": null,
+    "organization": [
+      "Tech Solutions AG",
+      "Innovate Robotics GmbH"
+    ]
+  },
+  "7723": {
+    "person": [
+      "Markus Studer"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "Liquidator",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Zürcher Bau & Partner AG",
+      "Postfinance"
+    ]
+  },
+  "7725": {
+    "person": [
+      "Marco Bianchi"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": null,
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Helvetia Bau GmbH"
+    ]
+  },
+  "7727": {
+    "person": [
+      "Sabine Keller",
+      "Herrn Kunz"
+    ],
+    "age": null,
+    "location": "Winterthur",
+    "occupation": "CFO",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Immoinvest Zürich AG"
+    ]
+  },
+  "7731": {
+    "person": [
+      "Klaus Schmidt"
+    ],
+    "age": null,
+    "location": null,
+    "occupation": "General Counsel",
+    "education": null,
+    "nationality": null,
+    "organization": [
+      "Tech Holding International SA",
+      "CleanTech Innovations AG"
+    ]
+  }
+}

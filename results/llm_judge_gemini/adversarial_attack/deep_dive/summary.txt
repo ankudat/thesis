@@ -1,0 +1,59 @@
+####################################################################################################
+  ADVERSARIAL INFERENCE ATTACK — DEEP-DIVE SUMMARY
+####################################################################################################
+
+Detection metrics (P/R/F1) and PII leakage are reproduced from
+  results/<pipeline>/.../*_evaluation_results.json   (P/R/F1, All Categories, strict)
+  results/semantic_preservation/*_semantic_per_document.json   (leakage; mean over docs)
+
+Attack metrics:  success_rate = MATCH / (MATCH + NO_MATCH);  SKIP excluded.
+  AnyLk = fraction of docs with at least one MATCH on at least one attribute.
+  AvgLk = mean of the per-attribute success_rates.
+
+====================================================================================================
+  Table 1 — Detection (P/R/F1) + PII leakage + attack headline
+====================================================================================================
+Pipeline                                         P      R     F1     Leak    AnyLk  AvgLk      n
+----------------------------------------------------------------------------------------------------
+bert_(pretrained)__regex                     0.796  0.726  0.760    16.9%    88.7%  51.4%    611
+bert_fine-tuned                              0.957  0.967  0.962     1.3%    77.1%  43.2%    611
+datenwertschöpfung_api                         n/a    n/a    n/a   37.6%    99.8%  73.9%    611
+llm_llama-3_few-shot_verify                  0.861  0.871  0.866     6.6%    79.5%  46.9%    611
+llm_llama-3_fine-tuned                       0.970  0.967  0.969     1.6%    75.9%  42.9%    611
+llm_llama-3_prompt_few-shot                    n/a    n/a    n/a    5.2%    83.5%  45.2%    611
+llm_qwen2.5_few-shot_verify                  0.930  0.752  0.832    21.3%    88.2%  55.7%    611
+llm_qwen2.5_prompt_few-shot                    n/a    n/a    n/a   19.2%    92.5%  52.8%    611
+llm_sauerkrautlm_few-shot_verify             0.908  0.873  0.890     8.2%    82.0%  48.4%    611
+llm_sauerkrautlm_prompt_few-shot               n/a    n/a    n/a    7.2%    87.6%  51.2%    611
+presidio                                     0.796  0.831  0.813     7.1%    81.8%  47.3%    611
+spacy__regex                                 0.783  0.692  0.735    21.0%    92.6%  59.3%    611
+
+====================================================================================================
+  Table 2 — Per-attribute attack success rate
+====================================================================================================
+Pipeline                                     perso     age   locat   occup   educa   natio   organ   AnyLk  AvgLk     n
+--------------------------------------------------------------------------------------------------------------
+bert_(pretrained)__regex                     18.2%  100.0%   19.8%   92.3%   86.0%   40.0%    3.8%   88.7%  51.4%   611
+bert_fine-tuned                              17.3%   95.8%   10.3%   70.5%   72.2%   35.4%    0.8%   77.1%  43.2%   611
+datenwertschöpfung_api                       30.0%   91.7%   43.8%   96.6%   74.6%   83.6%   96.9%   99.8%  73.9%   611
+llm_llama-3_few-shot_verify                  36.3%   95.8%   11.1%   70.4%   56.2%   55.2%    3.3%   79.5%  46.9%   611
+llm_llama-3_fine-tuned                       17.7%   94.4%    8.5%   70.0%   74.8%   33.8%    1.1%   75.9%  42.9%   611
+llm_llama-3_prompt_few-shot                  18.0%   87.3%   35.1%   81.1%   57.4%   33.8%    3.8%   83.5%  45.2%   611
+llm_qwen2.5_few-shot_verify                  51.6%   94.7%   22.0%   78.9%   70.2%   54.4%   18.2%   88.2%  55.7%   611
+llm_qwen2.5_prompt_few-shot                  22.1%   84.7%   45.6%   94.6%   61.1%   55.0%    6.2%   92.5%  52.8%   611
+llm_sauerkrautlm_few-shot_verify             38.6%   98.6%   10.3%   74.1%   68.4%   45.2%    3.3%   82.0%  48.4%   611
+llm_sauerkrautlm_prompt_few-shot             18.0%   85.9%   43.4%   86.8%   64.9%   52.6%    6.7%   87.6%  51.2%   611
+presidio                                     22.9%   95.8%   12.7%   75.3%   75.4%   39.1%   10.0%   81.8%  47.3%   611
+spacy__regex                                 26.0%  100.0%   14.3%   95.3%   82.0%   85.0%   12.3%   92.6%  59.3%   611
+
+----------------------------------------------------------------------------------------------------
+PER-ATTRIBUTE HIT COUNTS (across all pipelines)
+----------------------------------------------------------------------------------------------------
+Attribute           MATCH   NO_MATCH       SKIP    evaluable     rate
+person              1,935      5,397          0        7,332    26.4%
+age                   806         54      6,472          860    93.7%
+location            1,048      3,492      2,792        4,540    23.1%
+occupation          5,271      1,144        917        6,415    82.2%
+education             965        408      5,959        1,373    70.3%
+nationality           380        370      6,582          750    50.7%
+organization        1,016      6,316          0        7,332    13.9%
