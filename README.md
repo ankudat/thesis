@@ -2,9 +2,6 @@
 
 ### Master's Thesis, Hochschule Luzern (HSLU)
 
-**Programme:** MSc in Applied Information and Data Science
-**Submission:** 2026
-
 ---
 
 ## Overview
@@ -15,34 +12,34 @@ The thesis benchmarks **twenty in-house anonymization pipeline configurations pl
 
 - **Classical:** spaCy + Regex, BERT (pretrained) + Regex, Microsoft Presidio.
 - **Learned token classifiers:** a fine-tuned BERT encoder, and a Llama-3 8B fine-tuned with QLoRA.
-- **Prompted LLMs:** Llama-3, Qwen 2.5, and SauerkrautLM, evaluated in zero-shot, few-shot, and few-shot with self-verification, in two anonymization paradigms (tag-and-replace and prompt-based rewriting).
+- **Prompted LLMs:** Llama-3, Qwen2.5, and SauerkrautLM, evaluated in zero-shot, few-shot, and few-shot with self-verification, in two anonymization paradigms (tag-and-replace and prompt-based rewriting).
 
-All in-house experiments run on a single **NVIDIA RTX 4090 (24 GB VRAM)**. The practical claim is that on-premises deployment is realistic for regulated industries that cannot use cloud LLM APIs.
+All in-house experiments run on a single **NVIDIA RTX 4090 (24 GB VRAM)**.
 
 ---
 
 ## Headline results
 
-PII detection (overall F1 on 638 test documents, strict span-and-label matching):
+Per-pipeline summary on the 638-document test set. Overall F1 uses strict span-and-label matching. PII leak rate is the proportion of ground-truth PII strings still visible in the output (lower is better). Readability and Meaning are LLM-judge ratings on a 1-10 scale (higher is better).
 
-| Pipeline                                | Overall F1 | Tier-3 F1 (quasi-IDs) | Masked BERTScore | PII leak rate |
-|-----------------------------------------|-----------:|----------------------:|-----------------:|--------------:|
-| Llama-3 [fine-tuned, QLoRA]             |  **0.969** |             **0.918** |        **0.995** |      **1.6%** |
-| BERT Fine-Tuned                         |      0.962 |                 0.911 |            0.995 |          1.3% |
-| SauerkrautLM [few-shot + verify]        |      0.890 |                 0.848 |            0.983 |          8.3% |
-| Llama-3 [few-shot + verify]             |      0.866 |                 0.842 |            0.982 |          6.6% |
-| Qwen2.5 [few-shot + verify]             |      0.832 |                 0.758 |            0.969 |         21.3% |
-| Microsoft Presidio                      |      0.813 |                 0.740 |            0.970 |          7.1% |
-| BERT (pretrained) + Regex               |      0.760 |             **0.000** |            0.967 |         16.9% |
-| spaCy + Regex                           |      0.735 |             **0.000** |            0.957 |         21.0% |
-| Llama-3 [prompt rewrite]                |        n/a |                   n/a |          0.864 * |          5.2% |
-| SauerkrautLM [prompt rewrite]           |        n/a |                   n/a |          0.866 * |          7.2% |
-| Qwen2.5 [prompt rewrite]                |        n/a |                   n/a |          0.882 * |         19.2% |
-| Anonymizer API (external, classical)    |        n/a |                   n/a |            0.837 |         37.6% |
+| Pipeline                                | Overall F1 | PII leak rate | Masked BERTScore | Readability | Meaning |
+|-----------------------------------------|-----------:|--------------:|-----------------:|------------:|--------:|
+| Llama-3 [fine-tuned, QLoRA]             |  **0.969** |          1.6% |        **0.995** |        8.78 | **9.40** |
+| BERT Fine-Tuned                         |      0.962 |      **1.3%** |        **0.995** |        8.68 |    9.31 |
+| SauerkrautLM [few-shot + verify]        |      0.890 |          8.3% |            0.983 |        8.10 |    8.89 |
+| Llama-3 [few-shot + verify]             |      0.866 |          6.6% |            0.982 |        7.86 |    8.67 |
+| Qwen2.5 [few-shot + verify]             |      0.832 |         21.3% |            0.969 |        8.10 |    9.11 |
+| Microsoft Presidio                      |      0.813 |          7.1% |            0.970 |        6.85 |    7.41 |
+| BERT (pretrained) + Regex               |      0.760 |         16.9% |            0.967 |        7.95 |    8.35 |
+| spaCy + Regex                           |      0.735 |         21.0% |            0.957 |        7.16 |    7.63 |
+| Llama-3 [prompt rewrite]                |        n/a |          5.2% |          0.864 * |        8.72 |    5.91 |
+| SauerkrautLM [prompt rewrite]           |        n/a |          7.2% |          0.866 * |    **9.02** |    6.18 |
+| Qwen2.5 [prompt rewrite]                |        n/a |         19.2% |          0.882 * |        8.59 |    6.36 |
+| Anonymizer API (external, classical)    |        n/a |         37.6% |            0.837 |        6.89 |    8.24 |
 
-\* The prompt-rewriting pipelines change non-PII wording as well as PII, so their masked BERTScore is not directly comparable to the tag-and-replace pipelines above; their primary utility metric in the thesis is the LLM-judge meaning score (5.91-6.36 for the three pipelines, well below the 9.31-9.40 of the fine-tuned tag-and-replace pipelines).
+\* The prompt-rewriting pipelines change non-PII wording as well as PII, so their masked BERTScore is not directly comparable to the tag-and-replace pipelines above; the LLM-judge meaning score is the fair cross-paradigm comparison.
 
-Per-category, per-tier, and per-pipeline numbers, along with semantic preservation, hallucination, readability, meaning preservation, and inference-attack results, are in `results/` and Chapter 5 of the thesis.
+Per-category, per-tier, and per-pipeline numbers, along with hallucination rate and inference-attack results, are in `results/` and Chapter 5 of the thesis.
 
 ---
 
@@ -231,13 +228,11 @@ See [demo/README.md](demo/README.md) for the full install guide, hardware requir
 - The synthetic dataset is generated by **Google Gemini 2.5 Pro**, to avoid using real customer data.
 - Generated notes go through a deterministic rule pass and a second LLM-based audit before being added to the corpus. The author inspected a sample manually.
 - The anonymization models themselves run **fully on-premises**; no input data leaves the local machine during inference.
-- The **Anonymizer API** baseline (a third-party commercial service) is the only experiment that sends data over the network, and is included strictly for comparison. Access to this service was provided privately for the thesis and is not publicly available, so the corresponding row in the results table cannot be reproduced by external readers.
+- The **Anonymizer API** baseline is the only experiment that sends data over the network, and is included for comparison. Access to this service was provided privately for the thesis and is not publicly available.
 
 ---
 
 ## License
 
-- **Code** (`src/`, `demo/`): MIT License. See [`LICENSE`](LICENSE).
-- **Synthetic dataset** (`data/`): Creative Commons Attribution 4.0 International (CC BY 4.0). See [`data/LICENSE`](data/LICENSE). Free to share and adapt with attribution.
-
-Third-party model weights (Llama-3, Qwen 2.5, SauerkrautLM, BERT-de-NER, spaCy `de_core_news_lg`) remain subject to their respective licenses and are not redistributed by this repository.
+- **Code** (`src/`, `demo/`): [MIT](LICENSE).
+- **Synthetic dataset** (`data/`): [CC BY 4.0](data/LICENSE).
