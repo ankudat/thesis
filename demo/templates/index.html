@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>German PII Anonymizer -- Thesis Demo</title>
+<style>
+  :root {
+    --accent: #8B1A1A;
+    --bg: #fafafa;
+    --panel: #ffffff;
+    --border: #e0e0e0;
+    --text: #222;
+    --muted: #666;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: Georgia, "Times New Roman", serif;
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.5;
+  }
+  header {
+    background: var(--accent);
+    color: white;
+    padding: 20px 32px;
+  }
+  header h1 { margin: 0; font-size: 22px; font-weight: normal; }
+  header p  { margin: 4px 0 0 0; font-size: 13px; opacity: 0.85; }
+
+  main { padding: 24px 32px 48px; max-width: 1600px; margin: 0 auto; }
+
+  .input-area {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 16px;
+    margin-bottom: 20px;
+  }
+  textarea {
+    width: 100%;
+    min-height: 60px;
+    height: 80px;
+    font-family: "Georgia", serif;
+    font-size: 14px;
+    padding: 12px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    resize: vertical;
+  }
+  .controls {
+    margin-top: 12px;
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  button {
+    background: var(--accent);
+    color: white;
+    border: none;
+    padding: 9px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 14px;
+  }
+  button:hover { background: #6b1414; }
+  button:disabled { background: #999; cursor: not-allowed; }
+  button.secondary { background: #555; }
+  button.secondary:hover { background: #333; }
+
+  .results {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  @media (max-width: 1100px) {
+    .results { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 700px) {
+    .results { grid-template-columns: 1fr; }
+  }
+  .featured-row {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+  @media (max-width: 900px) {
+    .featured-row { grid-template-columns: 1fr; }
+  }
+  .section-heading {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    font-weight: bold;
+    margin: 0 0 10px 0;
+  }
+  .section-heading.secondary {
+    margin-top: 8px;
+  }
+  .panel.featured {
+    border: 2px solid var(--accent);
+    background: #fffafa;
+  }
+  .panel.featured h2 {
+    background: var(--accent);
+    color: white;
+    margin: -16px -16px 12px -16px;
+    padding: 10px 16px;
+    border-radius: 4px 4px 0 0;
+    font-size: 17px;
+  }
+
+  /* Per-source border on cascade entities (in addition to category color) */
+  .src-regex { box-shadow: inset 0 -3px 0 #555; }
+  .src-bert  { box-shadow: inset 0 -3px 0 #2271b1; }
+  .src-llm   { box-shadow: inset 0 -3px 0 #8B1A1A; }
+
+  .panel {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 16px;
+    overflow: hidden;
+  }
+  .panel h2 {
+    margin: 0 0 4px 0;
+    font-size: 16px;
+    color: var(--accent);
+  }
+  .panel .meta {
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 12px;
+  }
+  .section-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--muted);
+    margin: 14px 0 6px 0;
+  }
+  .text-box {
+    background: #fafafa;
+    border: 1px solid #eee;
+    border-radius: 4px;
+    padding: 10px 12px;
+    font-family: "Consolas", "Courier New", monospace;
+    font-size: 13px;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    min-height: 60px;
+  }
+  .status { font-style: italic; color: var(--muted); }
+  .error { color: #b8001a; font-weight: bold; }
+
+  /* Entity highlighting colors -- coordinated with thesis red palette */
+  .ent { padding: 1px 4px; border-radius: 3px; font-weight: 600; }
+  .ent-PER     { background: #f2d5d5; }
+  .ent-LOC     { background: #ffe8c2; }
+  .ent-ORG     { background: #d6e9d6; }
+  .ent-DATE    { background: #d4e6f7; }
+  .ent-EMAIL   { background: #e3d7f4; }
+  .ent-PHONE   { background: #f7d4e6; }
+  .ent-IBAN    { background: #d4f2ee; }
+  .ent-MONEY   { background: #f4ead7; }
+  .ent-JOB     { background: #e5abab; }
+  .ent-AGE     { background: #b8524e; color: white; }
+  .ent-NATION  { background: #8B1A1A; color: white; }
+  .ent-EDU     { background: #5c0e0e; color: white; }
+  .ent .lbl {
+    font-size: 9px;
+    margin-left: 3px;
+    vertical-align: super;
+    opacity: 0.7;
+  }
+
+  .legend {
+    margin-top: 8px;
+    font-size: 12px;
+    color: var(--muted);
+  }
+  .legend span { display: inline-block; margin-right: 6px; padding: 1px 6px;
+                  border-radius: 3px; }
+
+  .summary {
+    margin-bottom: 20px;
+    padding: 12px;
+    background: #fff8f0;
+    border-left: 4px solid var(--accent);
+    border-radius: 4px;
+    font-size: 13px;
+  }
+
+  /* Adversarial inference attack section (featured panels only) */
+  .attack-section {
+    margin-top: 14px;
+    border-top: 1px dashed #ccc;
+    padding-top: 12px;
+  }
+  .attack-btn {
+    background: #444;
+    color: white;
+    border: none;
+    padding: 6px 14px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 12px;
+  }
+  .attack-btn:hover { background: #222; }
+  .attack-btn:disabled { background: #aaa; cursor: not-allowed; }
+  .attack-display { margin-top: 10px; font-size: 12px; }
+  .attack-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: "Consolas", "Courier New", monospace;
+    font-size: 11.5px;
+    margin-top: 6px;
+  }
+  .attack-table th, .attack-table td {
+    padding: 4px 6px;
+    border-bottom: 1px solid #eee;
+    text-align: left;
+    vertical-align: top;
+  }
+  .attack-table th {
+    font-weight: bold;
+    background: #f3f3f3;
+    font-family: Georgia, serif;
+    font-size: 11px;
+  }
+  .match-yes { color: #b8001a; font-weight: bold; }
+  .match-no  { color: #1a8b1a; font-weight: bold; }
+  .attack-summary {
+    margin-top: 8px;
+    padding: 8px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+  }
+  .attack-summary.bad  { background: #fbe4e4; border-left: 3px solid #b8001a; }
+  .attack-summary.good { background: #e4f5e4; border-left: 3px solid #1a8b1a; }
+
+  /* Hidden debug log panel at bottom of the page */
+  .debug-panel {
+    margin-top: 40px;
+    padding: 12px 16px;
+    background: #fafafa;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    font-size: 12px;
+    color: var(--muted);
+  }
+  .debug-panel summary {
+    cursor: pointer;
+    font-family: Georgia, serif;
+    font-size: 13px;
+    user-select: none;
+  }
+  .debug-panel .debug-controls {
+    margin: 10px 0 6px 0;
+  }
+  .debug-panel pre {
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 4px;
+    padding: 10px;
+    max-height: 360px;
+    overflow: auto;
+    font-family: "Consolas", "Courier New", monospace;
+    font-size: 11px;
+    white-space: pre-wrap;
+    word-break: break-word;
+    margin: 0;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>German PII Anonymizer &mdash; Thesis Demo</h1>
+</header>
+
+<main>
+  <div class="input-area">
+    <textarea id="input" placeholder="Beispiel: Meeting am 09. August 2023 in Zug mit Frau Dr. Elena Petrova, CEO der neu gegründeten Innovatech Spinoff GmbH, einer Tochtergesellschaft der Tech Holding AG. Wir haben die Kontoeröffnungsunterlagen für ein CHF- und ein EUR-Konto finalisiert. Das Stammkapital wird auf das Konto CH77 0090 0999 8888 7777 1 einbezahlt. Der E-Banking-Vertrag mit Lesezugriff für den CFO, Herrn Paul Schmidt (p.schmidt@innovatech.ch), wurde ebenfalls aufgesetzt."></textarea>
+    <div class="controls">
+      <button id="run-all">Run All</button>
+      <button class="secondary" data-pipeline="cascade">Run Cascade only</button>
+      <button class="secondary" data-pipeline="regex">Run Regex only</button>
+      <button class="secondary" data-pipeline="bert">Run BERT only</button>
+      <button class="secondary" data-pipeline="llm">Run LLM Tag only</button>
+      <button class="secondary" data-pipeline="rewrite">Run LLM Rewrite only</button>
+      <button class="secondary" id="example-btn">Load example</button>
+      <button class="secondary" id="clear-btn">Clear</button>
+    </div>
+    <div class="legend">
+      Categories:
+      <span class="ent-PER">PER</span><span class="ent-LOC">LOC</span><span class="ent-ORG">ORG</span><span class="ent-DATE">DATE</span><span class="ent-EMAIL">EMAIL</span><span class="ent-PHONE">PHONE</span><span class="ent-IBAN">IBAN</span><span class="ent-MONEY">MONEY</span><span class="ent-JOB">JOB</span><span class="ent-AGE">AGE</span><span class="ent-NATION">NATION</span><span class="ent-EDU">EDU</span>
+    </div>
+  </div>
+
+  <div class="section-heading">Recommended comparison &mdash; tag-and-replace vs. rewrite paradigms</div>
+  <div class="featured-row">
+    <div class="panel featured" id="panel-cascade">
+      <h2>Cascade &mdash; Regex &rarr; BERT &rarr; Llama-3</h2>
+      <div class="meta">Tag-and-replace. Each stage adds only what the earlier stages missed; earlier stages win on overlap. Underline indicates which stage caught each entity (gray=regex, blue=BERT, red=LLM).</div>
+      <div class="section-label">Highlighted</div>
+      <div class="text-box" id="hi-cascade"><span class="status">No run yet.</span></div>
+      <div class="section-label">Masked output</div>
+      <div class="text-box" id="mk-cascade"><span class="status">No run yet.</span></div>
+      <div class="attack-section">
+        <button class="attack-btn" data-attack="cascade" disabled>&#9658; Run privacy attack</button>
+        <div class="attack-display" id="attack-cascade"></div>
+      </div>
+    </div>
+    <div class="panel featured" id="panel-rewrite">
+      <h2>Llama-3 8B &mdash; Rewrite</h2>
+      <div class="meta">Fluent paraphrase &mdash; higher hallucination/leak risk</div>
+      <div class="section-label">Rewritten text</div>
+      <div class="text-box" id="rw-rewrite"><span class="status">No run yet.</span></div>
+      <div class="attack-section">
+        <button class="attack-btn" data-attack="rewrite" disabled>&#9658; Run privacy attack</button>
+        <div class="attack-display" id="attack-rewrite"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-heading secondary">Component pipelines</div>
+  <div class="results" id="component-pipelines">
+    <div class="panel" id="panel-regex">
+      <h2>1. Regex</h2>
+      <div class="meta">Tier 2 only &mdash; structured patterns</div>
+      <div class="section-label">Highlighted</div>
+      <div class="text-box" id="hi-regex"><span class="status">No run yet.</span></div>
+      <div class="section-label">Masked output</div>
+      <div class="text-box" id="mk-regex"><span class="status">No run yet.</span></div>
+    </div>
+    <div class="panel" id="panel-bert">
+      <h2>2. BERT (pretrained)</h2>
+      <div class="meta">Tier 1 + Tier 2 &mdash; PER/LOC/ORG + regex</div>
+      <div class="section-label">Highlighted</div>
+      <div class="text-box" id="hi-bert"><span class="status">No run yet.</span></div>
+      <div class="section-label">Masked output</div>
+      <div class="text-box" id="mk-bert"><span class="status">No run yet.</span></div>
+    </div>
+    <div class="panel" id="panel-llm">
+      <h2>3. Llama-3 8B &mdash; Tag &amp; Replace</h2>
+      <div class="meta">All tiers &mdash; entity-level masking</div>
+      <div class="section-label">Highlighted</div>
+      <div class="text-box" id="hi-llm"><span class="status">No run yet.</span></div>
+      <div class="section-label">Masked output</div>
+      <div class="text-box" id="mk-llm"><span class="status">No run yet.</span></div>
+    </div>
+  </div>
+
+  <details class="debug-panel" id="debug-panel">
+    <summary>Debug log (raw LLM ground-truth and adversary output)</summary>
+    <div class="debug-controls">
+      <button class="secondary" id="debug-refresh">Refresh log</button>
+    </div>
+    <pre id="debug-log">&lt;click "Refresh log" to load&gt;</pre>
+  </details>
+</main>
+
+<script>
+const EXAMPLE = "Meeting am 09. August 2023 in Zug mit Frau Dr. Elena Petrova, CEO der neu gegründeten Innovatech Spinoff GmbH, einer Tochtergesellschaft der Tech Holding AG. Wir haben die Kontoeröffnungsunterlagen für ein CHF- und ein EUR-Konto finalisiert. Das Stammkapital wird auf das Konto CH77 0090 0999 8888 7777 1 einbezahlt. Der E-Banking-Vertrag mit Lesezugriff für den CFO, Herrn Paul Schmidt (p.schmidt@innovatech.ch), wurde ebenfalls aufgesetzt.";
+
+function escapeHtml(s) {
+  return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+
+function highlight(text, entities, showSource) {
+  if (!entities || entities.length === 0) return escapeHtml(text);
+  const sorted = entities.slice().sort((a, b) => a.start - b.start);
+  let out = '', cursor = 0;
+  for (const e of sorted) {
+    if (e.start < cursor) continue;  // skip overlaps
+    out += escapeHtml(text.slice(cursor, e.start));
+    const srcCls = (showSource && e.source) ? ` src-${e.source}` : '';
+    const srcLbl = (showSource && e.source) ? `/${e.source}` : '';
+    out += `<span class="ent ent-${e.label}${srcCls}">${escapeHtml(e.text)}<span class="lbl">${e.label}${srcLbl}</span></span>`;
+    cursor = e.end;
+  }
+  out += escapeHtml(text.slice(cursor));
+  return out;
+}
+
+async function runPipeline(name, text) {
+  const isRewrite = (name === 'rewrite');
+  const hi = isRewrite ? null : document.getElementById('hi-' + name);
+  const mk = isRewrite ? null : document.getElementById('mk-' + name);
+  const rw = isRewrite ? document.getElementById('rw-rewrite') : null;
+
+  if (isRewrite) {
+    rw.innerHTML = '<span class="status">Running... (model may need to load on first request)</span>';
+  } else {
+    hi.innerHTML = '<span class="status">Running... (model may need to load on first request)</span>';
+    mk.innerHTML = '<span class="status">...</span>';
+  }
+  // Disable attack button until pipeline finishes successfully
+  const attackBtn = document.querySelector(`.attack-btn[data-attack="${name}"]`);
+  if (attackBtn) attackBtn.disabled = true;
+  const attackDisplay = document.getElementById('attack-' + name);
+  if (attackDisplay) attackDisplay.innerHTML = '';
+
+  try {
+    const resp = await fetch('/anonymize/' + name, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ text }),
+    });
+    const data = await resp.json();
+    if (data.error) {
+      const target = isRewrite ? rw : hi;
+      target.innerHTML = `<span class="error">Error: ${escapeHtml(data.error)}</span>`;
+      if (mk) mk.innerHTML = '';
+      return;
+    }
+    if (isRewrite) {
+      rw.textContent = data.rewritten;
+      document.querySelector('#panel-rewrite .meta').innerHTML +=
+        ` &mdash; ${data.elapsed_ms} ms`;
+    } else {
+      const isCascade = (name === 'cascade');
+      hi.innerHTML = highlight(text, data.entities, isCascade);
+      mk.textContent = data.masked;
+      let meta = ` &mdash; <b>${data.count}</b> entities, ${data.elapsed_ms} ms`;
+      if (isCascade && data.breakdown) {
+        meta += ` (${data.breakdown.regex} regex + ${data.breakdown.bert} BERT + ${data.breakdown.llm} LLM)`;
+      }
+      document.querySelector('#panel-' + name + ' .meta').innerHTML += meta;
+    }
+    // Enable attack button (only for cascade and rewrite, where the button exists)
+    if (attackBtn) attackBtn.disabled = false;
+  } catch (e) {
+    const target = isRewrite ? rw : hi;
+    target.innerHTML = `<span class="error">Network error: ${escapeHtml(String(e))}</span>`;
+  }
+}
+
+// Adversarial inference attack: extract 7 attributes from original (ground
+// truth) and from anonymized text (attack), then compare per attribute.
+const ATTR_LABELS = {
+  person:       'Person',
+  organization: 'Organization',
+  age:          'Age',
+  location:     'Location',
+  occupation:   'Occupation',
+  education:    'Education',
+  nationality:  'Nationality',
+};
+
+function fmtAttr(value) {
+  if (value === null || value === undefined) return '—';
+  if (Array.isArray(value)) return value.length ? value.join(', ') : '—';
+  const s = String(value).trim();
+  if (!s || s.toLowerCase() === 'unknown') return '—';
+  return s;
+}
+
+function renderAttackResults(data) {
+  let rows = '';
+  for (const key of Object.keys(ATTR_LABELS)) {
+    const gt = fmtAttr(data.ground_truth ? data.ground_truth[key] : null);
+    const guess = fmtAttr(data.attack_guesses ? data.attack_guesses[key] : null);
+    const matched = !!(data.matches && data.matches[key]);
+    const icon = matched
+      ? '<span class="match-yes">&#10003; leak</span>'
+      : '<span class="match-no">&#10007; safe</span>';
+    rows += `<tr><td><b>${ATTR_LABELS[key]}</b></td>
+              <td>${escapeHtml(gt)}</td>
+              <td>${escapeHtml(guess)}</td>
+              <td>${icon}</td></tr>`;
+  }
+  const leaks = data.leak_count || 0;
+  const total = data.total || 7;
+  const summaryClass = leaks === 0 ? 'good' : 'bad';
+  const summaryText = leaks === 0
+    ? `<b>0 of ${total}</b> attributes leaked &mdash; adversary could not infer the subject (${data.elapsed_ms} ms)`
+    : `<b>${leaks} of ${total}</b> attributes still inferable by the adversary (${data.elapsed_ms} ms)`;
+  return `
+    <table class="attack-table">
+      <thead><tr><th>Attribute</th><th>Ground truth</th><th>Adversary guess</th><th>Result</th></tr></thead>
+      <tbody>${rows}</tbody>
+    </table>
+    <div class="attack-summary ${summaryClass}">${summaryText}</div>
+  `;
+}
+
+async function runAttack(panelType) {
+  const original = document.getElementById('input').value.trim();
+  if (!original) { alert('No input text.'); return; }
+  let anonymized;
+  if (panelType === 'cascade') {
+    anonymized = document.getElementById('mk-cascade').textContent || '';
+  } else if (panelType === 'rewrite') {
+    anonymized = document.getElementById('rw-rewrite').textContent || '';
+  }
+  if (!anonymized || /^(No run yet|Running|\.\.\.)/.test(anonymized.trim())) {
+    alert('Run the pipeline first.');
+    return;
+  }
+
+  const btn = document.querySelector(`.attack-btn[data-attack="${panelType}"]`);
+  const display = document.getElementById('attack-' + panelType);
+  btn.disabled = true;
+  display.innerHTML = '<span class="status">Running attack... (~60&ndash;90 s; three LLM calls: ground truth, adversary, judge).</span>';
+
+  try {
+    const resp = await fetch('/attack', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ original, anonymized }),
+    });
+    const data = await resp.json();
+    if (data.error) {
+      display.innerHTML = `<span class="error">Error: ${escapeHtml(data.error)}</span>`;
+    } else {
+      display.innerHTML = renderAttackResults(data);
+    }
+  } catch (e) {
+    display.innerHTML = `<span class="error">Network error: ${escapeHtml(String(e))}</span>`;
+  } finally {
+    btn.disabled = false;
+  }
+}
+
+document.querySelectorAll('.attack-btn').forEach(btn => {
+  btn.addEventListener('click', () => runAttack(btn.dataset.attack));
+});
+
+// Debug log panel — fetches the server-side attack_debug.log on demand.
+async function refreshDebugLog() {
+  const target = document.getElementById('debug-log');
+  target.textContent = 'Loading...';
+  try {
+    const resp = await fetch('/attack_log');
+    const text = await resp.text();
+    target.textContent = text || '<log is empty>';
+    // Scroll the pre to the bottom so the most recent entry is visible
+    target.scrollTop = target.scrollHeight;
+  } catch (e) {
+    target.textContent = 'Error loading log: ' + String(e);
+  }
+}
+document.getElementById('debug-refresh').addEventListener('click', refreshDebugLog);
+// Auto-refresh after every attack run (debug panel still hidden by default)
+const _origRunAttack = runAttack;
+runAttack = async function(panelType) {
+  await _origRunAttack(panelType);
+  refreshDebugLog();
+};
+
+function resetMeta() {
+  // Map by panel id so the reset works regardless of DOM order
+  const fresh = {
+    'panel-cascade': 'Each stage adds only what the earlier stages missed; earlier stages win on overlap. Underline indicates which stage caught each entity (gray=regex, blue=BERT, red=LLM).',
+    'panel-regex':   'Tier 2 only &mdash; structured patterns',
+    'panel-bert':    'Tier 1 + Tier 2 &mdash; PER/LOC/ORG + regex',
+    'panel-llm':     'All tiers &mdash; entity-level masking',
+    'panel-rewrite': 'Fluent paraphrase &mdash; higher hallucination/leak risk',
+  };
+  for (const [id, html] of Object.entries(fresh)) {
+    const el = document.querySelector('#' + id + ' .meta');
+    if (el) el.innerHTML = html;
+  }
+}
+
+document.getElementById('run-all').addEventListener('click', async () => {
+  const text = document.getElementById('input').value.trim();
+  if (!text) { alert('Please paste some text first.'); return; }
+  resetMeta();
+  // Run regex + bert in parallel (fast); the three LLM-based pipelines (tag,
+  // rewrite, cascade) share the same model so they must run sequentially.
+  await Promise.all([runPipeline('regex', text), runPipeline('bert', text)]);
+  await runPipeline('llm', text);
+  await runPipeline('rewrite', text);
+  await runPipeline('cascade', text);
+});
+
+document.querySelectorAll('button[data-pipeline]').forEach(btn => {
+  btn.addEventListener('click', async () => {
+    const text = document.getElementById('input').value.trim();
+    if (!text) { alert('Please paste some text first.'); return; }
+    resetMeta();
+    await runPipeline(btn.dataset.pipeline, text);
+  });
+});
+
+document.getElementById('example-btn').addEventListener('click', () => {
+  document.getElementById('input').value = EXAMPLE;
+});
+
+document.getElementById('clear-btn').addEventListener('click', () => {
+  // Reset input
+  document.getElementById('input').value = '';
+  // Reset all panel content (highlighted + masked + rewritten)
+  const noRun = '<span class="status">No run yet.</span>';
+  ['regex', 'bert', 'llm', 'cascade'].forEach(name => {
+    const hi = document.getElementById('hi-' + name);
+    const mk = document.getElementById('mk-' + name);
+    if (hi) hi.innerHTML = noRun;
+    if (mk) mk.innerHTML = noRun;
+  });
+  const rw = document.getElementById('rw-rewrite');
+  if (rw) rw.innerHTML = noRun;
+  // Reset meta lines (timing, counts)
+  resetMeta();
+  // Clear attack displays and disable attack buttons
+  document.querySelectorAll('.attack-display').forEach(d => d.innerHTML = '');
+  document.querySelectorAll('.attack-btn').forEach(b => b.disabled = true);
+});
+</script>
+
+</body>
+</html>
