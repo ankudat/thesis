@@ -14,7 +14,7 @@ load_dotenv()
 API_KEY = os.getenv("GEMINI_API_KEY")
 
 if not API_KEY:
-    raise ValueError("API Key not found! Please check your .env file.")
+    raise ValueError("API key not found. Set GEMINI_API_KEY in the environment or in a .env file.")
 
 # DATASET SETTINGS
 TOTAL_SAMPLES_NEEDED = 3000

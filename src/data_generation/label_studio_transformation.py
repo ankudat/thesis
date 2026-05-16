@@ -4,7 +4,7 @@ import os
 # ==========================================
 # 1. CONFIGURATION
 # ==========================================
-# Input: The raw data from your Gemini generator
+# Input: The raw data from the Gemini generator
 INPUT_FILE = r"C:\thesis\data\processed\german_financial_data_cleaned.json"
 # Output: The specific file to upload to Label Studio
 OUTPUT_FILE = r"C:\thesis\data\processed\label_studio_final_import.json"
