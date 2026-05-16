@@ -23,10 +23,10 @@ Implements two complementary evaluations:
 
   C) ATTACK PROTOCOL:
      1. Ground-truth extraction: an LLM extracts true attribute values
-        (age, location, occupation, education, nationality, organization)
+        (person, age, location, occupation, education, nationality, organization)
         from the ORIGINAL text. Cached on disk – pipeline-independent.
         Attribute set is aligned with the thesis 12-entity schema
-        (Tier-3 quasi-identifiers + LOC + ORG from Tier-1).
+        (Tier-3 quasi-identifiers + PER + LOC + ORG from Tier-1).
      2. Adversarial inference: an LLM "adversary" sees ONLY the anonymized
         text and is asked to infer the same attributes via chain-of-thought.
         It returns a top-3 guess list per attribute plus a confidence score.
@@ -40,7 +40,7 @@ Implements two complementary evaluations:
 Results are reported per pipeline, per complexity level, and overall.
 
 Usage:
-    1. Set your Gemini API key: set GEMINI_API_KEY=your_key_here
+    1. Provide GEMINI_API_KEY in the environment: set GEMINI_API_KEY=your_key_here
        (or set GOOGLE_API_KEY=your_key_here)
     2. Adjust paths in USER SETTINGS below
     3. Run: python llm_judge_gemini.py
@@ -101,6 +101,16 @@ SEED     = 42
 # Paid tier: 2000 RPM → 0.5s is fine
 API_DELAY = 0.5    # Set to 4.5 for free tier, 0.5 for paid tier
 
+# ── Spending cap (running cost meter) ──
+# Track cumulative Gemini cost from response.usage_metadata. Print a running
+# total every COST_PRINT_EVERY calls, and HARD-STOP the script if it ever
+# exceeds MAX_SPEND_USD. This is best-effort (depends on SDK exposing token
+# counts); the authoritative cap is the Google Cloud project budget alert.
+GEMINI_PRICE_INPUT_PER_1M  = 0.30   # USD per 1M input tokens (Gemini 2.5 Flash text)
+GEMINI_PRICE_OUTPUT_PER_1M = 2.50   # USD per 1M output tokens (Gemini 2.5 Flash text)
+MAX_SPEND_USD              = 100.0   # Hard cap; raise SystemExit if cumulative cost exceeds this
+COST_PRINT_EVERY           = 50     # Print running total every N successful calls
+
 # ── Adversarial inference attack settings (Staab et al., ICLR 2025) ──
 # When True, runs the empirical attack alongside the LLM-as-judge ratings.
 # The attack adds ~3 API calls per (document, pipeline) pair:
@@ -109,18 +119,39 @@ API_DELAY = 0.5    # Set to 4.5 for free tier, 0.5 for paid tier
 #   - 1 LLM match-judging call (compares GT vs. attacker top-3 guesses)
 RUN_ATTACK = True
 
-# Quasi-identifier attributes the adversary attempts to infer.
+# Attributes the adversary attempts to infer.
 # Aligned with the thesis 12-entity schema (TIER1_DIRECT_NER ∪ TIER3_QUASI):
-#   age          ↔ AGE     (Tier 3)
-#   location     ↔ LOC     (Tier 1)
-#   occupation   ↔ JOB     (Tier 3)
-#   education    ↔ EDU     (Tier 3)
-#   nationality  ↔ NATION  (Tier 3)
-#   organization ↔ ORG     (Tier 1) — employer / primary affiliation
+#   person       ↔ PER     (Tier 1) — list of ALL personal names mentioned in the text
+#                                     (clients, advisors, family members, anyone)
+#   age          ↔ AGE     (Tier 3) — main client only
+#   location     ↔ LOC     (Tier 1) — main client only
+#   occupation   ↔ JOB     (Tier 3) — main client only
+#   education    ↔ EDU     (Tier 3) — main client only
+#   nationality  ↔ NATION  (Tier 3) — main client only
+#   organization ↔ ORG     (Tier 1) — list of ALL organizations mentioned in the text
+#                                     (employers, schools, third parties, etc.;
+#                                      the bank that produced the note is excluded)
+# Person and organization use list-of-all-mentions semantics: an attack succeeds if
+# the adversary can identify ANY name / ANY org in the text — this captures recall
+# failures of the anonymization pipeline (any unmasked direct identifier = privacy
+# breach). The five quasi-identifier attributes (age, location, occupation, education,
+# nationality) describe the main client only — they are personal attributes, not
+# enumerable mentions.
 # (Sex is intentionally excluded: it is not part of the 12-entity schema and
 #  no pipeline attempts to mask it, so attacking it would yield ~100% leakage
 #  with no signal for comparing pipelines.)
-ATTACK_ATTRIBUTES = ["age", "location", "occupation", "education", "nationality", "organization"]
+ATTACK_ATTRIBUTES = ["person", "age", "location", "occupation", "education", "nationality", "organization"]
+
+# Tier groupings of the attack attributes (mirror the schema tiers in
+# evaluation_utils.py). Used for the tier-level breakdown in the report:
+#   Tier 1 attributes are direct identifiers with a literal surface form
+#     in the text (defendable by token-level masking).
+#   Tier 3 attributes are quasi-identifiers that typically leak through
+#     surrounding context rather than a single tagged token.
+# Tier 2 (IBAN/EMAIL/PHONE/DATE/MONEY) is not adversarially attacked because
+# those entities are structured identifiers without inference targets.
+TIER1_ATTACK_ATTRIBUTES = ["person", "location", "organization"]
+TIER3_ATTACK_ATTRIBUTES = ["age", "occupation", "education", "nationality"]
 
 # Output paths for the attack (separate from the judge outputs)
 ATTACK_OUTPUT_DIR   = os.path.join(BASE_DIR, "results", "llm_judge_gemini", "adversarial_attack")
@@ -179,12 +210,113 @@ def create_gemini_client():
     return client
 
 
-def call_gemini(client, prompt: str, model: str = GEMINI_MODEL, temperature: float = 0.1) -> str:
+# ── Running cost meter (module-level state) ──
+_cost_state = {
+    "total_calls":         0,
+    "total_input_tokens":  0,
+    "total_output_tokens": 0,
+    "total_cost_usd":      0.0,
+}
+
+
+def _track_cost(response) -> None:
+    """
+    Update the running cost meter from a Gemini response's usage_metadata.
+    Prints a running total every COST_PRINT_EVERY calls and raises SystemExit
+    if cumulative spend exceeds MAX_SPEND_USD.
+    """
+    usage = getattr(response, "usage_metadata", None)
+    if usage is None:
+        return
+    in_toks  = getattr(usage, "prompt_token_count",      0) or 0
+    out_toks = getattr(usage, "candidates_token_count",  0) or 0
+    cost = (
+        in_toks  * GEMINI_PRICE_INPUT_PER_1M  / 1_000_000
+        + out_toks * GEMINI_PRICE_OUTPUT_PER_1M / 1_000_000
+    )
+    _cost_state["total_calls"]         += 1
+    _cost_state["total_input_tokens"]  += in_toks
+    _cost_state["total_output_tokens"] += out_toks
+    _cost_state["total_cost_usd"]      += cost
+
+    n = _cost_state["total_calls"]
+    if n % COST_PRINT_EVERY == 0:
+        print(
+            f"  [cost] {n:>5} calls — "
+            f"input {_cost_state['total_input_tokens']:>10,} tok, "
+            f"output {_cost_state['total_output_tokens']:>9,} tok, "
+            f"${_cost_state['total_cost_usd']:.3f} spent"
+        )
+
+    if _cost_state["total_cost_usd"] > MAX_SPEND_USD:
+        print(
+            f"\n*** SPENDING CAP REACHED: ${_cost_state['total_cost_usd']:.3f} "
+            f"exceeds MAX_SPEND_USD=${MAX_SPEND_USD:.2f} ***"
+        )
+        print(
+            f"*** {n} calls made; "
+            f"input {_cost_state['total_input_tokens']:,} tok, "
+            f"output {_cost_state['total_output_tokens']:,} tok ***"
+        )
+        print("*** Script halted. Raise MAX_SPEND_USD at the top of the file to continue. ***")
+        raise SystemExit(1)
+
+
+def print_cost_summary() -> None:
+    """Print the final running-cost meter summary at end of run."""
+    print(f"\n{'─' * 60}")
+    print(f"  Total Gemini API spend (this run)")
+    print(f"{'─' * 60}")
+    print(f"  Calls:         {_cost_state['total_calls']:,}")
+    print(f"  Input tokens:  {_cost_state['total_input_tokens']:,}")
+    print(f"  Output tokens: {_cost_state['total_output_tokens']:,}")
+    print(f"  Estimated cost: ${_cost_state['total_cost_usd']:.3f} USD "
+          f"(cap was ${MAX_SPEND_USD:.2f})")
+    print(f"{'─' * 60}")
+
+
+def call_gemini(
+    client,
+    prompt: str,
+    model: str = GEMINI_MODEL,
+    temperature: float = 0.1,
+    thinking: bool = True,
+) -> str:
     """
     Call the Gemini API with a prompt and return the text response.
     Includes retry logic for rate limiting.
+
+    `thinking` controls Gemini 2.5 Flash's hidden chain-of-thought:
+      - True  (default): reasoning ON. Used for the LLM-as-judge calls so new
+                         scores remain on the same scale as the existing
+                         per-pipeline judge files (which were generated with
+                         reasoning ON before reasoning was made configurable).
+      - False           : reasoning OFF (thinking_budget=0). Used for the
+                         adversarial attack pipeline (ground-truth extraction,
+                         adversarial inference, match-judging). Saves 5–15s
+                         of latency per call across ~16k calls; the attack
+                         prompt already produces explicit visible reasoning,
+                         so hidden CoT is mostly redundant.
     """
     from google.genai import types
+
+    config_kwargs = {
+        "temperature": temperature,
+        "max_output_tokens": 2048,
+    }
+    if not thinking:
+        # ThinkingConfig was added to google-genai in mid-2025. On older SDKs
+        # the attribute is missing; warn once and fall through (reasoning stays on).
+        if hasattr(types, "ThinkingConfig"):
+            config_kwargs["thinking_config"] = types.ThinkingConfig(thinking_budget=0)
+        else:
+            if not getattr(call_gemini, "_no_thinking_config_warned", False):
+                print(
+                    "  Warning: installed google-genai SDK has no ThinkingConfig — "
+                    "reasoning cannot be disabled on this version.\n"
+                    "  Run: pip install -U google-genai   (recommended for ~4× speedup)"
+                )
+                call_gemini._no_thinking_config_warned = True
 
     max_retries = 3
     for attempt in range(max_retries):
@@ -192,11 +324,10 @@ def call_gemini(client, prompt: str, model: str = GEMINI_MODEL, temperature: flo
             response = client.models.generate_content(
                 model=model,
                 contents=prompt,
-                config=types.GenerateContentConfig(
-                    temperature=temperature,
-                    max_output_tokens=4096,
-                ),
+                config=types.GenerateContentConfig(**config_kwargs),
             )
+            # Update running cost meter (may raise SystemExit if spend cap reached)
+            _track_cost(response)
             return response.text.strip() if response.text else ""
 
         except Exception as e:
@@ -672,66 +803,109 @@ def build_ground_truth_prompt(original_text: str) -> str:
     """Extract true attribute values from the ORIGINAL (un-anonymized) text."""
     return (
         "You are an information-extraction assistant for German banking texts.\n"
-        "From the text below, extract attribute values about the main client/individual.\n"
-        "Use exactly null (no quotes) when an attribute is NOT present or cannot be inferred.\n\n"
+        "From the text below, extract the requested attribute values.\n"
+        "  - 'person' and 'organization' are LISTS of every name / every organization\n"
+        "    mentioned in the text (not just the main client).\n"
+        "  - All other attributes (age, location, occupation, education, nationality)\n"
+        "    describe the MAIN CLIENT — the individual the note is centered on.\n"
+        "Use exactly null (no quotes) for single-valued attributes that are NOT present\n"
+        "or cannot be inferred. Use [] (empty array) for person / organization when none\n"
+        "is mentioned.\n\n"
         "Attributes to extract:\n"
-        "- age: integer age (e.g., 47); null if not stated\n"
+        "- person: JSON ARRAY of EVERY personal name mentioned in the text — clients, advisors,\n"
+        "  employees, family members, friends, anyone. Each entry should be the most complete form\n"
+        "  found (full name preferred over just surname). Use [] if no person is mentioned.\n"
+        "  Examples: [\"Hans Müller\"]  →  one person.\n"
+        "            [\"Hans Müller\", \"Anna Bernasconi\", \"Dr. Lukas Schmid\"]  →  three persons.\n"
+        "            []  →  no person mentioned.\n"
+        "- age: integer age of the main client (e.g., 47); null if not stated\n"
         "- location: city, town, region, or canton (e.g., Zürich, Bern, Aargau); null if absent\n"
         "- occupation: job title or profession (e.g., Anwalt, Software Engineer, Pflegerin); null if absent\n"
         '- education: highest education stated (e.g., "Lehre", "Bachelor", "Master", "Doktorat"); null if absent\n'
         "- nationality: country/region of origin or citizenship (e.g., Schweiz, Deutschland, Italien); null if absent\n"
-        "- organization: employer or primary organizational affiliation of the client\n"
-        "  (e.g., Novartis, ABB, UBS, Stadt Zürich, Universität Zürich); null if absent.\n"
-        "  Do NOT use the bank itself as the organization — extract the CLIENT's employer/affiliation only.\n\n"
+        "- organization: JSON ARRAY of EVERY organization name mentioned in the text — employers,\n"
+        "  schools/universities, companies, public institutions, NGOs, anyone. Each entry should be\n"
+        "  the most complete form found. Use [] if no organization is mentioned.\n"
+        "  Do NOT include the bank itself that produced the note (the bank is the SENDER, not part\n"
+        "  of the client's affiliations). DO include all other organizations: client's employer,\n"
+        "  third-party companies referenced, schools, government bodies, etc.\n"
+        "  Examples: [\"Novartis\"]                                     → one organization.\n"
+        "            [\"Novartis\", \"ETH Zürich\", \"Stadt Zürich\"]   → three organizations.\n"
+        "            []                                                → no organization mentioned.\n\n"
         "═══════════════════════════════════════════════\n"
         f"ORIGINAL TEXT:\n{original_text}\n"
         "═══════════════════════════════════════════════\n\n"
         "Respond ONLY with a JSON object, no other text:\n"
-        '{"age": <int or null>, "location": <string or null>, '
-        '"occupation": <string or null>, "education": <string or null>, '
-        '"nationality": <string or null>, "organization": <string or null>}'
+        '{"person": <array of strings>, "age": <int or null>, '
+        '"location": <string or null>, "occupation": <string or null>, '
+        '"education": <string or null>, "nationality": <string or null>, '
+        '"organization": <array of strings>}'
     )
 
 
 def build_attack_prompt(anonymized_text: str) -> str:
     """
     Adversarial inference prompt (Staab et al., ICLR 2025).
-    The adversary sees ONLY the anonymized text and must infer attributes
-    of the underlying individual using contextual clues.
+    The adversary sees ONLY the anonymized text and must infer:
+      - direct identifiers as lists (any person name / any organization mentioned)
+      - quasi-identifiers of the main client (age, location, occupation,
+        education, nationality)
     """
     return (
-        "You are an expert investigator attempting to re-identify the main "
-        "individual from an anonymized German banking text. The text has had "
-        "personally identifiable information replaced with placeholders such as "
-        "[PER], [LOC], [ORG], [JOB], [DATE], [MONEY], [IBAN], [EMAIL], [PHONE], "
-        "[AGE], [NATION], [EDU].\n\n"
-        "You do NOT have access to the original text. Use ONLY what remains in "
-        "the anonymized text — linguistic patterns, financial details, occupational "
-        "hints, geographic references, monetary amounts, dates, behavioral clues, "
-        "and any indirect signals. Even when explicit identifiers are masked, "
-        "residual context often leaks information about the underlying person.\n\n"
+        "You are an expert investigator attempting to re-identify information "
+        "from an anonymized German banking text. The text has been anonymized "
+        "to remove personally identifiable information (PII).\n\n"
+        "Two anonymization styles are possible — handle whichever you encounter:\n"
+        "  (a) TAG-AND-REPLACE — PII spans replaced with bracketed placeholders such\n"
+        "      as [PER], [LOC], [ORG], [JOB], [DATE], [MONEY], [IBAN], [EMAIL],\n"
+        "      [PHONE], [AGE], [NATION], [EDU]. The text around them is otherwise unchanged.\n"
+        "  (b) PROMPT-REWRITE — text rewritten in fluent prose with PII removed or\n"
+        "      generalized (e.g., \"works at a large pharma company in Basel\" instead\n"
+        "      of \"works at Novartis in Basel\"; \"a man in his late 40s\" instead of\n"
+        "      \"Herr Müller, 47\"). No bracketed tags appear in this style.\n\n"
+        "You do NOT have access to the original text. Use ONLY what remains in the "
+        "anonymized text — linguistic patterns, financial details, occupational hints, "
+        "geographic references, monetary amounts, dates, behavioral clues, and any "
+        "indirect signals. In rewrites especially, the GENERALIZED PHRASING ITSELF is a "
+        "strong clue (e.g., \"large pharma company in Basel\" is almost certainly Novartis "
+        "or Roche; \"Schweizer Privatbank in Zürich\" narrows down hard). Even when explicit "
+        "identifiers are masked or paraphrased, residual context often leaks information "
+        "about the underlying person.\n\n"
         "INSTRUCTIONS:\n"
         "1. First, identify all clues in the text (linguistic register, financial\n"
         "   amounts, products mentioned, regional dialect/idioms, professional jargon,\n"
-        "   context of the conversation, life events, etc.).\n"
+        "   context of the conversation, life events, generalized paraphrases, etc.).\n"
         "2. For EACH attribute below, reason from those clues to your best estimates.\n"
         "3. Return your TOP-3 guesses ranked by likelihood (most likely first).\n"
         "4. Rate confidence 1–5 (5 = strong textual evidence, 1 = pure guess).\n"
         "5. Cite the specific clue(s) you used in 1 sentence.\n\n"
         "Attributes to infer:\n"
+        "- person: full name of ANY person mentioned in the underlying text (client, advisor,\n"
+        "  family member, or anyone else). Provide your top-3 best name guesses — they may target\n"
+        "  the same person or different ones. Inference counts as successful if any of your\n"
+        "  guesses matches the surname of any real person in the original text.\n"
+        "  Note: in tag-and-replace this is usually impossible unless the pipeline failed to mask\n"
+        "  a name; in prompt-rewrite the rewrite may still hint at gender/ethnicity via salutation\n"
+        "  or pronouns. If no usable signal exists, output 3 plausible-but-uncertain guesses with\n"
+        "  confidence 1.\n"
         "- age: integer age (e.g., 45) or tight range (e.g., 40-50)\n"
         "- location: city / town / region / canton\n"
         "- occupation: job title or profession\n"
         '- education: educational level (e.g., "Lehre", "Bachelor", "Master")\n'
         "- nationality: country / region of origin or citizenship\n"
-        "- organization: employer or primary organizational affiliation of the underlying client\n"
-        "  (e.g., Novartis, ABB, UBS, Stadt Zürich, Universität Zürich).\n"
-        "  Do NOT name the bank that produced the text — guess the CLIENT's employer/affiliation.\n\n"
+        "- organization: any organization referenced in the underlying text (employer of the\n"
+        "  client, school/university, third-party companies, public institutions, etc.).\n"
+        "  Provide your top-3 best org guesses — they may target the same organization or\n"
+        "  different ones. Inference counts as successful if any of your guesses matches any\n"
+        "  organization in the original text.\n"
+        "  Do NOT name the bank that produced the text itself — that is the SENDER, not part\n"
+        "  of the inference target.\n\n"
         "═══════════════════════════════════════════════\n"
         f"ANONYMIZED TEXT:\n{anonymized_text}\n"
         "═══════════════════════════════════════════════\n\n"
         "Respond ONLY with a JSON object, no other text:\n"
         "{\n"
+        '  "person":       {"guesses": [<g1>, <g2>, <g3>], "confidence": <1-5>, "reasoning": "<1 sentence>"},\n'
         '  "age":          {"guesses": [<g1>, <g2>, <g3>], "confidence": <1-5>, "reasoning": "<1 sentence>"},\n'
         '  "location":     {"guesses": [<g1>, <g2>, <g3>], "confidence": <1-5>, "reasoning": "<1 sentence>"},\n'
         '  "occupation":   {"guesses": [<g1>, <g2>, <g3>], "confidence": <1-5>, "reasoning": "<1 sentence>"},\n'
@@ -759,34 +933,67 @@ def build_match_judge_prompt(ground_truth: Dict, attacker_guesses: Dict) -> str:
         "guesses semantically matches the ground-truth value extracted from the "
         "original text.\n\n"
         "MATCHING RUBRIC (per attribute):\n"
-        "- age:          ±5 years tolerance; overlapping range counts (e.g. 47 vs. 45-50 → MATCH).\n"
-        "- location:     same city/town OR same canton OR a clearly equivalent variant\n"
-        "                (e.g. Zürich ↔ Zurich ↔ ZH → MATCH). A strict regional ancestor\n"
-        "                that is much broader than the GT does NOT match\n"
-        "                (e.g. 'Schweiz' for GT 'Bern' → NO_MATCH).\n"
-        "- occupation:   same general profession or close job category\n"
+        "- person:       Ground truth is a LIST of all personal names mentioned in the original\n"
+        "                text. The attacker provides up to 3 ranked guesses. MATCH if the surname\n"
+        "                of ANY attacker guess equals the surname of ANY name in the GT list\n"
+        "                (case- and accent-insensitive; treat ä↔ae, ö↔oe, ü↔ue, ß↔ss as equivalent).\n"
+        "                Examples:\n"
+        "                  GT ['Hans Müller'],                guess 'Müller'    → MATCH\n"
+        "                  GT ['Müller'],                     guess 'Mueller'   → MATCH (transliteration)\n"
+        "                  GT ['Hans Müller', 'Anna Schmid'], guess 'Schmid'    → MATCH (matches 2nd person)\n"
+        "                  GT ['Hans Müller'],                guess 'Hans Schmid' → NO_MATCH (first name only)\n"
+        "                  GT ['Hans Müller'],                guess 'Berger'    → NO_MATCH\n"
+        "                If GT is null or [] → SKIP.\n"
+        "- age:          ±5 years tolerance OR overlapping range → MATCH (e.g. 47 vs. 45-50 → MATCH).\n"
+        "- location:     same city/town OR same canton OR a clearly equivalent variant → MATCH\n"
+        "                (e.g. Zürich ↔ Zurich ↔ ZH → MATCH).\n"
+        "                If the guess is MORE SPECIFIC than the GT and the GT is contained\n"
+        "                in the guess → MATCH (Staab et al. rule: \"London, UK\" matches GT\n"
+        "                \"United Kingdom\"; GT 'Schweiz', guess 'Bern, Schweiz' → MATCH).\n"
+        "                A strict regional ancestor that is much BROADER than the GT → NO_MATCH\n"
+        "                (e.g. GT 'Bern', guess 'Schweiz' → NO_MATCH).\n"
+        "- occupation:   same general profession or close job category → MATCH\n"
         "                (e.g. Anwalt ↔ Jurist ↔ lawyer → MATCH; Anwalt ↔ Lehrer → NO_MATCH).\n"
-        "- education:    same educational level\n"
+        "                Treat 'unemployed', 'none', 'arbeitslos', 'kein Beruf', 'keine Tätigkeit'\n"
+        "                as equivalent (Staab et al. rule).\n"
+        "                A clearly broader job-family label that does not pin down the actual\n"
+        "                profession → NO_MATCH (e.g. GT 'Anwalt', guess 'Akademiker' → NO_MATCH).\n"
+        "- education:    same educational level → MATCH\n"
         "                (e.g. Bachelor ↔ Hochschulabschluss → MATCH; Lehre ↔ Master → NO_MATCH).\n"
         "- nationality:  same country or close regional grouping → MATCH.\n"
-        "- organization: same employer/institution OR a clearly equivalent variant\n"
-        "                (e.g. UBS ↔ UBS AG ↔ UBS Switzerland → MATCH;\n"
+        "                A broader regional grouping (e.g. continent or trade bloc) → NO_MATCH\n"
+        "                (e.g. GT 'Schweiz', guess 'DACH-Region' or 'Europa' → NO_MATCH).\n"
+        "- organization: Ground truth is a LIST of all organization names mentioned in the original\n"
+        "                text. The attacker provides up to 3 ranked guesses. MATCH if ANY attacker\n"
+        "                guess names the same institution as ANY GT entry, OR is a clearly\n"
+        "                equivalent variant (e.g. UBS ↔ UBS AG ↔ UBS Switzerland → MATCH;\n"
         "                ETH Zürich ↔ ETHZ → MATCH).\n"
-        "                A pure industry/sector label that is much broader than the GT does NOT match\n"
-        "                (e.g. 'Pharma-Konzern' for GT 'Novartis' → NO_MATCH; 'Bank' for GT 'UBS' → NO_MATCH).\n\n"
+        "                Examples:\n"
+        "                  GT ['Novartis'],                guess 'Novartis'        → MATCH\n"
+        "                  GT ['Novartis', 'ETH Zürich'], guess 'ETHZ'             → MATCH (matches 2nd org)\n"
+        "                  GT ['Novartis'],                guess 'Pharma-Konzern'  → NO_MATCH (sector only)\n"
+        "                  GT ['UBS'],                     guess 'Schweizer Grossbank' → NO_MATCH (sector only)\n"
+        "                A pure industry/sector label that does not name any specific institution\n"
+        "                in the GT list → NO_MATCH.\n"
+        "                If GT is null or [] → SKIP.\n\n"
         "OUTPUT VALUES per attribute:\n"
-        '- "MATCH"    — at least one of the top-3 attacker guesses matches GT under the rubric\n'
-        '- "NO_MATCH" — none of the guesses match\n'
-        '- "SKIP"     — GT is null (the original did not contain this attribute), so the attack is not evaluable\n\n'
+        '- "MATCH"    — at least one of the attacker\'s top-3 guesses is correct under the rubric\n'
+        '- "NO_MATCH" — no guess is correct\n'
+        '- "SKIP"     — GT is null (the original did not contain this attribute);\n'
+        "               excluded from the denominator\n\n"
         "═══════════════════════════════════════════════\n"
         f"GROUND TRUTH (from original text):\n{gt_str}\n"
         "═══════════════════════════════════════════════\n"
         f"ATTACKER'S TOP-3 GUESSES (from anonymized text):\n{guesses_str}\n"
         "═══════════════════════════════════════════════\n\n"
         "Respond ONLY with a JSON object, no other text:\n"
-        '{"age": "MATCH"/"NO_MATCH"/"SKIP", "location": "MATCH"/"NO_MATCH"/"SKIP", '
-        '"occupation": "MATCH"/"NO_MATCH"/"SKIP", "education": "MATCH"/"NO_MATCH"/"SKIP", '
-        '"nationality": "MATCH"/"NO_MATCH"/"SKIP", "organization": "MATCH"/"NO_MATCH"/"SKIP"}'
+        '{"person": "MATCH"/"NO_MATCH"/"SKIP", '
+        '"age": "MATCH"/"NO_MATCH"/"SKIP", '
+        '"location": "MATCH"/"NO_MATCH"/"SKIP", '
+        '"occupation": "MATCH"/"NO_MATCH"/"SKIP", '
+        '"education": "MATCH"/"NO_MATCH"/"SKIP", '
+        '"nationality": "MATCH"/"NO_MATCH"/"SKIP", '
+        '"organization": "MATCH"/"NO_MATCH"/"SKIP"}'
     )
 
 
@@ -806,13 +1013,35 @@ def _extract_json_obj(response: str) -> Optional[Dict]:
 
 
 def parse_ground_truth_response(response: str) -> Dict:
-    """Parse the flat ground-truth attribute JSON."""
+    """Parse the flat ground-truth attribute JSON.
+
+    `person` and `organization` are lists of all names/orgs mentioned in the text
+    (empty list / null → normalized to None for SKIP semantics). All other
+    attributes are a single string or null.
+    """
+    list_attrs = {"person", "organization"}
     parsed = _extract_json_obj(response) or {}
     out = {}
     for a in ATTACK_ATTRIBUTES:
         v = parsed.get(a)
-        if isinstance(v, str) and v.strip().lower() in {"", "null", "none", "n/a", "unknown"}:
-            v = None
+        if a in list_attrs:
+            # Normalize to either a non-empty list[str] or None.
+            if v is None:
+                v = None
+            elif isinstance(v, list):
+                cleaned = [str(x).strip() for x in v if x is not None and str(x).strip()]
+                v = cleaned if cleaned else None
+            elif isinstance(v, str):
+                # Tolerate the model returning a single string instead of a list.
+                if v.strip().lower() in {"", "null", "none", "n/a", "unknown", "[]"}:
+                    v = None
+                else:
+                    v = [v.strip()]
+            else:
+                v = None
+        else:
+            if isinstance(v, str) and v.strip().lower() in {"", "null", "none", "n/a", "unknown"}:
+                v = None
         out[a] = v
     return out
 
@@ -841,9 +1070,14 @@ def parse_match_response(response: str) -> Dict[str, str]:
     """Parse the match judge response into MATCH/NO_MATCH/SKIP per attribute."""
     parsed = _extract_json_obj(response) or {}
     out = {}
+    valid = {"MATCH", "NO_MATCH", "SKIP"}
     for a in ATTACK_ATTRIBUTES:
-        v = str(parsed.get(a, "SKIP")).upper().strip()
-        if v not in {"MATCH", "NO_MATCH", "SKIP"}:
+        v = str(parsed.get(a, "SKIP")).upper().strip().replace(" ", "_")
+        # If the model still emits LESS_PRECISE despite the binary rubric,
+        # collapse it to NO_MATCH (a partial match is not a successful re-id).
+        if v in {"LESS_PRECISE", "LESSPRECISE"}:
+            v = "NO_MATCH"
+        if v not in valid:
             v = "SKIP"
         out[a] = v
     return out
@@ -873,7 +1107,7 @@ def extract_ground_truth_attributes(
     print(f"  Extracting ground-truth attributes for {len(todo)} documents...")
     for gold in tqdm(todo, desc="Ground truth"):
         prompt = build_ground_truth_prompt(gold["text"])
-        response = call_gemini(client, prompt)
+        response = call_gemini(client, prompt, thinking=False)
         cache[gold["id"]] = parse_ground_truth_response(response)
         if API_DELAY > 0:
             time.sleep(API_DELAY)
@@ -909,13 +1143,13 @@ def attack_pipeline(
             continue
 
         # Step 1: adversarial inference (sees ONLY the anonymized text)
-        attack_response = call_gemini(client, build_attack_prompt(anon_text))
+        attack_response = call_gemini(client, build_attack_prompt(anon_text), thinking=False)
         attacker_guesses = parse_attack_response(attack_response)
         if API_DELAY > 0:
             time.sleep(API_DELAY)
 
         # Step 2: LLM match judging
-        match_response = call_gemini(client, build_match_judge_prompt(gt, attacker_guesses))
+        match_response = call_gemini(client, build_match_judge_prompt(gt, attacker_guesses), thinking=False)
         match_judgment = parse_match_response(match_response)
         if not _extract_json_obj(match_response):
             parse_failures += 1
@@ -966,10 +1200,18 @@ def aggregate_attack_scores(results: List[Dict], pipeline_name: str) -> Dict:
 
     overall_per_attr = {a: _attr_stats(results, a) for a in ATTACK_ATTRIBUTES}
 
-    # "Any attribute leaked" = at least one MATCH on at least one attribute
+    def _tier_mean(per_attr: Dict, tier_attrs: List[str]) -> Optional[float]:
+        """Mean of per-attribute success rates for the attrs in `tier_attrs`."""
+        rates = [per_attr[a]["success_rate"] for a in tier_attrs
+                 if per_attr.get(a) and per_attr[a]["success_rate"] is not None]
+        return round(sum(rates) / len(rates), 3) if rates else None
+
+    # "Any attribute leaked" = at least one MATCH on at least one attribute (worst-case privacy)
     any_leak = sum(1 for r in results if any(v == "MATCH" for v in r["match"].values()))
     valid_rates = [v["success_rate"] for v in overall_per_attr.values() if v["success_rate"] is not None]
-    avg_leak_rate = round(sum(valid_rates) / len(valid_rates), 3) if valid_rates else None
+    avg_leak_rate    = round(sum(valid_rates) / len(valid_rates), 3) if valid_rates else None
+    tier1_leak_rate  = _tier_mean(overall_per_attr, TIER1_ATTACK_ATTRIBUTES)
+    tier3_leak_rate  = _tier_mean(overall_per_attr, TIER3_ATTACK_ATTRIBUTES)
 
     # Per-complexity breakdown
     by_complexity = defaultdict(list)
@@ -987,7 +1229,9 @@ def aggregate_attack_scores(results: List[Dict], pipeline_name: str) -> Dict:
         per_complexity[level] = {
             "count": len(group),
             "any_attribute_leak_rate": round(any_leak_g / len(group), 3),
-            "average_leak_rate": round(sum(rates_g) / len(rates_g), 3) if rates_g else None,
+            "average_leak_rate":       round(sum(rates_g) / len(rates_g), 3) if rates_g else None,
+            "tier1_leak_rate":         _tier_mean(per_attr_g, TIER1_ATTACK_ATTRIBUTES),
+            "tier3_leak_rate":         _tier_mean(per_attr_g, TIER3_ATTACK_ATTRIBUTES),
             "per_attribute": per_attr_g,
         }
 
@@ -997,6 +1241,8 @@ def aggregate_attack_scores(results: List[Dict], pipeline_name: str) -> Dict:
             "count":                   len(results),
             "any_attribute_leak_rate": round(any_leak / len(results), 3) if results else 0.0,
             "average_leak_rate":       avg_leak_rate,
+            "tier1_leak_rate":         tier1_leak_rate,
+            "tier3_leak_rate":         tier3_leak_rate,
             "per_attribute":           overall_per_attr,
         },
         "by_complexity": per_complexity,
@@ -1014,8 +1260,18 @@ def format_attack_report(all_results: List[Dict]) -> str:
     lines.append("=" * 78)
     lines.append("")
     lines.append("  Lower is better. success_rate = MATCH / (MATCH + NO_MATCH).")
-    lines.append("  SKIP (ground truth absent in original) is excluded from the denominator.")
+    lines.append("  evaluable = MATCH + NO_MATCH; SKIP (GT null in original) excluded from denominator.")
     lines.append("  any_leak = at least one attribute successfully inferred from the anonymized text.")
+    lines.append("")
+    lines.append("  Attribute groupings (mirroring the schema tiers in evaluation_utils.py):")
+    lines.append(f"    Tier 1 (direct identifiers):  {', '.join(TIER1_ATTACK_ATTRIBUTES)}")
+    lines.append("                                  defendable by token-level masking")
+    lines.append(f"    Tier 3 (quasi-identifiers):   {', '.join(TIER3_ATTACK_ATTRIBUTES)}")
+    lines.append("                                  leak through surrounding context, not single tokens")
+    lines.append("    Tier 2 structured identifiers (IBAN/EMAIL/PHONE/DATE/MONEY) are excluded")
+    lines.append("    from the attack since they are not inference targets.")
+    lines.append("    Tier1 / Tier3 columns are unweighted means of the per-attribute success rates")
+    lines.append("    in the corresponding tier.")
 
     # ── Summary table ──
     col_w = 6
@@ -1023,7 +1279,7 @@ def format_attack_report(all_results: List[Dict]) -> str:
     lines.append("  SUMMARY: Attack Success Rate by Pipeline")
     lines.append(f"{'#' * 78}\n")
     header = (
-        f"  {'Pipeline':<38} {'AnyLk':>6} {'AvgLk':>6} "
+        f"  {'Pipeline':<38} {'AnyLk':>6} {'AvgLk':>6} {'Tier1':>6} {'Tier3':>6} "
         + " ".join(f"{a[:5]:>{col_w}}" for a in ATTACK_ATTRIBUTES)
         + f" {'n':>5}"
     )
@@ -1035,12 +1291,14 @@ def format_attack_report(all_results: List[Dict]) -> str:
         o = result["aggregated"]["overall"]
         any_lk = f"{o['any_attribute_leak_rate']:.1%}" if o['any_attribute_leak_rate'] is not None else "n/a"
         avg_lk = f"{o['average_leak_rate']:.1%}"       if o['average_leak_rate']       is not None else "n/a"
+        t1     = f"{o.get('tier1_leak_rate'):.1%}"     if o.get('tier1_leak_rate')     is not None else "n/a"
+        t3     = f"{o.get('tier3_leak_rate'):.1%}"     if o.get('tier3_leak_rate')     is not None else "n/a"
         per_attr_strs = []
         for a in ATTACK_ATTRIBUTES:
             sr = o["per_attribute"][a]["success_rate"]
             per_attr_strs.append(f"{sr:>{col_w}.1%}" if sr is not None else f"{'n/a':>{col_w}}")
         lines.append(
-            f"  {name:<38} {any_lk:>6} {avg_lk:>6} "
+            f"  {name:<38} {any_lk:>6} {avg_lk:>6} {t1:>6} {t3:>6} "
             + " ".join(per_attr_strs)
             + f" {o['count']:>5}"
         )
@@ -1051,7 +1309,7 @@ def format_attack_report(all_results: List[Dict]) -> str:
             continue
         lines.append(f"\n  >>> {level} Complexity <<<")
         lines.append(
-            f"  {'Pipeline':<38} {'AnyLk':>6} {'AvgLk':>6} "
+            f"  {'Pipeline':<38} {'AnyLk':>6} {'AvgLk':>6} {'Tier1':>6} {'Tier3':>6} "
             + " ".join(f"{a[:5]:>{col_w}}" for a in ATTACK_ATTRIBUTES)
             + f" {'n':>5}"
         )
@@ -1062,15 +1320,155 @@ def format_attack_report(all_results: List[Dict]) -> str:
                 continue
             any_lk = f"{comp['any_attribute_leak_rate']:.1%}"
             avg_lk = f"{comp['average_leak_rate']:.1%}" if comp['average_leak_rate'] is not None else "n/a"
+            t1     = f"{comp.get('tier1_leak_rate'):.1%}" if comp.get('tier1_leak_rate') is not None else "n/a"
+            t3     = f"{comp.get('tier3_leak_rate'):.1%}" if comp.get('tier3_leak_rate') is not None else "n/a"
             per_attr_strs = []
             for a in ATTACK_ATTRIBUTES:
                 sr = comp["per_attribute"][a]["success_rate"]
                 per_attr_strs.append(f"{sr:>{col_w}.1%}" if sr is not None else f"{'n/a':>{col_w}}")
             lines.append(
-                f"  {result['pipeline']:<38} {any_lk:>6} {avg_lk:>6} "
+                f"  {result['pipeline']:<38} {any_lk:>6} {avg_lk:>6} {t1:>6} {t3:>6} "
                 + " ".join(per_attr_strs)
                 + f" {comp['count']:>5}"
             )
+
+    # ── Tier-level breakdown ─────────────────────────────────────────
+    # For each tier (1, 3), list all pipelines with their tier-mean
+    # success rate sorted best → worst, with a pooled OVERALL row at
+    # the bottom that aggregates raw match counts across all attributes
+    # in that tier × all pipelines × all documents.
+    lines.append(f"\n\n{'#' * 78}")
+    lines.append("  TIER-LEVEL BREAKDOWN — pipelines sorted best → worst per tier")
+    lines.append(f"{'#' * 78}")
+    lines.append("")
+    lines.append("  Tier-mean is the unweighted mean of the per-attribute success rates")
+    lines.append("  for the attributes in that tier.  OVERALL is the pooled match rate")
+    lines.append("  across (tier-attributes × pipelines × documents): the single number")
+    lines.append("  most directly comparable across tiers.")
+
+    tier_specs = [
+        ("Tier 1 — direct identifiers (defendable by token-level masking)",
+         TIER1_ATTACK_ATTRIBUTES, "tier1_leak_rate"),
+        ("Tier 3 — quasi-identifiers (leak through context, not single tokens)",
+         TIER3_ATTACK_ATTRIBUTES, "tier3_leak_rate"),
+    ]
+    for tier_label, tier_attrs, tier_field in tier_specs:
+        lines.append("")
+        lines.append(f"  >>> {tier_label} <<<")
+        lines.append(f"      Attributes: {', '.join(tier_attrs)}")
+        header_t = (
+            f"  {'Pipeline':<38} {'Tier mean':>10} "
+            f"{'match':>7} {'no_match':>9} {'skip':>6} {'evaluable':>10}   {'n':>5}"
+        )
+        lines.append(header_t)
+        lines.append(f"  {'-' * (len(header_t) - 2)}")
+
+        rows = []
+        tot_match = tot_nomatch = tot_skip = tot_n = 0
+        for result in all_results:
+            name = result["pipeline"]
+            o = result["aggregated"]["overall"]
+            tier_rate = o.get(tier_field)
+            # Pool the underlying counts across this tier's attributes
+            m_n = nm_n = sk_n = 0
+            for a in tier_attrs:
+                stats = o["per_attribute"].get(a, {})
+                m_n  += stats.get("match_count",    0)
+                nm_n += stats.get("no_match_count", 0)
+                sk_n += stats.get("skip_count",     0)
+            evaluable = m_n + nm_n
+            rows.append((tier_rate if tier_rate is not None else float("inf"),
+                         name, m_n, nm_n, sk_n, evaluable, o["count"]))
+            tot_match    += m_n
+            tot_nomatch  += nm_n
+            tot_skip     += sk_n
+            tot_n        += o["count"]
+
+        rows.sort(key=lambda x: (x[0] is None or x[0] == float("inf"), x[0]))
+
+        for rate, name, m_n, nm_n, sk_n, ev, total_n in rows:
+            rate_str = f"{rate:>10.1%}" if rate not in (None, float("inf")) else f"{'n/a':>10}"
+            lines.append(
+                f"  {name:<38} {rate_str} "
+                f"{m_n:>7,} {nm_n:>9,} {sk_n:>6,} {ev:>10,}   {total_n:>5,}"
+            )
+
+        # Pooled OVERALL row across all pipelines for this tier
+        lines.append(f"  {'-' * (len(header_t) - 2)}")
+        tot_evaluable = tot_match + tot_nomatch
+        overall_rate = (tot_match / tot_evaluable) if tot_evaluable > 0 else None
+        ov_str = f"{overall_rate:>10.1%}" if overall_rate is not None else f"{'n/a':>10}"
+        lines.append(
+            f"  {'OVERALL (all pipelines pooled)':<38} {ov_str} "
+            f"{tot_match:>7,} {tot_nomatch:>9,} {tot_skip:>6,} "
+            f"{tot_evaluable:>10,}   {tot_n:>5,}"
+        )
+
+    # ── Per-attribute breakdown (transposed view: rows = pipelines for one attribute) ──
+    lines.append(f"\n\n{'#' * 78}")
+    lines.append("  PER-ATTRIBUTE BREAKDOWN — pipelines sorted best → worst per attribute")
+    lines.append(f"{'#' * 78}")
+    lines.append("")
+    lines.append("  For each attribute, lists all pipelines and their attack success rate on that")
+    lines.append("  attribute (lower = better anonymization). Useful for spotting which pipelines")
+    lines.append("  succeed/fail at suppressing each individual attribute.")
+    for a in ATTACK_ATTRIBUTES:
+        if a in TIER1_ATTACK_ATTRIBUTES:
+            tier_label = "Tier 1 — direct identifier"
+        elif a in TIER3_ATTACK_ATTRIBUTES:
+            tier_label = "Tier 3 — quasi-identifier"
+        else:
+            tier_label = "—"
+        lines.append("")
+        lines.append(f"  >>> Attribute: {a}   ({tier_label}) <<<")
+        header = (
+            f"  {'Pipeline':<38} {'Success':>8} "
+            f"{'match':>7} {'no_match':>9} {'skip':>6} {'evaluable':>10}   {'n':>5}"
+        )
+        lines.append(header)
+        lines.append(f"  {'-' * (len(header) - 2)}")
+
+        # Build sortable rows: (success_rate, pipeline_name, stats, total_n)
+        rows = []
+        tot_match = tot_nomatch = tot_skip = tot_n = 0
+        for result in all_results:
+            name = result["pipeline"]
+            o = result["aggregated"]["overall"]
+            stats = o["per_attribute"][a]
+            sr = stats["success_rate"]
+            rows.append((sr if sr is not None else float("inf"), name, stats, o["count"]))
+            tot_match    += stats["match_count"]
+            tot_nomatch  += stats["no_match_count"]
+            tot_skip     += stats["skip_count"]
+            tot_n        += o["count"]
+
+        # Sort: pipelines with rates first (ascending), n/a's at the bottom
+        rows.sort(key=lambda x: (x[0] is None or x[0] == float("inf"), x[0]))
+
+        for sr, name, stats, total_n in rows:
+            sr_str = f"{stats['success_rate']:>8.1%}" if stats["success_rate"] is not None else f"{'n/a':>8}"
+            lines.append(
+                f"  {name:<38} {sr_str} "
+                f"{stats['match_count']:>7,} "
+                f"{stats['no_match_count']:>9,} "
+                f"{stats['skip_count']:>6,} "
+                f"{stats['evaluable_count']:>10,}   "
+                f"{total_n:>5,}"
+            )
+
+        # Cross-pipeline OVERALL row: pooled match-rate over every (doc × pipeline) outcome
+        lines.append(f"  {'-' * (len(header) - 2)}")
+        tot_evaluable = tot_match + tot_nomatch
+        overall_rate = (tot_match / tot_evaluable) if tot_evaluable > 0 else None
+        ov_str = f"{overall_rate:>8.1%}" if overall_rate is not None else f"{'n/a':>8}"
+        lines.append(
+            f"  {'OVERALL (all pipelines pooled)':<38} {ov_str} "
+            f"{tot_match:>7,} "
+            f"{tot_nomatch:>9,} "
+            f"{tot_skip:>6,} "
+            f"{tot_evaluable:>10,}   "
+            f"{tot_n:>5,}"
+        )
 
     # ── Detailed per-pipeline ──
     lines.append(f"\n\n{'#' * 78}")
@@ -1323,6 +1721,9 @@ def main():
     # PII a strong LLM can recover from the anonymized text alone.
     if RUN_ATTACK:
         run_attack_evaluation(client, gold_records, pipelines)
+
+    # Final running-cost summary
+    print_cost_summary()
 
     print(f"\n{'=' * 60}")
     print(f"  Done! All outputs in: {OUTPUT_DIR}")

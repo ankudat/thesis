@@ -42,8 +42,11 @@ Implements the methodology from Section 4.3.2 of the thesis:
      appear (case-insensitive) in the anonymized/rewritten text.
      Computed as: leaked_count / total_pii_count.
      This is the privacy metric for prompt-based rewrites (where span-based
-     recall cannot be computed), and is analogous to (1 - recall) for
-     tag-and-replace pipelines. Enables direct privacy comparison across
+     recall cannot be computed). For tag-and-replace pipelines, leakage
+     rate is related to but NOT identical to (1 - recall): boundary
+     mismatches count as false negatives in recall but do not cause
+     leakage if the PII string is still removed. Therefore leakage rate
+     is always <= (1 - recall). Enables direct privacy comparison across
      all anonymization paradigms.
 
   7. PER-PIPELINE AND PER-COMPLEXITY BREAKDOWN
@@ -58,7 +61,7 @@ Inputs required:
 Usage:
     python semantic_preservation.py
 
-    Adjust the USER SETTINGS section below to point to your data and
+    Adjust the USER SETTINGS section below to point to the data and
     prediction files.
 
 Requirements:
@@ -69,11 +72,10 @@ Requirements:
     (this script defaults to "bert-base-multilingual-cased" which
     handles German well).
 
-Author: André Kuhn – Master Thesis (MScIDS, HSLU)
 """
 
 # =====================================================================
-#  USER SETTINGS — Adjust paths before running
+#  USER SETTINGS
 # =====================================================================
 
 # Path to the Label Studio export (ground truth)
@@ -99,21 +101,28 @@ PREDICTION_FILES = {
     "LLM Llama-3 [few-shot]":          os.path.join(BASE_DIR, "results", "llm_baselines", "llm_meta_llama_3_8b_instruct_few_shot_predictions.json"),
     "LLM Llama-3 [few-shot +verify]":  os.path.join(BASE_DIR, "results", "llm_baselines", "llm_meta_llama_3_8b_instruct_few_shot_verified_predictions.json"),
     # LLM tag-and-replace: Qwen2.5
+    "LLM Qwen2.5 [zero-shot]":         os.path.join(BASE_DIR, "results", "llm_baselines", "llm_qwen2.5_7b_instruct_zero_shot_predictions.json"),
+    "LLM Qwen2.5 [few-shot]":          os.path.join(BASE_DIR, "results", "llm_baselines", "llm_qwen2.5_7b_instruct_few_shot_predictions.json"),
     "LLM Qwen2.5 [few-shot +verify]":  os.path.join(BASE_DIR, "results", "llm_baselines", "llm_qwen2.5_7b_instruct_few_shot_verified_predictions.json"),
     # LLM tag-and-replace: SauerkrautLM
+    "LLM SauerkrautLM [zero-shot]":    os.path.join(BASE_DIR, "results", "llm_baselines", "llm_llama_3.1_sauerkrautlm_8b_instruct_zero_shot_predictions.json"),
+    "LLM SauerkrautLM [few-shot]":     os.path.join(BASE_DIR, "results", "llm_baselines", "llm_llama_3.1_sauerkrautlm_8b_instruct_few_shot_predictions.json"),
     "LLM SauerkrautLM [few-shot +verify]": os.path.join(BASE_DIR, "results", "llm_baselines", "llm_llama_3.1_sauerkrautlm_8b_instruct_few_shot_verified_predictions.json"),
-    # LLM fine-tuned (QLoRA)
+    # LLM fine-tuned (QLoRA) — only Llama-3 has been fine-tuned so far
     "LLM Llama-3 [fine-tuned]":        os.path.join(BASE_DIR, "results", "llm_finetuned", "llm_finetuned_meta_llama_3_8b_instruct", "llm_finetuned_meta_llama_3_8b_instruct_predictions.json"),
-    "LLM Qwen2.5 [fine-tuned]":        os.path.join(BASE_DIR, "results", "llm_finetuned", "llm_finetuned_qwen2.5_7b_instruct", "llm_finetuned_qwen2.5_7b_instruct_predictions.json"),
-    "LLM SauerkrautLM [fine-tuned]":   os.path.join(BASE_DIR, "results", "llm_finetuned", "llm_finetuned_llama_3.1_sauerkrautlm_8b_instruct", "llm_finetuned_llama_3.1_sauerkrautlm_8b_instruct_predictions.json"),
 }
 
 # Prompt-based anonymization files (rewritten text, not entity predictions)
 # These use a different format: {"id", "rewritten_text"} instead of {"id", "entities"}
 PROMPT_ANON_FILES = {
+    "LLM Llama-3 [prompt zero-shot]":      os.path.join(BASE_DIR, "results", "llm_prompt_anonymize", "prompt_anon_meta_llama_3_8b_instruct_zero_shot_predictions.json"),
     "LLM Llama-3 [prompt few-shot]":       os.path.join(BASE_DIR, "results", "llm_prompt_anonymize", "prompt_anon_meta_llama_3_8b_instruct_few_shot_predictions.json"),
+    "LLM Qwen2.5 [prompt zero-shot]":      os.path.join(BASE_DIR, "results", "llm_prompt_anonymize", "prompt_anon_qwen2.5_7b_instruct_zero_shot_predictions.json"),
     "LLM Qwen2.5 [prompt few-shot]":       os.path.join(BASE_DIR, "results", "llm_prompt_anonymize", "prompt_anon_qwen2.5_7b_instruct_few_shot_predictions.json"),
-    "LLM SauerkrautLM [prompt few-shot]":   os.path.join(BASE_DIR, "results", "llm_prompt_anonymize", "prompt_anon_llama_3.1_sauerkrautlm_8b_instruct_few_shot_predictions.json"),
+    "LLM SauerkrautLM [prompt zero-shot]": os.path.join(BASE_DIR, "results", "llm_prompt_anonymize", "prompt_anon_llama_3.1_sauerkrautlm_8b_instruct_zero_shot_predictions.json"),
+    "LLM SauerkrautLM [prompt few-shot]":  os.path.join(BASE_DIR, "results", "llm_prompt_anonymize", "prompt_anon_llama_3.1_sauerkrautlm_8b_instruct_few_shot_predictions.json"),
+    # External API baseline
+    "Datenwertsch\u00f6pfung API":         os.path.join(BASE_DIR, "results", "datenwertschoepfung_baseline", "datenwertschoepfung_predictions.json"),
 }
 
 # Output directory for semantic preservation results
@@ -545,8 +554,8 @@ def evaluate_semantic_preservation_rewrite(
     """
     Semantic preservation evaluation for PROMPT-BASED rewrites.
 
-    Unlike tag-and-replace (where we construct anonymized text from entity
-    predictions), here we receive the rewritten text directly.
+    Unlike tag-and-replace (where the anonymized text is constructed from
+    entity predictions), the rewritten text is received directly.
 
     Computes:
       - BERTScore(rewritten, original) on full texts
@@ -602,11 +611,13 @@ def evaluate_semantic_preservation_rewrite(
 
         # PII leakage rate: proportion of ground-truth PII strings that
         # still appear in the rewritten text (case-insensitive).
-        # This is the privacy metric for prompt-based rewrites, analogous
-        # to (1 - recall) for tag-and-replace pipelines.
+        # Uses word boundary matching (\b) to avoid false positives from
+        # German compound words (e.g., "Fischer" in "Fischerei").
         leaked = 0
+        rewritten_lower = rewritten.lower()
         for ent in gold_ents:
-            if ent["text"].lower() in rewritten.lower():
+            search = re.escape(ent["text"].lower())
+            if re.search(r'\b' + search + r'\b', rewritten_lower):
                 leaked += 1
         total_pii = len(gold_ents)
         pii_leakage_rate = leaked / total_pii if total_pii > 0 else 0.0
@@ -732,11 +743,15 @@ def evaluate_semantic_preservation(
 
         # PII leakage rate: proportion of ground-truth PII strings that
         # still appear in the anonymized text (case-insensitive).
-        # For tag-and-replace, this is analogous to (1 - recall): any PII
-        # the model missed will remain as plain text in the output.
+        # Uses word boundary matching to avoid false positives from
+        # German compound words. For tag-and-replace, leakage is related
+        # to but not identical to (1 - recall): boundary mismatches count
+        # as FN in recall but do not cause leakage if the PII is removed.
         leaked = 0
+        anon_lower = anonymized_text.lower()
         for ent in gold_ents:
-            if ent["text"].lower() in anonymized_text.lower():
+            search = re.escape(ent["text"].lower())
+            if re.search(r'\b' + search + r'\b', anon_lower):
                 leaked += 1
         total_pii = len(gold_ents)
         pii_leakage_rate = leaked / total_pii if total_pii > 0 else 0.0
