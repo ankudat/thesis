@@ -1,0 +1,32 @@
+{
+  "total": {
+    "generated": 2991,
+    "retained": 2542,
+    "rejected": 449,
+    "rate": 0.15011701771982613
+  },
+  "per_complexity": {
+    "Low": {
+      "generated": 999,
+      "retained": 870,
+      "rejected": 129,
+      "rate": 0.12912912912912913
+    },
+    "Medium": {
+      "generated": 1000,
+      "retained": 855,
+      "rejected": 145,
+      "rate": 0.145
+    },
+    "High": {
+      "generated": 992,
+      "retained": 817,
+      "rejected": 175,
+      "rate": 0.17641129032258066
+    }
+  },
+  "source_files": {
+    "raw": "data/raw/german_financial_data_raw.json",
+    "cleaned": "data/processed/german_financial_data_cleaned.json"
+  }
+}

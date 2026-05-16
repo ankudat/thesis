@@ -1,0 +1,53 @@
+{
+  "totals": {
+    "generated": 2991,
+    "stage1_rejected": 149,
+    "stage2_rejected": 300,
+    "retained": 2542,
+    "total_rejected": 449,
+    "stage1_rate": 0.04981611501170177,
+    "stage2_rate": 0.10030090270812438
+  },
+  "per_complexity": {
+    "Low": {
+      "generated": 999,
+      "stage1_rejected": 30,
+      "stage2_rejected": 99,
+      "retained": 870,
+      "total_rejected": 129,
+      "stage1_rate": 0.03003003003003003,
+      "stage2_rate": 0.0990990990990991,
+      "overall_rate": 0.12912912912912913
+    },
+    "Medium": {
+      "generated": 1000,
+      "stage1_rejected": 47,
+      "stage2_rejected": 98,
+      "retained": 855,
+      "total_rejected": 145,
+      "stage1_rate": 0.047,
+      "stage2_rate": 0.098,
+      "overall_rate": 0.145
+    },
+    "High": {
+      "generated": 992,
+      "stage1_rejected": 72,
+      "stage2_rejected": 103,
+      "retained": 817,
+      "total_rejected": 175,
+      "stage1_rate": 0.07258064516129033,
+      "stage2_rate": 0.10383064516129033,
+      "overall_rate": 0.17641129032258066
+    }
+  },
+  "stage1_reason_frequencies": {
+    "Unbalanced tags": 228,
+    "Invalid/hallucinated tag": 69,
+    "Bracket leak in entity": 25
+  },
+  "orphan_clean_records": [],
+  "source_files": {
+    "raw": "data/raw/german_financial_data_raw.json",
+    "cleaned": "data/processed/german_financial_data_cleaned.json"
+  }
+}
