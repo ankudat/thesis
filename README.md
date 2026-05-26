@@ -41,7 +41,6 @@ Per-pipeline summary on the 638-document test set. Overall F1 uses strict span-a
 | Qwen2.5 [prompt rewrite]                |        n/a |         19.2% |            0.882 |        8.59 |    6.36 |
 | Anonymizer API                          |        n/a |         37.6% |            0.837 |        6.89 |    8.24 |
 
-Per-category, per-tier, and per-pipeline numbers, along with hallucination rate and inference-attack results, are in `results/` and Chapter 5 of the thesis.
 
 ---
 
