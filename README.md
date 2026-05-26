@@ -1,4 +1,4 @@
-# How well do LLMs anonymize text data?
+# How well do local LLMs anonymize text data?
 
 ### Master's Thesis, Hochschule Luzern (HSLU)
 
