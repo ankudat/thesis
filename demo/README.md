@@ -1,7 +1,6 @@
 # German PII Anonymizer — Web Demo
 
 Five-pipeline web demo derived from the master's thesis
-*"How well do LLMs anonymize text data?"* (HSLU, 2026).
 
 Paste a German banking note in the browser, click **Run All**, and compare
 five anonymization approaches side by side:
